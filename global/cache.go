@@ -32,6 +32,7 @@ func NewFileCache(file string) *FileCache {
 
 //缓存
 func (cache *FileCache) Set(data Expired) (err error) {
+
 	//检查目录是否存在
 	if _, err := os.Stat(cache.file); os.IsNotExist(err) {
 		_ = os.MkdirAll(cache.file, os.ModePerm)
