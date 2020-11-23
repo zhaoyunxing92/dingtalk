@@ -3,7 +3,7 @@ package domain
 //钉钉应用
 type MicroApp struct {
 	Name           string `json:"name"`           //应用名称
-	AgentId        uint32 `json:"agentId"`        //应用id
+	AgentId        uint64 `json:"agentId"`        //应用id
 	Icon           string `json:"appIcon"`        //应用图标
 	Desc           string `json:"appDesc"`        //应用描述
 	Self           bool   `json:"isSelf"`         //是否自建 false:不是

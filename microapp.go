@@ -18,7 +18,7 @@ func (talk *DingTalk) GetMicroAppList() (apps domain.MicroAppList, err error) {
 }
 
 //根据id获取应用
-func (talk *DingTalk) GetMicroAppByAgentId(agentId uint32) (app domain.MicroApp, err error) {
+func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app domain.MicroApp, err error) {
 	var apps domain.MicroAppList
 	if apps, err = talk.GetMicroAppList(); err != nil {
 		return domain.MicroApp{}, err
