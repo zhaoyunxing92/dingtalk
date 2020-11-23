@@ -1,6 +1,8 @@
-package api
+package dingtalk_go
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestDingTalk_GetToken(t *testing.T) {
 	talk, _ := NewDingTalk("dingdv9vbx9mcrj18g1n", "bDBJd67ct1Ik0GFqhNNWH4Lbo4aqZGglaE1wJ3mnbG6ANRjOruuGzs6Z0glNEU63")

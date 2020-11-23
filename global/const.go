@@ -1,6 +1,6 @@
 package global
 
 const (
-	Host     = "https://oapi.dingtalk.com"
-	GetToken = "/gettoken"
+	Host        = "https://oapi.dingtalk.com"
+	GetTokenKey = "/gettoken"
 )

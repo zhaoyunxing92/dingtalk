@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -20,22 +21,25 @@ type Cache interface {
 }
 
 type FileCache struct {
-	file string
+	path string //文件路径
+	file string //文件
 }
 
 //文件缓存
-func NewFileCache(file string) *FileCache {
+func NewFileCache(path, file string) *FileCache {
+	file = strings.Join([]string{path, file}, "/")
 	return &FileCache{
-		file: file,
+		path,
+		file,
 	}
 }
 
 //缓存
 func (cache *FileCache) Set(data Expired) (err error) {
-
 	//检查目录是否存在
-	if _, err := os.Stat(cache.file); os.IsNotExist(err) {
-		_ = os.MkdirAll(cache.file, os.ModePerm)
+	path := cache.path
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		_ = os.MkdirAll(path, os.ModePerm)
 	}
 	var bytes []byte
 	if bytes, err = json.Marshal(data); err != nil {

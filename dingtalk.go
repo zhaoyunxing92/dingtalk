@@ -1,4 +1,4 @@
-package api
+package dingtalk_go
 
 import (
 	"errors"
@@ -13,7 +13,7 @@ type DingTalk struct {
 	AppKey    string //应用key
 	AppSecret string //应用秘钥
 	client    *http.Client
-	Cache     global.Cache
+	cache     global.Cache
 }
 
 // 创建钉钉客户端
@@ -26,12 +26,12 @@ func NewDingTalk(appKey, appSecret string) (*DingTalk, error) {
 	}
 	return &DingTalk{appKey, appSecret, &http.Client{
 		Timeout: 10 * time.Second,
-	}, global.NewFileCache(".token/" + appKey)}, nil
+	}, global.NewFileCache(".token", appKey)}, nil
 }
 
 //获取token
 func (talk *DingTalk) GetToken() (token string, err error) {
-	cache := talk.Cache
+	cache := talk.cache
 	var accessToken domain.AccessToken
 	//先缓存中获取
 	if err = cache.Get(&accessToken); err == nil {
@@ -42,7 +42,7 @@ func (talk *DingTalk) GetToken() (token string, err error) {
 	args.Set("appkey", talk.AppKey)
 	args.Set("appsecret", talk.AppSecret)
 
-	if err = talk.request(http.MethodGet, global.GetToken, args, nil, &accessToken); err != nil {
+	if err = talk.request(http.MethodGet, global.GetTokenKey, args, nil, &accessToken); err != nil {
 		return "", err
 	}
 	if err = cache.Set(&accessToken); err != nil {

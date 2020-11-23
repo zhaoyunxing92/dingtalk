@@ -1,4 +1,4 @@
-package api
+package dingtalk_go
 
 import (
 	"bytes"
@@ -16,7 +16,7 @@ func (talk *DingTalk) request(method, path string, params url.Values, form inter
 	if params == nil {
 		params = url.Values{}
 	}
-	if path != global.GetToken {
+	if path != global.GetTokenKey {
 		var token string
 		if token, err = talk.GetToken(); err != nil {
 			return err
