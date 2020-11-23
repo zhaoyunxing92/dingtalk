@@ -3,8 +3,8 @@ package tests
 import (
 	"testing"
 )
-
-func TestDingTalk_GetMicroAppList(t *testing.T) {
+//测试应用列表
+func TestDingTalkGetMicroAppList(t *testing.T) {
 
 	apps, err := dingTalk.GetMicroAppList()
 
@@ -14,7 +14,7 @@ func TestDingTalk_GetMicroAppList(t *testing.T) {
 	t.Logf("应用列表:%v", apps)
 }
 
-func TestDingTalk_GetMicroAppVisibleScopes(t *testing.T) {
+func TestDingTalkGetMicroAppVisibleScopes(t *testing.T) {
 	scopes, err := dingTalk.GetMicroAppVisibleScopes(970282753)
 	if err != nil {
 		t.Fatal(err)
