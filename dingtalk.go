@@ -1,6 +1,11 @@
 package dingtalk
 
 import (
+	"github.com/go-playground/locales/en"
+	"github.com/go-playground/locales/zh"
+	translator "github.com/go-playground/universal-translator"
+	"github.com/go-playground/validator/v10"
+	zh_trans "github.com/go-playground/validator/v10/translations/zh"
 	"github.com/zhaoyunxing92/dingtalk/domain"
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"net/http"
@@ -13,13 +18,20 @@ type DingTalk struct {
 	AppSecret string //应用秘钥
 	client    *http.Client
 	cache     global.Cache
+	validate  *validator.Validate //参数校验
+	trans     translator.Translator
 }
 
 // 创建钉钉客户端
-func NewDingTalk(appKey, appSecret string) *DingTalk{
+func NewDingTalk(appKey, appSecret string) *DingTalk {
+	validate := validator.New()
+	uni := translator.New(en.New(), zh.New())
+	trans, _ := uni.GetTranslator("zh")
+	_ = zh_trans.RegisterDefaultTranslations(validate, trans)
+
 	return &DingTalk{appKey, appSecret, &http.Client{
 		Timeout: 10 * time.Second,
-	}, global.NewFileCache(".token", appKey)}
+	}, global.NewFileCache(".token", appKey), validate, trans}
 }
 
 //获取token

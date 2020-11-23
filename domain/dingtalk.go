@@ -10,7 +10,7 @@ type Response struct {
 	Msg  string `json:"errmsg"`  //msg
 }
 
-//统一检查异常
+//统一检查返回异常异常
 type Unmarshallable interface {
 	CheckError() error
 }

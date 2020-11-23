@@ -35,7 +35,7 @@ func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app domain.MicroApp,
 
 //获取应用可见范围
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range
-func (talk *DingTalk) GetMicroAppVisibleScopes(agentId uint) (scopes domain.MicroAppVisibleScopes, err error) {
+func (talk *DingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes domain.MicroAppVisibleScopes, err error) {
 	form := map[string]interface{}{
 		"agentId": agentId,
 	}
