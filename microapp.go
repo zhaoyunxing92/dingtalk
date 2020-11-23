@@ -15,6 +15,22 @@ func (talk *DingTalk) GetMicroAppList() (apps domain.MicroAppList, err error) {
 	return apps, err
 }
 
+//根据id获取应用
+func (talk *DingTalk) GetMicroAppByAgentId(agentId uint) (app domain.MicroApp, err error) {
+	var apps domain.MicroAppList
+	if apps, err = talk.GetMicroAppList(); err != nil {
+		return domain.MicroApp{}, err
+	}
+
+	for _, item := range apps.AppList {
+		if item.AgentId == agentId {
+			return item, nil
+		}
+	}
+
+	return
+}
+
 //获取应用可见范围
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range
 func (talk *DingTalk) GetMicroAppVisibleScopes(agentId uint) (scopes domain.MicroAppVisibleScopes, err error) {
