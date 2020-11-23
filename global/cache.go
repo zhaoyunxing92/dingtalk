@@ -12,7 +12,7 @@ import (
 //过期的
 type Expired interface {
 	CreatedAt() int64
-	ExpiresIn() int
+	ExpiresIn() int16
 }
 
 type Cache interface {

@@ -6,7 +6,7 @@ import (
 
 //{"errcode":40035,"errmsg":"缺少参数 corpid or appkey"}
 type Response struct {
-	Code uint64 `json:"errcode"` //code
+	Code int32  `json:"errcode"` //code
 	Msg  string `json:"errmsg"`  //msg
 }
 

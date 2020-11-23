@@ -3,7 +3,7 @@ package domain
 //钉钉token结构体
 type AccessToken struct {
 	Response
-	Expires int    `json:"expires_in"`   //过期时间
+	Expires int16  `json:"expires_in"`   //过期时间
 	Created int64  `json:"created"`      //创建时间
 	Token   string `json:"access_token"` //token
 }
@@ -14,6 +14,6 @@ func (token *AccessToken) CreatedAt() int64 {
 }
 
 //Expired.ExpiresIn is how soon the access token is expired
-func (token *AccessToken) ExpiresIn() int {
+func (token *AccessToken) ExpiresIn() int16 {
 	return token.Expires
 }
