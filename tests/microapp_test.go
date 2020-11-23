@@ -21,3 +21,11 @@ func TestDingTalkGetMicroAppVisibleScopes(t *testing.T) {
 	}
 	t.Logf("应用可视作用域:%v", scopes)
 }
+
+func TestDingTalkGetMicroAppByAgentId(t *testing.T) {
+	app, err := dingTalk.GetMicroAppByAgentId(970282753)
+	if err!=nil{
+		t.Fatal(err)
+	}
+	t.Logf("%v",app)
+}
