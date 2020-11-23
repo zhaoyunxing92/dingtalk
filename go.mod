@@ -1,3 +1,3 @@
 module github.com/zhaoyunxing92/dingtalk
 
-go 1.14
+go 1.15
