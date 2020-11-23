@@ -1,0 +1,26 @@
+package dingtalk
+
+import (
+	"github.com/zhaoyunxing92/dingtalk/domain"
+	"github.com/zhaoyunxing92/dingtalk/global"
+	"net/http"
+)
+
+//获取应用列表
+//https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications
+func (talk *DingTalk) GetMicroAppList() (apps domain.MicroAppList, err error) {
+
+	err = talk.request(http.MethodPost, global.MicroAppListKey, nil, nil, &apps)
+
+	return apps, err
+}
+
+//获取应用可见范围
+//https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range
+func (talk *DingTalk) GetMicroAppVisibleScopes(agentId uint) (scopes domain.MicroAppVisibleScopes, err error) {
+	form := map[string]interface{}{
+		"agentId": agentId,
+	}
+	err = talk.request(http.MethodPost, global.MicroAppVisibleScopesKey, nil, form, &scopes)
+	return scopes, err
+}

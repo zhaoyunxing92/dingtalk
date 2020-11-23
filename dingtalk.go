@@ -1,7 +1,6 @@
-package dingtalk_go
+package dingtalk
 
 import (
-	"errors"
 	"github.com/zhaoyunxing92/dingtalk/domain"
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"net/http"
@@ -17,16 +16,10 @@ type DingTalk struct {
 }
 
 // 创建钉钉客户端
-func NewDingTalk(appKey, appSecret string) (*DingTalk, error) {
-	if appKey == "" {
-		return nil, errors.New("appKey不能为空")
-	}
-	if appSecret == "" {
-		return nil, errors.New("appSecret不能为空")
-	}
+func NewDingTalk(appKey, appSecret string) *DingTalk{
 	return &DingTalk{appKey, appSecret, &http.Client{
 		Timeout: 10 * time.Second,
-	}, global.NewFileCache(".token", appKey)}, nil
+	}, global.NewFileCache(".token", appKey)}
 }
 
 //获取token
@@ -45,6 +38,7 @@ func (talk *DingTalk) GetToken() (token string, err error) {
 	if err = talk.request(http.MethodGet, global.GetTokenKey, args, nil, &accessToken); err != nil {
 		return "", err
 	}
+	accessToken.Created = time.Now().Unix()
 	if err = cache.Set(&accessToken); err != nil {
 		return "", err
 	}
