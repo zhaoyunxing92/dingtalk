@@ -1,6 +1,8 @@
 package dingtalk
 
 import (
+	"errors"
+	"fmt"
 	"github.com/zhaoyunxing92/dingtalk/domain"
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"net/http"
@@ -28,7 +30,7 @@ func (talk *DingTalk) GetMicroAppByAgentId(agentId uint) (app domain.MicroApp, e
 		}
 	}
 
-	return
+	return domain.MicroApp{},errors.New(fmt.Sprintf("agentId:%d is not exist",agentId))
 }
 
 //获取应用可见范围
