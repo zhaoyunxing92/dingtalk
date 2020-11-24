@@ -6,4 +6,5 @@ const (
 	MicroAppListKey          = "/microapp/list"                                //获取应用列表
 	MicroAppVisibleScopesKey = "/microapp/visible_scopes"                      //获取应用可见范围
 	CorpConversationKey      = "/topapi/message/corpconversation/asyncsend_v2" //发送工作通知
+	MediaUploadKey           = "/media/upload"                                 //上传媒体文件
 )

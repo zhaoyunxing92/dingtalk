@@ -91,7 +91,7 @@ func (notify *WorkNotify) Validate(valid *validator.Validate, trans translator.T
 }
 
 //工作通知返回结果
-type WorkNotifyResp struct {
+type WorkNotifyRep struct {
 	Response
 	RequestId string `json:"request_id"` //请求的id
 	TaskId    int    `json:"task_id"`    //创建的异步发送任务id

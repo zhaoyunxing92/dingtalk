@@ -7,6 +7,7 @@ import (
 	"github.com/zhaoyunxing92/dingtalk/domain"
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"io/ioutil"
+	"mime/multipart"
 	"net/http"
 	"net/url"
 )
@@ -34,32 +35,48 @@ func (talk *DingTalk) httpRequest(method, path string, args url.Values, form int
 	uri.RawQuery = args.Encode()
 
 	var (
-		request *http.Request
-		resp    *http.Response
+		res     *http.Request
+		rep     *http.Response
 		err     error
 		content []byte
 	)
 
-	switch method {
-	case "POST":
-		//表单不为空
-		d, _ := json.Marshal(form)
-		request, _ = http.NewRequest("POST", uri.String(), bytes.NewReader(d))
-		break
-	default:
-		request, _ = http.NewRequest("GET", uri.String(), nil)
+	if form != nil {
+		//检查提交表单类型
+		switch form.(type) {
+		case domain.UploadFile:
+			body := &bytes.Buffer{}
+			// 文件写入 body
+			writer := multipart.NewWriter(body)
+			file := form.(domain.UploadFile)
+			_ = writer.WriteField("type", file.Type)
+			_ = writer.WriteField("media", string(file.Media))
+
+			res, _ = http.NewRequest("POST", uri.String(), body)
+			res.Header.Set("Content-Type", writer.FormDataContentType())
+		default:
+			//表单不为空
+			d, _ := json.Marshal(form)
+			res, _ = http.NewRequest("POST", uri.String(), bytes.NewReader(d))
+		}
+	} else {
+		if method == "GET" {
+			res, _ = http.NewRequest("GET", uri.String(), nil)
+		} else {
+			res, _ = http.NewRequest("POST", uri.String(), nil)
+		}
 	}
 
-	if resp, err = client.Do(request); err != nil {
+	if rep, err = client.Do(res); err != nil {
 		return err
 	}
 
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		return errors.New("dingtalk server error: " + resp.Status)
+	defer rep.Body.Close()
+	if rep.StatusCode != 200 {
+		return errors.New("dingtalk server error: " + rep.Status)
 	}
 
-	if content, err = ioutil.ReadAll(resp.Body); err != nil {
+	if content, err = ioutil.ReadAll(rep.Body); err != nil {
 		return err
 	}
 	if err = json.Unmarshal(content, data); err != nil {

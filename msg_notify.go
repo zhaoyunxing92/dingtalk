@@ -10,7 +10,7 @@ import (
 //部门id或用户id重复会剔除
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/send-work-notifications
 //发送工作通知
-func (talk *DingTalk) SendWorkNotify(res domain.WorkNotifyRes) (resp domain.WorkNotifyResp, err error) {
+func (talk *DingTalk) SendWorkNotify(res domain.WorkNotifyRes) (resp domain.WorkNotifyRep, err error) {
 	//组装部门、用户
 	res.AssembleDept()
 	res.AssembleUser()
