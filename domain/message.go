@@ -5,14 +5,14 @@ type Message interface {
 }
 
 // 钉钉消息结构体
-type Text struct {
+type text struct {
 	Content string `json:"content" validate:"required"`
 }
 
 //文本消息
 type TextMessage struct {
 	MsgType string `json:"msgtype" validate:"required"`
-	Text    `json:"text" validate:"required"`
+	text    `json:"text" validate:"required"`
 }
 
 type OA struct {
@@ -26,7 +26,7 @@ type OAMessage struct {
 
 // 文本对象
 func newTextMessages(context string) TextMessage {
-	return TextMessage{"text", Text{Content: context}}
+	return TextMessage{"text", text{Content: context}}
 }
 
 //构建oa消息
