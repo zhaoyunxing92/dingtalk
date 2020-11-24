@@ -18,10 +18,16 @@ type WorkNotify struct {
 	Msg        interface{} `json:"msg" validate:"required"`
 }
 
+//构建oa消息,工作通知title默认使用小程序名称
+//url:消息点击链接地址，当发送消息为小程序时支持小程序跳转链接。
+//bgColor:消息头部的背景颜色
+//fs:消息体的表单，最多显示6个，超过会被隐藏。
 func NewOAWorkNotify(oa OA) *WorkNotify {
 	return &WorkNotify{Msg: newOaMessage(oa)}
 }
 
+//文本消息通知
+//text:发送的内容
 func NewTextWorkNotify(text string) *WorkNotify {
 	return &WorkNotify{Msg: newTextMessages(text)}
 }
@@ -32,16 +38,16 @@ func (notify *WorkNotify) AssembleDept() {
 	if size == 0 {
 		return
 	}
-	depts := make([]string, 0, size)
+	ds := make([]string, 0, size)
 	temp := map[int]int{}
 	for idx, id := range notify.DeptIds {
 		if _, ok := temp[id]; !ok {
 			temp[id] = idx
-			depts = append(depts, strconv.Itoa(id))
+			ds = append(ds, strconv.Itoa(id))
 		}
 	}
 	//部门id字符串拼接
-	notify.StrDeptIds = strings.Join(depts, ",")
+	notify.StrDeptIds = strings.Join(ds, ",")
 }
 
 //组装用户,移除重复数据
