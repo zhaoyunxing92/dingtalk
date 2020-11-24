@@ -6,13 +6,13 @@ import (
 )
 
 //发送工作通知
-func TestWorkNotify(t *testing.T) {
-	res:=new(domain.TextWorkNotifyRes)
-	res.AgentId=970282753
-	res.Msg=domain.NewTextMessages("你好")
-	res.UserIds=[]string{"manager164"}
-	_, err := dingTalk.SendTextCorpConversation(res)
+func TestSendWorkNotify(t *testing.T) {
+
+	res := domain.NewTextWorkNotify("hello dingtalk 0")
+	res.UserIds = []string{"manager164"}
+	notify, err := dingTalk.SendWorkNotify(res)
 	if err != nil {
 		t.Fatal(err)
 	}
+	t.Log(notify)
 }

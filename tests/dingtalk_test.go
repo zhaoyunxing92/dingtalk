@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-var dingTalk = dingtalk.NewDingTalk("dingdv9vbx9mcrj18g1n", "bDBJd67ct1Ik0GFqhNNWH4Lbo4aqZGglaE1wJ3mnbG6ANRjOruuGzs6Z0glNEU63")
+var dingTalk = dingtalk.NewDingTalk(1020345059, "dinggqaj3nmlgosailas", "qzNjaNQCVhA73jLKe2OwT1z4jNATcAz07KJ6pczeRw4Xn1XfP93brx5DiD_MMsQ7")
 
 func TestDingTalkGetToken(t *testing.T) {
 
@@ -24,5 +24,5 @@ func TestCurrentPath(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	t.Logf("path:%s",strings.Replace(dir, "\\", "/", -1))
+	t.Logf("path:%s", strings.Replace(dir, "\\", "/", -1))
 }

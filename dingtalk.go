@@ -14,6 +14,7 @@ import (
 )
 
 type DingTalk struct {
+	AgentId   int    //应用id
 	AppKey    string //应用key
 	AppSecret string //应用秘钥
 	client    *http.Client
@@ -23,13 +24,13 @@ type DingTalk struct {
 }
 
 // 创建钉钉客户端
-func NewDingTalk(appKey, appSecret string) *DingTalk {
+func NewDingTalk(agentId int, appKey, appSecret string) *DingTalk {
 	validate := validator.New()
 	uni := translator.New(en.New(), zh.New())
 	trans, _ := uni.GetTranslator("zh")
 	_ = zh_trans.RegisterDefaultTranslations(validate, trans)
 
-	return &DingTalk{appKey, appSecret, &http.Client{
+	return &DingTalk{agentId, appKey, appSecret, &http.Client{
 		Timeout: 10 * time.Second,
 	}, global.NewFileCache(".token", appKey), validate, trans}
 }
