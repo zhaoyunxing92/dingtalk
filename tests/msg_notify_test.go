@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"encoding/json"
 	"github.com/zhaoyunxing92/dingtalk/domain"
 	"testing"
 )
@@ -53,7 +54,6 @@ func TestSendOAWorkNotify(t *testing.T) {
 	oa.MessageUrl = "https://ding-doc.dingtalk.com/document#/org-dev-guide/message-types-and-data-format"
 	oa.PcMessageUrl = "https://ding-doc.dingtalk.com"
 
-
 	res := domain.NewOAWorkNotify(oa)
 	res.UserIds = []string{"manager164"}
 
@@ -61,5 +61,74 @@ func TestSendOAWorkNotify(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%v",notify)
+	t.Logf("%v", notify)
+}
+
+func TestSendOAWorkNotifyJson(t *testing.T) {
+
+	oa := `{
+     "msgtype": "oa",
+     "oa": {
+        "message_url": "http://dingtalk.com",
+        "head": {
+            "bgcolor": "FFBBBBBB",
+            "text": "头部标题"
+        },
+        "body": {
+            "title": "正文标题",
+            "form": [
+                {
+                    "key": "姓名:",
+                    "value": "张三"
+                },
+                {
+                    "key": "年龄:",
+                    "value": "20"
+                },
+                {
+                    "key": "身高:",
+                    "value": "1.8米"
+                },
+                {
+                    "key": "体重:",
+                    "value": "130斤"
+                },
+                {
+                    "key": "学历:",
+                    "value": "本科"
+                },
+                {
+                    "key": "爱好:",
+                    "value": "打球、听音乐"
+                }
+            ],
+            "rich": {
+                "num": "15.6",
+                "unit": "元"
+            },
+            "content": "大段文本大段文本大段文本大段文本大段文本大段文本",
+            "image": "@lADOADmaWMzazQKA",
+            "file_count": "3",
+            "author": "李四 "
+        }
+    }
+}
+`
+
+	msg := new(domain.OAMessage)
+	err := json.Unmarshal([]byte(oa), msg)
+
+	notify := new(domain.WorkNotify)
+	notify.Msg = msg
+
+	notify.UserIds = []string{"manager164"}
+
+	rep, err := dingTalk.SendWorkNotify(notify)
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	t.Logf("%v", rep)
+
 }
