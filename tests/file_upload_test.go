@@ -3,15 +3,15 @@ package tests
 import (
 	"encoding/json"
 	"github.com/zhaoyunxing92/dingtalk/domain"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
 func TestMediaUpload(t *testing.T) {
 
-	file, err := ioutil.ReadFile("./../image/dingtalk.png")
+	file, err := os.Open("./../image/dingtalk.png")
 
-	req := domain.NewUploadFile("image", file)
+	req := domain.NewUploadFile("dingtalk.png", "image", file)
 	media, err := dingTalk.MediaUpload(req)
 	if err != nil {
 		t.Fatal(err)

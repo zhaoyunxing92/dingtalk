@@ -15,6 +15,7 @@ type Body struct {
 	Title   string `json:"title" validate:"omitempty,max=50"` //消息体的标题，建议50个字符以内。
 	Forms   []Form `json:"form" validate:"omitempty,lte=6"`   //消息体的表单，最多显示6个，超过会被隐藏。
 	Content string `json:"content"`                           //消息体的内容，最多显示3行。
+	ImageId string `json:"image"`                             //图片id
 	Author  string `json:"author"`                            //自定义的作者名字。
 }
 

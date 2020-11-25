@@ -46,6 +46,7 @@ func TestSendOAWorkNotify(t *testing.T) {
 	oa.Body.Content = "消息体的标题，建议50个字符以内。"
 	oa.Body.Title = "头部标题"
 	oa.Body.Author = "赵云兴"
+	oa.Body.ImageId="@lALPDe7sx7z5xEJgzQJA"
 
 	//设置头
 	oa.Header.BgColor = "FFBBBBBB"

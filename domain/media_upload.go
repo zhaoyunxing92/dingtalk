@@ -4,6 +4,7 @@ import (
 	"errors"
 	translator "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
+	"io"
 	"strings"
 )
 
@@ -14,18 +15,20 @@ import (
 type MediaUpload struct {
 	Response
 	Type      string `json:"type"`       // 媒体文件类型
-	MediaId   []byte `json:"media_id"`   // 媒体文件类型
+	MediaId   string `json:"media_id"`   // 媒体文件类型
 	CreatedAt int    `json:"created_at"` // 媒体文件类型
 }
 
 //请求
 type UploadFile struct {
-	Type  string `json:"type" validate:"required,oneof=image voice file"` // 媒体文件类型
-	Media []byte `json:"media" validate:"required"`                       // 媒体文件类型
+	Type      string    `validate:"required,oneof=image voice file"` // 媒体文件类型
+	FileName  string    `validate:"required"`                        // 文件名称
+	FieldName string    `validate:"required"`                        //字段名称
+	Reader    io.Reader `validate:"required"`
 }
 
-func NewUploadFile(tp string, media []byte) UploadFile {
-	return UploadFile{tp, media}
+func NewUploadFile(name, tp string, reader io.Reader) UploadFile {
+	return UploadFile{tp, name, "media", reader}
 }
 
 //请求参数验证

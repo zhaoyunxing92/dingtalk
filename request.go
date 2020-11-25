@@ -6,6 +6,7 @@ import (
 	"errors"
 	"github.com/zhaoyunxing92/dingtalk/domain"
 	"github.com/zhaoyunxing92/dingtalk/global"
+	"io"
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
@@ -45,15 +46,22 @@ func (talk *DingTalk) httpRequest(method, path string, args url.Values, form int
 		//检查提交表单类型
 		switch form.(type) {
 		case domain.UploadFile:
-			body := &bytes.Buffer{}
-			// 文件写入 body
-			writer := multipart.NewWriter(body)
-			file := form.(domain.UploadFile)
-			_ = writer.WriteField("type", file.Type)
-			_ = writer.WriteField("media", string(file.Media))
+			var b bytes.Buffer
+			w := multipart.NewWriter(&b)
 
-			res, _ = http.NewRequest("POST", uri.String(), body)
-			res.Header.Set("Content-Type", writer.FormDataContentType())
+			file := form.(domain.UploadFile)
+			fw, err := w.CreateFormFile(file.FieldName, file.FileName)
+			if err != nil {
+				return err
+			}
+			if _, err = io.Copy(fw, file.Reader); err != nil {
+				return err
+			}
+			if err = w.Close(); err != nil {
+				return err
+			}
+			res, _ = http.NewRequest("POST", uri.String(), &b)
+			res.Header.Set("Content-Type", w.FormDataContentType())
 		default:
 			//表单不为空
 			d, _ := json.Marshal(form)
