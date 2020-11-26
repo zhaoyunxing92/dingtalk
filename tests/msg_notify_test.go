@@ -42,8 +42,12 @@ func TestSendOAWorkNotify(t *testing.T) {
 	f5.Key = "爱好:"
 	f5.Value = "go、java、docker、vue"
 
-	//设置体
-	oa.Body.Forms = append(oa.Body.Forms, f, f2, f3, f4, f5)
+	f6 := model.Form{}
+	f6.Key = "测试:"
+	f6.Value = "go、java、docker、vue"
+
+	//设置体最多只有6个
+	oa.Body.Forms = append(oa.Body.Forms, f, f2, f3, f4, f5, f6)
 	oa.Body.Content = "validator用于对数据进行校验。在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。例如日期格式，用户年龄，性别等必须是正常的值，不能随意设置。"
 	oa.Body.Title = "头部标题"
 	oa.Body.Author = "赵云兴"

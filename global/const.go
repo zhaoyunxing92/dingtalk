@@ -10,5 +10,11 @@ const (
 	GetSendProgressKey        = corpConversation + "/getsendprogress" //获取工作通知消息的发送进度
 	GetSendResultKey          = corpConversation + "/getsendresult"   //获取工作通知消息的发送结果
 	RecallCorpConversationKey = corpConversation + "/recall"          //撤回工作通知
+
+	department                = "/topapi/v2/department"               //部门管理2.0
+	DepartmentCreateKey       = department + "/create"                //创建部门
+	DepartmentUpdateKey       = department + "/update"                //更新部门
+	DepartmentDeleteKey       = department + "/delete"                //删除部门
+
 	MediaUploadKey            = "/media/upload"                       //上传媒体文件
 )
