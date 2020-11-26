@@ -2,6 +2,8 @@ package model
 
 import (
 	"fmt"
+	translator "github.com/go-playground/universal-translator"
+	"github.com/go-playground/validator/v10"
 )
 
 //{"errcode":40035,"errmsg":"缺少参数 corpid or appkey"}
@@ -14,6 +16,11 @@ type Response struct {
 //统一检查返回异常异常
 type Unmarshallable interface {
 	CheckError() error
+}
+
+//请求
+type Request interface {
+	Validate(valid *validator.Validate, trans translator.Translator) error
 }
 
 func (res *Response) CheckError() (err error) {

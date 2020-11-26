@@ -99,12 +99,11 @@ func (notify *WorkNotify) Validate(valid *validator.Validate, trans translator.T
 
 //发送工作通知请求
 type WorkNotifyRes interface {
+	Request
 	//拼接部门
 	AssembleDept()
 	//拼接用户
 	AssembleUser()
 	//设置agentId
 	SetAgentId(id int)
-	//参数验证
-	Validate(valid *validator.Validate, trans translator.Translator) error
 }
