@@ -3,14 +3,14 @@ package dingtalk
 import (
 	"errors"
 	"fmt"
-	"github.com/zhaoyunxing92/dingtalk/domain"
+	"github.com/zhaoyunxing92/dingtalk/model"
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"net/http"
 )
 
 //获取应用列表
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications
-func (talk *DingTalk) GetMicroAppList() (apps domain.MicroAppList, err error) {
+func (talk *DingTalk) GetMicroAppList() (apps model.MicroAppList, err error) {
 
 	err = talk.request(http.MethodPost, global.MicroAppListKey, nil, nil, &apps)
 
@@ -18,10 +18,10 @@ func (talk *DingTalk) GetMicroAppList() (apps domain.MicroAppList, err error) {
 }
 
 //根据id获取应用
-func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app domain.MicroApp, err error) {
-	var apps domain.MicroAppList
+func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app model.MicroApp, err error) {
+	var apps model.MicroAppList
 	if apps, err = talk.GetMicroAppList(); err != nil {
-		return domain.MicroApp{}, err
+		return model.MicroApp{}, err
 	}
 
 	for _, item := range apps.AppList {
@@ -30,12 +30,12 @@ func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app domain.MicroApp,
 		}
 	}
 
-	return domain.MicroApp{},errors.New(fmt.Sprintf("agentId:%d is not exist",agentId))
+	return model.MicroApp{},errors.New(fmt.Sprintf("agentId:%d is not exist",agentId))
 }
 
 //获取应用可见范围
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range
-func (talk *DingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes domain.MicroAppVisibleScopes, err error) {
+func (talk *DingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes model.MicroAppVisibleScopes, err error) {
 	form := map[string]interface{}{
 		"agentId": agentId,
 	}

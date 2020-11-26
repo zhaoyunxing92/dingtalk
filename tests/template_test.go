@@ -2,7 +2,7 @@ package tests
 
 import (
 	"encoding/json"
-	"github.com/zhaoyunxing92/dingtalk/domain"
+	"github.com/zhaoyunxing92/dingtalk/model"
 	"os"
 	"testing"
 	"text/template"
@@ -13,17 +13,13 @@ func TestTemplate(t *testing.T) {
 "应用名称：{{.name}}"
 `
 
-	app := new(domain.MicroApp)
+	app := new(model.MicroApp)
 	app.AgentId = 1020345059
 
 	tmpl, err := template.New("文本渲染").Parse(str)
 	if err != nil {
 		t.Fatal(err)
 	}
-
-/*	args:=map[string]string{
-		"agentId":"1020345059",
-	}*/
 	args:=`{"agentId":1020345059,"name":"赵云兴"}`
 	var obj map[string]interface{}
 	err = json.Unmarshal([]byte(args), &obj)

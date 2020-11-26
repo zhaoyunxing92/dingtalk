@@ -1,4 +1,4 @@
-package domain
+package model
 
 //钉钉应用
 type MicroApp struct {

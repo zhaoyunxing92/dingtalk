@@ -1,4 +1,4 @@
-package domain
+package model
 
 //oa消息的头
 type Header struct {
@@ -11,12 +11,19 @@ type Form struct {
 	Value string `json:"value"`
 }
 
+//单行富文本信息。
+type Rich struct {
+	Num  string `json:"num"`  //单行富文本信息的数目。
+	Unit string `json:"unit"` //单行富文本信息的单位。
+}
+
+//消息体
 type Body struct {
-	Title   string `json:"title" validate:"omitempty,max=50"` //消息体的标题，建议50个字符以内。
-	Forms   []Form `json:"form" validate:"omitempty,lte=6"`   //消息体的表单，最多显示6个，超过会被隐藏。
-	Content string `json:"content"`                           //消息体的内容，最多显示3行。
-	ImageId string `json:"image"`                             //图片id
-	Author  string `json:"author"`                            //自定义的作者名字。
+	Title   string `json:"title" validate:"omitempty,max=50"`       //消息体的标题，建议50个字符以内。
+	Forms   []Form `json:"form" validate:"omitempty,lte=6"`         //消息体的表单，最多显示6个，超过会被隐藏。
+	Content string `json:"content"`                                 //消息体的内容，最多显示3行。
+	ImageId string `json:"image" validate:"omitempty,startswith=@"` //图片id,以@开头的
+	Author  string `json:"author"`                                  //自定义的作者名字。
 }
 
 // oa
@@ -30,11 +37,11 @@ type OA struct {
 
 //OA
 type OAMessage struct {
-	MsgType string `json:"msgtype" validate:"required"`
-	OA      `json:"oa" validate:"required"`
+	message
+	OA `json:"oa" validate:"required"`
 }
 
 //构建oa消息
 func newOaMessage(oa OA) *OAMessage {
-	return &OAMessage{"oa", oa}
+	return &OAMessage{message{MsgType: "oa"}, oa}
 }

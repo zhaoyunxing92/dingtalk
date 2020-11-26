@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"github.com/zhaoyunxing92/dingtalk/domain"
+	"github.com/zhaoyunxing92/dingtalk/model"
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"io"
 	"io/ioutil"
@@ -14,7 +14,7 @@ import (
 )
 
 //统一请求
-func (talk *DingTalk) request(method, path string, params url.Values, form interface{}, data domain.Unmarshallable) (err error) {
+func (talk *DingTalk) request(method, path string, params url.Values, form interface{}, data model.Unmarshallable) (err error) {
 	if params == nil {
 		params = url.Values{}
 	}
@@ -29,7 +29,7 @@ func (talk *DingTalk) request(method, path string, params url.Values, form inter
 	return talk.httpRequest(method, path, params, form, data)
 }
 
-func (talk *DingTalk) httpRequest(method, path string, args url.Values, form interface{}, data domain.Unmarshallable) error {
+func (talk *DingTalk) httpRequest(method, path string, args url.Values, form interface{}, data model.Unmarshallable) error {
 	client := talk.client
 
 	uri, _ := url.Parse(global.Host + path)
@@ -45,11 +45,11 @@ func (talk *DingTalk) httpRequest(method, path string, args url.Values, form int
 	if form != nil {
 		//检查提交表单类型
 		switch form.(type) {
-		case domain.UploadFile:
+		case model.UploadFile:
 			var b bytes.Buffer
 			w := multipart.NewWriter(&b)
 
-			file := form.(domain.UploadFile)
+			file := form.(model.UploadFile)
 			fw, err := w.CreateFormFile(file.FieldName, file.FileName)
 			if err != nil {
 				return err

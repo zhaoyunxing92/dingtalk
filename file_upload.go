@@ -1,17 +1,17 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/domain"
+	"github.com/zhaoyunxing92/dingtalk/model"
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"net/http"
 	"net/url"
 )
 
-func (talk *DingTalk) MediaUpload(req domain.UploadFile) (media domain.MediaUpload, err error) {
+func (talk *DingTalk) MediaUpload(req model.UploadFile) (media model.MediaUpload, err error) {
 
 	//参数验证
 	if err = req.Validate(talk.validate, talk.trans); err != nil {
-		return domain.MediaUpload{}, err
+		return model.MediaUpload{}, err
 	}
 	params := url.Values{}
 	params.Add("type", req.Type)

@@ -1,4 +1,4 @@
-package domain
+package model
 
 import (
 	"errors"
@@ -22,14 +22,21 @@ type WorkNotify struct {
 //url:消息点击链接地址，当发送消息为小程序时支持小程序跳转链接。
 //bgColor:消息头部的背景颜色
 //fs:消息体的表单，最多显示6个，超过会被隐藏。
-func NewOAWorkNotify(oa OA) *WorkNotify {
-	return &WorkNotify{Msg: newOaMessage(oa)}
+func (notify *WorkNotify) NewOAWorkNotify(oa OA) {
+	notify.Msg = newOaMessage(oa)
 }
 
 //文本消息通知
-//text:发送的内容
-func NewTextWorkNotify(text string) *WorkNotify {
-	return &WorkNotify{Msg: newTextMessages(text)}
+//content:发送的内容
+func (notify *WorkNotify) NewTextWorkNotify(content string) {
+	notify.Msg = newTextMessages(content)
+}
+
+//markdown消息
+//title:标题
+//content:内容
+func (notify *WorkNotify) NewMarkdownWorkNotify(title, content string) {
+	notify.Msg = newMarkDownMessage(title, content)
 }
 
 //组装部门，移除重复部门
@@ -90,14 +97,7 @@ func (notify *WorkNotify) Validate(valid *validator.Validate, trans translator.T
 	return nil
 }
 
-//工作通知返回结果
-type WorkNotifyRep struct {
-	Response
-	RequestId string `json:"request_id"` //请求的id
-	TaskId    int    `json:"task_id"`    //创建的异步发送任务id
-}
-
-//工作通知请求
+//发送工作通知请求
 type WorkNotifyRes interface {
 	//拼接部门
 	AssembleDept()

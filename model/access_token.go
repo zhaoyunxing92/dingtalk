@@ -1,4 +1,4 @@
-package domain
+package model
 
 //钉钉token结构体
 type AccessToken struct {
