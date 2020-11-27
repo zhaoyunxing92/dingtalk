@@ -16,5 +16,6 @@ const (
 	DepartmentUpdateKey       = departmentV2 + "/update"              //更新部门
 	DepartmentDeleteKey       = departmentV2 + "/delete"              //删除部门
 	DepartmentEduGetKey       = "/topapi/edu/dept/get"                //获取部门详情
+	DepartmentGetKey          = "/department/get"                     //获取部门详情
 	MediaUploadKey            = "/media/upload"                       //上传媒体文件
 )

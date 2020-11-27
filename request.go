@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"github.com/zhaoyunxing92/dingtalk/global"
+	"github.com/zhaoyunxing92/dingtalk/model"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -60,19 +60,15 @@ func (talk *DingTalk) httpRequest(method, path string, args url.Values, form int
 			if err = w.Close(); err != nil {
 				return err
 			}
-			res, _ = http.NewRequest("POST", uri.String(), &b)
+			res, _ = http.NewRequest(method, uri.String(), &b)
 			res.Header.Set("Content-Type", w.FormDataContentType())
 		default:
 			//表单不为空
 			d, _ := json.Marshal(form)
-			res, _ = http.NewRequest("POST", uri.String(), bytes.NewReader(d))
+			res, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
 		}
 	} else {
-		if method == "GET" {
-			res, _ = http.NewRequest("GET", uri.String(), nil)
-		} else {
-			res, _ = http.NewRequest("POST", uri.String(), nil)
-		}
+		res, _ = http.NewRequest(method, uri.String(), nil)
 	}
 
 	if rep, err = client.Do(res); err != nil {

@@ -77,7 +77,7 @@ func (talk *DingTalk) GetDepartmentDetail(deptId int) (rsp DeptCreateResponse, e
 	form := make(map[string]int, 1)
 	form["dept_id"] = deptId
 
-	err = talk.request(http.MethodPost, global.DepartmentEduGetKey, nil, form, &rsp)
+	err = talk.request(http.MethodGet, global.DepartmentGetKey, nil, form, &rsp)
 
 	return rsp, err
 }
