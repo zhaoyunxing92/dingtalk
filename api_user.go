@@ -6,14 +6,14 @@ import (
 	"net/http"
 )
 
-type result struct {
+type userResult struct {
 	UserId string `json:"userid"`
 }
 
 //创建用户返回
 type UserCreateResponse struct {
 	model.Response
-	Result result `json:"result"`
+	userResult `json:"result"`
 }
 
 //创建用户

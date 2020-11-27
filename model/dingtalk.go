@@ -7,18 +7,18 @@ import (
 )
 
 //{"errcode":40035,"errmsg":"缺少参数 corpid or appkey"}
-//响应
+//Response:响应
 type Response struct {
 	Code int    `json:"errcode"` //code
 	Msg  string `json:"errmsg"`  //msg
 }
 
-//统一检查返回异常异常
+//Unmarshallable:统一检查返回异常异常
 type Unmarshallable interface {
 	CheckError() error
 }
 
-//请求
+//Request:请求
 type Request interface {
 	Validate(valid *validator.Validate, trans translator.Translator) error
 }
