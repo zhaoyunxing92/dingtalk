@@ -22,62 +22,62 @@ type DeptCreateResponse struct {
 	deptResult `json:"result"`
 }
 
-//CreateDepartment 创建部门
+//CreateV2Department 创建部门
 //name:部门名称
 //parentId:父部门id
-func (talk *DingTalk) CreateDepartment(name string, parentId int) (rsp DeptCreateResponse, err error) {
+func (talk *DingTalk) CreateV2Department(name string, parentId int) (rsp DeptCreateResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["name"] = name
 	form["parent_id"] = parentId
 
-	err = talk.request(http.MethodPost, global.DepartmentCreateKey, nil, form, &rsp)
+	err = talk.request(http.MethodPost, global.DepartmentCreateV2Key, nil, form, &rsp)
 
 	return rsp, err
 }
 
-//CreateDetailDepartment:创建详细的部门
-func (talk *DingTalk) CreateDetailDepartment(res model.Request) (rsp DeptCreateResponse, err error) {
+//CreateV2DetailDepartment:创建详细的部门
+func (talk *DingTalk) CreateV2DetailDepartment(res model.Request) (rsp DeptCreateResponse, err error) {
 
 	if err = res.Validate(talk.validate, talk.trans); err != nil {
 		return rsp, err
 	}
 
-	err = talk.request(http.MethodPost, global.DepartmentCreateKey, nil, res, &rsp)
+	err = talk.request(http.MethodPost, global.DepartmentCreateV2Key, nil, res, &rsp)
 
 	return rsp, err
 }
 
-//UpdateDepartment:更新部门
-func (talk *DingTalk) UpdateDepartment(name string, parentId int) (rsp DeptCreateResponse, err error) {
+//UpdateV2Department:更新部门
+func (talk *DingTalk) UpdateV2Department(name string, parentId int) (rsp DeptCreateResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["name"] = name
 	form["parent_id"] = parentId
 
-	err = talk.request(http.MethodPost, global.DepartmentUpdateKey, nil, form, &rsp)
+	err = talk.request(http.MethodPost, global.DepartmentUpdateV2Key, nil, form, &rsp)
 
 	return rsp, err
 }
 
-//DeleteDepartment:删除部门
-func (talk *DingTalk) DeleteDepartment(deptId int) (rsp DeptCreateResponse, err error) {
+//DeleteV2Department:删除部门
+func (talk *DingTalk) DeleteV2Department(deptId int) (rsp DeptCreateResponse, err error) {
 
 	form := make(map[string]int, 1)
 	form["dept_id"] = deptId
 
-	err = talk.request(http.MethodPost, global.DepartmentDeleteKey, nil, form, &rsp)
+	err = talk.request(http.MethodPost, global.DepartmentDeleteV2Key, nil, form, &rsp)
 
 	return rsp, err
 }
 
-//DeleteDepartment:删除部门
+//DeleteV2Department:删除部门
 func (talk *DingTalk) GetDepartmentDetail(deptId int) (rsp DeptCreateResponse, err error) {
 
 	form := make(map[string]int, 1)
 	form["dept_id"] = deptId
 
-	err = talk.request(http.MethodGet, global.DepartmentGetKey, nil, form, &rsp)
+	err = talk.request(http.MethodPost, global.DepartmentGetKey, nil, form, &rsp)
 
 	return rsp, err
 }

@@ -9,7 +9,7 @@ import (
 
 func TestCreateDepartment(t *testing.T) {
 	//427285169
-	rsp, err := dingTalk.CreateDepartment("golang", 1)
+	rsp, err := dingTalk.CreateV2Department("golang", 1)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -31,7 +31,7 @@ func TestCreateDetailDepartment(t *testing.T) {
 
 	js, err := json.Marshal(dept)
 	fmt.Println(string(js))
-	rsp, err := dingTalk.CreateDetailDepartment(dept)
+	rsp, err := dingTalk.CreateV2DetailDepartment(dept)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -42,7 +42,7 @@ func TestCreateDetailDepartment(t *testing.T) {
 //TestDeleteDepartment:删除部门
 func TestDeleteDepartment(t *testing.T) {
 
-	rsp, err := dingTalk.DeleteDepartment(427497463)
+	rsp, err := dingTalk.DeleteV2Department(427497463)
 	if err != nil {
 		t.Fatal(err)
 	}
