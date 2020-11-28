@@ -64,6 +64,24 @@ type OrgUserCountResponse struct {
 	Count int `json:"count"`
 }
 
+//InactiveUserResponse:未登录用户数据。
+type InactiveUserResponse struct {
+	model.Response
+	RequestId    string             `json:"request_id"`
+	InactiveUser model.InactiveUser `json:"result"`
+}
+
+type OrgAdminUserResponse struct {
+	model.Response
+	Admins []model.OrgAdminList `json:"adminList"`
+}
+
+type OrgAdminScopeResponse struct {
+	model.Response
+	RequestId string `json:"request_id"`
+	Depts     []int  `json:"dept_ids"` //可管理的部门ID列表
+}
+
 //CreateUser:创建用户
 //name:姓名
 //mobile:手机号
@@ -156,6 +174,37 @@ func (talk *DingTalk) GetOrgUserCount(active int) (req OrgUserCountResponse, err
 	params.Set("onlyActive", strconv.Itoa(active))
 
 	err = talk.request(http.MethodGet, global.GetOrgUserCountKey, params, nil, &req)
+	return req, err
+}
+
+//GetOrgInactiveUser:获取未登录钉钉的员工列表
+//active:0:包含未激活钉钉的人员数量,1:不包含未激活钉钉的人员数量
+func (talk *DingTalk) GetOrgInactiveUser(date string, offset, size int) (req InactiveUserResponse, err error) {
+	if size < 0 || size > 100 {
+		size = 100
+	}
+
+	form := make(map[string]interface{}, 3)
+	form["query_date"] = date
+	form["offset"] = offset
+	form["size"] = size
+
+	err = talk.request(http.MethodPost, global.GetOrgInactiveUserKey, nil, form, &req)
+	return req, err
+}
+
+//GetOrgAdminUser:获取未登录钉钉的员工列表
+func (talk *DingTalk) GetOrgAdminUser() (req OrgAdminUserResponse, err error) {
+	err = talk.request(http.MethodGet, global.GetOrgAdminUserKey, nil, nil, &req)
+	return req, err
+}
+
+//GetOrgAdminScope:获取管理员通讯录权限范围
+func (talk *DingTalk) GetOrgAdminScope(userId string) (req OrgAdminScopeResponse, err error) {
+	form := make(map[string]string, 1)
+	form["userid"] = userId
+
+	err = talk.request(http.MethodPost, global.GetOrgAdminScopeKey, nil, form, &req)
 	return req, err
 }
 

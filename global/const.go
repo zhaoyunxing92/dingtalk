@@ -16,7 +16,9 @@ const (
 	GetUserIdByMobileKey      = user + "/get_by_mobile"               //根据手机号获取userid
 	GetOrgUserCountKey        = user + "/get_org_user_count"          //获取企业员工人数
 	GetDeptUserDetailKey      = user + "/listbypage"                  //获取部门用户详情
-	GetUserAdminKey           = user + "/get_admin"                   //获取管理员列表
+	GetOrgAdminUserKey        = user + "/get_admin"                   //获取管理员列表
+	GetOrgInactiveUserKey     = "/topapi/inactive/user/get"           //获取未登录钉钉的员工列表
+	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope"        //获取管理员通讯录权限范围
 	SendCorpConversationKey   = corpConversation + "/asyncsend_v2"    //发送工作通知
 	GetSendProgressKey        = corpConversation + "/getsendprogress" //获取工作通知消息的发送进度
 	GetSendResultKey          = corpConversation + "/getsendresult"   //获取工作通知消息的发送结果

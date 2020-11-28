@@ -90,6 +90,18 @@ type userv2 struct {
 	HiredDate  int    `json:"hired_date,omitempty"`                               //入职时间，Unix时间戳，单位毫秒。
 }
 
+//InactiveUser:未登录用户数据。
+type InactiveUser struct {
+	More    bool     `json:"has_more"` //是否还有更多
+	UserIds []string `json:"list"`     //用户userid
+}
+
+//OrgAdminList:管理员列表
+type OrgAdminList struct {
+	Level  int    `json:"sys_level"` //1：表示主管理员,2：表示子管理员
+	UserId string `json:"userid"`    //用户userid
+}
+
 func NewUser() *userv2 {
 	return &userv2{}
 }

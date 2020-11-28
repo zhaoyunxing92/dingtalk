@@ -101,6 +101,37 @@ func TestGetOrgUserCount(t *testing.T) {
 	t.Log(string(js))
 }
 
+//TestGetOrgInactiveUser:根据手机号获取userid
+func TestGetOrgInactiveUser(t *testing.T) {
+
+	rsp, err := dingTalk.GetOrgInactiveUser("20201128", 0, 2)
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//TestGetOrgAdminUser:获取未登录钉钉的员工列表
+func TestGetOrgAdminUser(t *testing.T) {
+	rsp, err := dingTalk.GetOrgAdminUser()
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//TestGetOrgAdminScope:获取未登录钉钉的员工列表
+func TestGetOrgAdminScope(t *testing.T) {
+	rsp, err := dingTalk.GetOrgAdminScope("manager164")
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
 //TestCreatUserV2:用户管理2-创建用户
 func TestCreatUserV2(t *testing.T) {
 	//011755000243774889
