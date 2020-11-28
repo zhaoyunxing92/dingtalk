@@ -61,7 +61,7 @@ type User struct {
 	OrderInDepts    string      `json:"orderInDepts,omitempty"`                                //在对应的部门中的排序，Map结构的json字符串。Key是部门的ID，Value是人员在这个部门的排序值。
 	Department      []int       `json:"department,omitempty"`                                  //数组类型，数组里面值为整型，成员所属部门ID列表。
 	Extattr         string      `json:"extattr,omitempty"`                                     //扩展属性，可以设置多种属性
-	HiredDate       int         `json:"hired_date,omitempty"`                                  //入职时间，Unix时间戳，单位毫秒。
+	HiredDate       int         `json:"hiredDate,omitempty"`                                   //入职时间，Unix时间戳，单位毫秒。
 	Lang            string      `json:"lang,omitempty" validate:"omitempty,oneof=zh_CN en_US"` //通讯录语言，默认zh_CN。如果是英文，请输入en_US。
 	StateCode       string      `json:"stateCode,omitempty"`                                   //国家地区码
 	ManagerUserId   string      `json:"managerUserId,omitempty"`                               //主管的ID
@@ -69,9 +69,9 @@ type User struct {
 
 //UserRoles:用户角色
 type UserRoles struct {
-	Id    int `json:"id,omitempty"`        //角色id
-	Name  int `json:"name,omitempty"`      //角色名称
-	Group int `json:"groupName,omitempty"` //角色组
+	Id    int    `json:"id,omitempty"`        //角色id
+	Name  string `json:"name,omitempty"`      //角色名称
+	Group string `json:"groupName,omitempty"` //角色组
 }
 
 type userv2 struct {

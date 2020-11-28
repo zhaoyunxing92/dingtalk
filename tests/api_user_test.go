@@ -10,7 +10,7 @@ import (
 func TestCreatUser(t *testing.T) {
 	//userId:011755000243774889
 	deptIds := []int{1, 427805278}
-	user, err := dingTalk.CreateUser("张三", "18513027676", deptIds)
+	user, err := dingTalk.CreateUser("李四", "18513027675", deptIds)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -56,10 +56,44 @@ func TestUpdateUser(t *testing.T) {
 	t.Log(string(js))
 }
 
-// TestGetUser:获取用户
-func TestGetUser(t *testing.T) {
+// TestGetUserDetail:获取用户
+func TestGetUserDetail(t *testing.T) {
 
-	rsp, err := dingTalk.GetUser("011755000243774889", "zh_CN")
+	rsp, err := dingTalk.GetUserDetail("011755000243774889", "zh_CN")
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//QiifpBr4PK6VYDhGcFegcYQiEiE
+//TestGetUserIdByUnionId:根据unionid获取userid
+func TestGetUserIdByUnionId(t *testing.T) {
+
+	rsp, err := dingTalk.GetUserIdByUnionId("QiifpBr4PK6VYDhGcFegcYQiEiE")
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//TestGetUserIdByMobile:根据手机号获取userid
+func TestGetUserIdByMobile(t *testing.T) {
+
+	rsp, err := dingTalk.GetUserIdByMobile("18513027675")
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//TestGetUserIdByMobile:根据手机号获取userid
+func TestGetOrgUserCount(t *testing.T) {
+
+	rsp, err := dingTalk.GetOrgUserCount(1)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -4,6 +4,8 @@ import (
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
+	"net/url"
+	"strconv"
 )
 
 type deptResult struct {
@@ -22,14 +24,68 @@ type DeptCreateResponse struct {
 	deptResult `json:"result"`
 }
 
+type DeptUserIdsResponse struct {
+	model.Response
+	UserIds []string `json:"userIds,omitempty"` //用户列表
+}
+
+type GetDeptUserDetailResponse struct {
+	model.Response
+	More     bool         `json:"hasMore"`  //在分页查询时返回，代表是否还有下一页更多数据。
+	UserList []UserDetail `json:"userlist"` //成员列表
+}
+
+//GetDepartmentDetail:获取部门详情
+func (talk *DingTalk) GetDepartmentDetail(deptId int, lang string) (rsp model.Department, err error) {
+
+	if lang != "en_US" {
+		lang = "zh_CN"
+	}
+
+	params := url.Values{}
+	params.Set("id", strconv.Itoa(deptId))
+	params.Set("lang", lang)
+
+	err = talk.request(http.MethodGet, global.DepartmentGetKey, params, nil, &rsp)
+
+	return rsp, err
+}
+
+//GetDeptUserIds:获取部门用户userid列表
+//deptId:部门id
+func (talk *DingTalk) GetDeptUserIds(deptId int) (req DeptUserIdsResponse, err error) {
+
+	params := url.Values{}
+	params.Set("deptId", strconv.Itoa(deptId))
+
+	err = talk.request(http.MethodGet, global.GetDeptUserIdKey, params, nil, &req)
+	return req, err
+}
+
+//GetDeptUserDetail:获取部门用户详情
+func (talk *DingTalk) GetDeptUserDetail(lang string, deptId, offset int) (req GetDeptUserDetailResponse, err error) {
+	if lang != "en_US" {
+		lang = "zh_CN"
+	}
+	params := url.Values{}
+	params.Set("lang", lang)
+	params.Set("department_id", strconv.Itoa(deptId))
+	params.Set("offset", strconv.Itoa(offset))
+	params.Set("size", strconv.Itoa(100))
+	params.Set("order", "entry_desc")
+
+	err = talk.request(http.MethodGet, global.GetDeptUserDetailKey, params, nil, &req)
+	return req, err
+}
+
 //CreateV2Department 创建部门
 //name:部门名称
 //parentId:父部门id
-func (talk *DingTalk) CreateV2Department(name string, parentId int) (rsp DeptCreateResponse, err error) {
+func (talk *DingTalk) CreateV2Department(name string, pId int) (rsp DeptCreateResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["name"] = name
-	form["parent_id"] = parentId
+	form["parent_id"] = pId
 
 	err = talk.request(http.MethodPost, global.DepartmentCreateV2Key, nil, form, &rsp)
 
@@ -67,17 +123,6 @@ func (talk *DingTalk) DeleteV2Department(deptId int) (rsp DeptCreateResponse, er
 	form["dept_id"] = deptId
 
 	err = talk.request(http.MethodPost, global.DepartmentDeleteV2Key, nil, form, &rsp)
-
-	return rsp, err
-}
-
-//DeleteV2Department:删除部门
-func (talk *DingTalk) GetDepartmentDetail(deptId int) (rsp DeptCreateResponse, err error) {
-
-	form := make(map[string]int, 1)
-	form["dept_id"] = deptId
-
-	err = talk.request(http.MethodPost, global.DepartmentGetKey, nil, form, &rsp)
 
 	return rsp, err
 }
