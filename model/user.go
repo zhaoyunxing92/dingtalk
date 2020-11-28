@@ -34,7 +34,29 @@ import (
 	"email":"test@xxx.com"
 }
 */
-type user struct {
+
+type User struct {
+	Id              string         `json:"userid,omitempty" validate:"omitempty,max=64,min=1"`    //员工唯一标识ID（不可修改），企业内必须唯一。长度为1~64个字符，如果不传，将自动生成一个userid。
+	Senior          bool           `json:"isSenior,omitempty"`                                    //是否开启高管模式
+	Hide            bool           `json:"isHide,omitempty"`                                      //是否号码隐藏：管模式
+	JobNumber       string         `json:"jobnumber,omitempty" validate:"omitempty,max=64"`       //员工工号，对应显示到OA后台和客户端个人资料的工号栏目。长度为0~64个字符。码隐藏：管模式
+	Email           string         `json:"email,omitempty" validate:"omitempty,max=64,email"`     //员工邮箱，长度最大64个字符。企业内必须唯一，不可重复。
+	Remark          string         `json:"remark,omitempty" validate:"omitempty,max=1000"`        //备注，长度最大为1024个字符。
+	WorkPlace       string         `json:"workPlace,omitempty" validate:"omitempty,max=50"`       //办公地点。长度为0~50个字符。
+	Tel             string         `json:"tel,omitempty" validate:"omitempty,max=50"`             //分机号。长度为0~50个字符，企业内必须唯一，不可重复。
+	Mobile          string         `json:"mobile,omitempty"`                                      //手机号码，企业内必须唯一，不可重复。
+	Position        string         `json:"position,omitempty" validate:"omitempty,max=64"`        //职位信息。长度为0~64个字符
+	PositionInDepts map[int]string `json:"positionInDepts,omitempty"`                             //设置用户在每个部门下的职位。Key是deptId，表示部门；Value是职位，表示在这个部门下的职位。
+	Department      []int          `json:"department,omitempty"`                                  //数组类型，数组里面值为整型，成员所属部门ID列表。
+	Name            string         `json:"name,omitempty" validate:"omitempty,max=64"`            //员工姓名，长度最大64个字符。
+	Extattr         string         `json:"extattr,omitempty"`                                     //扩展属性，可以设置多种属性
+	OrgEmail        string         `json:"orgEmail,omitempty" validate:"omitempty,email"`         //员工的企业邮箱，如果员工已经开通了企业邮箱，接口会返回，否则会报错。
+	OrderInDepts    map[int]string `json:"orderInDepts,omitempty"`                                //在对应的部门中的排序，Map结构的json字符串。Key是部门的ID，Value是人员在这个部门的排序值。
+	HiredDate       int            `json:"hired_date,omitempty"`                                  //入职时间，Unix时间戳，单位毫秒。
+	Lang            string         `json:"lang,omitempty" validate:"omitempty,oneof=zh_CN en_US"` //通讯录语言，默认zh_CN。如果是英文，请输入en_US。
+}
+
+type userv2 struct {
 	Id         string `json:"userid,omitempty" validate:"omitempty,max=64,min=1"` // 员工唯一标识ID（不可修改），企业内必须唯一。长度为1~64个字符，如果不传，将自动生成一个userid。
 	Name       string `json:"name,omitempty" validate:"omitempty,max=64"`         //员工姓名，长度最大64个字符。
 	Mobile     string `json:"mobile,omitempty"`                                   //手机号码，企业内必须唯一，不可重复。
@@ -50,12 +72,25 @@ type user struct {
 	HiredDate  int    `json:"hired_date,omitempty"`                               //入职时间，Unix时间戳，单位毫秒。
 }
 
-func NewUser() *user {
-	return &user{}
+func NewUser() *userv2 {
+	return &userv2{}
 }
 
 //请求参数验证
-func (u user) Validate(valid *validator.Validate, trans translator.Translator) error {
+func (u userv2) Validate(valid *validator.Validate, trans translator.Translator) error {
+	if err := valid.Struct(u); err != nil {
+		errs := err.(validator.ValidationErrors)
+		var slice []string
+		for _, msg := range errs {
+			slice = append(slice, msg.Translate(trans))
+		}
+		return errors.New(strings.Join(slice, ","))
+	}
+	return nil
+}
+
+//请求参数验证
+func (u User) Validate(valid *validator.Validate, trans translator.Translator) error {
 	if err := valid.Struct(u); err != nil {
 		errs := err.(validator.ValidationErrors)
 		var slice []string
