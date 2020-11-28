@@ -9,8 +9,9 @@ import (
 //{"errcode":40035,"errmsg":"缺少参数 corpid or appkey"}
 //Response:响应
 type Response struct {
-	Code int    `json:"errcode"` //code
-	Msg  string `json:"errmsg"`  //msg
+	Code   int    `json:"errcode"`          //code
+	Msg    string `json:"errmsg"`           //msg
+	UserId string `json:"userid,omitempty"` //用户id
 }
 
 //Unmarshallable:统一检查返回异常异常

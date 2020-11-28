@@ -13,7 +13,8 @@ func TestCreateDepartment(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%v", rsp)
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
 }
 
 //TestCreateDetailDepartment:创建详细的部门
