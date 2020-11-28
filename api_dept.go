@@ -63,15 +63,19 @@ func (talk *DingTalk) GetDeptUserIds(deptId int) (req DeptUserIdsResponse, err e
 }
 
 //GetDeptUserDetail:获取部门用户详情
-func (talk *DingTalk) GetDeptUserDetail(lang string, deptId, offset int) (req GetDeptUserDetailResponse, err error) {
+func (talk *DingTalk) GetDeptUserDetail(deptId, offset, size int, lang string) (req GetDeptUserDetailResponse, err error) {
 	if lang != "en_US" {
 		lang = "zh_CN"
+	}
+
+	if size < 0 || size > 100 {
+		size = 100
 	}
 	params := url.Values{}
 	params.Set("lang", lang)
 	params.Set("department_id", strconv.Itoa(deptId))
 	params.Set("offset", strconv.Itoa(offset))
-	params.Set("size", strconv.Itoa(100))
+	params.Set("size", strconv.Itoa(size))
 	params.Set("order", "entry_desc")
 
 	err = talk.request(http.MethodGet, global.GetDeptUserDetailKey, params, nil, &req)

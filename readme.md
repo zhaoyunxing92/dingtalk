@@ -25,6 +25,19 @@
       - [x] [更新用户详情](https://ding-doc.dingtalk.com/document#/org-dev-guide/update-user-info)
       
       - [x] [获取部门用户userid列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-deptment-users)
+      
+      - [x] [根据手机号获取userid](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-userid-By-Mobile)
+
+      - [x] [获取企业员工人数](https://ding-doc.dingtalk.com/document#/org-dev-guide/Get-user-count)
+      
+      - [x] [获取部门用户详情](https://ding-doc.dingtalk.com/document#/org-dev-guide/list-dept-user-details)
+     
+      - [x] [获取未登录钉钉的员工列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-list-of-employees-who-have-not-logged-on)
+      
+      - [x] [获取管理员列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-Admin-list)
+      
+      - [x] [获取管理员通讯录权限范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-permission-of-admin)
+
   - 部门管理
   
   - 角色管理 

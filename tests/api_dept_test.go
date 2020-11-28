@@ -73,7 +73,7 @@ func TestGetDepartmentUserIds(t *testing.T) {
 //GetDeptUserDetail：获取部门用户userid列表
 func TestGetDeptUserDetail(t *testing.T) {
 
-	rsp, err := dingTalk.GetDeptUserDetail("", 1, 0)
+	rsp, err := dingTalk.GetDeptUserDetail(1, 0, 3, "")
 	if err != nil {
 		t.Fatal(err)
 	}
