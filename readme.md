@@ -17,11 +17,15 @@
 
 * 通讯录管理
 
-  - 用户管理2.0
-      - [ ] [创建用户](https://ding-doc.dingtalk.com/document#/org-dev-guide/create-a-user)
+  - 用户管理
+      - [x] [创建用户](https://ding-doc.dingtalk.com/document#/org-dev-guide/create-user)
 
-      - [ ] [更新用户信息](https://ding-doc.dingtalk.com/document#/org-dev-guide/update-user-information)
-  - 部门管理2.0
+      - [x] [删除用户](https://ding-doc.dingtalk.com/document#/org-dev-guide/delete-user)
+      
+      - [x] [更新用户详情](https://ding-doc.dingtalk.com/document#/org-dev-guide/update-user-info)
+      
+      - [x] [获取部门用户userid列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-deptment-users)
+  - 部门管理
   
   - 角色管理 
   

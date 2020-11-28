@@ -13,7 +13,7 @@ const (
 	GetUserKey                = user + "/get"                         //获取用户详情
 	GetDeptUserIdKey          = user + "/getDeptMember"               //获取部门用户userid列表
 	GetUserIdByUnionIdKey     = user + "/getUseridByUnionid"          //根据unionid获取userid
-	GetUserByMobileKey        = user + "/get_by_mobile"               //根据手机号获取userid
+	GetUserIdByMobileKey      = user + "/get_by_mobile"               //根据手机号获取userid
 	GetOrgUserCountKey        = user + "/get_org_user_count"          //获取企业员工人数
 	GetDeptUserDetailKey      = user + "/listbypage"                  //获取部门用户详情
 	GetUserAdminKey           = user + "/get_admin"                   //获取管理员列表
