@@ -31,14 +31,17 @@ func TestDeleteUser(t *testing.T) {
 //TestDeleteUser:删除用户
 func TestUpdateUser(t *testing.T) {
 
+	positionInDepts := `{1: "技术支持"}`
+	orderInDepts := `{1: 1, 427805278: 1}`
+
 	user := new(model.User)
 	user.Name = "李四"
 	user.Id = "011755000243774889"
 	user.Remark = "测试用户"
 	user.Position = "技术支持"
-	user.PositionInDepts = map[int]string{1: "技术支持"}
+	user.PositionInDepts = positionInDepts
+	user.OrderInDepts = orderInDepts
 	user.JobNumber = "001"
-	user.OrderInDepts = map[int]string{1: "1", 427805278: "1"}
 	user.Department = []int{1, 427805278}
 	user.Hide = true
 	user.OrgEmail = "1@dingtalk.com"

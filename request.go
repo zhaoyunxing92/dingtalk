@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"github.com/zhaoyunxing92/dingtalk/model"
 	"io"
@@ -26,7 +27,7 @@ func (talk *DingTalk) request(method, path string, params url.Values, form inter
 		//set token
 		params.Set("access_token", token)
 	}
-	return talk.httpRequest(method, path, params, form, data)
+ 	return talk.httpRequest(method, path, params, form, data)
 }
 
 func (talk *DingTalk) httpRequest(method, path string, args url.Values, form interface{}, data model.Unmarshallable) error {
@@ -83,6 +84,7 @@ func (talk *DingTalk) httpRequest(method, path string, args url.Values, form int
 	if content, err = ioutil.ReadAll(rep.Body); err != nil {
 		return err
 	}
+	fmt.Println(string(content))
 	if err = json.Unmarshal(content, data); err != nil {
 		return err
 	}

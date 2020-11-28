@@ -17,6 +17,11 @@ type UserCreateResponse struct {
 	userResult `json:"result,omitempty"`
 }
 
+//type getUserResult struct {
+//	model.Response
+//}
+
+
 //CreateUser:创建用户
 //name:姓名
 //mobile:手机号

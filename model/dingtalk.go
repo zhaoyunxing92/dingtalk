@@ -12,6 +12,7 @@ type Response struct {
 	Code   int    `json:"errcode"`          //code
 	Msg    string `json:"errmsg"`           //msg
 	UserId string `json:"userid,omitempty"` //用户id
+	User
 }
 
 //Unmarshallable:统一检查返回异常异常
