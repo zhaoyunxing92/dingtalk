@@ -17,14 +17,18 @@
 
 * 通讯录管理
 
-  - 用户管理
+  - 用户管理(**10**/10)
       - [x] [创建用户](https://ding-doc.dingtalk.com/document#/org-dev-guide/create-user)
 
       - [x] [删除用户](https://ding-doc.dingtalk.com/document#/org-dev-guide/delete-user)
       
       - [x] [更新用户详情](https://ding-doc.dingtalk.com/document#/org-dev-guide/update-user-info)
+
+      - [x] [获取用户详情](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-user-detail)
       
       - [x] [获取部门用户userid列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-deptment-users)
+
+      - [x] [根据unionid获取userid](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-Userid-By-Unionid)
       
       - [x] [根据手机号获取userid](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-userid-By-Mobile)
 
