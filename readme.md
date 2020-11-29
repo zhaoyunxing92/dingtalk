@@ -76,17 +76,22 @@
   - [x] [设置群管理员](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-chat-admin)
       
 * 消息通知(4/6)
-  - [x] [发送工作通知](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-work-notifications)
-  
-  - [x] [获取工作通知消息的发送进度](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-work-notification-progess)
 
-  - [x] [获取工作通知消息的发送结果](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-work-notification-result)
+  - 工作通知
+    - [x] [发送工作通知](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-work-notifications)
+      
+    - [x] [获取工作通知消息的发送进度](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-work-notification-progess)
+    
+    - [x] [获取工作通知消息的发送结果](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-work-notification-result)
+    
+    - [x] [撤回工作通知消息](https://ding-doc.dingtalk.com/document#/org-dev-guide/withdrawal-work-notification)
 
-  - [x] [撤回工作通知消息](https://ding-doc.dingtalk.com/document#/org-dev-guide/withdrawal-work-notification)
-
-  - [ ] 企业群消息 
-
-  - [ ] 普通消息
+  - 企业群消息
+    - [x] [发送消息到企业群](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-chat-messages)
+    
+    - [x] [查询群消息已读人员列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-the-list-of-people-who-have-read-a-group-1)
+      
+  - [x] [发送普通消息](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-normal-messages)
 
 * 钉钉运动
 

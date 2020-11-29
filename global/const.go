@@ -46,8 +46,12 @@ const (
 	CreateChatKey       = chat + "/create"                          //创建群
 	GetChatInfoKey      = chat + "/get"                             //获取群会话
 	UpdateChatKey       = chat + "/update"                          //修改群会话
+	SendMsgToChatKey    = chat + "/send"                            //发送消息到企业群
+	GetChatReadUserKey  = chat + "/getReadList"                     //查询群消息已读人员列表
 	ChatFriendSwitchKey = "/topapi/chat/member/friendswitch/update" //设置禁止群成员私聊
 	ChatSubAdminKey     = "/topapi/chat/subadmin/update"            //设置群管理员
+
+	SendToConversationKey = "/message/send_to_conversation" //发送普通消息
 
 	GetOrgInactiveUserKey     = "/topapi/inactive/user/get"           //获取未登录钉钉的员工列表
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope"        //获取管理员通讯录权限范围

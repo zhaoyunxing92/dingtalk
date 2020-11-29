@@ -23,13 +23,13 @@ type WorkNotify struct {
 //bgColor:消息头部的背景颜色
 //fs:消息体的表单，最多显示6个，超过会被隐藏。
 func (notify *WorkNotify) NewOAWorkNotify(oa OA) {
-	notify.Msg = newOaMessage(oa)
+	notify.Msg = NewOaMessage(oa)
 }
 
 //文本消息通知
 //content:发送的内容
 func (notify *WorkNotify) NewTextWorkNotify(content string) {
-	notify.Msg = newTextMessages(content)
+	notify.Msg = NewTextMessages(content)
 }
 
 //markdown消息
