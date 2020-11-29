@@ -22,8 +22,8 @@ const (
 	DeleteDeptKey             = dept + "/delete"                      //删除部门
 	UpdateDeptKey             = dept + "/update"                      //更新部门
 	GetDeptDetailKey          = dept + "/get"                         //获取部门详情
-	GetDeptListKey            = dept + "/list"                        //获取部门列表
-	GetDeptSubListKey         = dept + "/list_ids"                    //获取子部门ID列表
+	GetSubDeptListKey         = dept + "/list"                        //获取子部门列表
+	GetSubDeptIdsKey          = dept + "/list_ids"                    //获取子部门ID列表
 	GetParentDeptsByUserKey   = dept + "/list_parent_depts"           //查询指定用户的所有上级父部门路径
 	GetParentDeptsByDeptKey   = dept + "/list_parent_depts_by_dept"   //查询部门的所有上级父部门路径
 	GetOrgInactiveUserKey     = "/topapi/inactive/user/get"           //获取未登录钉钉的员工列表
@@ -32,12 +32,5 @@ const (
 	GetSendProgressKey        = corpConversation + "/getsendprogress" //获取工作通知消息的发送进度
 	GetSendResultKey          = corpConversation + "/getsendresult"   //获取工作通知消息的发送结果
 	RecallCorpConversationKey = corpConversation + "/recall"          //撤回工作通知
-	CreateUserV2Key           = "/topapi/v2/user/create"              //创建用户
-	departmentV2              = "/topapi/v2/department"               //部门管理2.0
-	DepartmentCreateV2Key     = departmentV2 + "/create"              //创建部门
-	DepartmentUpdateV2Key     = departmentV2 + "/update"              //更新部门
-	DepartmentDeleteV2Key     = departmentV2 + "/delete"              //删除部门
-	DepartmentGetV2Key        = "/topapi/edu/dept/get"                //获取部门详情
-	DepartmentGetKey          = "/department/get"                     //获取部门详情
 	MediaUploadKey            = "/media/upload"                       //上传媒体文件
 )

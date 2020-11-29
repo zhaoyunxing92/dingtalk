@@ -28,7 +28,8 @@ type Dept struct {
 	GroupContainSubDept   bool     `json:"groupContainSubDept,omitempty"`                    //部门群是否包含子部门
 	OrgDeptOwner          string   `json:"orgDeptOwner,omitempty"`                           //企业群群主的userid
 	DeptGroupChatId       string   `json:"deptGroupChatId,omitempty"`                        //创建部门群自动生成的id。
-	DeptManagerUseridList string   `json:"deptManagerUseridList,omitempty"`                  //部门的主管列表，取值为由主管的userid组成的字符串，不同的userid使用"|"符号进行分隔。
+	DeptManagerUserIds    []string `json:"-"`                                                //部门的主管列表，取值为由主管的userid组成的字符串，不同的userid使用"|"符号进行分隔。
+	StrDeptManagerUserIds string   `json:"deptManagerUseridList,omitempty"`                  //字符串拼接
 	DeptPermits           []int    `json:"-" validate:"omitempty,lte=200"`                   //指定可以查看本部门的其他部门列表200,当hide_dept为true时，则此值生效。
 	StrDeptPermits        string   `json:"deptPermits,omitempty"`                            //使用|拼接的字符串
 	UserPermits           []string `json:"-" validate:"omitempty,lte=200"`                   //指定可以查看本部门的人员userid列表，总数不能超过200。当hide_dept为true时，则此值生效。
@@ -82,6 +83,26 @@ type DeptDetail struct {
 	Extension             string `json:"ext"`                   //扩展字段，JSON格式。
 }
 
+type GetSubDeptResponse struct {
+	Response
+	Depts []DeptDetail `json:"department"`
+}
+
+type GetSubDeptIdsResponse struct {
+	Response
+	SubDeptIds []int `json:"sub_dept_id_list"`
+}
+
+type GetParentIdsByUserIdResponse struct {
+	Response
+	ParentIds [][]int `json:"department"` //指定员工的部门信息。
+}
+
+type GetParentIdsByDeptIdResponse struct {
+	Response
+	ParentIds []int `json:"parentIds"`
+}
+
 //CreateDetailDeptRequest
 type CreateDetailDeptRequest interface {
 	Request
@@ -89,6 +110,7 @@ type CreateDetailDeptRequest interface {
 	JoinOuterPermitDepts()
 	JoinDeptPermits()
 	JoinUserPermits()
+	JoinDeptManagerUserIds()
 }
 
 //Validate:参数验证
@@ -170,4 +192,21 @@ func (d *Dept) JoinUserPermits() {
 		}
 	}
 	d.StrUserPermits = strings.Join(users, "|")
+}
+
+//JoinDeptManagerUserIds:组装参数,去除重复
+func (d *Dept) JoinDeptManagerUserIds() {
+	var size = len(d.DeptManagerUserIds)
+	if size <= 0 {
+		return
+	}
+	users := make([]string, 0)
+	tmp := make(map[string]int, size)
+	for idx, item := range d.DeptManagerUserIds {
+		if _, ok := tmp[item]; !ok {
+			tmp[item] = idx
+			users = append(users, item)
+		}
+	}
+	d.StrDeptManagerUserIds = strings.Join(users, "|")
 }
