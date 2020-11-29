@@ -124,20 +124,11 @@ func TestGetOrgAdminUser(t *testing.T) {
 
 //TestGetOrgAdminScope:获取未登录钉钉的员工列表
 func TestGetOrgAdminScope(t *testing.T) {
+
 	rsp, err := dingTalk.GetOrgAdminScope("manager164")
 	if err != nil {
 		t.Fatal(err)
 	}
 	js, err := json.Marshal(rsp)
 	t.Log(string(js))
-}
-
-//TestCreatUserV2:用户管理2-创建用户
-func TestCreatUserV2(t *testing.T) {
-	//011755000243774889
-	user, err := dingTalk.CreateUserV2("张三", "18513027676", 1)
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Logf("%v", user)
 }

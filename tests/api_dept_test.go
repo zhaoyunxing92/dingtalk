@@ -2,12 +2,13 @@ package tests
 
 import (
 	"encoding/json"
+	"github.com/zhaoyunxing92/dingtalk/model"
 	"testing"
 )
 
 func TestCreateDepartment(t *testing.T) {
-	//427285169
-	rsp, err := dingTalk.CreateV2Department("golang", 1)
+	//427772502
+	rsp, err := dingTalk.CreateDept("golang", 1)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15,43 +16,38 @@ func TestCreateDepartment(t *testing.T) {
 	t.Log(string(js))
 }
 
-//TestCreateDetailDepartment:创建详细的部门
-func TestCreateDetailDepartment(t *testing.T) {
+//TestCreateDetailDept:创建详细的部门
+func TestCreateDetailDept(t *testing.T) {
 
-	//dept := new(model.Department)
-	//dept.Name = "测试"
-	//dept.ParentId = 1 //根部门
-	//dept.Hide = true
-	//dept.DeptPermits = []int{411415721, 412362849}
-	//dept.OuterDept = true
-	//dept.OuterDeptOnlySelf = false
-	////dept.OuterPermitDepts = []int{411415721, 412362849}
-	//dept.Order = 10
-	//
-	//js, err := json.Marshal(dept)
-	//fmt.Println(string(js))
-	//rsp, err := dingTalk.CreateV2DetailDepartment(dept)
-	//if err != nil {
-	//	t.Fatal(err)
-	//}
-	//t.Logf("%v", rsp)
+	dept := new(model.Dept)
+	dept.Name = "测试部门"
+	dept.ParentId = 1 //根部门
+	dept.SourceIdentifier = "123"
+	dept.Hide = true
+	dept.ShareBalance = true
+	dept.ParentBalanceFirst = true
+	dept.DeptPermits = []int{411415721, 411415721, 412362849}
+	dept.OuterDept = true
+	dept.OuterDeptOnlySelf = false
+	dept.UserPermits = []string{"manager164", "manager164"}
+	dept.DeptPermits = []int{411415721, 411415721, 412362849}
+	dept.OuterPermitUsers = []string{"manager164", "manager164"}
+	dept.OuterPermitDepts = []int{411415721, 411415721, 412362849}
+	dept.Order = 1
+	dept.Extension = `{"职能":"人事"}`
 
-}
-
-//TestDeleteDepartment:删除部门
-func TestDeleteDepartment(t *testing.T) {
-
-	rsp, err := dingTalk.DeleteV2Department(427497463)
+	rsp, err := dingTalk.CreateDetailDept(dept)
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%v", rsp)
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
 }
 
-//TestGetDepartmentDetail：获取部门详情
-func TestGetDepartmentDetail(t *testing.T) {
+//TestGetDeptDetail：获取部门详情
+func TestGetDeptDetail(t *testing.T) {
 
-	rsp, err := dingTalk.GetDepartmentDetail(427805278, "")
+	rsp, err := dingTalk.GetDeptDetail(428051259, "")
 	if err != nil {
 		t.Fatal(err)
 	}
