@@ -104,6 +104,8 @@
   
   - [x] [获取应用可见范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range)
 
+* 群机器人
+
 * 文件存储 (**1**/10)
   - [x] [上传媒体文件](https://ding-doc.dingtalk.com/document#/org-dev-guide/upload-media-files-1)
   

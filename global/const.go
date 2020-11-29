@@ -53,6 +53,8 @@ const (
 
 	SendToConversationKey = "/message/send_to_conversation" //发送普通消息
 
+	SendRobotMsgKey = "/robot/send" //发送机器人消息
+
 	GetOrgInactiveUserKey     = "/topapi/inactive/user/get"           //获取未登录钉钉的员工列表
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope"        //获取管理员通讯录权限范围
 	SendCorpConversationKey   = corpConversation + "/asyncsend_v2"    //发送工作通知
