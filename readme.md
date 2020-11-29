@@ -42,8 +42,23 @@
       
       - [x] [获取管理员通讯录权限范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-permission-of-admin)
 
-  - 部门管理
-  
+  - 部门管理(**8**/8)
+      - [x] [创建部门](https://ding-doc.dingtalk.com/document#/org-dev-guide/create-a-department)
+      
+      - [x] [删除部门](https://ding-doc.dingtalk.com/document#/org-dev-guide/delete-a-department)
+      
+      - [x] [更新部门](https://ding-doc.dingtalk.com/document#/org-dev-guide/update-a-department-v1)
+      
+      - [x] [获取部门详情](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-department-details-v1)
+      
+      - [x] [获取部门列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-department-list)
+      
+      - [x] [获取子部门Id列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-sub-departmentId-list)
+      
+      - [x] [查询指定用户的所有上级父部门路径](https://ding-doc.dingtalk.com/document#/org-dev-guide/GET-parent-depts)
+      
+      - [x] [查询部门的所有上级父部门路径](https://ding-doc.dingtalk.com/document#/org-dev-guide/GET-parent-deptsby-dept)
+      
   - 角色管理 
   
 * 消息通知(4/6)

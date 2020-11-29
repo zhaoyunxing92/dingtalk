@@ -66,10 +66,65 @@ func TestGetDepartmentUserIds(t *testing.T) {
 	t.Log(string(js))
 }
 
-//GetDeptUserDetail：获取部门用户userid列表
+//TestGetDeptUserDetail：获取部门用户userid列表
 func TestGetDeptUserDetail(t *testing.T) {
 
 	rsp, err := dingTalk.GetDeptUserDetail(1, 0, 3, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//TestDeleteDept:删除部门
+func TestDeleteDept(t *testing.T) {
+
+	rsp, err := dingTalk.DeleteDept(428051259)
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//TestGetSubDeptList:获取部门列表
+func TestGetSubDeptList(t *testing.T) {
+
+	rsp, err := dingTalk.GetSubDeptList(1, "", true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//TestGetSubDeptIds:获取部门列表
+func TestGetSubDeptIds(t *testing.T) {
+
+	rsp, err := dingTalk.GetSubDeptIds(1)
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//TestGetUserParentDeptIds:查询指定用户的所有上级父部门路径
+func TestGetUserParentDeptIds(t *testing.T) {
+
+	rsp, err := dingTalk.GetParentIdsByUserId("manager164")
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
+//TestGetUserParentDeptIds:查询指定用户的所有上级父部门路径
+func TestGetParentIdsByDeptId(t *testing.T) {
+
+	rsp, err := dingTalk.GetParentIdsByDeptId(427922598)
 	if err != nil {
 		t.Fatal(err)
 	}
