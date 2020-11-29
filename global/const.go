@@ -17,6 +17,15 @@ const (
 	GetOrgUserCountKey        = user + "/get_org_user_count"          //获取企业员工人数
 	GetDeptUserDetailKey      = user + "/listbypage"                  //获取部门用户详情
 	GetOrgAdminUserKey        = user + "/get_admin"                   //获取管理员列表
+	dept                      = "/department"                         //部门模块
+	CreateDeptKey             = dept + "/create"                      //创建部门
+	DeleteDeptKey             = dept + "/delete"                      //删除部门
+	UpdateDeptKey             = dept + "/update"                      //更新部门
+	GetDeptDetailKey          = dept + "/get"                         //获取部门详情
+	GetDeptListKey            = dept + "/list"                        //获取部门列表
+	GetDeptSubListKey         = dept + "/list_ids"                    //获取子部门ID列表
+	GetParentDeptsByUserKey   = dept + "/list_parent_depts"           //查询指定用户的所有上级父部门路径
+	GetParentDeptsByDeptKey   = dept + "/list_parent_depts_by_dept"   //查询部门的所有上级父部门路径
 	GetOrgInactiveUserKey     = "/topapi/inactive/user/get"           //获取未登录钉钉的员工列表
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope"        //获取管理员通讯录权限范围
 	SendCorpConversationKey   = corpConversation + "/asyncsend_v2"    //发送工作通知
