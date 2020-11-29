@@ -24,6 +24,16 @@ func (talk *DingTalk) CreateUser(name, mobile string, deptIds []int) (req model.
 	return req, err
 }
 
+//CreateDetailUser:创建详细的用户
+func (talk *DingTalk) CreateDetailUser(res model.Request) (req model.UserIdResponse, err error) {
+
+	if err = res.Validate(talk.validate, talk.trans); err != nil {
+		return req, err
+	}
+	err = talk.request(http.MethodPost, global.CreateUserKey, nil, res, &req)
+	return req, err
+}
+
 //DeleteUser:删除用户
 //userId:员工唯一标识userid
 func (talk *DingTalk) DeleteUser(userId string) (req model.Response, err error) {

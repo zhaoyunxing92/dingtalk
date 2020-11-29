@@ -62,8 +62,19 @@
       
       - [x] [查询部门的所有上级父部门路径](https://ding-doc.dingtalk.com/document#/org-dev-guide/GET-parent-deptsby-dept)
       
-  - 角色管理 
+  - 角色管理
+   
+* 群会话管理(**5**/5)
+  - [x] [创建群会话](https://ding-doc.dingtalk.com/document#/org-dev-guide/create-chat)
   
+  - [x] [获取群会话](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-chat-detail)
+  
+  - [x] [修改群会话](https://ding-doc.dingtalk.com/document#/org-dev-guide/update-chat-config)
+  
+  - [x] [设置禁止群成员私聊](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-private-chat)
+  
+  - [x] [设置群管理员](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-chat-admin)
+      
 * 消息通知(4/6)
   - [x] [发送工作通知](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-work-notifications)
   
