@@ -11,6 +11,8 @@ import (
 type Response struct {
 	Code      int    `json:"errcode"` //code
 	Msg       string `json:"errmsg"`  //msg
+	Success   bool   `json:"success"`
+	RequestId string `json:"request_id"`
 }
 
 //Unmarshallable:统一检查返回异常异常

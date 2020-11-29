@@ -17,6 +17,33 @@ func TestCreatUser(t *testing.T) {
 	t.Logf("%v", user)
 }
 
+//TestCreateDetailUser:用户管理-创建用户
+func TestCreateDetailUser(t *testing.T) {
+	positionInDepts := `{1: "技术支持",427772502:"开发"}`
+	orderInDepts := `{1: 1, 427772502: 1}`
+
+	user := new(model.User)
+	user.Name = "李四"
+	user.Mobile = "18513027675"
+	user.Remark = "测试用户"
+	user.Position = "技术支持"
+	user.PositionInDepts = positionInDepts
+	user.OrderInDepts = orderInDepts
+	user.JobNumber = "001"
+	user.Department = []int{1, 427772502}
+	user.Hide = true
+	user.OrgEmail = "1@dingtalk.com"
+	user.Email = "1@dingtalk.com"
+	user.Lang = "en_US"
+
+	rsp, err := dingTalk.CreateDetailUser(user)
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}
+
 //TestDeleteUser:删除用户
 func TestDeleteUser(t *testing.T) {
 	//userId:011755000243774889

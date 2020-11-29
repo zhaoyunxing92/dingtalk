@@ -42,6 +42,13 @@ const (
 	BatchRemoveUserRoleKey = role + "/removerolesforemps" //批量删除员工角色
 	UpdateUserRoleScopeKey = role + "/scope/update"       //设定角色成员管理范围
 
+	chat                = "/chat"                                   //群模块
+	CreateChatKey       = chat + "/create"                          //创建群
+	GetChatInfoKey      = chat + "/get"                             //获取群会话
+	UpdateChatKey       = chat + "/update"                          //修改群会话
+	ChatFriendSwitchKey = "/topapi/chat/member/friendswitch/update" //设置禁止群成员私聊
+	ChatSubAdminKey     = "/topapi/chat/subadmin/update"            //设置群管理员
+
 	GetOrgInactiveUserKey     = "/topapi/inactive/user/get"           //获取未登录钉钉的员工列表
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope"        //获取管理员通讯录权限范围
 	SendCorpConversationKey   = corpConversation + "/asyncsend_v2"    //发送工作通知
