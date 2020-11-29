@@ -132,8 +132,8 @@ func (d *Dept) JoinOuterPermitUsers() {
 	if size <= 0 {
 		return
 	}
-	users := make([]string, 0)
-	tmp := make(map[string]int, size)
+	users := make([]string, 0, size)
+	tmp := map[string]int{}
 	for idx, item := range d.OuterPermitUsers {
 		if _, ok := tmp[item]; !ok {
 			tmp[item] = idx
@@ -149,8 +149,8 @@ func (d *Dept) JoinOuterPermitDepts() {
 	if size <= 0 {
 		return
 	}
-	depts := make([]string, 0)
-	tmp := make(map[int]int, size)
+	depts := make([]string, 0, size)
+	tmp := map[int]int{}
 	for idx, item := range d.OuterPermitDepts {
 		if _, ok := tmp[item]; !ok {
 			tmp[item] = idx
@@ -166,8 +166,8 @@ func (d *Dept) JoinDeptPermits() {
 	if size <= 0 {
 		return
 	}
-	depts := make([]string, 0)
-	tmp := make(map[int]int, size)
+	depts := make([]string, 0, size)
+	tmp := map[int]int{}
 	for idx, item := range d.DeptPermits {
 		if _, ok := tmp[item]; !ok {
 			tmp[item] = idx
@@ -183,8 +183,8 @@ func (d *Dept) JoinUserPermits() {
 	if size <= 0 {
 		return
 	}
-	users := make([]string, 0)
-	tmp := make(map[string]int, size)
+	users := make([]string, 0, size)
+	tmp := map[string]int{}
 	for idx, item := range d.UserPermits {
 		if _, ok := tmp[item]; !ok {
 			tmp[item] = idx
@@ -200,8 +200,8 @@ func (d *Dept) JoinDeptManagerUserIds() {
 	if size <= 0 {
 		return
 	}
-	users := make([]string, 0)
-	tmp := make(map[string]int, size)
+	users := make([]string, 0, size)
+	tmp := map[string]int{}
 	for idx, item := range d.DeptManagerUserIds {
 		if _, ok := tmp[item]; !ok {
 			tmp[item] = idx

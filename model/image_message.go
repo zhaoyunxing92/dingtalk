@@ -7,25 +7,26 @@ import (
 	"strings"
 )
 
+//图片消息
 // 钉钉消息结构体
-type text struct {
-	Content string `json:"content" validate:"required"`
+type image struct {
+	MediaId string `json:"media_id" validate:"required"`
 }
 
 //文本消息
-type textMessage struct {
+type imageMessage struct {
 	message
-	text `json:"text" validate:"required"`
+	image `json:"image" validate:"required"`
 }
 
 // 文本对象
-func NewTextMessages(context string) textMessage {
-	return textMessage{message: message{MsgType: "text"}, text: text{Content: context}}
+func NewImageMessages(mediaId string) imageMessage {
+	return imageMessage{message{MsgType: "image"}, image{MediaId: mediaId}}
 }
 
 //请求参数验证
-func (t textMessage) Validate(valid *validator.Validate, trans translator.Translator) error {
-	if err := valid.Struct(t); err != nil {
+func (i imageMessage) Validate(valid *validator.Validate, trans translator.Translator) error {
+	if err := valid.Struct(i); err != nil {
 		errs := err.(validator.ValidationErrors)
 		var slice []string
 		for _, msg := range errs {

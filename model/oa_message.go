@@ -1,5 +1,12 @@
 package model
 
+import (
+	"errors"
+	translator "github.com/go-playground/universal-translator"
+	"github.com/go-playground/validator/v10"
+	"strings"
+)
+
 //oa消息的头
 type Header struct {
 	BgColor string `json:"bgcolor" validate:"required"`     //消息头部的背景颜色。长度限制为8个英文字符，其中前2为表示透明度，后6位表示颜色值。不要添加0x。
@@ -42,6 +49,19 @@ type OAMessage struct {
 }
 
 //构建oa消息
-func newOaMessage(oa OA) *OAMessage {
+func NewOaMessage(oa OA) *OAMessage {
 	return &OAMessage{message{MsgType: "oa"}, oa}
+}
+
+//请求参数验证
+func (o OAMessage) Validate(valid *validator.Validate, trans translator.Translator) error {
+	if err := valid.Struct(o); err != nil {
+		errs := err.(validator.ValidationErrors)
+		var slice []string
+		for _, msg := range errs {
+			slice = append(slice, msg.Translate(trans))
+		}
+		return errors.New(strings.Join(slice, ","))
+	}
+	return nil
 }

@@ -69,6 +69,20 @@ type GetChatInfoResponse struct {
 	ChatInfo ChatDetail `json:"chat_info"`
 }
 
+//ChatSetResponse:群设置返回
+type ChatSetResponse struct {
+	Response
+	Success   bool   `json:"success"`
+	RequestId string `json:"request_id"`
+}
+
+//ChatSetResponse:群设置返回
+type GetChatMsgReadResponse struct {
+	Response
+	NextCursor int      `json:"next_cursor"`    //下次分页获取的起始游标。
+	UserIds    []string `json:"readUserIdList"` //已读人员的userid列表。已读人员为空时不返回该参数。
+}
+
 //请求参数验证
 func (u CreateChat) Validate(valid *validator.Validate, trans translator.Translator) error {
 	if err := valid.Struct(u); err != nil {
