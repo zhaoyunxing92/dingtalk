@@ -1,4 +1,4 @@
-module github.com/zhaoyunxing92/dingtalk
+module github.com/lihongchen/dingtalk
 
 go 1.15
 
