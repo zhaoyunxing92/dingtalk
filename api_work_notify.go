@@ -1,9 +1,10 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/model"
-	"github.com/zhaoyunxing92/dingtalk/global"
 	"net/http"
+
+	"github.com/lihongchen/dingtalk/global"
+	"github.com/lihongchen/dingtalk/model"
 )
 
 //发送工作通知返回结果

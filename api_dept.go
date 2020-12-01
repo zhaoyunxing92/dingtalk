@@ -1,11 +1,12 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
 	"net/url"
 	"strconv"
+
+	"github.com/lihongchen/dingtalk/global"
+	"github.com/lihongchen/dingtalk/model"
 )
 
 // CreateDept:创建部门

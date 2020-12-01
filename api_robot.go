@@ -1,9 +1,10 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
 	"time"
+
+	"github.com/lihongchen/dingtalk/model"
 )
 
 type Robot struct {

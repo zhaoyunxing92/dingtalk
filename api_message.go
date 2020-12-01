@@ -1,9 +1,10 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
+
+	"github.com/lihongchen/dingtalk/global"
+	"github.com/lihongchen/dingtalk/model"
 )
 
 //SendToConversation:发送普通消息

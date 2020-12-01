@@ -1,10 +1,11 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/model"
-	"github.com/zhaoyunxing92/dingtalk/global"
 	"net/http"
 	"net/url"
+
+	"github.com/lihongchen/dingtalk/global"
+	"github.com/lihongchen/dingtalk/model"
 )
 
 func (talk *DingTalk) MediaUpload(req model.UploadFile) (media model.MediaUpload, err error) {

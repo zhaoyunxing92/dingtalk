@@ -3,9 +3,10 @@ package dingtalk
 import (
 	"errors"
 	"fmt"
-	"github.com/zhaoyunxing92/dingtalk/model"
-	"github.com/zhaoyunxing92/dingtalk/global"
 	"net/http"
+
+	"github.com/lihongchen/dingtalk/global"
+	"github.com/lihongchen/dingtalk/model"
 )
 
 //获取应用列表
@@ -30,7 +31,7 @@ func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app model.MicroApp, 
 		}
 	}
 
-	return model.MicroApp{},errors.New(fmt.Sprintf("agentId:%d is not exist",agentId))
+	return model.MicroApp{}, errors.New(fmt.Sprintf("agentId:%d is not exist", agentId))
 }
 
 //获取应用可见范围

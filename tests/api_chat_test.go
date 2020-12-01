@@ -2,8 +2,9 @@ package tests
 
 import (
 	"encoding/json"
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"testing"
+
+	"github.com/lihongchen/dingtalk/model"
 )
 
 //TestCreateChat:创建群

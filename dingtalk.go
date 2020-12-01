@@ -1,16 +1,18 @@
 package dingtalk
 
 import (
+	"crypto/tls"
+	"net/http"
+	"net/url"
+	"time"
+
 	"github.com/go-playground/locales/en"
 	"github.com/go-playground/locales/zh"
 	translator "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	zh_trans "github.com/go-playground/validator/v10/translations/zh"
-	"github.com/zhaoyunxing92/dingtalk/model"
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"net/http"
-	"net/url"
-	"time"
+	"github.com/lihongchen/dingtalk/global"
+	"github.com/lihongchen/dingtalk/model"
 )
 
 type DingTalk struct {
@@ -31,8 +33,8 @@ func NewDingTalk(agentId int, appKey, appSecret string) *DingTalk {
 	_ = zh_trans.RegisterDefaultTranslations(validate, trans)
 
 	return &DingTalk{agentId, appKey, appSecret, &http.Client{
-		Timeout: 10 * time.Second,
-		Transport: &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}}
+		Timeout:   10 * time.Second,
+		Transport: &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}},
 	}, global.NewFileCache(".token", appKey), validate, trans}
 }
 

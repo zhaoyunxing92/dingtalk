@@ -2,9 +2,10 @@ package tests
 
 import (
 	"encoding/json"
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"os"
 	"testing"
+
+	"github.com/lihongchen/dingtalk/model"
 )
 
 func TestMediaUpload(t *testing.T) {
