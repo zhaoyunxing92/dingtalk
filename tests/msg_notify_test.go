@@ -172,6 +172,26 @@ func TestMarkdownWorkNotify(t *testing.T) {
 	t.Logf("%v", rep)
 }
 
+func TestCardWorkNotify(t *testing.T) {
+
+	card := model.Card{}
+	card.Title="测试标题"
+	card.SingleTitle="详情"
+	card.SingleUrl="https://ding-doc.dingtalk.com/document#/"
+	card.Content="测试换号符合\r这个管用吗，测试换行符\n管用吗，测试换行符<br/>管用吗"
+
+	res := new(model.WorkNotify)
+	res.UserIds = []string{"manager164"}
+	res.NewCardMessage(card)
+
+	progress, err := dingTalk.SendWorkNotify(res)
+
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("%v", progress)
+}
+
 func TestGetWorkNotifyProgress(t *testing.T) {
 
 	progress, err := dingTalk.GetWorkNotifyProgress(288197314059)

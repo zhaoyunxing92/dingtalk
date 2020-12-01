@@ -39,6 +39,11 @@ func (notify *WorkNotify) NewMarkdownWorkNotify(title, content string) {
 	notify.Msg = newMarkDownMessage(title, content)
 }
 
+//卡片消息
+func (notify *WorkNotify) NewCardMessage(card Card) {
+	notify.Msg = newCardMessage(card)
+}
+
 //组装部门，移除重复部门
 func (notify *WorkNotify) AssembleDept() {
 	var size = len(notify.DeptIds)
