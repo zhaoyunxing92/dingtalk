@@ -178,7 +178,8 @@ func TestCardWorkNotify(t *testing.T) {
 	card.Title="测试标题"
 	card.SingleTitle="详情"
 	card.SingleUrl="https://ding-doc.dingtalk.com/document#/"
-	card.Content="测试换号符合\r这个管用吗，测试换行符\n管用吗，测试换行符<br/>管用吗"
+	card.Content="> 异常通知 \n * **推断场景**:同账号id命中名单变化未重新入审 \n * **异常指标**: 因以上原因导致应入审未入审的任务量"
+
 
 	res := new(model.WorkNotify)
 	res.UserIds = []string{"manager164"}
