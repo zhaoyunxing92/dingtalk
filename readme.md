@@ -106,6 +106,11 @@
 
 * 群机器人
 
+* AI
+  - [x] [文本翻译](https://ding-doc.dingtalk.com/document#/org-dev-guide/text-translation)
+  - [x] [OCR文字识别](https://ding-doc.dingtalk.com/document#/org-dev-guide/ocr)
+  - [x] [ASR 一句话语音识别](https://ding-doc.dingtalk.com/document#/org-dev-guide/asr-short-sentence-recognition)
+  
 * 文件存储 (**1**/10)
   - [x] [上传媒体文件](https://ding-doc.dingtalk.com/document#/org-dev-guide/upload-media-files-1)
   

@@ -10,7 +10,7 @@ type Robot struct {
 	Token  string
 	client *http.Client
 }
-
+//https://oapi.dingtalk.com/robot/send?access_token=f00184626027aafcd6b4fe07b90ec11250d78b8735282185256a0c72186a5f49
 func NewRobot(token string) Robot {
 	return Robot{token, &http.Client{Timeout: 10 * time.Second}}
 }
