@@ -7,20 +7,48 @@ import (
 	"strings"
 )
 
-//消息类型及数据格式
-type textRobotMsg struct {
-	message
-	text
+type robotMsg struct {
+	At `json:"at"`
+}
+type At struct {
 	AtAll     bool     `json:"isAtAll"`
 	AtMobiles []string `json:"atMobiles"`
 }
 
-func NewTextRobotMsg(content string) *textRobotMsg {
-	return &textRobotMsg{message: message{MsgType: "text"}, text: text{Content: content}}
+//TextRobotMsg:消息类型及数据格式
+type TextRobotMsg struct {
+	textMessage
+	robotMsg
+}
+type MarkdownRobotMsg struct {
+	markdownMessage
+	robotMsg
+}
+
+func NewTextRobotMsg(content string) *TextRobotMsg {
+	return &TextRobotMsg{textMessage: NewTextMessages(content)}
+}
+
+//markdown消息
+func NewMarkDownRobotMessage(title, content string) *MarkdownRobotMsg {
+	return &MarkdownRobotMsg{markdownMessage: NewMarkDownMessage(title, content)}
 }
 
 //请求参数验证
-func (t textRobotMsg) Validate(valid *validator.Validate, trans translator.Translator) error {
+func (t TextRobotMsg) Validate(valid *validator.Validate, trans translator.Translator) error {
+	if err := valid.Struct(t); err != nil {
+		errs := err.(validator.ValidationErrors)
+		var slice []string
+		for _, msg := range errs {
+			slice = append(slice, msg.Translate(trans))
+		}
+		return errors.New(strings.Join(slice, ","))
+	}
+	return nil
+}
+
+//请求参数验证
+func (t MarkdownRobotMsg) Validate(valid *validator.Validate, trans translator.Translator) error {
 	if err := valid.Struct(t); err != nil {
 		errs := err.(validator.ValidationErrors)
 		var slice []string

@@ -36,7 +36,7 @@ func (notify *WorkNotify) NewTextWorkNotify(content string) {
 //title:标题
 //content:内容
 func (notify *WorkNotify) NewMarkdownWorkNotify(title, content string) {
-	notify.Msg = newMarkDownMessage(title, content)
+	notify.Msg = NewMarkDownMessage(title, content)
 }
 
 //卡片消息

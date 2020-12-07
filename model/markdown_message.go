@@ -11,6 +11,6 @@ type markdownMessage struct {
 	markdown `json:"markdown"`
 }
 
-func newMarkDownMessage(title, content string) markdownMessage {
+func NewMarkDownMessage(title, content string) markdownMessage {
 	return markdownMessage{message{MsgType: "markdown"}, markdown{title, content}}
 }

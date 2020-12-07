@@ -55,7 +55,9 @@ const (
 
 	SendRobotMsgKey = "/robot/send" //发送机器人消息
 
-	Translate = "/topapi/ai/mt/translate" //文本翻译
+	TranslateKey      = "/topapi/ai/mt/translate"          //文本翻译
+	OrcRecognizeKey   = "/topapi/ocr/structured/recognize" //OCR文字识别
+	VoiceTranslateKey = "/topapi/asr/voice/translate"      //ASR 一句话语音识别
 
 	GetOrgInactiveUserKey     = "/topapi/inactive/user/get"           //获取未登录钉钉的员工列表
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope"        //获取管理员通讯录权限范围

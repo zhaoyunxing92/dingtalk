@@ -34,7 +34,7 @@ func (robot *Robot) send(form interface{}, data model.Unmarshallable) (err error
 	args := url.Values{}
 	args.Set("access_token", robot.Token)
 
-	return robot.httpRequest(http.MethodGet, global.SendRobotMsgKey, args, form, data)
+	return robot.httpRequest(http.MethodPost, global.SendRobotMsgKey, args, form, data)
 }
 
 func (robot *Robot) httpRequest(method, path string, args url.Values, form interface{}, data model.Unmarshallable) error {
@@ -50,34 +50,11 @@ func (robot *Robot) httpRequest(method, path string, args url.Values, form inter
 		content []byte
 	)
 
-	if form != nil {
-		//检查提交表单类型
-		switch form.(type) {
-		case model.UploadFile:
-			var b bytes.Buffer
-			w := multipart.NewWriter(&b)
+	//表单不为空
+	d, _ := json.Marshal(form)
 
-			file := form.(model.UploadFile)
-			fw, err := w.CreateFormFile(file.FieldName, file.FileName)
-			if err != nil {
-				return err
-			}
-			if _, err = io.Copy(fw, file.Reader); err != nil {
-				return err
-			}
-			if err = w.Close(); err != nil {
-				return err
-			}
-			req, _ = http.NewRequest(method, uri.String(), &b)
-			req.Header.Set("Content-Type", w.FormDataContentType())
-		default:
-			//表单不为空
-			d, _ := json.Marshal(form)
-			req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
-		}
-	} else {
-		req, _ = http.NewRequest(method, uri.String(), nil)
-	}
+	req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
+	req.Header.Set("Content-Type","application/json")
 
 	if res, err = client.Do(req); err != nil {
 		return err
@@ -97,7 +74,6 @@ func (robot *Robot) httpRequest(method, path string, args url.Values, form inter
 	}
 	return data.CheckError()
 }
-
 
 func (talk *DingTalk) httpRequest(method, path string, args url.Values, form interface{}, data model.Unmarshallable) error {
 	client := talk.client
