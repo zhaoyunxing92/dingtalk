@@ -67,14 +67,29 @@ func TestLinkMessage(t *testing.T) {
 	t.Log(string(js))
 }
 
-//TestRobotFileMessage:机器发送文件
-func TestRobotFileMessage(t *testing.T) {
-	//msg := model.NewFileMessage("@lALPDe7sx7z5xEJgzQJA")
-	//
-	//res, err := robot.SendRobotMsg(msg)
-	//if err != nil {
-	//	t.Fatal(err)
-	//}
-	//js, err := json.Marshal(res)
-	//t.Log(string(js))
+//TestFeedCardMessage:FeedCard
+func TestFeedCardMessage(t *testing.T) {
+
+	links := []model.FeedCardLink{{
+		Title:  "链接消息测试",
+		Url:    "https://www.dingtalk.com",
+		BkgUrl: "https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png",
+	}, {
+		Title:  "链接消息测试",
+		Url:    "https://www.dingtalk.com",
+		BkgUrl: "https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png",
+	}, {
+		Title:  "链接消息测试",
+		Url:    "https://www.dingtalk.com",
+		BkgUrl: "https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png",
+	}}
+
+	msg := model.NewFeedCardMessage(links)
+
+	res, err := robot.SendRobotMsg(msg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(res)
+	t.Log(string(js))
 }
