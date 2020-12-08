@@ -37,6 +37,8 @@ func NewMarkDownRobotMessage(title, content string) *MarkdownRobotMsg {
 	return &MarkdownRobotMsg{markdownMessage: newMarkDownMessage(title, content)}
 }
 
+//FeedCard类型
+
 //请求参数验证
 func (t TextRobotMsg) Validate(valid *validator.Validate, trans translator.Translator) error {
 	if err := valid.Struct(t); err != nil {
