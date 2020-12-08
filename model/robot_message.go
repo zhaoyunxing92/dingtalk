@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type robotMsg struct {
+type RobotMsg struct {
 	At `json:"at"`
 }
 type At struct {
@@ -18,11 +18,13 @@ type At struct {
 //TextRobotMsg:消息类型及数据格式
 type TextRobotMsg struct {
 	textMessage
-	robotMsg
+	RobotMsg
 }
+
+//MarkdownRobotMsg:markdown机器人消息
 type MarkdownRobotMsg struct {
 	markdownMessage
-	robotMsg
+	RobotMsg
 }
 
 func NewTextRobotMsg(content string) *TextRobotMsg {
