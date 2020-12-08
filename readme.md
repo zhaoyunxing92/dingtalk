@@ -9,6 +9,10 @@
 首先我要感谢 [godingtalk](https://github.com/hugozhu/godingtalk) 库,我是参考他的代码写的。但是由于钉钉历史原因，很多api都更新了,
 新的企业是无法获取`corpid`和`corpsecret`的现在也无法获取了,其次就是我有很多钉钉预警的业务需要做,于是就写了这个
 
+## 怎么使用
+
+基本上每个接口我都会在`tests`目录里面有测试用例可以去查看
+
 ## 开发进度
 
 * 获取凭证 (**1**/3)
@@ -105,7 +109,7 @@
   - [x] [获取应用可见范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range)
 
 * 群机器人
-
+  - [x] [自定义机器人接入](https://ding-doc.dingtalk.com/document#/org-dev-guide/custom-robot) 基本的消息类型都已经支持并完成测试
 * AI
   - [x] [文本翻译](https://ding-doc.dingtalk.com/document#/org-dev-guide/text-translation)
   - [x] [OCR文字识别](https://ding-doc.dingtalk.com/document#/org-dev-guide/ocr)
