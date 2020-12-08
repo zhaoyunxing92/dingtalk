@@ -18,7 +18,7 @@ type WorkNotify struct {
 	Msg        interface{} `json:"msg" validate:"required"`
 }
 
-//构建oa消息,工作通知title默认使用小程序名称
+//NewOAWorkNotify:构建oa消息,工作通知title默认使用小程序名称
 //url:消息点击链接地址，当发送消息为小程序时支持小程序跳转链接。
 //bgColor:消息头部的背景颜色
 //fs:消息体的表单，最多显示6个，超过会被隐藏。
@@ -26,22 +26,27 @@ func (notify *WorkNotify) NewOAWorkNotify(oa OA) {
 	notify.Msg = NewOaMessage(oa)
 }
 
-//文本消息通知
+//NewTextWorkNotify: text文本消息通知
 //content:发送的内容
 func (notify *WorkNotify) NewTextWorkNotify(content string) {
-	notify.Msg = NewTextMessages(content)
+	notify.Msg = NewTextMessage(content)
 }
 
-//markdown消息
+//NewMarkdownWorkNotify:markdown消息
 //title:标题
 //content:内容
 func (notify *WorkNotify) NewMarkdownWorkNotify(title, content string) {
-	notify.Msg = NewMarkDownMessage(title, content)
+	notify.Msg = newMarkDownMessage(title, content)
 }
 
-//卡片消息
+//NewCardMessage：card消息
 func (notify *WorkNotify) NewCardMessage(card Card) {
 	notify.Msg = newCardMessage(card)
+}
+
+//NewFileMessage：file消息
+func (notify *WorkNotify) NewFileMessage(mediaId string) {
+	notify.Msg = NewFileMessage(mediaId)
 }
 
 //组装部门，移除重复部门

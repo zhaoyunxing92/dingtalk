@@ -81,7 +81,7 @@ func TestChatSubAdmin(t *testing.T) {
 func TestSendTextMsgToChat(t *testing.T) {
 	//chat44231f20c2e5c88cf67651e1b82bfb86
 
-	msg := model.NewTextMessages("hello")
+	msg := model.NewTextMessage("hello")
 
 	//cidQm8R6iRg2CcePBHqlUU3xQ==
 	rsp, err := dingTalk.SendMsgToChat("chat44231f20c2e5c88cf67651e1b82bfb86", msg)

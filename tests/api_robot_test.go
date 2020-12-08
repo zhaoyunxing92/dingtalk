@@ -50,3 +50,31 @@ func TestMarkDownRobotMessage(t *testing.T) {
 	js, err := json.Marshal(res)
 	t.Log(string(js))
 }
+
+//TestLinkMessage:link消息
+func TestLinkMessage(t *testing.T) {
+	msg := model.NewLinkMessage()
+	msg.Title = "链接消息测试"
+	msg.MediaId = "@lALPDe7sx7z5xEJgzQJA"
+	msg.Url = "https://ding-doc.dingtalk.com/document#/org-dev-guide/message-types-and-data-format/title-48c-gj4-sbp"
+	msg.Describe = "是以企业工作通知会话中某个微应用的名义推送到员工的通知消息，例如生日祝福、入职提醒等"
+
+	res, err := robot.SendRobotMsg(msg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(res)
+	t.Log(string(js))
+}
+
+//TestRobotFileMessage:机器发送文件
+func TestRobotFileMessage(t *testing.T) {
+	//msg := model.NewFileMessage("@lALPDe7sx7z5xEJgzQJA")
+	//
+	//res, err := robot.SendRobotMsg(msg)
+	//if err != nil {
+	//	t.Fatal(err)
+	//}
+	//js, err := json.Marshal(res)
+	//t.Log(string(js))
+}

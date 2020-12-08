@@ -52,9 +52,10 @@ func (robot *Robot) httpRequest(method, path string, args url.Values, form inter
 
 	//表单不为空
 	d, _ := json.Marshal(form)
+	fmt.Println(string(d))
 
 	req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
-	req.Header.Set("Content-Type","application/json")
+	req.Header.Set("Content-Type", "application/json")
 
 	if res, err = client.Do(req); err != nil {
 		return err

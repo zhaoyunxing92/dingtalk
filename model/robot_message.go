@@ -27,13 +27,14 @@ type MarkdownRobotMsg struct {
 	RobotMsg
 }
 
+//NewTextRobotMsg:
 func NewTextRobotMsg(content string) *TextRobotMsg {
-	return &TextRobotMsg{textMessage: NewTextMessages(content)}
+	return &TextRobotMsg{textMessage: NewTextMessage(content)}
 }
 
-//markdown消息
+//NewMarkDownRobotMessage:markdown消息
 func NewMarkDownRobotMessage(title, content string) *MarkdownRobotMsg {
-	return &MarkdownRobotMsg{markdownMessage: NewMarkDownMessage(title, content)}
+	return &MarkdownRobotMsg{markdownMessage: newMarkDownMessage(title, content)}
 }
 
 //请求参数验证
