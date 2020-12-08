@@ -2,6 +2,7 @@ package tests
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/zhaoyunxing92/dingtalk/model"
 	"testing"
 )
@@ -16,6 +17,19 @@ func TestSendTextWorkNotify(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Log(notify)
+}
+
+func Benchmark_NewTextWorkNotify(b *testing.B) {
+	for i := 0; i < b.N; i++ { //use b.N for looping
+		res := new(model.WorkNotify)
+		res.NewTextWorkNotify(fmt.Sprintf("test hello abc golang:%d", i))
+		res.UserIds = []string{"manager164"}
+		notify, err := dingTalk.SendWorkNotify(res)
+		if err != nil {
+			b.Fatal(err)
+		}
+		b.Log(notify)
+	}
 }
 
 func TestSendOAWorkNotify(t *testing.T) {
@@ -175,11 +189,10 @@ func TestMarkdownWorkNotify(t *testing.T) {
 func TestCardWorkNotify(t *testing.T) {
 
 	card := model.Card{}
-	card.Title="测试标题"
-	card.SingleTitle="详情"
-	card.SingleUrl="https://ding-doc.dingtalk.com/document#/"
-	card.Content="> 异常通知 \n * **推断场景**:同账号id命中名单变化未重新入审 \n * **异常指标**: 因以上原因导致应入审未入审的任务量"
-
+	card.Title = "测试标题"
+	card.SingleTitle = "详情"
+	card.SingleUrl = "https://ding-doc.dingtalk.com/document#/"
+	card.Content = "> 异常通知 \n * **推断场景**:同账号id命中名单变化未重新入审 \n * **异常指标**: 因以上原因导致应入审未入审的任务量"
 
 	res := new(model.WorkNotify)
 	res.UserIds = []string{"manager164"}
@@ -195,7 +208,7 @@ func TestCardWorkNotify(t *testing.T) {
 
 func TestGetWorkNotifyProgress(t *testing.T) {
 
-	progress, err := dingTalk.GetWorkNotifyProgress(288197314059)
+	progress, err := dingTalk.GetWorkNotifyProgress(292610197251)
 
 	if err != nil {
 		t.Fatal(err)
@@ -205,7 +218,7 @@ func TestGetWorkNotifyProgress(t *testing.T) {
 
 func TestGetWorkNotifyResult(t *testing.T) {
 
-	progress, err := dingTalk.GetWorkNotifySendResult(288137412007)
+	progress, err := dingTalk.GetWorkNotifySendResult(292610197251)
 
 	if err != nil {
 		t.Fatal(err)
