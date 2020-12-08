@@ -1,8 +1,8 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"github.com/zhaoyunxing92/dingtalk/global"
+	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
 )
 
@@ -42,7 +42,8 @@ type sendResult struct {
 }
 
 //推送被禁止的具体原因。
-// code:143105表示企业自建应用每日推送给用户的消息超过上限,143106表示企业自建应用推送给用户的消息重复
+// code:143105表示企业自建应用每日推送给用户的消息超过上限,
+//      143106表示企业自建应用推送给用户的消息重复
 type forbiddenList struct {
 	Code   string `json:"code"`   //流控code
 	Count  int    `json:"count"`  //流控阀值。

@@ -19,7 +19,7 @@ type textMessage struct {
 }
 
 // 文本对象
-func NewTextMessages(context string) textMessage {
+func NewTextMessage(context string) textMessage {
 	return textMessage{message: message{MsgType: "text"}, text: text{Content: context}}
 }
 

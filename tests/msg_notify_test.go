@@ -186,6 +186,7 @@ func TestMarkdownWorkNotify(t *testing.T) {
 	t.Logf("%v", rep)
 }
 
+//TestCardWorkNotify:card消息
 func TestCardWorkNotify(t *testing.T) {
 
 	card := model.Card{}
@@ -204,6 +205,20 @@ func TestCardWorkNotify(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Logf("%v", progress)
+}
+
+//TestSendFileMessage:发送文件
+func TestSendFileMessage(t *testing.T) {
+	req := new(model.WorkNotify)
+	req.UserIds = []string{"manager164"}
+	req.NewFileMessage("@lALPDe7sx7z5xEJgzQJA")
+
+	res, err := dingTalk.SendWorkNotify(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(res)
+	t.Log(string(js))
 }
 
 func TestGetWorkNotifyProgress(t *testing.T) {
