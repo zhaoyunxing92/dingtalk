@@ -31,7 +31,7 @@ const (
 
 	role                   = "/topapi/role"               //角色模块
 	GetRoleListKey         = role + "/list"               //获取角色列表
-	GetUserRoleListKey     = role + "/simplelist"         //获取指定角色的员工列表
+	GetRoleUserListKey     = role + "/simplelist"         //获取指定角色的员工列表
 	GetRoleGroupKey        = role + "/getrolegroup"       //获取角色组
 	GetRoleDetailKey       = role + "/getrole"            //获取角色详情
 	CreateRoleGroupKey     = "/role/add_role_group"       //创建角色组
