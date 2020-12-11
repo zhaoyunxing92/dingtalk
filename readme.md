@@ -1,4 +1,4 @@
-![dingtalk](https://img.alicdn.com/tfs/TB1bB9QKpzqK1RjSZFoXXbfcXXa-576-96.png)
+![dingtalk](./image/dingtalk.png)
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
 
