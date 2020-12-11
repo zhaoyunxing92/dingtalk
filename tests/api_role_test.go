@@ -30,7 +30,8 @@ func TestGetUserRoleList(t *testing.T) {
 //TestGetRoleGroup:获取角色组
 func TestGetRoleGroup(t *testing.T) {
 
-	res, err := dingTalk.GetRoleGroup(1299380992)
+	res, err := dingTalk.GetRoleGroup(1299380989)
+
 	if err != nil {
 		t.Fatal(err)
 	}
