@@ -12,16 +12,22 @@ type openRole struct {
 	Name string `json:"role_name"` //角色名称
 }
 
+//roleDetail:角色详情
+type roleDetail struct {
+	GroupId int    `json:"groupId"` //角色id
+	Name    string `json:"name"`    //角色名称
+}
+
 //roleGroup:角色组
 type roleGroup struct {
-	GroupId int        `json:"groupId"` //角色id
-	Name    string     `json:"name"`    //角色组名称
+	GroupId int    `json:"groupId"` //角色id
+	Name    string `json:"name"`    //角色组名称
 	Roles   []role `json:"roles"`   //角色列表
 }
 
 //roleGroup:角色组
 type openRoleGroup struct {
-	Name  string `json:"group_name"` //角色组名称
+	Name  string     `json:"group_name"` //角色组名称
 	Roles []openRole `json:"roles"`      //角色列表
 }
 
@@ -52,4 +58,22 @@ type RoleUserListResponse struct {
 type RoleGroupResponse struct {
 	Response
 	Result openRoleGroup `json:"role_group"`
+}
+
+//RoleDetailResponse:获取角色详情
+type RoleDetailResponse struct {
+	Response
+	Role roleDetail `json:"role"`
+}
+
+//CreateRoleGroupResponse:创建角色组
+type CreateRoleGroupResponse struct {
+	Response
+	GroupId int `json:"groupId"` //角色组id
+}
+
+//CreateRoleResponse:创建角色
+type CreateRoleResponse struct {
+	Response
+	RoleId int `json:"roleId"` //角色id
 }

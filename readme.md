@@ -71,9 +71,24 @@
      
      - [x] [获取指定角色的员工列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-role-simplelist)
      
-     - [ ] [获取角色组](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-role-group)
-        
-   
+     - [x] [获取角色组](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-role-group)
+     
+     - [x] [获取角色详情](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-role)
+     
+     - [x] [创建角色组](https://ding-doc.dingtalk.com/document#/org-dev-guide/add-role-group)
+     
+     - [x] [创建角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/add-role)
+     
+     - [x] [更新角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/update-role)
+     
+     - [x] [删除角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/delete-role)
+     
+     - [x] [批量增加员工角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/add-role-for-users)
+     
+     - [x] [批量删除员工角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/remove-roles-for-users)
+     
+     - [x] [设定角色成员管理范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-the-management-scope-of-role-members) 官方接口不通
+     
 * 群会话管理(**5**/5)
   - [x] [创建群会话](https://ding-doc.dingtalk.com/document#/org-dev-guide/create-chat)
   
