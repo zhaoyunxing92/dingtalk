@@ -66,7 +66,7 @@
       
       - [x] [查询部门的所有上级父部门路径](https://ding-doc.dingtalk.com/document#/org-dev-guide/GET-parent-deptsby-dept)
       
-  - 角色管理(**3**/11)
+  - 角色管理(**11**/11)
      - [x] [获取角色列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/list-roles)
      
      - [x] [获取指定角色的员工列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-role-simplelist)
