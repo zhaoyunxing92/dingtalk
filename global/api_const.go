@@ -29,17 +29,17 @@ const (
 	GetParentDeptsByUserKey = dept + "/list_parent_depts"         //查询指定用户的所有上级父部门路径
 	GetParentDeptsByDeptKey = dept + "/list_parent_depts_by_dept" //查询部门的所有上级父部门路径
 
-	role                             = "/topapi/role"               //角色模块
-	GetRoleListKey                   = role + "/list"               //获取角色列表
-	GetRoleUserListKey               = role + "/simplelist"         //获取指定角色的员工列表
-	GetRoleGroupKey                  = role + "/getrolegroup"       //获取角色组
-	GetRoleDetailKey                 = role + "/getrole"            //获取角色详情
-	CreateRoleGroupKey               = "/role/add_role_group"       //创建角色组
-	CreateRoleKey                    = "/role/add_role"             //创建角色
-	UpdateRoleKey                    = "/role/update_role"          //更新角色
-	DeleteRoleKey                    = role + "/deleterole"         //删除角色
-	RoleBatchAddUserKey              = role + "/addrolesforemps"    //批量增加员工角色
-	RoleBatchRemoveUserKey           = role + "/removerolesforemps" //批量删除员工角色
+	role                         = "/topapi/role"               //角色模块
+	GetRoleListKey               = role + "/list"               //获取角色列表
+	GetRoleUserListKey           = role + "/simplelist"         //获取指定角色的员工列表
+	GetRoleGroupKey              = role + "/getrolegroup"       //获取角色组
+	GetRoleDetailKey             = role + "/getrole"            //获取角色详情
+	CreateRoleGroupKey           = "/role/add_role_group"       //创建角色组
+	CreateRoleKey                = "/role/add_role"             //创建角色
+	UpdateRoleKey                = "/role/update_role"          //更新角色
+	DeleteRoleKey                = role + "/deleterole"         //删除角色
+	RoleBatchAddUserKey          = role + "/addrolesforemps"    //批量增加员工角色
+	RoleBatchRemoveUserKey       = role + "/removerolesforemps" //批量删除员工角色
 	RoleUpdateUserManageScopeKey = role + "/scope/update"       //设定角色成员管理范围
 
 	chat                = "/chat"                                   //群模块
@@ -66,4 +66,11 @@ const (
 	GetSendResultKey          = corpConversation + "/getsendresult"   //获取工作通知消息的发送结果
 	RecallCorpConversationKey = corpConversation + "/recall"          //撤回工作通知
 	MediaUploadKey            = "/media/upload"                       //上传媒体文件
+
+	callback                   = "/call_back"                              //事件回调模板
+	RegisterCallBackKey        = callback + "/register_call_back"          //注册事件回调接口
+	GetCallBackKey             = callback + "/get_call_back"               //查询事件回调接口
+	UpdateCallBackKey          = callback + "/update_call_back"            //更新事件回调接口
+	GetCallBackFailedDetailKey = callback + "/get_call_back_failed_result" //获取回调失败的结果
+	DeleteCallBackKey          = callback + "/delete_call_back"            //删除事件回调接口
 )
