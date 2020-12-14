@@ -86,7 +86,7 @@ func TestUpdateUser(t *testing.T) {
 // TestGetUserDetail:获取用户
 func TestGetUserDetail(t *testing.T) {
 
-	rsp, err := dingTalk.GetUserDetail("011755000243774889", "zh_CN")
+	rsp, err := dingTalk.GetUserDetail("085764632424187083", "zh_CN")
 	if err != nil {
 		t.Fatal(err)
 	}

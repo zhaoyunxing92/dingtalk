@@ -2,7 +2,7 @@
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
 
-[钉钉开发平台](https://ding-doc.dingtalk.com/document#/org-dev-guide) 是基于新版的钉钉开发平台api文档开发，也就是说在你使用之前是需要在[钉钉开发者后台](https://open-dev.dingtalk.com/#/index) 创建一个小程序或应用
+[dingtalk](https://github.com/zhaoyunxing92/dingtalk) 是基于新版的[钉钉开发平台api文档](https://ding-doc.dingtalk.com/document#/org-dev-guide) 开发，也就是说在你使用之前是需要在[钉钉开发者后台](https://open-dev.dingtalk.com/#/index) 创建一个小程序或应用
 
 ## 为什么有它
 
@@ -66,14 +66,26 @@
       
       - [x] [查询部门的所有上级父部门路径](https://ding-doc.dingtalk.com/document#/org-dev-guide/GET-parent-deptsby-dept)
       
-  - 角色管理(**3**/11)
-     - [x] [获取角色列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/list-roles)
-     
-     - [x] [获取指定角色的员工列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-role-simplelist)
-     
-     - [ ] [获取角色组](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-role-group)
-        
+  - 角色管理(**11**/11)
    
+     - [x] [获取角色组](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-role-group)
+     
+     - [x] [获取角色详情](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-role)
+     
+     - [x] [创建角色组](https://ding-doc.dingtalk.com/document#/org-dev-guide/add-role-group)
+     
+     - [x] [创建角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/add-role)
+     
+     - [x] [更新角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/update-role)
+     
+     - [x] [删除角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/delete-role)
+     
+     - [x] [批量增加员工角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/add-role-for-users)
+     
+     - [x] [批量删除员工角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/remove-roles-for-users)
+     
+     - [x] [设定角色成员管理范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-the-management-scope-of-role-members) 官方接口不通
+     
 * 群会话管理(**5**/5)
   - [x] [创建群会话](https://ding-doc.dingtalk.com/document#/org-dev-guide/create-chat)
   
@@ -101,7 +113,7 @@
     
     - [x] [查询群消息已读人员列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-the-list-of-people-who-have-read-a-group-1)
       
-  - [x] [发送普通消息](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-normal-messages)
+    - [x] [发送普通消息](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-normal-messages)
 
 * 钉钉运动
 
@@ -116,9 +128,12 @@
 
 * 群机器人
   - [x] [自定义机器人接入](https://ding-doc.dingtalk.com/document#/org-dev-guide/custom-robot) 基本的消息类型都已经支持并完成测试
+  
 * AI
   - [x] [文本翻译](https://ding-doc.dingtalk.com/document#/org-dev-guide/text-translation)
+  
   - [x] [OCR文字识别](https://ding-doc.dingtalk.com/document#/org-dev-guide/ocr)
+  
   - [x] [ASR 一句话语音识别](https://ding-doc.dingtalk.com/document#/org-dev-guide/asr-short-sentence-recognition)
   
 * 文件存储 (**1**/10)
