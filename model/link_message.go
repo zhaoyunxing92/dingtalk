@@ -21,7 +21,7 @@ type linkMessage struct {
 }
 
 func NewLinkMessage() *linkMessage {
-	return &linkMessage{message: message{MsgType: "Link"}}
+	return &linkMessage{message: message{MsgType: "link"}}
 }
 
 //请求参数验证
