@@ -142,3 +142,12 @@ func (talk *DingTalk) GetOrgAdminScope(userId string) (req model.OrgAdminScopeRe
 	err = talk.request(http.MethodPost, global.GetOrgAdminScopeKey, nil, form, &req)
 	return req, err
 }
+
+//GetUserByAuthCode:通过免登码获取用户信息(v2)
+func (talk *DingTalk) GetUserByAuthCode(code string) (req model.UserGetByCodeResponse, err error) {
+	form := make(map[string]string, 1)
+	form["code"] = code
+
+	err = talk.request(http.MethodPost, global.GetUserByAuthCodeKey, nil, form, &req)
+	return req, err
+}

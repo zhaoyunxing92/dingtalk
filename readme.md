@@ -48,6 +48,8 @@
       - [x] [获取管理员列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-Admin-list)
       
       - [x] [获取管理员通讯录权限范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-permission-of-admin)
+      
+      - [x] [通过免登码获取用户信息(v2)](https://ding-doc.dingtalk.com/document/app/obtain-the-userid-of-a-user-by-using-the-log-free)
 
   - 部门管理(**8**/8)
       - [x] [创建部门](https://ding-doc.dingtalk.com/document#/org-dev-guide/create-a-department)
@@ -84,7 +86,7 @@
      
      - [x] [批量删除员工角色](https://ding-doc.dingtalk.com/document#/org-dev-guide/remove-roles-for-users)
      
-     - [x] [设定角色成员管理范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-the-management-scope-of-role-members) 官方接口不通
+     - [x] [设定角色成员管理范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-the-management-scope-of-role-members) 未测试通过
      
 * 群会话管理(**5**/5)
   - [x] [创建群会话](https://ding-doc.dingtalk.com/document#/org-dev-guide/create-chat)

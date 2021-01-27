@@ -159,3 +159,13 @@ func TestGetOrgAdminScope(t *testing.T) {
 	js, err := json.Marshal(rsp)
 	t.Log(string(js))
 }
+
+//根据auth code获取用户信息
+func TestGetUserByAuthCode(t *testing.T) {
+	rsp, err := dingTalk.GetUserByAuthCode("07bf4b2eb1f8301d97d2d5ec690548bd")
+	if err != nil {
+		t.Fatal(err)
+	}
+	js, err := json.Marshal(rsp)
+	t.Log(string(js))
+}

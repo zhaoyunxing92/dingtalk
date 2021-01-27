@@ -120,6 +120,17 @@ type UserDetail struct {
 	ManagerUserId   string      `json:"managerUserId"`   //主管的ID
 }
 
+//UserGetByCode:根据code获取用户信息
+type UserGetByCode struct {
+	Name              string `json:"name"`               //姓名
+	UnionId           string `json:"unionid"`            //员工在当前开发者企业账号范围内的唯一标识，系统生成，固定值，不会改变。
+	AssociatedUnionId string `json:"associated_unionid"` //用户关联的unionId。
+	UserId            string `json:"userid"`             //用户的userid。
+	DeviceId          string `json:"device_id"`          //设备id
+	Admin             bool   `json:"sys"`                //是否是管理员。
+	Level             int    `json:"sys_level"`          //级别。 1：主管理员 2：子管理员 100：老板 0：其他（如普通员工）
+}
+
 //UserIdResponse:创建用户、根据unionId获取
 type UserIdResponse struct {
 	Response
@@ -146,6 +157,11 @@ type OrgAdminUserResponse struct {
 type OrgAdminScopeResponse struct {
 	Response
 	Depts []int `json:"dept_ids"` //可管理的部门ID列表
+}
+
+type UserGetByCodeResponse struct {
+	Response
+	UserGetByCode `json:"result"` //可管理的部门ID列表
 }
 
 //请求参数验证

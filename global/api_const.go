@@ -1,23 +1,23 @@
 package global
 
-const (
-	Host                     = "https://oapi.dingtalk.com"        //钉钉ap域名
-	GetTokenKey              = "/gettoken"                        //获取access_token
-	MicroAppListKey          = "/microapp/list"                   //获取应用列表
-	MicroAppVisibleScopesKey = "/microapp/visible_scopes"         //获取应用可见范围
-	corpConversation         = "/topapi/message/corpconversation" //工作通知
+const ( ///topapi/v2/user/getuserinfo
+	Host                     = "https://oapi.dingtalk.com" //钉钉ap域名
+	GetTokenKey              = "/gettoken"                 //获取access_token
+	MicroAppListKey          = "/microapp/list"            //获取应用列表
+	MicroAppVisibleScopesKey = "/microapp/visible_scopes"  //获取应用可见范围
 
-	user                  = "/user"                      //用户模块
-	CreateUserKey         = user + "/create"             //创建用户
-	DeleteUserKey         = user + "/delete"             //删除用户
-	UpdateUserKey         = user + "/update"             //更新用户详情
-	GetUserKey            = user + "/get"                //获取用户详情
-	GetDeptUserIdKey      = user + "/getDeptMember"      //获取部门用户userid列表
-	GetUserIdByUnionIdKey = user + "/getUseridByUnionid" //根据unionid获取userid
-	GetUserIdByMobileKey  = user + "/get_by_mobile"      //根据手机号获取userid
-	GetOrgUserCountKey    = user + "/get_org_user_count" //获取企业员工人数
-	GetDeptUserDetailKey  = user + "/listbypage"         //获取部门用户详情
-	GetOrgAdminUserKey    = user + "/get_admin"          //获取管理员列表
+	user                  = "/user"                       //用户模块
+	CreateUserKey         = user + "/create"              //创建用户
+	DeleteUserKey         = user + "/delete"              //删除用户
+	UpdateUserKey         = user + "/update"              //更新用户详情
+	GetUserKey            = user + "/get"                 //获取用户详情
+	GetDeptUserIdKey      = user + "/getDeptMember"       //获取部门用户userid列表
+	GetUserIdByUnionIdKey = user + "/getUseridByUnionid"  //根据unionid获取userid
+	GetUserIdByMobileKey  = user + "/get_by_mobile"       //根据手机号获取userid
+	GetOrgUserCountKey    = user + "/get_org_user_count"  //获取企业员工人数
+	GetDeptUserDetailKey  = user + "/listbypage"          //获取部门用户详情
+	GetOrgAdminUserKey    = user + "/get_admin"           //获取管理员列表
+	GetUserByAuthCodeKey  = "/topapi/v2/user/getuserinfo" //通过免登码获取用户信息v2
 
 	dept                    = "/department"                       //部门模块
 	CreateDeptKey           = dept + "/create"                    //创建部门
@@ -59,13 +59,16 @@ const (
 	OrcRecognizeKey   = "/topapi/ocr/structured/recognize" //OCR文字识别
 	VoiceTranslateKey = "/topapi/asr/voice/translate"      //ASR 一句话语音识别
 
-	GetOrgInactiveUserKey     = "/topapi/inactive/user/get"           //获取未登录钉钉的员工列表
-	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope"        //获取管理员通讯录权限范围
+	GetOrgInactiveUserKey = "/topapi/inactive/user/get"    //获取未登录钉钉的员工列表
+	GetOrgAdminScopeKey   = "/topapi/user/get_admin_scope" //获取管理员通讯录权限范围
+
+	corpConversation          = "/topapi/message/corpconversation"    //工作通知
 	SendCorpConversationKey   = corpConversation + "/asyncsend_v2"    //发送工作通知
 	GetSendProgressKey        = corpConversation + "/getsendprogress" //获取工作通知消息的发送进度
 	GetSendResultKey          = corpConversation + "/getsendresult"   //获取工作通知消息的发送结果
 	RecallCorpConversationKey = corpConversation + "/recall"          //撤回工作通知
-	MediaUploadKey            = "/media/upload"                       //上传媒体文件
+
+	MediaUploadKey = "/media/upload" //上传媒体文件
 
 	callback                   = "/call_back"                              //事件回调模板
 	RegisterCallBackKey        = callback + "/register_call_back"          //注册事件回调接口
