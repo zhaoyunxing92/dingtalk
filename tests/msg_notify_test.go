@@ -32,6 +32,7 @@ func Benchmark_NewTextWorkNotify(b *testing.B) {
 	}
 }
 
+//TestSendOAWorkNotify:oa工作通知
 func TestSendOAWorkNotify(t *testing.T) {
 
 	oa := model.OA{}
@@ -54,7 +55,7 @@ func TestSendOAWorkNotify(t *testing.T) {
 
 	f5 := model.Form{}
 	f5.Key = "爱好:"
-	f5.Value = "go、java、docker、vue"
+	f5.Value = "go、java、docker、vue、吃饭"
 
 	f6 := model.Form{}
 	f6.Key = "测试:"
@@ -63,16 +64,19 @@ func TestSendOAWorkNotify(t *testing.T) {
 	//设置体最多只有6个
 	oa.Body.Forms = append(oa.Body.Forms, f, f2, f3, f4, f5, f6)
 	oa.Body.Content = "validator用于对数据进行校验。在 Web 开发中，对用户传过来的数据我们都需要进行严格校验，防止用户的恶意请求。例如日期格式，用户年龄，性别等必须是正常的值，不能随意设置。"
-	oa.Body.Title = "头部标题"
+	oa.Body.Title = "头部标题这会显示"
 	oa.Body.Author = "赵云兴"
 	oa.Body.ImageId = "@lALPDe7sx7z5xEJgzQJA"
 
 	//设置头
 	oa.Header.BgColor = "FFBBBBBB"
-	oa.Header.Text = "被替换为应用名称"
-
-	oa.MessageUrl = "https://ding-doc.dingtalk.com/document#/org-dev-guide/message-types-and-data-format"
+	oa.Header.Text = "小程序消息则不会显示"
+    //pc跳转和小程序跳转
+	oa.MessageUrl = "eapp://page/component/index"
 	oa.PcMessageUrl = "https://ding-doc.dingtalk.com"
+	// 设置状态
+	oa.StatusBar.Value="处理完成"
+	oa.StatusBar.BackColor="#FFF65E5E"
 
 	res := new(model.WorkNotify)
 	res.NewOAWorkNotify(oa)

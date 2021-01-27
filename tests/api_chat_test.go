@@ -92,7 +92,7 @@ func TestSendTextMsgToChat(t *testing.T) {
 	t.Log(string(js))
 }
 
-//TestSendOAMsgToChat:发送oa消息
+//TestSendOAMsgToChat:发送oa消息到群
 func TestSendOAMsgToChat(t *testing.T) {
 	//chat44231f20c2e5c88cf67651e1b82bfb86
 
@@ -133,7 +133,7 @@ func TestSendOAMsgToChat(t *testing.T) {
 	oa.Header.BgColor = "FFBBBBBB"
 	oa.Header.Text = "被替换为应用名称"
 
-	oa.MessageUrl = "https://ding-doc.dingtalk.com/document#/org-dev-guide/message-types-and-data-format"
+	oa.MessageUrl = "eapp://page/component/index"
 	oa.PcMessageUrl = "https://ding-doc.dingtalk.com"
 
 	res := new(model.WorkNotify)
