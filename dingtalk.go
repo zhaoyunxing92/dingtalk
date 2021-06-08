@@ -6,8 +6,8 @@ import (
 	translator "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	zh_trans "github.com/go-playground/validator/v10/translations/zh"
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"github.com/zhaoyunxing92/dingtalk/global"
+	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
 	"net/url"
 	"time"
@@ -35,7 +35,7 @@ func NewDingTalk(agentId int, appKey, appSecret string) *DingTalk {
 	}, global.NewFileCache(".token", appKey), validate, trans}
 }
 
-//获取token
+//GetToken：获取token
 func (talk *DingTalk) GetToken() (token string, err error) {
 	cache := talk.cache
 	var accessToken model.AccessToken
