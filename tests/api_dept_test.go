@@ -131,3 +131,14 @@ func TestGetParentIdsByDeptId(t *testing.T) {
 	js, err := json.Marshal(rsp)
 	t.Log(string(js))
 }
+
+//TestBatchDelDept 批量删除部门
+func TestBatchDelDept(t *testing.T) {
+	rsp, _ := dingTalk.GetSubDeptIds(1)
+	for _, id := range rsp.SubDeptIds {
+		//需要保留的部门id
+		if id != 492171596 {
+			_, _ = dingTalk.DeleteDept(id)
+		}
+	}
+}
