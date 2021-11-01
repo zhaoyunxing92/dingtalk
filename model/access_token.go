@@ -1,6 +1,6 @@
 package model
 
-//钉钉token结构体
+//AccessToken 钉钉token结构体
 type AccessToken struct {
 	Response
 	Expires int16  `json:"expires_in"`   //过期时间
@@ -8,12 +8,12 @@ type AccessToken struct {
 	Token   string `json:"access_token"` //token
 }
 
-//Expired.CreatedAt is when the access token is generated
+//CreatedAt Expired.CreatedAt is when the access token is generated
 func (token *AccessToken) CreatedAt() int64 {
 	return token.Created
 }
 
-//Expired.ExpiresIn is how soon the access token is expired
+//ExpiresIn is how soon the access token is expired
 func (token *AccessToken) ExpiresIn() int16 {
 	return token.Expires
 }

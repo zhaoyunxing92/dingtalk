@@ -6,8 +6,8 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+//Response 响应
 //{"errcode":40035,"errmsg":"缺少参数 corpid or appkey"}
-//Response:响应
 type Response struct {
 	Code      int    `json:"errcode"`          //code
 	Msg       string `json:"errmsg,omitempty"` //msg
@@ -15,12 +15,12 @@ type Response struct {
 	RequestId string `json:"request_id,omitempty"`
 }
 
-//Unmarshallable:统一检查返回异常异常
+//Unmarshallable 统一检查返回异常异常
 type Unmarshallable interface {
 	CheckError() error
 }
 
-//Request:请求
+//Request 请求
 type Request interface {
 	Validate(valid *validator.Validate, trans translator.Translator) error
 }

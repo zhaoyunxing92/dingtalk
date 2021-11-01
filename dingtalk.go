@@ -6,6 +6,7 @@ import (
 	translator "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	zh_trans "github.com/go-playground/validator/v10/translations/zh"
+	"github.com/zhaoyunxing92/dingtalk/cache"
 	"github.com/zhaoyunxing92/dingtalk/global"
 	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
@@ -18,7 +19,7 @@ type DingTalk struct {
 	AppKey    string //应用key
 	AppSecret string //应用秘钥
 	client    *http.Client
-	cache     global.Cache
+	cache     cache.Cache
 	validate  *validator.Validate //参数校验
 	trans     translator.Translator
 }
@@ -32,7 +33,7 @@ func NewDingTalk(agentId int, appKey, appSecret string) *DingTalk {
 
 	return &DingTalk{agentId, appKey, appSecret, &http.Client{
 		Timeout: 10 * time.Second,
-	}, global.NewFileCache(".token", appKey), validate, trans}
+	}, cache.NewFileCache(".token", appKey), validate, trans}
 }
 
 //GetToken：获取token

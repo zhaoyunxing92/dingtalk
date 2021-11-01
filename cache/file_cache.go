@@ -1,4 +1,4 @@
-package global
+package cache
 
 import (
 	"encoding/json"
@@ -9,23 +9,14 @@ import (
 	"time"
 )
 
-//过期的
-type Expired interface {
-	CreatedAt() int64
-	ExpiresIn() int16
-}
-
-type Cache interface {
-	Set(data Expired) error
-	Get(data Expired) error
-}
-
 type FileCache struct {
 	path string //文件路径
 	file string //文件
 }
 
-//文件缓存
+//NewFileCache 文件缓存
+//path 缓存文件路径
+//file 文件名称
 func NewFileCache(path, file string) *FileCache {
 	file = strings.Join([]string{path, file}, "/")
 	return &FileCache{
@@ -34,9 +25,8 @@ func NewFileCache(path, file string) *FileCache {
 	}
 }
 
-//缓存
+//Set 缓存
 func (cache *FileCache) Set(data Expired) (err error) {
-	//检查目录是否存在
 	path := cache.path
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		_ = os.MkdirAll(path, os.ModePerm)
@@ -51,7 +41,7 @@ func (cache *FileCache) Set(data Expired) (err error) {
 	return err
 }
 
-//获取
+//Get 获取
 func (cache *FileCache) Get(data Expired) error {
 	bytes, err := ioutil.ReadFile(cache.file)
 	if err == nil {
