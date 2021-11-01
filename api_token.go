@@ -2,10 +2,12 @@ package dingtalk
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/constant"
+	"github.com/zhaoyunxing92/dingtalk/crypto"
 	"github.com/zhaoyunxing92/dingtalk/request"
 	"github.com/zhaoyunxing92/dingtalk/response"
 	"net/http"
 	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -53,6 +55,7 @@ func (ding *DingTalk) GetSuiteAccessToken() (token string, err error) {
 
 // GetCorpAccessToken 服务商获取第三方应用授权企业的access_token
 func (ding *DingTalk) GetCorpAccessToken() (token string, err error) {
+
 	req := request.NewCorpAccessToken().
 		SetKey(ding.Key).
 		SetSecret(ding.Secret).
@@ -60,9 +63,21 @@ func (ding *DingTalk) GetCorpAccessToken() (token string, err error) {
 		SetCorpId(ding.CorpId).
 		Build()
 
-	res := &response.SuiteAccessToken{}
+	if err = validate(req); err != nil {
+		return "", err
+	}
 
-	if err = ding.request(http.MethodPost, constant.CorpAccessToken, nil, req, res); err != nil {
+	timestamp := strconv.FormatInt(time.Now().Unix(), 10)
+	sign := crypto.GetSignature(timestamp, req.Secret, req.Ticket)
+
+	args := url.Values{}
+	args.Set("accessKey", req.Key)
+	args.Set("suiteTicket", req.Ticket)
+	args.Set("timestamp", timestamp)
+	args.Set("signature", sign)
+
+	res := &response.SuiteAccessToken{}
+	if err = ding.request(http.MethodPost, constant.CorpAccessToken, args, req, res); err != nil {
 		return "", err
 	}
 	return res.Token, err

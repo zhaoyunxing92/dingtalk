@@ -2,11 +2,11 @@ package request
 
 //SuiteAccessToken 获取suite套件token
 type CorpAccessToken struct {
-	Key string `json:"suite_key" validate:"required"`
+	Key string `json:"accessKey" validate:"required"`
 
 	Secret string `json:"suite_secret" validate:"required"`
 
-	Ticket string `json:"suite_ticket" validate:"required"`
+	Ticket string `json:"suiteTicket" validate:"required"`
 
 	CorpId string `json:"auth_corpid" validate:"required"`
 }
