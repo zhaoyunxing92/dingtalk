@@ -1,7 +1,7 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/global"
+	"github.com/zhaoyunxing92/dingtalk/constant"
 	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
 	"net/url"
@@ -12,7 +12,7 @@ import (
 //name:姓名
 //mobile:手机号
 //deptId:部门
-func (talk *DingTalk) CreateUser(name, mobile string, deptIds []int) (req model.UserIdResponse, err error) {
+func (ding *DingTalk) CreateUser(name, mobile string, deptIds []int) (req model.UserIdResponse, err error) {
 
 	form := map[string]interface{}{
 		"name":       name,
@@ -20,48 +20,41 @@ func (talk *DingTalk) CreateUser(name, mobile string, deptIds []int) (req model.
 		"department": deptIds,
 	}
 
-	err = talk.request(http.MethodPost, global.CreateUserKey, nil, form, &req)
+	err = ding.request(http.MethodPost, constant.CreateUserKey, nil, form, &req)
 	return req, err
 }
 
 //CreateDetailUser:创建详细的用户
-func (talk *DingTalk) CreateDetailUser(res model.Request) (req model.UserIdResponse, err error) {
+func (ding *DingTalk) CreateDetailUser(res model.Request) (req model.UserIdResponse, err error) {
 
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return req, err
-	}
-	err = talk.request(http.MethodPost, global.CreateUserKey, nil, res, &req)
+	err = ding.request(http.MethodPost, constant.CreateUserKey, nil, res, &req)
 	return req, err
 }
 
 //DeleteUser:删除用户
 //userId:员工唯一标识userid
-func (talk *DingTalk) DeleteUser(userId string) (req model.Response, err error) {
+func (ding *DingTalk) DeleteUser(userId string) (req model.Response, err error) {
 
 	params := url.Values{}
 	params.Set("userid", userId)
 
-	err = talk.request(http.MethodGet, global.DeleteUserKey, params, nil, &req)
+	err = ding.request(http.MethodGet, constant.DeleteUserKey, params, nil, &req)
 	return req, err
 }
 
 //UpdateUser:更新用户
 //res:员工信息
 //TODO:PositionInDepts:只用写一个，因为写多了也是无用的
-func (talk *DingTalk) UpdateUser(res model.Request) (req model.Response, err error) {
+func (ding *DingTalk) UpdateUser(res model.Request) (req model.Response, err error) {
 
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return req, err
-	}
-
-	err = talk.request(http.MethodPost, global.UpdateUserKey, nil, res, &req)
+	err = ding.request(http.MethodPost, constant.UpdateUserKey, nil, res, &req)
 	return req, err
 }
 
 //GetUserDetail:获取用户
 //userId:用户id
 //lang:语言，默认是zh_CN
-func (talk *DingTalk) GetUserDetail(userId, lang string) (req model.UserDetail, err error) {
+func (ding *DingTalk) GetUserDetail(userId, lang string) (req model.UserDetail, err error) {
 
 	if lang != "en_US" {
 		lang = "zh_CN"
@@ -71,35 +64,35 @@ func (talk *DingTalk) GetUserDetail(userId, lang string) (req model.UserDetail, 
 	params.Set("userid", userId)
 	params.Set("lang", lang)
 
-	err = talk.request(http.MethodGet, global.GetUserKey, params, nil, &req)
+	err = ding.request(http.MethodGet, constant.GetUserKey, params, nil, &req)
 	return req, err
 }
 
 //GetUserIdByUnionId:根据unionid获取userid
 //unionId:员工在当前开发者企业账号范围内的唯一标识
-func (talk *DingTalk) GetUserIdByUnionId(unionId string) (req model.UserIdResponse, err error) {
+func (ding *DingTalk) GetUserIdByUnionId(unionId string) (req model.UserIdResponse, err error) {
 
 	params := url.Values{}
 	params.Set("unionid", unionId)
 
-	err = talk.request(http.MethodGet, global.GetUserIdByUnionIdKey, params, nil, &req)
+	err = ding.request(http.MethodGet, constant.GetUserIdByUnionIdKey, params, nil, &req)
 	return req, err
 }
 
 //GetUserIdByMobile:根据手机号获取userid
 //unionId:员工在当前开发者企业账号范围内的唯一标识
-func (talk *DingTalk) GetUserIdByMobile(mobile string) (req model.UserIdResponse, err error) {
+func (ding *DingTalk) GetUserIdByMobile(mobile string) (req model.UserIdResponse, err error) {
 
 	params := url.Values{}
 	params.Set("mobile", mobile)
 
-	err = talk.request(http.MethodGet, global.GetUserIdByMobileKey, params, nil, &req)
+	err = ding.request(http.MethodGet, constant.GetUserIdByMobileKey, params, nil, &req)
 	return req, err
 }
 
 //GetOrgUserCount:获取企业员工人数
 //active:0:包含未激活钉钉的人员数量,1:不包含未激活钉钉的人员数量
-func (talk *DingTalk) GetOrgUserCount(active int) (req model.OrgUserCountResponse, err error) {
+func (ding *DingTalk) GetOrgUserCount(active int) (req model.OrgUserCountResponse, err error) {
 
 	if active < 0 || active > 2 {
 		active = 0
@@ -108,13 +101,13 @@ func (talk *DingTalk) GetOrgUserCount(active int) (req model.OrgUserCountRespons
 	params := url.Values{}
 	params.Set("onlyActive", strconv.Itoa(active))
 
-	err = talk.request(http.MethodGet, global.GetOrgUserCountKey, params, nil, &req)
+	err = ding.request(http.MethodGet, constant.GetOrgUserCountKey, params, nil, &req)
 	return req, err
 }
 
 //GetOrgInactiveUser:获取未登录钉钉的员工列表
 //active:0:包含未激活钉钉的人员数量,1:不包含未激活钉钉的人员数量
-func (talk *DingTalk) GetOrgInactiveUser(date string, offset, size int) (req model.InactiveUserResponse, err error) {
+func (ding *DingTalk) GetOrgInactiveUser(date string, offset, size int) (req model.InactiveUserResponse, err error) {
 	if size < 0 || size > 100 {
 		size = 100
 	}
@@ -124,30 +117,30 @@ func (talk *DingTalk) GetOrgInactiveUser(date string, offset, size int) (req mod
 	form["offset"] = offset
 	form["size"] = size
 
-	err = talk.request(http.MethodPost, global.GetOrgInactiveUserKey, nil, form, &req)
+	err = ding.request(http.MethodPost, constant.GetOrgInactiveUserKey, nil, form, &req)
 	return req, err
 }
 
 //GetOrgAdminUser:获取未登录钉钉的员工列表
-func (talk *DingTalk) GetOrgAdminUser() (req model.OrgAdminUserResponse, err error) {
-	err = talk.request(http.MethodGet, global.GetOrgAdminUserKey, nil, nil, &req)
+func (ding *DingTalk) GetOrgAdminUser() (req model.OrgAdminUserResponse, err error) {
+	err = ding.request(http.MethodGet, constant.GetOrgAdminUserKey, nil, nil, &req)
 	return req, err
 }
 
 //GetOrgAdminScope:获取管理员通讯录权限范围
-func (talk *DingTalk) GetOrgAdminScope(userId string) (req model.OrgAdminScopeResponse, err error) {
+func (ding *DingTalk) GetOrgAdminScope(userId string) (req model.OrgAdminScopeResponse, err error) {
 	form := make(map[string]string, 1)
 	form["userid"] = userId
 
-	err = talk.request(http.MethodPost, global.GetOrgAdminScopeKey, nil, form, &req)
+	err = ding.request(http.MethodPost, constant.GetOrgAdminScopeKey, nil, form, &req)
 	return req, err
 }
 
 //GetUserByAuthCode:通过免登码获取用户信息(v2)
-func (talk *DingTalk) GetUserByAuthCode(code string) (req model.UserGetByCodeResponse, err error) {
+func (ding *DingTalk) GetUserByAuthCode(code string) (req model.UserGetByCodeResponse, err error) {
 	form := make(map[string]string, 1)
 	form["code"] = code
 
-	err = talk.request(http.MethodPost, global.GetUserByAuthCodeKey, nil, form, &req)
+	err = ding.request(http.MethodPost, constant.GetUserByAuthCodeKey, nil, form, &req)
 	return req, err
 }

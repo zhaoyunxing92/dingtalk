@@ -2,7 +2,7 @@ package cache
 
 import (
 	"encoding/json"
-	"errors"
+	"github.com/pkg/errors"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -50,7 +50,7 @@ func (cache *FileCache) Get(data Expired) error {
 			created := data.CreatedAt()
 			expires := data.ExpiresIn()
 			if time.Now().Unix() > created+int64(expires-60) {
-				err = errors.New("data is already expired")
+				err = errors.New("token is already expired")
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/global"
+	"github.com/zhaoyunxing92/dingtalk/constant"
 	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
 )
@@ -53,53 +53,49 @@ type forbiddenList struct {
 //发送普通文本工作通知
 //部门id或用户id重复会剔除
 //发送工作通知
-func (talk *DingTalk) SendWorkNotify(res model.WorkNotifyRes) (resp WorkNotifyRep, err error) {
+func (ding *DingTalk) SendWorkNotify(res model.WorkNotifyRes) (resp WorkNotifyRep, err error) {
 	//组装部门、用户
 	res.AssembleDept()
 	res.AssembleUser()
-	res.SetAgentId(talk.AgentId)
-	//字段验证
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return resp, err
-	}
+	res.SetAgentId(ding.Id)
 
-	err = talk.request(http.MethodPost, global.SendCorpConversationKey, nil, res, &resp)
+	err = ding.request(http.MethodPost, constant.SendCorpConversationKey, nil, res, &resp)
 
 	return resp, err
 }
 
 //获取工作通知消息的发送进度，仅支持查询24小时内的任务。
 //taskId:工作通知id
-func (talk *DingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressRsp, err error) {
+func (ding *DingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressRsp, err error) {
 	form := map[string]interface{}{
-		"agent_id": talk.AgentId,
+		"agent_id": ding.Id,
 		"task_id":  taskId,
 	}
-	err = talk.request(http.MethodPost, global.GetSendProgressKey, nil, form, &rsp)
+	err = ding.request(http.MethodPost, constant.GetSendProgressKey, nil, form, &rsp)
 
 	return rsp, err
 }
 
 //获取工作通知消息的发送结果
 //taskId:工作通知id
-func (talk *DingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultRsp, err error) {
+func (ding *DingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultRsp, err error) {
 	form := map[string]interface{}{
-		"agent_id": talk.AgentId,
+		"agent_id": ding.Id,
 		"task_id":  taskId,
 	}
-	err = talk.request(http.MethodPost, global.GetSendResultKey, nil, form, &rsp)
+	err = ding.request(http.MethodPost, constant.GetSendResultKey, nil, form, &rsp)
 
 	return rsp, err
 }
 
 //撤回工作通知消息
 //taskId:工作通知id
-func (talk *DingTalk) RecallWorkNotifySendResult(taskId int) (rsp model.Response, err error) {
+func (ding *DingTalk) RecallWorkNotifySendResult(taskId int) (rsp model.Response, err error) {
 	form := map[string]interface{}{
-		"agent_id":    talk.AgentId,
+		"agent_id":    ding.Id,
 		"msg_task_id": taskId,
 	}
-	err = talk.request(http.MethodPost, global.RecallCorpConversationKey, nil, form, &rsp)
+	err = ding.request(http.MethodPost, constant.RecallCorpConversationKey, nil, form, &rsp)
 
 	return rsp, err
 }

@@ -5,42 +5,55 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/zhaoyunxing92/dingtalk/global"
+	"github.com/go-playground/validator/v10"
+	"github.com/zhaoyunxing92/dingtalk/constant"
 	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/response"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 //统一请求
-func (talk *DingTalk) request(method, path string, params url.Values, form interface{}, data model.Unmarshallable) (err error) {
+func (ding *DingTalk) request(method, path string, params url.Values, form interface{},
+	data response.Unmarshalled) (err error) {
+
+	if form != nil {
+		if err = validate(form); err != nil {
+			return err
+		}
+	}
+
 	if params == nil {
 		params = url.Values{}
 	}
-	if path != global.GetTokenKey {
+	if path != constant.GetTokenKey {
 		var token string
-		if token, err = talk.GetToken(); err != nil {
+		if token, err = ding.GetAccessToken(); err != nil {
 			return err
 		}
 		//set token
 		params.Set("access_token", token)
 	}
-	return talk.httpRequest(method, path, params, form, data)
+	return ding.httpRequest(method, path, params, form, data)
 }
 
-func (robot *Robot) send(form interface{}, data model.Unmarshallable) (err error) {
+func (robot *Robot) send(form interface{}, data response.Unmarshalled) (err error) {
 	args := url.Values{}
 	args.Set("access_token", robot.Token)
 
-	return robot.httpRequest(http.MethodPost, global.SendRobotMsgKey, args, form, data)
+	return robot.httpRequest(http.MethodPost, constant.SendRobotMsgKey, args, form, data)
 }
 
-func (robot *Robot) httpRequest(method, path string, args url.Values, form interface{}, data model.Unmarshallable) error {
+func (robot *Robot) httpRequest(method, path string, args url.Values, form interface{},
+	data response.Unmarshalled) error {
+
 	client := robot.client
 
-	uri, _ := url.Parse(global.Host + path)
+	uri, _ := url.Parse(constant.Host + path)
 	uri.RawQuery = args.Encode()
 
 	var (
@@ -76,10 +89,11 @@ func (robot *Robot) httpRequest(method, path string, args url.Values, form inter
 	return data.CheckError()
 }
 
-func (talk *DingTalk) httpRequest(method, path string, args url.Values, form interface{}, data model.Unmarshallable) error {
-	client := talk.client
+func (ding *DingTalk) httpRequest(method, path string, args url.Values, form interface{},
+	data response.Unmarshalled) error {
 
-	uri, _ := url.Parse(global.Host + path)
+	client := ding.Client
+	uri, _ := url.Parse(constant.Host + path)
 	uri.RawQuery = args.Encode()
 
 	var (
@@ -135,4 +149,18 @@ func (talk *DingTalk) httpRequest(method, path string, args url.Values, form int
 		return err
 	}
 	return data.CheckError()
+}
+
+// validate 参数验证
+func validate(s interface{}) error {
+	v := validator.New()
+	if err := v.Struct(s); err != nil {
+		errs := err.(validator.ValidationErrors)
+		var slice []string
+		for _, msg := range errs {
+			slice = append(slice, msg.Error())
+		}
+		return errors.New(strings.Join(slice, ","))
+	}
+	return nil
 }

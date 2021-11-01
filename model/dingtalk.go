@@ -15,11 +15,6 @@ type Response struct {
 	RequestId string `json:"request_id,omitempty"`
 }
 
-//Unmarshallable 统一检查返回异常异常
-type Unmarshallable interface {
-	CheckError() error
-}
-
 //Request 请求
 type Request interface {
 	Validate(valid *validator.Validate, trans translator.Translator) error

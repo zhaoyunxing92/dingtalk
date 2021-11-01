@@ -1,10 +1,15 @@
-package global
+package constant
 
-const ( ///topapi/v2/user/getuserinfo
+const (
 	Host                     = "https://oapi.dingtalk.com" //钉钉ap域名
 	GetTokenKey              = "/gettoken"                 //获取access_token
 	MicroAppListKey          = "/microapp/list"            //获取应用列表
 	MicroAppVisibleScopesKey = "/microapp/visible_scopes"  //获取应用可见范围
+
+	// SuiteAccessToken 获取第三方企业应用的
+	SuiteAccessToken = "/service/get_suite_token"
+	//CorpAccessToken 服务商获取第三方应用授权企业的access_token
+	CorpAccessToken = "/service/get_corp_token"
 
 	user                  = "/user"                       //用户模块
 	CreateUserKey         = user + "/create"              //创建用户

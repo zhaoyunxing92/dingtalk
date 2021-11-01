@@ -3,24 +3,24 @@ package dingtalk
 import (
 	"errors"
 	"fmt"
+	"github.com/zhaoyunxing92/dingtalk/constant"
 	"github.com/zhaoyunxing92/dingtalk/model"
-	"github.com/zhaoyunxing92/dingtalk/global"
 	"net/http"
 )
 
 //获取应用列表
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications
-func (talk *DingTalk) GetMicroAppList() (apps model.MicroAppList, err error) {
+func (ding *DingTalk) GetMicroAppList() (apps model.MicroAppList, err error) {
 
-	err = talk.request(http.MethodPost, global.MicroAppListKey, nil, nil, &apps)
+	err = ding.request(http.MethodPost, constant.MicroAppListKey, nil, nil, &apps)
 
 	return apps, err
 }
 
 //根据id获取应用
-func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app model.MicroApp, err error) {
+func (ding *DingTalk) GetMicroAppByAgentId(agentId uint64) (app model.MicroApp, err error) {
 	var apps model.MicroAppList
-	if apps, err = talk.GetMicroAppList(); err != nil {
+	if apps, err = ding.GetMicroAppList(); err != nil {
 		return model.MicroApp{}, err
 	}
 
@@ -35,10 +35,10 @@ func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app model.MicroApp, 
 
 //获取应用可见范围
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range
-func (talk *DingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes model.MicroAppVisibleScopes, err error) {
+func (ding *DingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes model.MicroAppVisibleScopes, err error) {
 	form := map[string]interface{}{
 		"agentId": agentId,
 	}
-	err = talk.request(http.MethodPost, global.MicroAppVisibleScopesKey, nil, form, &scopes)
+	err = ding.request(http.MethodPost, constant.MicroAppVisibleScopesKey, nil, form, &scopes)
 	return scopes, err
 }

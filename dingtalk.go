@@ -1,60 +1,96 @@
 package dingtalk
 
 import (
-	"github.com/go-playground/locales/en"
-	"github.com/go-playground/locales/zh"
-	translator "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
-	zh_trans "github.com/go-playground/validator/v10/translations/zh"
+	"github.com/pkg/errors"
 	"github.com/zhaoyunxing92/dingtalk/cache"
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
-	"net/url"
+	"strings"
 	"time"
 )
 
 type DingTalk struct {
-	AgentId   int    //应用id
-	AppKey    string //应用key
-	AppSecret string //应用秘钥
-	client    *http.Client
-	cache     cache.Cache
-	validate  *validator.Validate //参数校验
-	trans     translator.Translator
+	// 企业内部应用对应:AgentId，如果是应套件:SuiteId
+	Id int
+
+	// 企业内部应用对应:AppKey，套件对应:SuiteKey
+	Key string
+
+	//企业内部对应:AppSecret，套件对应:SuiteSecret
+	Secret string
+
+	// isv 钉钉开放平台会向应用的回调URL推送的suite_ticket（约5个小时推送一次）
+	Ticket string
+
+	//授权企业的id
+	CorpId string
+
+	Client *http.Client
+
+	Cache cache.Cache
 }
 
-// 创建钉钉客户端
-func NewDingTalk(agentId int, appKey, appSecret string) *DingTalk {
-	validate := validator.New()
-	uni := translator.New(en.New(), zh.New())
-	trans, _ := uni.GetTranslator("zh")
-	_ = zh_trans.RegisterDefaultTranslations(validate, trans)
-
-	return &DingTalk{agentId, appKey, appSecret, &http.Client{
-		Timeout: 10 * time.Second,
-	}, cache.NewFileCache(".token", appKey), validate, trans}
+// builder builder for dingtalk
+type builder struct {
+	ding *DingTalk
 }
 
-//GetToken：获取token
-func (talk *DingTalk) GetToken() (token string, err error) {
-	cache := talk.cache
-	var accessToken model.AccessToken
-	//先缓存中获取
-	if err = cache.Get(&accessToken); err == nil {
-		return accessToken.Token, nil
-	}
-	//读取本地文件
-	args := url.Values{}
-	args.Set("appkey", talk.AppKey)
-	args.Set("appsecret", talk.AppSecret)
+// NewDingTalk new DingTalkBuilder
+func NewDingTalk() *builder {
+	return &builder{ding: &DingTalk{}}
+}
 
-	if err = talk.request(http.MethodGet, global.GetTokenKey, args, nil, &accessToken); err != nil {
-		return "", err
+// SetId set agentId
+func (b *builder) SetId(id int) *builder {
+	b.ding.Id = id
+	return b
+}
+
+//SetKey set app key
+func (b *builder) SetKey(key string) *builder {
+	if len(key) <= 0 {
+		panic(errors.New("key is invalid"))
 	}
-	accessToken.Created = time.Now().Unix()
-	if err = cache.Set(&accessToken); err != nil {
-		return "", err
+	b.ding.Key = key
+	return b
+}
+
+//SetSecret set app secret
+func (b *builder) SetSecret(secret string) *builder {
+	if len(secret) <= 0 {
+		panic(errors.New("secret is invalid"))
 	}
-	return accessToken.Token, nil
+	b.ding.Secret = secret
+	return b
+}
+
+//SetTicket set app ticket
+func (b *builder) SetTicket(ticket string) *builder {
+	if len(ticket) <= 0 {
+		panic(errors.New("ticket is invalid"))
+	}
+	b.ding.Ticket = ticket
+	return b
+}
+
+//SetCorpId set app ticket
+func (b *builder) SetCorpId(corpId string) *builder {
+	if len(corpId) <= 0 {
+		panic(errors.New("corpId is invalid"))
+	}
+	b.ding.CorpId = corpId
+	return b
+}
+
+//Build return dingtalk
+func (b *builder) Build() *DingTalk {
+	ding := b.ding
+	key := ding.Key
+	// 存在说明是isv
+	if len(ding.Ticket) > 0 && len(ding.CorpId) > 0 {
+		ding.Cache = cache.NewFileCache(".token", strings.Join([]string{key, ding.CorpId}, "/"))
+	} else {
+		ding.Cache = cache.NewFileCache(".token", key)
+	}
+	ding.Client = &http.Client{Timeout: 10 * time.Second}
+	return b.ding
 }
