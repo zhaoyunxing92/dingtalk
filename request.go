@@ -30,10 +30,18 @@ func (ding *DingTalk) request(method, path string, params url.Values, form inter
 	if params == nil {
 		params = url.Values{}
 	}
-	if path != constant.GetTokenKey {
+
+	if path != constant.GetTokenKey && path != constant.CorpAccessToken {
 		var token string
-		if token, err = ding.GetAccessToken(); err != nil {
-			return err
+
+		if ding.isv() {
+			if token, err = ding.GetCorpAccessToken(); err != nil {
+				return err
+			}
+		} else {
+			if token, err = ding.GetAccessToken(); err != nil {
+				return err
+			}
 		}
 		//set token
 		params.Set("access_token", token)

@@ -29,6 +29,11 @@ type DingTalk struct {
 	Cache cache.Cache
 }
 
+//isv 是否isv
+func (ding *DingTalk) isv() bool {
+	return len(ding.Ticket) > 0 && len(ding.CorpId) > 0
+}
+
 // builder builder for dingtalk
 type builder struct {
 	ding *DingTalk
@@ -85,9 +90,9 @@ func (b *builder) SetCorpId(corpId string) *builder {
 func (b *builder) Build() *DingTalk {
 	ding := b.ding
 	key := ding.Key
-	// 存在说明是isv
-	if len(ding.Ticket) > 0 && len(ding.CorpId) > 0 {
-		ding.Cache = cache.NewFileCache(".token", strings.Join([]string{key, ding.CorpId}, "/"))
+	//判断是否isv
+	if ding.isv() {
+		ding.Cache = cache.NewFileCache(".token", strings.Join([]string{"isv", key, ding.CorpId}, "/"))
 	} else {
 		ding.Cache = cache.NewFileCache(".token", key)
 	}

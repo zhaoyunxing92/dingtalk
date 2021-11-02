@@ -10,8 +10,8 @@ import (
 //GetSignature 获取签名
 func GetSignature(timestamp, secret string, ticket string) string {
 	str := timestamp + "\n" + ticket
-	hash := hmac.New(sha256.New, []byte(secret))
-	hash.Write([]byte(str))
-	sign := base64.StdEncoding.EncodeToString(hash.Sum(nil))
+	h := hmac.New(sha256.New, []byte(secret))
+	h.Write([]byte(str))
+	sign := base64.StdEncoding.EncodeToString(h.Sum(nil))
 	return url.QueryEscape(sign)
 }
