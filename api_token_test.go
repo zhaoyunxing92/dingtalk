@@ -37,7 +37,7 @@ func TestGetCorpAccessToken(t *testing.T) {
 		SetId(10435002).
 		SetKey("suitegqebx814dt8immqw").
 		SetCorpId("ding3b1e912394011559bc961a6cb783455b").
-		SetTicket("iR4i4yOsNrSZCYLpfbrE6jigqU0hJuWVNmFQFuJ93IDQOir9bSQ3OP93gDUttfAVsljIXyXfBfVB0nr63dwOAT").
+		SetTicket("5nvE5VXD6BP43b9IBv8SLc4FBx3lgRZL0wdPPrXf48mi12yjPyftZwSA6r1NEgyF86sbR3Ksbe32TAsOHuDbGn").
 		SetSecret("AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m").
 		Build()
 

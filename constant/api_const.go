@@ -11,6 +11,8 @@ const (
 	//CorpAccessToken 服务商获取第三方应用授权企业的access_token
 	CorpAccessToken = "/service/get_corp_token"
 
+	GetAuthInfo = "/service/get_auth_info"
+
 	user                  = "/user"                       //用户模块
 	CreateUserKey         = user + "/create"              //创建用户
 	DeleteUserKey         = user + "/delete"              //删除用户
