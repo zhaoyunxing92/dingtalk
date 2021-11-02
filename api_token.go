@@ -55,10 +55,6 @@ func (ding *DingTalk) GetSuiteAccessToken() (token string, err error) {
 
 // GetCorpAccessToken 服务商获取第三方应用授权企业的access_token
 func (ding *DingTalk) GetCorpAccessToken() (token string, err error) {
-	req := request.NewCorpAccessToken().
-		SetCorpId(ding.CorpId).
-		Build()
-
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 	sign := crypto.GetSignature(timestamp, ding.Secret, ding.Ticket)
 
@@ -68,6 +64,7 @@ func (ding *DingTalk) GetCorpAccessToken() (token string, err error) {
 	args.Set("timestamp", timestamp)
 	args.Set("signature", sign)
 
+	req := request.NewCorpAccessToken(ding.CorpId)
 	res := &response.SuiteAccessToken{}
 	if err = ding.request(http.MethodPost, constant.CorpAccessToken, args, req, res); err != nil {
 		return "", err

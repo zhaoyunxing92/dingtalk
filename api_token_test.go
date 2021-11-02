@@ -35,7 +35,7 @@ func TestGetCorpAccessToken(t *testing.T) {
 	client := NewDingTalk().
 		SetId(10435002).
 		SetKey("suitegqebx814dt8immqw").
-		SetCorpId("dingc7c5220402493357f2c783f7214b6d69").
+		SetCorpId("ding3b1e912394011559bc961a6cb783455b").
 		SetTicket("iR4i4yOsNrSZCYLpfbrE6jigqU0hJuWVNmFQFuJ93IDQOir9bSQ3OP93gDUttfAVsljIXyXfBfVB0nr63dwOAT").
 		SetSecret("AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m").
 		Build()

@@ -92,9 +92,9 @@ func (b *builder) Build() *DingTalk {
 	key := ding.Key
 	//判断是否isv
 	if ding.isv() {
-		ding.Cache = cache.NewFileCache(".token", strings.Join([]string{"isv", key, ding.CorpId}, "/"))
+		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "isv", key}, "/"), ding.CorpId)
 	} else {
-		ding.Cache = cache.NewFileCache(".token", key)
+		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "corp"}, "/"), key)
 	}
 	ding.Client = &http.Client{Timeout: 10 * time.Second}
 	return b.ding
