@@ -34,10 +34,6 @@ func (ding *DingTalk) isv() bool {
 	return len(ding.Ticket) > 0 && len(ding.CorpId) > 0
 }
 
-func (ding *DingTalk) suite() bool {
-	return len(ding.Ticket) > 0
-}
-
 // builder builder for dingtalk
 type builder struct {
 	ding *DingTalk
@@ -97,8 +93,6 @@ func (b *builder) Build() *DingTalk {
 	//判断是否isv
 	if ding.isv() {
 		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "isv", key}, "/"), ding.CorpId)
-	} else if ding.suite() {
-		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "suite"}, "/"), key)
 	} else {
 		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "corp"}, "/"), key)
 	}

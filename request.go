@@ -18,17 +18,17 @@ import (
 )
 
 //统一请求
-func (ding *DingTalk) request(method, path string, params url.Values, form interface{},
+func (ding *DingTalk) request(method, path string, query url.Values, body interface{},
 	data response.Unmarshalled) (err error) {
 
-	if form != nil {
-		if err = validate(form); err != nil {
+	if body != nil {
+		if err = validate(body); err != nil {
 			return err
 		}
 	}
 
-	if params == nil {
-		params = url.Values{}
+	if query == nil {
+		query = url.Values{}
 	}
 
 	if path != constant.GetTokenKey && path != constant.CorpAccessToken &&
@@ -45,9 +45,9 @@ func (ding *DingTalk) request(method, path string, params url.Values, form inter
 			}
 		}
 		//set token
-		params.Set("access_token", token)
+		query.Set("access_token", token)
 	}
-	return ding.httpRequest(method, path, params, form, data)
+	return ding.httpRequest(method, path, query, body, data)
 }
 
 func (robot *Robot) send(form interface{}, data response.Unmarshalled) (err error) {
@@ -57,13 +57,13 @@ func (robot *Robot) send(form interface{}, data response.Unmarshalled) (err erro
 	return robot.httpRequest(http.MethodPost, constant.SendRobotMsgKey, args, form, data)
 }
 
-func (robot *Robot) httpRequest(method, path string, args url.Values, form interface{},
+func (robot *Robot) httpRequest(method, path string, query url.Values, body interface{},
 	data response.Unmarshalled) error {
 
 	client := robot.client
 
 	uri, _ := url.Parse(constant.Host + path)
-	uri.RawQuery = args.Encode()
+	uri.RawQuery = query.Encode()
 
 	var (
 		req     *http.Request
@@ -73,7 +73,7 @@ func (robot *Robot) httpRequest(method, path string, args url.Values, form inter
 	)
 
 	//表单不为空
-	d, _ := json.Marshal(form)
+	d, _ := json.Marshal(body)
 	fmt.Println(string(d))
 
 	req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
@@ -98,12 +98,12 @@ func (robot *Robot) httpRequest(method, path string, args url.Values, form inter
 	return data.CheckError()
 }
 
-func (ding *DingTalk) httpRequest(method, path string, args url.Values, form interface{},
+func (ding *DingTalk) httpRequest(method, path string, query url.Values, body interface{},
 	data response.Unmarshalled) error {
 
 	client := ding.Client
 	uri, _ := url.Parse(constant.Host + path)
-	uri.RawQuery = args.Encode()
+	uri.RawQuery = query.Encode()
 
 	var (
 		req     *http.Request
@@ -112,14 +112,14 @@ func (ding *DingTalk) httpRequest(method, path string, args url.Values, form int
 		content []byte
 	)
 
-	if form != nil {
+	if method != http.MethodGet {
 		//检查提交表单类型
-		switch form.(type) {
+		switch body.(type) {
 		case model.UploadFile:
 			var b bytes.Buffer
 			w := multipart.NewWriter(&b)
 
-			file := form.(model.UploadFile)
+			file := body.(model.UploadFile)
 			fw, err := w.CreateFormFile(file.FieldName, file.FileName)
 			if err != nil {
 				return err
@@ -134,8 +134,9 @@ func (ding *DingTalk) httpRequest(method, path string, args url.Values, form int
 			req.Header.Set("Content-Type", w.FormDataContentType())
 		default:
 			//表单不为空
-			d, _ := json.Marshal(form)
+			d, _ := json.Marshal(body)
 			req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
+			req.Header.Set("Content-Type", "application/json; charset=utf-8")
 		}
 	} else {
 		req, _ = http.NewRequest(method, uri.String(), nil)

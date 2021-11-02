@@ -1,6 +1,7 @@
 package dingtalk
 
 import (
+	"github.com/zhaoyunxing92/dingtalk/cache"
 	"github.com/zhaoyunxing92/dingtalk/constant"
 	"github.com/zhaoyunxing92/dingtalk/crypto"
 	"github.com/zhaoyunxing92/dingtalk/request"
@@ -8,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -39,7 +41,7 @@ func (ding *DingTalk) GetAccessToken() (token string, err error) {
 // GetSuiteAccessToken 获取第三方企业应用的suite_access_token
 func (ding *DingTalk) GetSuiteAccessToken() (token string, err error) {
 	var (
-		ch  = ding.Cache
+		ch  = cache.NewFileCache(strings.Join([]string{".token", "suite"}, "/"), ding.Key)
 		res = &response.SuiteAccessToken{}
 	)
 
