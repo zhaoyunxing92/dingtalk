@@ -19,10 +19,7 @@ type FileCache struct {
 //file 文件名称
 func NewFileCache(path, file string) *FileCache {
 	file = strings.Join([]string{path, file}, "/")
-	return &FileCache{
-		path,
-		file,
-	}
+	return &FileCache{path, file}
 }
 
 //Set 缓存

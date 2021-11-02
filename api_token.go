@@ -38,16 +38,25 @@ func (ding *DingTalk) GetAccessToken() (token string, err error) {
 
 // GetSuiteAccessToken 获取第三方企业应用的suite_access_token
 func (ding *DingTalk) GetSuiteAccessToken() (token string, err error) {
+	var (
+		ch  = ding.Cache
+		res = &response.SuiteAccessToken{}
+	)
 
+	if err = ch.Get(res); err == nil {
+		return res.Token, nil
+	}
 	req := request.NewSuiteAccessToken().
 		SetKey(ding.Key).
 		SetSecret(ding.Secret).
 		SetTicket(ding.Ticket).
 		Build()
 
-	res := &response.SuiteAccessToken{}
-
 	if err = ding.request(http.MethodPost, constant.SuiteAccessToken, nil, req, res); err != nil {
+		return "", err
+	}
+	res.Create = time.Now().Unix()
+	if err = ch.Set(res); err != nil {
 		return "", err
 	}
 	return res.Token, err

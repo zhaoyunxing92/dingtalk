@@ -31,7 +31,8 @@ func (ding *DingTalk) request(method, path string, params url.Values, form inter
 		params = url.Values{}
 	}
 
-	if path != constant.GetTokenKey && path != constant.CorpAccessToken {
+	if path != constant.GetTokenKey && path != constant.CorpAccessToken &&
+		path != constant.SuiteAccessToken {
 		var token string
 
 		if ding.isv() {

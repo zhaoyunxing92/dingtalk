@@ -20,7 +20,7 @@ type Unmarshalled interface {
 
 func (res *Response) CheckError() (err error) {
 	if res.Code != 0 {
-		err = errors.Errorf("%d: %s", res.Code, res.Msg)
+		err = errors.Errorf("code:%d,msg:%s", res.Code, res.Msg)
 	}
 	return err
 }
