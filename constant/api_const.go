@@ -14,7 +14,7 @@ const (
 	GetAuthInfo = "/service/get_auth_info"
 
 	user                  = "/user"                       //用户模块
-	CreateUserKey         = user + "/create"              //创建用户
+	CreateUserKey         = "/topapi/v2/user/create"      //创建用户
 	DeleteUserKey         = user + "/delete"              //删除用户
 	UpdateUserKey         = user + "/update"              //更新用户详情
 	GetUserKey            = user + "/get"                 //获取用户详情

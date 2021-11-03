@@ -1,4 +1,4 @@
-package dingtalk
+package api
 
 import (
 	"bytes"
@@ -147,6 +147,7 @@ func (ding *DingTalk) httpRequest(method, path string, query url.Values, body in
 	}
 
 	defer res.Body.Close()
+
 	if res.StatusCode != 200 {
 		return errors.New("dingtalk server error: " + res.Status)
 	}
@@ -154,10 +155,11 @@ func (ding *DingTalk) httpRequest(method, path string, query url.Values, body in
 	if content, err = ioutil.ReadAll(res.Body); err != nil {
 		return err
 	}
-	fmt.Println(string(content))
+
 	if err = json.Unmarshal(content, data); err != nil {
 		return err
 	}
+
 	return data.CheckError()
 }
 

@@ -1,4 +1,4 @@
-package dingtalk
+package api
 
 import (
 	"github.com/pkg/errors"
@@ -10,13 +10,13 @@ import (
 
 type DingTalk struct {
 	// 企业内部应用对应:AgentId，如果是应套件:SuiteId
-	Id int
+	Id int `json:"id" validate:"required"`
 
 	// 企业内部应用对应:AppKey，套件对应:SuiteKey
-	Key string
+	Key string `validate:"required"`
 
 	//企业内部对应:AppSecret，套件对应:SuiteSecret
-	Secret string
+	Secret string `validate:"required"`
 
 	// isv 钉钉开放平台会向应用的回调URL推送的suite_ticket（约5个小时推送一次）
 	Ticket string
@@ -88,6 +88,10 @@ func (b *builder) SetCorpId(corpId string) *builder {
 
 //Build return dingtalk
 func (b *builder) Build() *DingTalk {
+
+	if err := validate(b); err != nil {
+		panic(err)
+	}
 	ding := b.ding
 	key := ding.Key
 	//判断是否isv

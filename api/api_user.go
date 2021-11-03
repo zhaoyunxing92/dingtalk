@@ -1,27 +1,18 @@
-package dingtalk
+package api
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/constant"
 	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/request"
+	"github.com/zhaoyunxing92/dingtalk/response"
 	"net/http"
 	"net/url"
 	"strconv"
 )
 
-//CreateUser:创建用户
-//name:姓名
-//mobile:手机号
-//deptId:部门
-func (ding *DingTalk) CreateUser(name, mobile string, deptIds []int) (req model.UserIdResponse, err error) {
-
-	form := map[string]interface{}{
-		"name":       name,
-		"mobile":     mobile,
-		"department": deptIds,
-	}
-
-	err = ding.request(http.MethodPost, constant.CreateUserKey, nil, form, &req)
-	return req, err
+//CreateUser 创建用户
+func (ding *DingTalk) CreateUser(user *request.CreateUser) (req response.CreateUser, err error) {
+	return req, ding.request(http.MethodPost, constant.CreateUserKey, nil, user, &req)
 }
 
 //CreateDetailUser:创建详细的用户

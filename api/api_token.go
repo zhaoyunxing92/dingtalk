@@ -1,6 +1,7 @@
-package dingtalk
+package api
 
 import (
+	"errors"
 	"github.com/zhaoyunxing92/dingtalk/cache"
 	"github.com/zhaoyunxing92/dingtalk/constant"
 	"github.com/zhaoyunxing92/dingtalk/crypto"
@@ -66,6 +67,11 @@ func (ding *DingTalk) GetSuiteAccessToken() (token string, err error) {
 
 // GetCorpAccessToken 服务商获取第三方应用授权企业的access_token
 func (ding *DingTalk) GetCorpAccessToken() (token string, err error) {
+	// check ticket and corpId
+	if len(ding.Ticket) <= 0 || len(ding.CorpId) <= 0 {
+		return "", errors.New("ticket or corpId is null")
+	}
+
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 	sign := crypto.GetSignature(timestamp, ding.Secret, ding.Ticket)
 

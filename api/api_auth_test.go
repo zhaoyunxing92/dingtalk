@@ -1,4 +1,4 @@
-package dingtalk
+package api
 
 import "testing"
 

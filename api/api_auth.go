@@ -1,4 +1,4 @@
-package dingtalk
+package api
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/constant"
