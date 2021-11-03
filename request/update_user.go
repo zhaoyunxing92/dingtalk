@@ -52,7 +52,7 @@ type UpdateUser struct {
 	deptIds []int
 
 	//员工在对应的部门中的排序
-	DeptOrders []deptOrder `json:"dept_order_list"`
+	DeptOrders []DeptOrder `json:"dept_order_list"`
 
 	//员工在对应的部门中的职位
 	DeptTitles []deptTitle `json:"dept_title_list"`

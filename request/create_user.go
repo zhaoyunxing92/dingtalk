@@ -37,7 +37,7 @@ type CreateUser struct {
 
 	deptIds []int
 
-	DeptOrders []deptOrder `json:"dept_order_list,omitempty"`
+	DeptOrders []DeptOrder `json:"dept_order_list,omitempty"`
 
 	DeptTitles []deptTitle `json:"dept_title_list,omitempty"`
 
@@ -58,8 +58,8 @@ type CreateUser struct {
 	Password string `json:"init_password,omitempty"`
 }
 
-//deptOrder 员工在对应的部门中的排序
-type deptOrder struct {
+//DeptOrder 员工在对应的部门中的排序
+type DeptOrder struct {
 	DeptId int `json:"dept_id"`
 
 	Order int `json:"order"`
@@ -72,8 +72,8 @@ type deptTitle struct {
 	Title string `json:"title"`
 }
 
-func newDeptOrder(dept, order int) deptOrder {
-	return deptOrder{dept, order}
+func newDeptOrder(dept, order int) DeptOrder {
+	return DeptOrder{dept, order}
 }
 
 func newDeptTitle(dept int, title string) deptTitle {

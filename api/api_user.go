@@ -12,40 +12,26 @@ import (
 
 //CreateUser 创建用户
 func (ding *DingTalk) CreateUser(user *request.CreateUser) (req response.CreateUser, err error) {
+
 	return req, ding.Request(http.MethodPost, constant.CreateUserKey, nil, user, &req)
 }
 
 //UpdateUser 更新用户信息
 func (ding *DingTalk) UpdateUser(user *request.UpdateUser) (req response.Response, err error) {
+
 	return req, ding.Request(http.MethodPost, constant.UpdateUserKey, nil, user, &req)
 }
 
-//DeleteUser:删除用户
-//userId:员工唯一标识userid
-func (ding *DingTalk) DeleteUser(userId string) (req model.Response, err error) {
+//DeleteUser 删除用户
+func (ding *DingTalk) DeleteUser(userId string) (req response.Response, err error) {
 
-	params := url.Values{}
-	params.Set("userid", userId)
-
-	err = ding.Request(http.MethodGet, constant.DeleteUserKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.DeleteUserKey, nil, request.NewDeleteUser(userId), &req)
 }
 
-//GetUserDetail:获取用户
-//userId:用户id
-//lang:语言，默认是zh_CN
-func (ding *DingTalk) GetUserDetail(userId, lang string) (req model.UserDetail, err error) {
+//GetUserDetail 根据userid获取用户详情
+func (ding *DingTalk) GetUserDetail(user *request.UserDetail) (req response.UserDetail, err error) {
 
-	if lang != "en_US" {
-		lang = "zh_CN"
-	}
-
-	params := url.Values{}
-	params.Set("userid", userId)
-	params.Set("lang", lang)
-
-	err = ding.Request(http.MethodGet, constant.GetUserKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetUserDetailKey, nil, user, &req)
 }
 
 //GetUserIdByUnionId:根据unionid获取userid
