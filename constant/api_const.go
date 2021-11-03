@@ -16,7 +16,7 @@ const (
 	user                  = "/user"                       //用户模块
 	CreateUserKey         = "/topapi/v2/user/create"      //创建用户
 	DeleteUserKey         = user + "/delete"              //删除用户
-	UpdateUserKey         = user + "/update"              //更新用户详情
+	UpdateUserKey         = "/topapi/v2/user/update"      //更新用户详情
 	GetUserKey            = user + "/get"                 //获取用户详情
 	GetDeptUserIdKey      = user + "/getDeptMember"       //获取部门用户userid列表
 	GetUserIdByUnionIdKey = user + "/getUseridByUnionid"  //根据unionid获取userid

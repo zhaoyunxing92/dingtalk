@@ -2,8 +2,8 @@ package api
 
 import (
 	"errors"
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 	"strings"
 )
@@ -19,7 +19,7 @@ func (ding *DingTalk) GetRoleList(offset, size int) (apps model.RoleListResponse
 		"offset": offset,
 		"size":   size,
 	}
-	err = ding.request(http.MethodPost, constant.GetRoleListKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.GetRoleListKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -54,7 +54,7 @@ func (ding *DingTalk) GetRoleUserList(roleId, offset, size int) (apps model.Role
 		"offset":  offset,
 		"size":    size,
 	}
-	err = ding.request(http.MethodPost, constant.GetRoleUserListKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.GetRoleUserListKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -65,7 +65,7 @@ func (ding *DingTalk) GetRoleGroup(groupId int) (apps model.RoleGroupResponse, e
 	form := map[string]int{
 		"group_id": groupId,
 	}
-	err = ding.request(http.MethodPost, constant.GetRoleGroupKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.GetRoleGroupKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -76,7 +76,7 @@ func (ding *DingTalk) GetRoleDetail(roleId int) (apps model.RoleDetailResponse, 
 	form := map[string]int{
 		"roleId": roleId,
 	}
-	err = ding.request(http.MethodPost, constant.GetRoleDetailKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.GetRoleDetailKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -86,7 +86,7 @@ func (ding *DingTalk) CreateRoleGroup(name string) (apps model.CreateRoleGroupRe
 	form := map[string]string{
 		"name": name,
 	}
-	err = ding.request(http.MethodPost, constant.CreateRoleGroupKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.CreateRoleGroupKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -99,7 +99,7 @@ func (ding *DingTalk) CreateRole(name string, groupId int) (apps model.CreateRol
 		"roleName": name,
 		"groupId":  groupId,
 	}
-	err = ding.request(http.MethodPost, constant.CreateRoleKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.CreateRoleKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -113,7 +113,7 @@ func (ding *DingTalk) UpdateRole(name string, roleId int) (apps model.Response, 
 		"roleName": name,
 		"roleId":   roleId,
 	}
-	err = ding.request(http.MethodPost, constant.UpdateRoleKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.UpdateRoleKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -125,7 +125,7 @@ func (ding *DingTalk) DeleteRole(roleId int) (apps model.Response, err error) {
 	form := map[string]int{
 		"role_id": roleId,
 	}
-	err = ding.request(http.MethodPost, constant.DeleteRoleKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.DeleteRoleKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -146,7 +146,7 @@ func (ding *DingTalk) RoleBatchAddUser(roleIds []string, userIds []string) (apps
 		"userIds": strings.Join(userIds, ","),
 		"roleIds": strings.Join(roleIds, ","),
 	}
-	err = ding.request(http.MethodPost, constant.RoleBatchAddUserKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.RoleBatchAddUserKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -167,7 +167,7 @@ func (ding *DingTalk) RoleBatchRemoveUser(roleIds []string, userIds []string) (a
 		"userIds": strings.Join(userIds, ","),
 		"roleIds": strings.Join(roleIds, ","),
 	}
-	err = ding.request(http.MethodPost, constant.RoleBatchRemoveUserKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.RoleBatchRemoveUserKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -189,6 +189,6 @@ func (ding *DingTalk) RoleUpdateUserManageScope(userId string, roleId int, deptI
 	if deptIds != nil {
 		form["dept_ids"] = deptIds
 	}
-	err = ding.request(http.MethodPost, constant.RoleUpdateUserManageScopeKey, nil, form, &apps)
+	err = ding.Request(http.MethodPost, constant.RoleUpdateUserManageScopeKey, nil, form, &apps)
 	return apps, err
 }

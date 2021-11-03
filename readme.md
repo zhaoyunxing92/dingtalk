@@ -2,7 +2,7 @@
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
 
-[dingtalk](https://github.com/zhaoyunxing92/dingtalk)
+[dingtalk](https://github.com/zhaoyunxing92/dingtalk/v2)
 是基于新版的[钉钉开发平台api文档](https://ding-doc.dingtalk.com/document#/org-dev-guide)
 开发，也就是说在你使用之前是需要在[钉钉开发者后台](https://open-dev.dingtalk.com/#/index) 创建一个小程序或应用
 

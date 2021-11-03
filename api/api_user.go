@@ -1,10 +1,10 @@
 package api
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/model"
-	"github.com/zhaoyunxing92/dingtalk/request"
-	"github.com/zhaoyunxing92/dingtalk/response"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -12,14 +12,12 @@ import (
 
 //CreateUser 创建用户
 func (ding *DingTalk) CreateUser(user *request.CreateUser) (req response.CreateUser, err error) {
-	return req, ding.request(http.MethodPost, constant.CreateUserKey, nil, user, &req)
+	return req, ding.Request(http.MethodPost, constant.CreateUserKey, nil, user, &req)
 }
 
-//CreateDetailUser:创建详细的用户
-func (ding *DingTalk) CreateDetailUser(res model.Request) (req model.UserIdResponse, err error) {
-
-	err = ding.request(http.MethodPost, constant.CreateUserKey, nil, res, &req)
-	return req, err
+//UpdateUser 更新用户信息
+func (ding *DingTalk) UpdateUser(user *request.UpdateUser) (req response.Response, err error) {
+	return req, ding.Request(http.MethodPost, constant.UpdateUserKey, nil, user, &req)
 }
 
 //DeleteUser:删除用户
@@ -29,16 +27,7 @@ func (ding *DingTalk) DeleteUser(userId string) (req model.Response, err error) 
 	params := url.Values{}
 	params.Set("userid", userId)
 
-	err = ding.request(http.MethodGet, constant.DeleteUserKey, params, nil, &req)
-	return req, err
-}
-
-//UpdateUser:更新用户
-//res:员工信息
-//TODO:PositionInDepts:只用写一个，因为写多了也是无用的
-func (ding *DingTalk) UpdateUser(res model.Request) (req model.Response, err error) {
-
-	err = ding.request(http.MethodPost, constant.UpdateUserKey, nil, res, &req)
+	err = ding.Request(http.MethodGet, constant.DeleteUserKey, params, nil, &req)
 	return req, err
 }
 
@@ -55,7 +44,7 @@ func (ding *DingTalk) GetUserDetail(userId, lang string) (req model.UserDetail, 
 	params.Set("userid", userId)
 	params.Set("lang", lang)
 
-	err = ding.request(http.MethodGet, constant.GetUserKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetUserKey, params, nil, &req)
 	return req, err
 }
 
@@ -66,7 +55,7 @@ func (ding *DingTalk) GetUserIdByUnionId(unionId string) (req model.UserIdRespon
 	params := url.Values{}
 	params.Set("unionid", unionId)
 
-	err = ding.request(http.MethodGet, constant.GetUserIdByUnionIdKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetUserIdByUnionIdKey, params, nil, &req)
 	return req, err
 }
 
@@ -77,7 +66,7 @@ func (ding *DingTalk) GetUserIdByMobile(mobile string) (req model.UserIdResponse
 	params := url.Values{}
 	params.Set("mobile", mobile)
 
-	err = ding.request(http.MethodGet, constant.GetUserIdByMobileKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetUserIdByMobileKey, params, nil, &req)
 	return req, err
 }
 
@@ -92,7 +81,7 @@ func (ding *DingTalk) GetOrgUserCount(active int) (req model.OrgUserCountRespons
 	params := url.Values{}
 	params.Set("onlyActive", strconv.Itoa(active))
 
-	err = ding.request(http.MethodGet, constant.GetOrgUserCountKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetOrgUserCountKey, params, nil, &req)
 	return req, err
 }
 
@@ -108,13 +97,13 @@ func (ding *DingTalk) GetOrgInactiveUser(date string, offset, size int) (req mod
 	form["offset"] = offset
 	form["size"] = size
 
-	err = ding.request(http.MethodPost, constant.GetOrgInactiveUserKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.GetOrgInactiveUserKey, nil, form, &req)
 	return req, err
 }
 
 //GetOrgAdminUser:获取未登录钉钉的员工列表
 func (ding *DingTalk) GetOrgAdminUser() (req model.OrgAdminUserResponse, err error) {
-	err = ding.request(http.MethodGet, constant.GetOrgAdminUserKey, nil, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetOrgAdminUserKey, nil, nil, &req)
 	return req, err
 }
 
@@ -123,7 +112,7 @@ func (ding *DingTalk) GetOrgAdminScope(userId string) (req model.OrgAdminScopeRe
 	form := make(map[string]string, 1)
 	form["userid"] = userId
 
-	err = ding.request(http.MethodPost, constant.GetOrgAdminScopeKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.GetOrgAdminScopeKey, nil, form, &req)
 	return req, err
 }
 
@@ -132,6 +121,6 @@ func (ding *DingTalk) GetUserByAuthCode(code string) (req model.UserGetByCodeRes
 	form := make(map[string]string, 1)
 	form["code"] = code
 
-	err = ding.request(http.MethodPost, constant.GetUserByAuthCodeKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.GetUserByAuthCodeKey, nil, form, &req)
 	return req, err
 }

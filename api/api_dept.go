@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -17,7 +17,7 @@ func (ding *DingTalk) CreateDept(name string, parentId int) (rsp model.DeptCreat
 	form["name"] = name
 	form["parentid"] = parentId
 
-	err = ding.request(http.MethodPost, constant.CreateDeptKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.CreateDeptKey, nil, form, &rsp)
 
 	return rsp, err
 }
@@ -31,7 +31,7 @@ func (ding *DingTalk) CreateDetailDept(res model.CreateDetailDeptRequest) (req m
 	res.JoinDeptPermits()
 	res.JoinUserPermits()
 
-	err = ding.request(http.MethodPost, constant.CreateDeptKey, nil, res, &req)
+	err = ding.Request(http.MethodPost, constant.CreateDeptKey, nil, res, &req)
 
 	return req, err
 }
@@ -47,7 +47,7 @@ func (ding *DingTalk) GetDeptDetail(deptId int, lang string) (rsp model.DeptDeta
 	params.Set("id", strconv.Itoa(deptId))
 	params.Set("lang", lang)
 
-	err = ding.request(http.MethodGet, constant.GetDeptDetailKey, params, nil, &rsp)
+	err = ding.Request(http.MethodGet, constant.GetDeptDetailKey, params, nil, &rsp)
 
 	return rsp, err
 }
@@ -58,7 +58,7 @@ func (ding *DingTalk) DeleteDept(deptId int) (rsp model.Response, err error) {
 	params := url.Values{}
 	params.Set("id", strconv.Itoa(deptId))
 
-	err = ding.request(http.MethodGet, constant.DeleteDeptKey, params, nil, &rsp)
+	err = ding.Request(http.MethodGet, constant.DeleteDeptKey, params, nil, &rsp)
 
 	return rsp, err
 }
@@ -73,7 +73,7 @@ func (ding *DingTalk) UpdateDept(res model.CreateDetailDeptRequest) (rsp model.D
 	res.JoinUserPermits()
 	res.JoinDeptManagerUserIds()
 
-	err = ding.request(http.MethodPost, constant.UpdateDeptKey, nil, res, &rsp)
+	err = ding.Request(http.MethodPost, constant.UpdateDeptKey, nil, res, &rsp)
 
 	return rsp, err
 }
@@ -90,7 +90,7 @@ func (ding *DingTalk) GetSubDeptList(deptId int, lang string, fetch bool) (rsp m
 	params.Set("lang", lang)
 	params.Set("fetch_child", strconv.FormatBool(fetch))
 
-	err = ding.request(http.MethodGet, constant.GetSubDeptListKey, params, nil, &rsp)
+	err = ding.Request(http.MethodGet, constant.GetSubDeptListKey, params, nil, &rsp)
 
 	return rsp, err
 }
@@ -102,7 +102,7 @@ func (ding *DingTalk) GetDeptUserIds(deptId int) (req model.DeptUserIdsResponse,
 	params := url.Values{}
 	params.Set("deptId", strconv.Itoa(deptId))
 
-	err = ding.request(http.MethodGet, constant.GetDeptUserIdKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetDeptUserIdKey, params, nil, &req)
 	return req, err
 }
 
@@ -122,7 +122,7 @@ func (ding *DingTalk) GetDeptUserDetail(deptId, offset, size int, lang string) (
 	params.Set("size", strconv.Itoa(size))
 	params.Set("order", "entry_desc")
 
-	err = ding.request(http.MethodGet, constant.GetDeptUserDetailKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetDeptUserDetailKey, params, nil, &req)
 	return req, err
 }
 
@@ -132,7 +132,7 @@ func (ding *DingTalk) GetSubDeptIds(deptId int) (req model.GetSubDeptIdsResponse
 	params := url.Values{}
 	params.Set("id", strconv.Itoa(deptId))
 
-	err = ding.request(http.MethodGet, constant.GetSubDeptIdsKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetSubDeptIdsKey, params, nil, &req)
 	return req, err
 }
 
@@ -142,7 +142,7 @@ func (ding *DingTalk) GetParentIdsByUserId(userId string) (req model.GetParentId
 	params := url.Values{}
 	params.Set("userId", userId)
 
-	err = ding.request(http.MethodGet, constant.GetParentDeptsByUserKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetParentDeptsByUserKey, params, nil, &req)
 	return req, err
 }
 
@@ -152,6 +152,6 @@ func (ding *DingTalk) GetParentIdsByDeptId(deptId int) (req model.GetParentIdsBy
 	params := url.Values{}
 	params.Set("id", strconv.Itoa(deptId))
 
-	err = ding.request(http.MethodGet, constant.GetParentDeptsByDeptKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetParentDeptsByDeptKey, params, nil, &req)
 	return req, err
 }

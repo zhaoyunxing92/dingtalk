@@ -6,7 +6,7 @@ import (
 	translator "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	zh_trans "github.com/go-playground/validator/v10/translations/zh"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 	"time"
 )

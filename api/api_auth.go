@@ -1,10 +1,10 @@
 package api
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/crypto"
-	"github.com/zhaoyunxing92/dingtalk/request"
-	"github.com/zhaoyunxing92/dingtalk/response"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -24,7 +24,7 @@ func (ding *DingTalk) GetAuthInfo(corpId string) (string, error) {
 
 	req := request.NewAuthInfo(ding.Key, corpId)
 	res := &response.SuiteAccessToken{}
-	if err := ding.request(http.MethodPost, constant.GetAuthInfo, args, req, res); err != nil {
+	if err := ding.Request(http.MethodPost, constant.GetAuthInfo, args, req, res); err != nil {
 		return "", err
 	}
 	return res.Token, nil

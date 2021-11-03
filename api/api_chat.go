@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -19,7 +19,7 @@ func (ding *DingTalk) CreateChat(name, owner string, userIds []string) (rsp mode
 	form["owner"] = owner
 	form["useridlist"] = userIds
 
-	err = ding.request(http.MethodPost, constant.CreateChatKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.CreateChatKey, nil, form, &rsp)
 
 	return rsp, err
 }
@@ -27,7 +27,7 @@ func (ding *DingTalk) CreateChat(name, owner string, userIds []string) (rsp mode
 //CreateDetailChat:创建详细的群
 func (ding *DingTalk) CreateDetailChat(res model.Request) (req model.CreateChatResponse, err error) {
 
-	err = ding.request(http.MethodPost, constant.CreateChatKey, nil, res, &req)
+	err = ding.Request(http.MethodPost, constant.CreateChatKey, nil, res, &req)
 
 	return req, err
 }
@@ -37,14 +37,14 @@ func (ding *DingTalk) GetChatInfo(chatId string) (req model.GetChatInfoResponse,
 	params := url.Values{}
 	params.Set("chatid", chatId)
 
-	err = ding.request(http.MethodGet, constant.GetChatInfoKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetChatInfoKey, params, nil, &req)
 	return req, err
 }
 
 //UpdateChat:更新群
 func (ding *DingTalk) UpdateChat(res model.Request) (req model.Response, err error) {
 
-	err = ding.request(http.MethodPost, constant.UpdateChatKey, nil, res, &req)
+	err = ding.Request(http.MethodPost, constant.UpdateChatKey, nil, res, &req)
 	return req, err
 }
 
@@ -55,7 +55,7 @@ func (ding *DingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req model.
 	form["chatid"] = chatId
 	form["is_prohibit"] = prohibit
 
-	err = ding.request(http.MethodPost, constant.ChatFriendSwitchKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.ChatFriendSwitchKey, nil, form, &req)
 	return req, err
 }
 
@@ -73,7 +73,7 @@ func (ding *DingTalk) ChatSubAdmin(chatId, userId string, role int) (req model.C
 	form["userids"] = userId
 	form["role"] = role
 
-	err = ding.request(http.MethodPost, constant.ChatSubAdminKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.ChatSubAdminKey, nil, form, &req)
 	return req, err
 }
 
@@ -84,7 +84,7 @@ func (ding *DingTalk) SendMsgToChat(chatId string, msg model.Request) (req model
 	form["chatid"] = chatId
 	form["msg"] = msg
 
-	err = ding.request(http.MethodPost, constant.SendMsgToChatKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.SendMsgToChatKey, nil, form, &req)
 	return req, err
 }
 
@@ -98,6 +98,6 @@ func (ding *DingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (re
 	params.Set("cursor", strconv.Itoa(cursor))
 	params.Set("size", strconv.Itoa(size))
 
-	err = ding.request(http.MethodGet, constant.GetChatReadUserKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetChatReadUserKey, params, nil, &req)
 	return req, err
 }

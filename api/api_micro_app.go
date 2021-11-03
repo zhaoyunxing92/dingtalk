@@ -3,8 +3,8 @@ package api
 import (
 	"errors"
 	"fmt"
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 )
 
@@ -12,7 +12,7 @@ import (
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications
 func (ding *DingTalk) GetMicroAppList() (apps model.MicroAppList, err error) {
 
-	err = ding.request(http.MethodPost, constant.MicroAppListKey, nil, nil, &apps)
+	err = ding.Request(http.MethodPost, constant.MicroAppListKey, nil, nil, &apps)
 
 	return apps, err
 }
@@ -39,6 +39,6 @@ func (ding *DingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes model.Mic
 	form := map[string]interface{}{
 		"agentId": agentId,
 	}
-	err = ding.request(http.MethodPost, constant.MicroAppVisibleScopesKey, nil, form, &scopes)
+	err = ding.Request(http.MethodPost, constant.MicroAppVisibleScopesKey, nil, form, &scopes)
 	return scopes, err
 }

@@ -2,7 +2,7 @@ package tests
 
 import (
 	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/api"
+	"github.com/zhaoyunxing92/dingtalk/v2/api"
 	"log"
 	"os"
 	"strings"

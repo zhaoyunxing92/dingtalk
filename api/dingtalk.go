@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/pkg/errors"
-	"github.com/zhaoyunxing92/dingtalk/cache"
+	"github.com/zhaoyunxing92/dingtalk/v2/cache"
 	"net/http"
 	"strings"
 	"time"

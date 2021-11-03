@@ -1,6 +1,6 @@
 package request
 
-//SuiteAccessToken 获取suite套件token
+//CorpAccessToken 获取suite套件token
 type CorpAccessToken struct {
 	CorpId string `json:"auth_corpid" validate:"required"`
 }

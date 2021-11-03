@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 )
 
@@ -14,6 +14,6 @@ func (ding *DingTalk) SendToConversation(senderId, chatId string, msg model.Requ
 	form["cid"] = chatId
 	form["msg"] = msg
 
-	err = ding.request(http.MethodPost, constant.SendToConversationKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.SendToConversationKey, nil, form, &req)
 	return req, err
 }

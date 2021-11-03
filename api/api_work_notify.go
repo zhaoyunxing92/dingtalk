@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 )
 
@@ -59,7 +59,7 @@ func (ding *DingTalk) SendWorkNotify(res model.WorkNotifyRes) (resp WorkNotifyRe
 	res.AssembleUser()
 	res.SetAgentId(ding.Id)
 
-	err = ding.request(http.MethodPost, constant.SendCorpConversationKey, nil, res, &resp)
+	err = ding.Request(http.MethodPost, constant.SendCorpConversationKey, nil, res, &resp)
 
 	return resp, err
 }
@@ -71,7 +71,7 @@ func (ding *DingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressR
 		"agent_id": ding.Id,
 		"task_id":  taskId,
 	}
-	err = ding.request(http.MethodPost, constant.GetSendProgressKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.GetSendProgressKey, nil, form, &rsp)
 
 	return rsp, err
 }
@@ -83,7 +83,7 @@ func (ding *DingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultR
 		"agent_id": ding.Id,
 		"task_id":  taskId,
 	}
-	err = ding.request(http.MethodPost, constant.GetSendResultKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.GetSendResultKey, nil, form, &rsp)
 
 	return rsp, err
 }
@@ -95,7 +95,7 @@ func (ding *DingTalk) RecallWorkNotifySendResult(taskId int) (rsp model.Response
 		"agent_id":    ding.Id,
 		"msg_task_id": taskId,
 	}
-	err = ding.request(http.MethodPost, constant.RecallCorpConversationKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.RecallCorpConversationKey, nil, form, &rsp)
 
 	return rsp, err
 }

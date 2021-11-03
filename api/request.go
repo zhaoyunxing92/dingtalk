@@ -6,9 +6,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-playground/validator/v10"
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/model"
-	"github.com/zhaoyunxing92/dingtalk/response"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -17,8 +17,8 @@ import (
 	"strings"
 )
 
-//统一请求
-func (ding *DingTalk) request(method, path string, query url.Values, body interface{},
+//Request 统一请求
+func (ding *DingTalk) Request(method, path string, query url.Values, body interface{},
 	data response.Unmarshalled) (err error) {
 
 	if body != nil {
@@ -135,6 +135,7 @@ func (ding *DingTalk) httpRequest(method, path string, query url.Values, body in
 		default:
 			//表单不为空
 			d, _ := json.Marshal(body)
+			fmt.Println(string(d))
 			req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
 			req.Header.Set("Content-Type", "application/json; charset=utf-8")
 		}
@@ -155,7 +156,7 @@ func (ding *DingTalk) httpRequest(method, path string, query url.Values, body in
 	if content, err = ioutil.ReadAll(res.Body); err != nil {
 		return err
 	}
-
+	fmt.Println("content=", string(content))
 	if err = json.Unmarshal(content, data); err != nil {
 		return err
 	}

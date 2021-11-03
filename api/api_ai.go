@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 )
 
@@ -14,7 +14,7 @@ func (ding *DingTalk) Translate(query, sourceLanguage, targetLanguage string) (r
 	form["source_language"] = sourceLanguage
 	form["target_language"] = targetLanguage
 
-	err = ding.request(http.MethodPost, constant.TranslateKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.TranslateKey, nil, form, &rsp)
 
 	return rsp, err
 }
@@ -35,7 +35,7 @@ func (ding *DingTalk) OcrRecognize(ocrType, imageUrl string) (rsp model.OcrStruc
 	form["type"] = ocrType
 	form["image_url"] = imageUrl
 
-	err = ding.request(http.MethodPost, constant.OrcRecognizeKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.OrcRecognizeKey, nil, form, &rsp)
 	return rsp, err
 }
 
@@ -46,6 +46,6 @@ func (ding *DingTalk) VoiceTranslate(mediaId string) (rsp model.AiResponse, err 
 	form := make(map[string]string, 1)
 	form["media_id"] = mediaId
 
-	err = ding.request(http.MethodPost, constant.VoiceTranslateKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.VoiceTranslateKey, nil, form, &rsp)
 	return rsp, err
 }

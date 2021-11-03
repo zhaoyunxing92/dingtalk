@@ -2,11 +2,11 @@ package api
 
 import (
 	"errors"
-	"github.com/zhaoyunxing92/dingtalk/cache"
-	"github.com/zhaoyunxing92/dingtalk/constant"
-	"github.com/zhaoyunxing92/dingtalk/crypto"
-	"github.com/zhaoyunxing92/dingtalk/request"
-	"github.com/zhaoyunxing92/dingtalk/response"
+	"github.com/zhaoyunxing92/dingtalk/v2/cache"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -29,7 +29,7 @@ func (ding *DingTalk) GetAccessToken() (token string, err error) {
 	args.Set("appkey", ding.Key)
 	args.Set("appsecret", ding.Secret)
 
-	if err = ding.request(http.MethodGet, constant.GetTokenKey, args, nil, res); err != nil {
+	if err = ding.Request(http.MethodGet, constant.GetTokenKey, args, nil, res); err != nil {
 		return "", err
 	}
 	res.Create = time.Now().Unix()
@@ -55,7 +55,7 @@ func (ding *DingTalk) GetSuiteAccessToken() (token string, err error) {
 		SetTicket(ding.Ticket).
 		Build()
 
-	if err = ding.request(http.MethodPost, constant.SuiteAccessToken, nil, req, res); err != nil {
+	if err = ding.Request(http.MethodPost, constant.SuiteAccessToken, nil, req, res); err != nil {
 		return "", err
 	}
 	res.Create = time.Now().Unix()
@@ -83,7 +83,7 @@ func (ding *DingTalk) GetCorpAccessToken() (token string, err error) {
 
 	req := request.NewCorpAccessToken(ding.CorpId)
 	res := &response.SuiteAccessToken{}
-	if err = ding.request(http.MethodPost, constant.CorpAccessToken, args, req, res); err != nil {
+	if err = ding.Request(http.MethodPost, constant.CorpAccessToken, args, req, res); err != nil {
 		return "", err
 	}
 	return res.Token, err
