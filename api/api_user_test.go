@@ -21,7 +21,7 @@ func TestDingTalk_UpdateUser(t *testing.T) {
 			SetName("李四").
 			SetDept(1, 560935057).
 			//SetTelephone("").
-			SetForceUpdateFields("title,userid,title,userid").
+			//SetForceUpdateFields("title,userid,title,userid").
 			//SetDeptTitle(1, "普通员工").
 			//SetDeptTitle(554656655, "设计人员").
 			//SetJobNumber("").
