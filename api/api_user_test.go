@@ -40,6 +40,7 @@ func TestDingTalk_UpdateUser(t *testing.T) {
 func TestDingTalk_DeleteUser(t *testing.T) {
 
 	res, err := client.DeleteUser("1948546245774889")
+
 	assert.Nil(t, err)
 	assert.NotNil(t, res.Code)
 	assert.NotNil(t, res.RequestId)
@@ -48,8 +49,11 @@ func TestDingTalk_DeleteUser(t *testing.T) {
 func TestDingTalk_GetUserDetail(t *testing.T) {
 
 	detail, err := client.GetUserDetail(request.NewUserDetail("1948546245774889").Build())
+
 	assert.Nil(t, err)
 	assert.NotNil(t, detail.Code)
 	assert.NotNil(t, detail.RequestId)
+	assert.NotNil(t, detail.Name)
+	assert.NotNil(t, detail.UnionId)
 	assert.NotNil(t, detail.UserId)
 }

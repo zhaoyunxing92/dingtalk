@@ -17,12 +17,12 @@ const (
 	CreateUserKey         = user + "/create"              //创建用户
 	DeleteUserKey         = user + "/delete"              //删除用户
 	UpdateUserKey         = user + "/update"              //更新用户详情
-	GetUserDetailKey            = user + "/get"                 //获取用户详情
-	GetDeptUserIdKey      = user + "/getDeptMember"       //获取部门用户userid列表
+	GetUserDetailKey      = user + "/get"                 //获取用户详情
+	GetDeptUserIdKey      = "/topapi/user/listid"         //获取部门用户userid列表
 	GetUserIdByUnionIdKey = user + "/getUseridByUnionid"  //根据unionid获取userid
 	GetUserIdByMobileKey  = user + "/get_by_mobile"       //根据手机号获取userid
 	GetOrgUserCountKey    = user + "/get_org_user_count"  //获取企业员工人数
-	GetDeptUserDetailKey  = user + "/listbypage"          //获取部门用户详情
+	GetDeptSimpleUserKey  = "/topapi/user/listsimple"     //获取部门用户基础信息
 	GetOrgAdminUserKey    = user + "/get_admin"           //获取管理员列表
 	GetUserByAuthCodeKey  = "/topapi/v2/user/getuserinfo" //通过免登码获取用户信息v2
 

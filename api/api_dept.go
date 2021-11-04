@@ -3,6 +3,8 @@ package api
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -95,35 +97,17 @@ func (ding *DingTalk) GetSubDeptList(deptId int, lang string, fetch bool) (rsp m
 	return rsp, err
 }
 
-//GetDeptUserIds:获取部门用户userid列表
-//deptId:部门id
-func (ding *DingTalk) GetDeptUserIds(deptId int) (req model.DeptUserIdsResponse, err error) {
+//GetDeptUserIds 获取部门用户userid列表
+func (ding *DingTalk) GetDeptUserIds(du *request.DeptUserId) (req response.DeptUserId, err error) {
 
-	params := url.Values{}
-	params.Set("deptId", strconv.Itoa(deptId))
-
-	err = ding.Request(http.MethodGet, constant.GetDeptUserIdKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetDeptUserIdKey, nil, du, &req)
 }
 
-//GetDeptUserDetail:获取部门用户详情
-func (ding *DingTalk) GetDeptUserDetail(deptId, offset, size int, lang string) (req model.GetDeptUserDetailResponse, err error) {
-	if lang != "en_US" {
-		lang = "zh_CN"
-	}
+//GetDeptSimpleUserInfo 获取部门用户基础信息
+func (ding *DingTalk) GetDeptSimpleUserInfo(res *request.DeptSimpleUserInfo) (req response.DeptSimpleUserInfo,
+	err error) {
 
-	if size < 0 || size > 100 {
-		size = 100
-	}
-	params := url.Values{}
-	params.Set("lang", lang)
-	params.Set("department_id", strconv.Itoa(deptId))
-	params.Set("offset", strconv.Itoa(offset))
-	params.Set("size", strconv.Itoa(size))
-	params.Set("order", "entry_desc")
-
-	err = ding.Request(http.MethodGet, constant.GetDeptUserDetailKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetDeptSimpleUserKey, nil, res, &req)
 }
 
 //GetDeptUserDetail:获取子部门ID列表

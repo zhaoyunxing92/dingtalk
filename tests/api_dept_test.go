@@ -66,16 +66,6 @@ func TestGetDepartmentUserIds(t *testing.T) {
 	t.Log(string(js))
 }
 
-//TestGetDeptUserDetail：获取部门用户userid列表
-func TestGetDeptUserDetail(t *testing.T) {
-
-	rsp, err := dingTalk.GetDeptUserDetail(1, 0, 3, "")
-	if err != nil {
-		t.Fatal(err)
-	}
-	js, err := json.Marshal(rsp)
-	t.Log(string(js))
-}
 
 //TestDeleteDept:删除部门
 func TestDeleteDept(t *testing.T) {
