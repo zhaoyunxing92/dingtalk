@@ -5,12 +5,13 @@ import (
 	"testing"
 )
 
-func TestGetAccessToken(t *testing.T) {
-	client := NewDingTalk().
-		SetId(1244553273).
-		SetKey("dingkjy4w80esdwgjuyo").
-		SetSecret("bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW").
-		Build()
+var client = NewDingTalk().
+	SetId(1244553273).
+	SetKey("dingkjy4w80esdwgjuyo").
+	SetSecret("bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW").
+	Build()
+
+func TestDingTalk_GetAccessToken(t *testing.T) {
 
 	token, err := client.GetAccessToken()
 	assert.Nil(t, err)
@@ -18,13 +19,7 @@ func TestGetAccessToken(t *testing.T) {
 	t.Log(token)
 }
 
-func TestGetSuiteAccessToken(t *testing.T) {
-	client := NewDingTalk().
-		SetId(10435002).
-		SetKey("suitegqebx814dt8immqw").
-		SetTicket("iR4i4yOsNrSZCYLpfbrE6jigqU0hJuWVNmFQFuJ93IDQOir9bSQ3OP93gDUttfAVsljIXyXfBfVB0nr63dwOAT").
-		SetSecret("AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m").
-		Build()
+func TestDingTalk_GetSuiteAccessToken(t *testing.T) {
 
 	token, err := client.GetSuiteAccessToken()
 	assert.Nil(t, err)
@@ -32,14 +27,7 @@ func TestGetSuiteAccessToken(t *testing.T) {
 	t.Log(token)
 }
 
-func TestGetCorpAccessToken(t *testing.T) {
-	client := NewDingTalk().
-		SetId(10435002).
-		SetKey("suitegqebx814dt8immqw").
-		SetCorpId("ding3b1e912394011559bc961a6cb783455b").
-		SetTicket("5nvE5VXD6BP43b9IBv8SLc4FBx3lgRZL0wdPPrXf48mi12yjPyftZwSA6r1NEgyF86sbR3Ksbe32TAsOHuDbGn").
-		SetSecret("AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m").
-		Build()
+func TestDingTalk_GetCorpAccessToken(t *testing.T) {
 
 	token, err := client.GetCorpAccessToken()
 	assert.Nil(t, err)

@@ -6,12 +6,6 @@ import (
 	"testing"
 )
 
-var client = NewDingTalk().
-	SetId(1244553273).
-	SetKey("dingkjy4w80esdwgjuyo").
-	SetSecret("bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW").
-	Build()
-
 func TestDingTalk_CreateUser(t *testing.T) {
 
 	user, err := client.CreateUser(request.NewCreateUser("张三", "15669019211", 554656655).Build())
