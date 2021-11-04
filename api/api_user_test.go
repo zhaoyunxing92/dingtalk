@@ -19,12 +19,12 @@ func TestDingTalk_UpdateUser(t *testing.T) {
 	res, err := client.UpdateUser(
 		request.NewUpdateUser("1948546245774889").
 			SetName("李四").
-			SetDept(1, 554656655).
-			SetTelephone("").
+			SetDept(1, 560935057).
+			//SetTelephone("").
 			SetForceUpdateFields("title,userid,title,userid").
-			SetDeptTitle(1, "普通员工").
-			SetDeptTitle(554656655, "设计人员").
-			SetJobNumber("").
+			//SetDeptTitle(1, "普通员工").
+			//SetDeptTitle(554656655, "设计人员").
+			//SetJobNumber("").
 			Build())
 
 	assert.Nil(t, err)

@@ -29,7 +29,7 @@ const (
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope" //获取管理员通讯录权限范围
 
 	dept                    = "/department"                       //部门模块
-	CreateDeptKey           = dept + "/create"                    //创建部门
+	CreateDeptKey           = "/topapi/v2/department/create"      //创建部门
 	DeleteDeptKey           = dept + "/delete"                    //删除部门
 	UpdateDeptKey           = dept + "/update"                    //更新部门
 	GetDeptDetailKey        = dept + "/get"                       //获取部门详情

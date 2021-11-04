@@ -10,32 +10,10 @@ import (
 	"strconv"
 )
 
-// CreateDept:创建部门
-// name:部门名称
-// parentId:父部门id
-func (ding *DingTalk) CreateDept(name string, parentId int) (rsp model.DeptCreateResponse, err error) {
+//CreateDept 创建部门
+func (ding *DingTalk) CreateDept(res *request.CreateDept) (rsp response.CreateDept, err error) {
 
-	form := make(map[string]interface{}, 2)
-	form["name"] = name
-	form["parentid"] = parentId
-
-	err = ding.Request(http.MethodPost, constant.CreateDeptKey, nil, form, &rsp)
-
-	return rsp, err
-}
-
-//CreateDetailDept:创建详细的部门
-func (ding *DingTalk) CreateDetailDept(res model.CreateDetailDeptRequest) (req model.DeptCreateResponse, err error) {
-
-	//组装参数
-	res.JoinOuterPermitUsers()
-	res.JoinOuterPermitDepts()
-	res.JoinDeptPermits()
-	res.JoinUserPermits()
-
-	err = ding.Request(http.MethodPost, constant.CreateDeptKey, nil, res, &req)
-
-	return req, err
+	return rsp, ding.Request(http.MethodPost, constant.CreateDeptKey, nil, res, &rsp)
 }
 
 //GetDeptDetail:获取部门详情

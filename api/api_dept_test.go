@@ -34,3 +34,15 @@ func TestDingTalk_GetDeptDetailUserInfo(t *testing.T) {
 	assert.NotNil(t, res)
 	assert.NotNil(t, res.DeptDetailUsers)
 }
+
+func TestDingTalk_CreateDept(t *testing.T) {
+
+	res, err := client.CreateDept(
+		request.NewCreateDept("golang", 1).
+			SetHideDept(false).
+			SetOrder(1).
+			Build())
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
