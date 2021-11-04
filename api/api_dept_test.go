@@ -13,7 +13,7 @@ func TestDingTalk_GetDeptSimpleUserInfo(t *testing.T) {
 			Build())
 
 	assert.Nil(t, err)
-	assert.NotNil(t, info)
+	assert.NotNil(t, info.DeptUsers)
 }
 
 func TestDingTalk_GetDeptUserIds(t *testing.T) {
@@ -22,4 +22,15 @@ func TestDingTalk_GetDeptUserIds(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, userId.UserIds)
+}
+
+func TestDingTalk_GetDeptDetailUserInfo(t *testing.T) {
+
+	res, err := client.GetDeptDetailUserInfo(
+		request.NewDeptDetailUserInfo(1, 0, 10).
+			Build())
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.NotNil(t, res.DeptDetailUsers)
 }

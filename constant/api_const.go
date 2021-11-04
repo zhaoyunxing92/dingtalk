@@ -10,21 +10,24 @@ const (
 	SuiteAccessToken = "/service/get_suite_token"
 	//CorpAccessToken 服务商获取第三方应用授权企业的access_token
 	CorpAccessToken = "/service/get_corp_token"
-
+	//GetAuthInfo 获取企业授权信息
 	GetAuthInfo = "/service/get_auth_info"
 
-	user                  = "/topapi/v2/user"             //用户模块
-	CreateUserKey         = user + "/create"              //创建用户
-	DeleteUserKey         = user + "/delete"              //删除用户
-	UpdateUserKey         = user + "/update"              //更新用户详情
-	GetUserDetailKey      = user + "/get"                 //获取用户详情
-	GetDeptUserIdKey      = "/topapi/user/listid"         //获取部门用户userid列表
-	GetUserIdByUnionIdKey = user + "/getUseridByUnionid"  //根据unionid获取userid
-	GetUserIdByMobileKey  = user + "/get_by_mobile"       //根据手机号获取userid
-	GetOrgUserCountKey    = user + "/get_org_user_count"  //获取企业员工人数
-	GetDeptSimpleUserKey  = "/topapi/user/listsimple"     //获取部门用户基础信息
-	GetOrgAdminUserKey    = user + "/get_admin"           //获取管理员列表
-	GetUserByAuthCodeKey  = "/topapi/v2/user/getuserinfo" //通过免登码获取用户信息v2
+	user                  = "/topapi/v2/user"              //用户模块
+	CreateUserKey         = "/topapi/v2/user/create"       //创建用户
+	DeleteUserKey         = "/topapi/v2/user/delete"       //删除用户
+	UpdateUserKey         = "/topapi/v2/user/update"       //更新用户详情
+	GetUserDetailKey      = "/topapi/v2/user/get"          //获取用户详情
+	GetDeptUserIdKey      = "/topapi/user/listid"          //获取部门用户userid列表
+	GetUserIdByUnionIdKey = "/topapi/user/getbyunionid"    //根据unionid获取userid
+	GetUserIdByMobileKey  = "/topapi/v2/user/getbymobile"  //根据手机号获取userid
+	GetOrgUserCountKey    = user + "/get_org_user_count"   //获取企业员工人数
+	GetDeptSimpleUserKey  = "/topapi/user/listsimple"      //获取部门用户基础信息
+	GetDeptDetailUserKey  = "/topapi/v2/user/list"         //获取部门用户详情
+	GetOrgAdminUserKey    = user + "/get_admin"            //获取管理员列表
+	GetUserByAuthCodeKey  = "/topapi/v2/user/getuserinfo"  //通过免登码获取用户信息v2
+	GetUserCountKey       = "/topapi/user/count"           //获取员工人数
+	GetInactiveUserKey    = "/topapi/inactive/user/v2/get" //获取未登录钉钉的员工列表
 
 	dept                    = "/department"                       //部门模块
 	CreateDeptKey           = dept + "/create"                    //创建部门
@@ -66,8 +69,7 @@ const (
 	OrcRecognizeKey   = "/topapi/ocr/structured/recognize" //OCR文字识别
 	VoiceTranslateKey = "/topapi/asr/voice/translate"      //ASR 一句话语音识别
 
-	GetOrgInactiveUserKey = "/topapi/inactive/user/get"    //获取未登录钉钉的员工列表
-	GetOrgAdminScopeKey   = "/topapi/user/get_admin_scope" //获取管理员通讯录权限范围
+	GetOrgAdminScopeKey = "/topapi/user/get_admin_scope" //获取管理员通讯录权限范围
 
 	corpConversation          = "/topapi/message/corpconversation"    //工作通知
 	SendCorpConversationKey   = corpConversation + "/asyncsend_v2"    //发送工作通知

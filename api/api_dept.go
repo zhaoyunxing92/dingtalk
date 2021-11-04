@@ -110,6 +110,13 @@ func (ding *DingTalk) GetDeptSimpleUserInfo(res *request.DeptSimpleUserInfo) (re
 	return req, ding.Request(http.MethodPost, constant.GetDeptSimpleUserKey, nil, res, &req)
 }
 
+//GetDeptDetailUserInfo 获取部门用户详情
+func (ding *DingTalk) GetDeptDetailUserInfo(res *request.DeptDetailUserInfo) (req response.DeptDetailUserInfo,
+	err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetDeptDetailUserKey, nil, res, &req)
+}
+
 //GetDeptUserDetail:获取子部门ID列表
 func (ding *DingTalk) GetSubDeptIds(deptId int) (req model.GetSubDeptIdsResponse, err error) {
 

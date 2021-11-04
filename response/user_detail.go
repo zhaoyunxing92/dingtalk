@@ -6,10 +6,10 @@ import (
 
 type UserDetail struct {
 	Response
-	userGetResponse `json:"result"`
+	userDetail `json:"result"`
 }
 
-type userGetResponse struct {
+type userDetail struct {
 	UserId string `json:"userid"`
 
 	//员工在当前开发者企业账号范围内的唯一标识
@@ -131,7 +131,7 @@ type UnionOrg struct {
 	//员工的userid
 	UserId string `json:"userid"`
 
-	//当前用户所属的组织的企业corpid
+	//当前用户所属的组织的企业corpId
 	CorpId string `json:"corp_id"`
 }
 

@@ -34,26 +34,16 @@ func (ding *DingTalk) GetUserDetail(user *request.UserDetail) (req response.User
 	return req, ding.Request(http.MethodPost, constant.GetUserDetailKey, nil, user, &req)
 }
 
-//GetUserIdByUnionId:根据unionid获取userid
-//unionId:员工在当前开发者企业账号范围内的唯一标识
-func (ding *DingTalk) GetUserIdByUnionId(unionId string) (req model.UserIdResponse, err error) {
+//GetUserIdByUnionId 根据unionid获取用户userid
+func (ding *DingTalk) GetUserIdByUnionId(res *request.UnionIdGetUserId) (req response.UnionIdGetUserId, err error) {
 
-	params := url.Values{}
-	params.Set("unionid", unionId)
-
-	err = ding.Request(http.MethodGet, constant.GetUserIdByUnionIdKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetUserIdByUnionIdKey, nil, res, &req)
 }
 
-//GetUserIdByMobile:根据手机号获取userid
-//unionId:员工在当前开发者企业账号范围内的唯一标识
-func (ding *DingTalk) GetUserIdByMobile(mobile string) (req model.UserIdResponse, err error) {
+//GetUserIdByMobile 根据手机号获取userid
+func (ding *DingTalk) GetUserIdByMobile(res *request.MobileGetUserId) (req response.MobileGetUserId, err error) {
 
-	params := url.Values{}
-	params.Set("mobile", mobile)
-
-	err = ding.Request(http.MethodGet, constant.GetUserIdByMobileKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetUserIdByMobileKey, nil, res, &req)
 }
 
 //GetOrgUserCount:获取企业员工人数
@@ -68,22 +58,6 @@ func (ding *DingTalk) GetOrgUserCount(active int) (req model.OrgUserCountRespons
 	params.Set("onlyActive", strconv.Itoa(active))
 
 	err = ding.Request(http.MethodGet, constant.GetOrgUserCountKey, params, nil, &req)
-	return req, err
-}
-
-//GetOrgInactiveUser:获取未登录钉钉的员工列表
-//active:0:包含未激活钉钉的人员数量,1:不包含未激活钉钉的人员数量
-func (ding *DingTalk) GetOrgInactiveUser(date string, offset, size int) (req model.InactiveUserResponse, err error) {
-	if size < 0 || size > 100 {
-		size = 100
-	}
-
-	form := make(map[string]interface{}, 3)
-	form["query_date"] = date
-	form["offset"] = offset
-	form["size"] = size
-
-	err = ding.Request(http.MethodPost, constant.GetOrgInactiveUserKey, nil, form, &req)
 	return req, err
 }
 
@@ -109,4 +83,16 @@ func (ding *DingTalk) GetUserByAuthCode(code string) (req model.UserGetByCodeRes
 
 	err = ding.Request(http.MethodPost, constant.GetUserByAuthCodeKey, nil, form, &req)
 	return req, err
+}
+
+//GetUserCount 获取员工人数
+func (ding *DingTalk) GetUserCount(res *request.UserCount) (req response.UserCont, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetUserCountKey, nil, res, &req)
+}
+
+//GetInactiveUser 获取未登录钉钉的员工列表
+func (ding *DingTalk) GetInactiveUser(res *request.InactiveUser) (req response.InactiveUser, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetInactiveUserKey, nil, res, &req)
 }

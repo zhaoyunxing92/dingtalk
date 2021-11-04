@@ -1,7 +1,6 @@
 package request
 
-//DeptSimpleUserInfo 获取部门用户基础信息
-type DeptSimpleUserInfo struct {
+type DeptDetailUserInfo struct {
 	//部门ID，根部门ID为1
 	DeptId int `json:"dept_id" validate:"required,min=1"`
 
@@ -33,13 +32,14 @@ type DeptSimpleUserInfo struct {
 	Language string `json:"language,omitempty" validate:"omitempty,oneof=zh_CN en_US"`
 }
 
-type deptSimpleUserInfoBuilder struct {
-	du *DeptSimpleUserInfo
+type deptDetailUserInfoBuilder struct {
+	du *DeptDetailUserInfo
 }
 
-func NewDeptSimpleUserInfo(deptId, cursor, size int) *deptSimpleUserInfoBuilder {
-	return &deptSimpleUserInfoBuilder{du: &DeptSimpleUserInfo{DeptId: deptId, Cursor: cursor, Size: size}}
+func NewDeptDetailUserInfo(deptId, cursor, size int) *deptDetailUserInfoBuilder {
+	return &deptDetailUserInfoBuilder{du: &DeptDetailUserInfo{DeptId: deptId, Cursor: cursor, Size: size}}
 }
+
 
 //SetOrderField 部门成员的排序规则：
 //
@@ -54,23 +54,23 @@ func NewDeptSimpleUserInfo(deptId, cursor, size int) *deptSimpleUserInfoBuilder 
 //custom：代表用户定义(未定义时按照拼音)排序。
 //
 //默认值：custom。
-func (dub *deptSimpleUserInfoBuilder) SetOrderField(orderField string) *deptSimpleUserInfoBuilder {
+func (dub *deptDetailUserInfoBuilder) SetOrderField(orderField string) *deptDetailUserInfoBuilder {
 	dub.du.OrderField = orderField
 	return dub
 }
 
 //SetContainAccessLimit 是否返回访问受限的员工
-func (dub *deptSimpleUserInfoBuilder) SetContainAccessLimit(containAccessLimit bool) *deptSimpleUserInfoBuilder {
+func (dub *deptDetailUserInfoBuilder) SetContainAccessLimit(containAccessLimit bool) *deptDetailUserInfoBuilder {
 	dub.du.ContainAccessLimit = containAccessLimit
 	return dub
 }
 
 //SetLanguage 通讯录语言，默认zh_CN。如果是英文，请传入en_US。
-func (dub *deptSimpleUserInfoBuilder) SetLanguage(language string) *deptSimpleUserInfoBuilder {
+func (dub *deptDetailUserInfoBuilder) SetLanguage(language string) *deptDetailUserInfoBuilder {
 	dub.du.Language = language
 	return dub
 }
 
-func (dub *deptSimpleUserInfoBuilder) Build() *DeptSimpleUserInfo {
+func (dub *deptDetailUserInfoBuilder) Build() *DeptDetailUserInfo {
 	return dub.du
 }

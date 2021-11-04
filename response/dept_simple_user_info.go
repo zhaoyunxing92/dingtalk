@@ -2,10 +2,10 @@ package response
 
 type DeptSimpleUserInfo struct {
 	Response
-	DeptUserInfoPage `json:"result"`
+	deptUserInfoPage `json:"result"`
 }
 
-type DeptUserInfoPage struct {
+type deptUserInfoPage struct {
 	//是否还有更多的数据
 	HasMore bool `json:"has_more"`
 
