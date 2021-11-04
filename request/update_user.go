@@ -70,7 +70,7 @@ type UpdateUser struct {
 	Language *string `json:"language,omitempty" validate:"omitempty,oneof=zh_CN en_US"`
 
 	//强制更新的字段，支持清空指定的字段，多个字段之间使用逗号分隔。目前支持字段: manager_userid
-	ForceUpdateFields *string `json:"force_update_fields,omitempty"`
+	ForceUpdateFields string `json:"force_update_fields,omitempty"`
 
 	//强制更新的字段，支持清空指定的字段，多个字段之间使用逗号分隔。目前支持字段: manager_userid
 	forceUpdateFields []string
@@ -220,8 +220,7 @@ func (ub *updateUserBuilder) SetDept(id int, dept ...int) *updateUserBuilder {
 }
 func (ub *updateUserBuilder) Build() *UpdateUser {
 	ub.user.DeptIdList = strings.Join(ub.getDeptIds(), ",")
-	js := strings.Join(ub.getForceUpdateFields(), ",")
-	ub.user.ForceUpdateFields = &js
+	ub.user.ForceUpdateFields = strings.Join(ub.getForceUpdateFields(), ",")
 	return ub.user
 }
 
