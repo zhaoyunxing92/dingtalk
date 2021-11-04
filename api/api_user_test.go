@@ -91,3 +91,27 @@ func TestDingTalk_GetUserIdByUnionId(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, req.UserId)
 }
+
+func TestDingTalk_GetOrgAdminUser(t *testing.T) {
+
+	req, err := client.GetOrgAdminUser()
+
+	assert.Nil(t, err)
+	assert.NotNil(t, req.AdminUser)
+}
+
+func TestDingTalk_GetOrgAdminScope(t *testing.T) {
+
+	req, err := client.GetOrgAdminScope(request.NewAdminUserScope("manager164"))
+
+	assert.Nil(t, err)
+	assert.NotNil(t, req.DeptIds)
+}
+
+func TestDingTalk_GetUserCanAccessApplet(t *testing.T) {
+
+	req, err := client.GetUserCanAccessApplet(1244553273, "manager164")
+
+	assert.Nil(t, err)
+	assert.NotNil(t, req.Access)
+}

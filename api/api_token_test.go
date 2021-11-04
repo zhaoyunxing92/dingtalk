@@ -7,7 +7,7 @@ import (
 
 func TestGetAccessToken(t *testing.T) {
 	client := NewDingTalk().
-		SetId(1368002).
+		SetId(1244553273).
 		SetKey("dingkjy4w80esdwgjuyo").
 		SetSecret("bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW").
 		Build()

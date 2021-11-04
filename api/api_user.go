@@ -1,8 +1,8 @@
 package api
 
 import (
+	"github.com/pkg/errors"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
@@ -46,43 +46,30 @@ func (ding *DingTalk) GetUserIdByMobile(res *request.MobileGetUserId) (req respo
 	return req, ding.Request(http.MethodPost, constant.GetUserIdByMobileKey, nil, res, &req)
 }
 
-//GetOrgUserCount:获取企业员工人数
-//active:0:包含未激活钉钉的人员数量,1:不包含未激活钉钉的人员数量
-func (ding *DingTalk) GetOrgUserCount(active int) (req model.OrgUserCountResponse, err error) {
+//GetOrgAdminUser 获取管理员列表
+func (ding *DingTalk) GetOrgAdminUser() (req response.OrgAdminUser, err error) {
 
-	if active < 0 || active > 2 {
-		active = 0
+	return req, ding.Request(http.MethodPost, constant.GetOrgAdminUserKey, nil, nil, &req)
+}
+
+//GetOrgAdminScope 获取管理员通讯录权限范围
+func (ding *DingTalk) GetOrgAdminScope(res *request.AdminUserScope) (req response.AdminUserScope, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetOrgAdminScopeKey, nil, res, &req)
+}
+
+//GetUserCanAccessApplet 获取管理员的应用管理权限
+func (ding *DingTalk) GetUserCanAccessApplet(appId int, userId string) (req response.UserCanAccessApplet, err error) {
+
+	if !ding.isv() {
+		return response.UserCanAccessApplet{}, errors.New("应用必须是产品方案商所开发")
 	}
 
-	params := url.Values{}
-	params.Set("onlyActive", strconv.Itoa(active))
+	query := url.Values{}
+	query.Set("appId", strconv.Itoa(appId))
+	query.Set("userId", userId)
 
-	err = ding.Request(http.MethodGet, constant.GetOrgUserCountKey, params, nil, &req)
-	return req, err
-}
-
-//GetOrgAdminUser:获取未登录钉钉的员工列表
-func (ding *DingTalk) GetOrgAdminUser() (req model.OrgAdminUserResponse, err error) {
-	err = ding.Request(http.MethodGet, constant.GetOrgAdminUserKey, nil, nil, &req)
-	return req, err
-}
-
-//GetOrgAdminScope:获取管理员通讯录权限范围
-func (ding *DingTalk) GetOrgAdminScope(userId string) (req model.OrgAdminScopeResponse, err error) {
-	form := make(map[string]string, 1)
-	form["userid"] = userId
-
-	err = ding.Request(http.MethodPost, constant.GetOrgAdminScopeKey, nil, form, &req)
-	return req, err
-}
-
-//GetUserByAuthCode:通过免登码获取用户信息(v2)
-func (ding *DingTalk) GetUserByAuthCode(code string) (req model.UserGetByCodeResponse, err error) {
-	form := make(map[string]string, 1)
-	form["code"] = code
-
-	err = ding.Request(http.MethodPost, constant.GetUserByAuthCodeKey, nil, form, &req)
-	return req, err
+	return req, ding.Request(http.MethodGet, constant.GetUserCanAccessAppletKey, query, nil, &req)
 }
 
 //GetUserCount 获取员工人数

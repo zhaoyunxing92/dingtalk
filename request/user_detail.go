@@ -1,7 +1,7 @@
 package request
 
 type UserDetail struct {
-	*DeleteUser
+	UserId string `json:"userid" validate:"required"`
 
 	//通讯录语言，默认zh_CN。如果是英文，请传入en_US。
 	Language string `json:"language,omitempty" validate:"omitempty,oneof=zh_CN en_US"`
@@ -12,7 +12,7 @@ type userDetailBuilder struct {
 }
 
 func NewUserDetail(userId string) *userDetailBuilder {
-	return &userDetailBuilder{user: &UserDetail{DeleteUser: NewDeleteUser(userId)}}
+	return &userDetailBuilder{user: &UserDetail{UserId: userId}}
 }
 
 //SetLanguage 通讯录语言，默认zh_CN。如果是英文，请传入en_US。
