@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-type DingTalk struct {
+type dingTalk struct {
 	// 企业内部应用对应:AgentId，如果是应套件:SuiteId
 	Id int `json:"id" validate:"required"`
 
@@ -30,18 +30,18 @@ type DingTalk struct {
 }
 
 //isv 是否isv
-func (ding *DingTalk) isv() bool {
+func (ding *dingTalk) isv() bool {
 	return len(ding.Ticket) > 0 && len(ding.CorpId) > 0
 }
 
 // builder builder for dingtalk
 type builder struct {
-	ding *DingTalk
+	ding *dingTalk
 }
 
 // NewDingTalk new DingTalkBuilder
 func NewDingTalk() *builder {
-	return &builder{ding: &DingTalk{}}
+	return &builder{ding: &dingTalk{}}
 }
 
 // SetId set agentId
@@ -87,7 +87,7 @@ func (b *builder) SetCorpId(corpId string) *builder {
 }
 
 //Build return dingtalk
-func (b *builder) Build() *DingTalk {
+func (b *builder) Build() *dingTalk {
 
 	if err := validate(b); err != nil {
 		panic(err)

@@ -12,7 +12,7 @@ import (
 // name:群名称
 // owner:群主管
 // userIds:群成员
-func (ding *DingTalk) CreateChat(name, owner string, userIds []string) (rsp model.CreateChatResponse, err error) {
+func (ding *dingTalk) CreateChat(name, owner string, userIds []string) (rsp model.CreateChatResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["name"] = name
@@ -25,7 +25,7 @@ func (ding *DingTalk) CreateChat(name, owner string, userIds []string) (rsp mode
 }
 
 //CreateDetailChat:创建详细的群
-func (ding *DingTalk) CreateDetailChat(res model.Request) (req model.CreateChatResponse, err error) {
+func (ding *dingTalk) CreateDetailChat(res model.Request) (req model.CreateChatResponse, err error) {
 
 	err = ding.Request(http.MethodPost, constant.CreateChatKey, nil, res, &req)
 
@@ -33,7 +33,7 @@ func (ding *DingTalk) CreateDetailChat(res model.Request) (req model.CreateChatR
 }
 
 //GetChatInfo:获取群信息
-func (ding *DingTalk) GetChatInfo(chatId string) (req model.GetChatInfoResponse, err error) {
+func (ding *dingTalk) GetChatInfo(chatId string) (req model.GetChatInfoResponse, err error) {
 	params := url.Values{}
 	params.Set("chatid", chatId)
 
@@ -42,14 +42,14 @@ func (ding *DingTalk) GetChatInfo(chatId string) (req model.GetChatInfoResponse,
 }
 
 //UpdateChat:更新群
-func (ding *DingTalk) UpdateChat(res model.Request) (req model.Response, err error) {
+func (ding *dingTalk) UpdateChat(res model.Request) (req model.Response, err error) {
 
 	err = ding.Request(http.MethodPost, constant.UpdateChatKey, nil, res, &req)
 	return req, err
 }
 
 //ChatFriendSwitch:设置禁止群成员私聊
-func (ding *DingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req model.ChatSetResponse, err error) {
+func (ding *dingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req model.ChatSetResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["chatid"] = chatId
@@ -63,7 +63,7 @@ func (ding *DingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req model.
 //chatId:群id
 //userId:用户id
 //role:2：添加为管理员。 3：删除该管理员。
-func (ding *DingTalk) ChatSubAdmin(chatId, userId string, role int) (req model.ChatSetResponse, err error) {
+func (ding *dingTalk) ChatSubAdmin(chatId, userId string, role int) (req model.ChatSetResponse, err error) {
 
 	if role > 3 || role < 2 {
 		role = 3
@@ -78,7 +78,7 @@ func (ding *DingTalk) ChatSubAdmin(chatId, userId string, role int) (req model.C
 }
 
 //SendMsgToChat:发送消息到群
-func (ding *DingTalk) SendMsgToChat(chatId string, msg model.Request) (req model.MessageResponse, err error) {
+func (ding *dingTalk) SendMsgToChat(chatId string, msg model.Request) (req model.MessageResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["chatid"] = chatId
@@ -89,7 +89,7 @@ func (ding *DingTalk) SendMsgToChat(chatId string, msg model.Request) (req model
 }
 
 //GetChatMsgReadUser:查询群消息已读人员列表
-func (ding *DingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (req model.GetChatMsgReadResponse, err error) {
+func (ding *dingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (req model.GetChatMsgReadResponse, err error) {
 	if size > 100 || size < 0 {
 		size = 100
 	}

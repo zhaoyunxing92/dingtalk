@@ -12,7 +12,7 @@ import (
 )
 
 // GetAuthInfo 获取企业授权信息
-func (ding *DingTalk) GetAuthInfo(corpId string) (string, error) {
+func (ding *dingTalk) GetAuthInfo(corpId string) (string, error) {
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 	sign := crypto.GetSignature(timestamp, ding.Secret, ding.Ticket)
 

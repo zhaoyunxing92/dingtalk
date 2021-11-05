@@ -18,7 +18,7 @@ import (
 )
 
 //Request 统一请求
-func (ding *DingTalk) Request(method, path string, query url.Values, body interface{},
+func (ding *dingTalk) Request(method, path string, query url.Values, body interface{},
 	data response.Unmarshalled) (err error) {
 
 	if body != nil {
@@ -98,7 +98,7 @@ func (robot *Robot) httpRequest(method, path string, query url.Values, body inte
 	return data.CheckError()
 }
 
-func (ding *DingTalk) httpRequest(method, path string, query url.Values, body interface{},
+func (ding *dingTalk) httpRequest(method, path string, query url.Values, body interface{},
 	data response.Unmarshalled) error {
 
 	client := ding.Client

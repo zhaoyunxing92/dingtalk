@@ -11,7 +11,7 @@ import (
 //GetRoleList:获取角色列表
 //offset:支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始
 //size:支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，默认值20，最大值200。
-func (ding *DingTalk) GetRoleList(offset, size int) (apps model.RoleListResponse, err error) {
+func (ding *dingTalk) GetRoleList(offset, size int) (apps model.RoleListResponse, err error) {
 	if size > 200 || size < 0 {
 		size = 200
 	}
@@ -45,7 +45,7 @@ func (ding *DingTalk) GetRoleList(offset, size int) (apps model.RoleListResponse
 //    },
 //    "request_id": "y5y017a37yhd"
 //}
-func (ding *DingTalk) GetRoleUserList(roleId, offset, size int) (apps model.RoleUserListResponse, err error) {
+func (ding *dingTalk) GetRoleUserList(roleId, offset, size int) (apps model.RoleUserListResponse, err error) {
 	if size > 200 || size < 0 {
 		size = 200
 	}
@@ -60,7 +60,7 @@ func (ding *DingTalk) GetRoleUserList(roleId, offset, size int) (apps model.Role
 
 //GetRoleGroup:获取角色组
 //groupId:组id
-func (ding *DingTalk) GetRoleGroup(groupId int) (apps model.RoleGroupResponse, err error) {
+func (ding *dingTalk) GetRoleGroup(groupId int) (apps model.RoleGroupResponse, err error) {
 
 	form := map[string]int{
 		"group_id": groupId,
@@ -71,7 +71,7 @@ func (ding *DingTalk) GetRoleGroup(groupId int) (apps model.RoleGroupResponse, e
 
 //GetRoleDetail:获取角色详情
 //todo：如果你传的是角色组id，那么会返回角色组的信息
-func (ding *DingTalk) GetRoleDetail(roleId int) (apps model.RoleDetailResponse, err error) {
+func (ding *dingTalk) GetRoleDetail(roleId int) (apps model.RoleDetailResponse, err error) {
 
 	form := map[string]int{
 		"roleId": roleId,
@@ -81,7 +81,7 @@ func (ding *DingTalk) GetRoleDetail(roleId int) (apps model.RoleDetailResponse, 
 }
 
 //CreateRoleGroup:创建角色组
-func (ding *DingTalk) CreateRoleGroup(name string) (apps model.CreateRoleGroupResponse, err error) {
+func (ding *dingTalk) CreateRoleGroup(name string) (apps model.CreateRoleGroupResponse, err error) {
 
 	form := map[string]string{
 		"name": name,
@@ -93,7 +93,7 @@ func (ding *DingTalk) CreateRoleGroup(name string) (apps model.CreateRoleGroupRe
 //CreateRole:创建角色
 //name:角色名称
 //groupId:角色组id
-func (ding *DingTalk) CreateRole(name string, groupId int) (apps model.CreateRoleResponse, err error) {
+func (ding *dingTalk) CreateRole(name string, groupId int) (apps model.CreateRoleResponse, err error) {
 
 	form := map[string]interface{}{
 		"roleName": name,
@@ -107,7 +107,7 @@ func (ding *DingTalk) CreateRole(name string, groupId int) (apps model.CreateRol
 // todo:如果传入的是角色组id则会修改角色组信息
 //name:角色名称
 //roleId:角色id
-func (ding *DingTalk) UpdateRole(name string, roleId int) (apps model.Response, err error) {
+func (ding *dingTalk) UpdateRole(name string, roleId int) (apps model.Response, err error) {
 
 	form := map[string]interface{}{
 		"roleName": name,
@@ -120,7 +120,7 @@ func (ding *DingTalk) UpdateRole(name string, roleId int) (apps model.Response, 
 //DeleteRole:删除角色
 // todo:如果传入的是角色组id则会删除角色组
 //roleId:角色id
-func (ding *DingTalk) DeleteRole(roleId int) (apps model.Response, err error) {
+func (ding *dingTalk) DeleteRole(roleId int) (apps model.Response, err error) {
 
 	form := map[string]int{
 		"role_id": roleId,
@@ -132,7 +132,7 @@ func (ding *DingTalk) DeleteRole(roleId int) (apps model.Response, err error) {
 //RoleBatchAddUser:批量增加员工角色
 //roleIds:角色roleId列表，最多可传20个。
 //userIds:员工的userId,，最多可传20个。
-func (ding *DingTalk) RoleBatchAddUser(roleIds []string, userIds []string) (apps model.Response, err error) {
+func (ding *dingTalk) RoleBatchAddUser(roleIds []string, userIds []string) (apps model.Response, err error) {
 
 	if len(roleIds) > 20 {
 		err = errors.New("一次最多20个角色")
@@ -153,7 +153,7 @@ func (ding *DingTalk) RoleBatchAddUser(roleIds []string, userIds []string) (apps
 //RoleBatchRemoveUser:批量删除员工角色
 //roleIds:角色roleId列表，最多可传20个。
 //userIds:员工的userId,，最多可传20个。
-func (ding *DingTalk) RoleBatchRemoveUser(roleIds []string, userIds []string) (apps model.Response, err error) {
+func (ding *dingTalk) RoleBatchRemoveUser(roleIds []string, userIds []string) (apps model.Response, err error) {
 
 	if len(roleIds) > 20 {
 		err = errors.New("一次最多20个角色")
@@ -175,7 +175,7 @@ func (ding *DingTalk) RoleBatchRemoveUser(roleIds []string, userIds []string) (a
 //userId:用户id
 //roleId:角色id
 //deptIds:部门ID列表数。最多50个，不传则设置范围为所有人
-func (ding *DingTalk) RoleUpdateUserManageScope(userId string, roleId int, deptIds []int) (apps model.Response, err error) {
+func (ding *dingTalk) RoleUpdateUserManageScope(userId string, roleId int, deptIds []int) (apps model.Response, err error) {
 
 	if deptIds != nil && len(deptIds) > 50 {
 		err = errors.New("最多50个部门")

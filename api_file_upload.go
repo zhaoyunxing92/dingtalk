@@ -7,7 +7,7 @@ import (
 	"net/url"
 )
 
-func (ding *DingTalk) MediaUpload(req model.UploadFile) (media model.MediaUpload, err error) {
+func (ding *dingTalk) MediaUpload(req model.UploadFile) (media model.MediaUpload, err error) {
 
 	params := url.Values{}
 	params.Add("type", req.Type)

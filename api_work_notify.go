@@ -53,7 +53,7 @@ type forbiddenList struct {
 //发送普通文本工作通知
 //部门id或用户id重复会剔除
 //发送工作通知
-func (ding *DingTalk) SendWorkNotify(res model.WorkNotifyRes) (resp WorkNotifyRep, err error) {
+func (ding *dingTalk) SendWorkNotify(res model.WorkNotifyRes) (resp WorkNotifyRep, err error) {
 	//组装部门、用户
 	res.AssembleDept()
 	res.AssembleUser()
@@ -66,7 +66,7 @@ func (ding *DingTalk) SendWorkNotify(res model.WorkNotifyRes) (resp WorkNotifyRe
 
 //获取工作通知消息的发送进度，仅支持查询24小时内的任务。
 //taskId:工作通知id
-func (ding *DingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressRsp, err error) {
+func (ding *dingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressRsp, err error) {
 	form := map[string]interface{}{
 		"agent_id": ding.Id,
 		"task_id":  taskId,
@@ -78,7 +78,7 @@ func (ding *DingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressR
 
 //获取工作通知消息的发送结果
 //taskId:工作通知id
-func (ding *DingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultRsp, err error) {
+func (ding *dingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultRsp, err error) {
 	form := map[string]interface{}{
 		"agent_id": ding.Id,
 		"task_id":  taskId,
@@ -90,7 +90,7 @@ func (ding *DingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultR
 
 //撤回工作通知消息
 //taskId:工作通知id
-func (ding *DingTalk) RecallWorkNotifySendResult(taskId int) (rsp model.Response, err error) {
+func (ding *dingTalk) RecallWorkNotifySendResult(taskId int) (rsp model.Response, err error) {
 	form := map[string]interface{}{
 		"agent_id":    ding.Id,
 		"msg_task_id": taskId,

@@ -15,7 +15,7 @@ import (
 )
 
 //GetAccessToken 获取token
-func (ding *DingTalk) GetAccessToken() (token string, err error) {
+func (ding *dingTalk) GetAccessToken() (token string, err error) {
 	var (
 		ch  = ding.Cache
 		res = &response.AccessToken{}
@@ -40,7 +40,7 @@ func (ding *DingTalk) GetAccessToken() (token string, err error) {
 }
 
 // GetSuiteAccessToken 获取第三方企业应用的suite_access_token
-func (ding *DingTalk) GetSuiteAccessToken() (token string, err error) {
+func (ding *dingTalk) GetSuiteAccessToken() (token string, err error) {
 	var (
 		ch  = cache.NewFileCache(strings.Join([]string{".token", "suite"}, "/"), ding.Key)
 		res = &response.SuiteAccessToken{}
@@ -66,7 +66,7 @@ func (ding *DingTalk) GetSuiteAccessToken() (token string, err error) {
 }
 
 // GetCorpAccessToken 服务商获取第三方应用授权企业的access_token
-func (ding *DingTalk) GetCorpAccessToken() (token string, err error) {
+func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
 	// check ticket and corpId
 	if len(ding.Ticket) <= 0 || len(ding.CorpId) <= 0 {
 		return "", errors.New("ticket or corpId is null")

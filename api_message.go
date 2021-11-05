@@ -7,7 +7,7 @@ import (
 )
 
 //SendToConversation:发送普通消息
-func (ding *DingTalk) SendToConversation(senderId, chatId string, msg model.Request) (req model.SendToConversationResponse, err error) {
+func (ding *dingTalk) SendToConversation(senderId, chatId string, msg model.Request) (req model.SendToConversationResponse, err error) {
 
 	form := make(map[string]interface{}, 3)
 	form["sender"] = senderId
