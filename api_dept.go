@@ -16,49 +16,31 @@ func (ding *dingTalk) CreateDept(res *request.CreateDept) (rsp response.CreateDe
 	return rsp, ding.Request(http.MethodPost, constant.CreateDeptKey, nil, res, &rsp)
 }
 
-//GetDeptDetail:获取部门详情
-func (ding *dingTalk) GetDeptDetail(deptId int, lang string) (rsp model.DeptDetail, err error) {
+//DeleteDept 删除部门
+func (ding *dingTalk) DeleteDept(res *request.DeleteDept) (rsp response.Response, err error) {
 
-	if lang != "en_US" {
-		lang = "zh_CN"
-	}
-
-	params := url.Values{}
-	params.Set("id", strconv.Itoa(deptId))
-	params.Set("lang", lang)
-
-	err = ding.Request(http.MethodGet, constant.GetDeptDetailKey, params, nil, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.DeleteDeptKey, nil, res, &rsp)
 }
 
-//DeleteDept:删除部门
-func (ding *dingTalk) DeleteDept(deptId int) (rsp model.Response, err error) {
+//UpdateDept 更新部门
+func (ding *dingTalk) UpdateDept(res *request.UpdateDept) (rsp response.Response, err error) {
 
-	params := url.Values{}
-	params.Set("id", strconv.Itoa(deptId))
-
-	err = ding.Request(http.MethodGet, constant.DeleteDeptKey, params, nil, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.UpdateDeptKey, nil, res, &rsp)
 }
 
-//UpdateDept:更新部门
-func (ding *dingTalk) UpdateDept(res model.CreateDetailDeptRequest) (rsp model.DeptCreateResponse, err error) {
+//GetDeptDetail 获取部门详情
+func (ding *dingTalk) GetDeptDetail(res *request.DeptDetail) (rsp response.DeptDetail, err error) {
 
-	//组装参数
-	res.JoinOuterPermitUsers()
-	res.JoinOuterPermitDepts()
-	res.JoinDeptPermits()
-	res.JoinUserPermits()
-	res.JoinDeptManagerUserIds()
-
-	err = ding.Request(http.MethodPost, constant.UpdateDeptKey, nil, res, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.GetDeptDetailKey, nil, res, &rsp)
 }
 
-//GetSubDeptList:获取子部门列表
+//GetDeptList 获取部门列表
+func (ding *dingTalk) GetDeptList(res *request.DeptList) (rsp response.DeptList, err error) {
+
+	return rsp, ding.Request(http.MethodPost, constant.GetDeptListKey, nil, res, &rsp)
+}
+
+//GetSubDeptList 获取子部门列表
 func (ding *dingTalk) GetSubDeptList(deptId int, lang string, fetch bool) (rsp model.GetSubDeptResponse, err error) {
 
 	if lang != "en_US" {

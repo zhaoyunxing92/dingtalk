@@ -38,10 +38,53 @@ func TestDingTalk_GetDeptDetailUserInfo(t *testing.T) {
 func TestDingTalk_CreateDept(t *testing.T) {
 
 	res, err := client.CreateDept(
-		request.NewCreateDept("golang", 1).
+		request.NewCreateDept("test", 1).
 			SetHideDept(false).
-			SetDeptPermits(1,1,2).
+			SetDeptPermits(1, 1, 2).
 			SetOrder(1).
+			Build())
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_DeleteDept(t *testing.T) {
+
+	res, err := client.DeleteDept(request.NewDeleteDept(560900478))
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_GetDeptDetail(t *testing.T) {
+
+	res, err := client.GetDeptDetail(request.NewDeptDetail(560935057).Build())
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_UpdateDept(t *testing.T) {
+
+	res, err := client.UpdateDept(
+		request.NewUpdateDept(560935057).
+			SetHideDept(true).
+			SetOuterDept(true).
+			SetDeptPermits(1, 554656655).
+			SetUserPermits("manager164").
+			SetUserPermitsDeptIds(1, 554656655).
+			SetUserPermitsUsers("manager164").
+			Build())
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_GetDeptList(t *testing.T) {
+
+	res, err := client.GetDeptList(
+		request.NewDeptList().
+			SetDeptId(1).
 			Build())
 
 	assert.Nil(t, err)

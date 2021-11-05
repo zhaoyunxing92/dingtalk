@@ -30,9 +30,10 @@ const (
 
 	dept                    = "/department"                       //部门模块
 	CreateDeptKey           = "/topapi/v2/department/create"      //创建部门
-	DeleteDeptKey           = dept + "/delete"                    //删除部门
-	UpdateDeptKey           = dept + "/update"                    //更新部门
-	GetDeptDetailKey        = dept + "/get"                       //获取部门详情
+	DeleteDeptKey           = "/topapi/v2/department/delete"      //删除部门
+	UpdateDeptKey           = "/topapi/v2/department/update"      //更新部门
+	GetDeptDetailKey        = "/topapi/v2/department/get"         //获取部门详情
+	GetDeptListKey        = "/topapi/v2/department/listsub"         //获取部门详情
 	GetSubDeptListKey       = dept + "/list"                      //获取子部门列表
 	GetSubDeptIdsKey        = dept + "/list_ids"                  //获取子部门ID列表
 	GetParentDeptsByUserKey = dept + "/list_parent_depts"         //查询指定用户的所有上级父部门路径

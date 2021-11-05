@@ -25,14 +25,14 @@ type UpdateDept struct {
 	//指定可以查看本部门的其他部门列表，总数不能超过200
 	//
 	//当hide_dept为true时，则此值生效
-	DeptPermits string `json:"dept_ds,omitempty"`
+	DeptPermits string `json:"dept_permits,omitempty"`
 
 	deptPermits []int
 
 	//指定可以查看本部门的人员userid列表，总数不能超过200
 	//
 	//当hide_dept为true时，则此值生效
-	UserPermits string `json:"user_ds,omitempty"`
+	UserPermits string `json:"user_permits,omitempty"`
 
 	userPermits []string
 
