@@ -28,16 +28,15 @@ const (
 	GetInactiveUserKey        = "/topapi/inactive/user/v2/get" //获取未登录钉钉的员工列表
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope" //获取管理员通讯录权限范围
 
-	dept                    = "/department"                       //部门模块
-	CreateDeptKey           = "/topapi/v2/department/create"      //创建部门
-	DeleteDeptKey           = "/topapi/v2/department/delete"      //删除部门
-	UpdateDeptKey           = "/topapi/v2/department/update"      //更新部门
-	GetDeptDetailKey        = "/topapi/v2/department/get"         //获取部门详情
-	GetDeptListKey        = "/topapi/v2/department/listsub"         //获取部门详情
-	GetSubDeptListKey       = dept + "/list"                      //获取子部门列表
-	GetSubDeptIdsKey        = dept + "/list_ids"                  //获取子部门ID列表
-	GetParentDeptsByUserKey = dept + "/list_parent_depts"         //查询指定用户的所有上级父部门路径
-	GetParentDeptsByDeptKey = dept + "/list_parent_depts_by_dept" //查询部门的所有上级父部门路径
+	dept                    = "/department"                            //部门模块
+	CreateDeptKey           = "/topapi/v2/department/create"           //创建部门
+	DeleteDeptKey           = "/topapi/v2/department/delete"           //删除部门
+	UpdateDeptKey           = "/topapi/v2/department/update"           //更新部门
+	GetDeptDetailKey        = "/topapi/v2/department/get"              //获取部门详情
+	GetDeptListKey          = "/topapi/v2/department/listsub"          //获取部门详情
+	GetSubDeptListKey       = "/topapi/v2/department/listsubid"        //获取子部门列表
+	GetParentDeptsByUserKey = "/topapi/v2/department/listparentbyuser" //查询指定用户的所有上级父部门路径
+	GetParentDeptsByDeptKey = "/topapi/v2/department/listparentbydept" //查询部门的所有上级父部门路径
 
 	role                         = "/topapi/role"               //角色模块
 	GetRoleListKey               = role + "/list"               //获取角色列表

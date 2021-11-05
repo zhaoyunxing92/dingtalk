@@ -50,7 +50,7 @@ func TestDingTalk_CreateDept(t *testing.T) {
 
 func TestDingTalk_DeleteDept(t *testing.T) {
 
-	res, err := client.DeleteDept(request.NewDeleteDept(560900478))
+	res, err := client.DeleteDept(560900478)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
@@ -89,4 +89,30 @@ func TestDingTalk_GetDeptList(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
+}
+
+func TestDingTalk_GetSubDeptList(t *testing.T) {
+
+	res, err := client.GetSubDeptList(1)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_GetParentIdsByDeptId(t *testing.T) {
+
+	res, err := client.GetParentIdsByDeptId(554656655)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.NotNil(t, res.ParentIds)
+}
+
+func TestDingTalk_GetParentIdsByUserId(t *testing.T) {
+
+	res, err := client.GetParentIdsByUserId("manager164")
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.NotNil(t, res.Parent)
 }

@@ -10,19 +10,19 @@ import (
 
 type dingTalk struct {
 	// 企业内部应用对应:AgentId，如果是应套件:SuiteId
-	Id int `json:"id" validate:"required"`
+	Id int `json:"id,omitempty" validate:"required"`
 
 	// 企业内部应用对应:AppKey，套件对应:SuiteKey
-	Key string `validate:"required"`
+	Key string `json:"key,omitempty" validate:"required"`
 
 	//企业内部对应:AppSecret，套件对应:SuiteSecret
-	Secret string `validate:"required"`
+	Secret string `json:"secret,omitempty" validate:"required"`
 
 	// isv 钉钉开放平台会向应用的回调URL推送的suite_ticket（约5个小时推送一次）
-	Ticket string
+	Ticket string `json:"ticket,omitempty"`
 
 	//授权企业的id
-	CorpId string
+	CorpId string `json:"corpId"`
 
 	Client *http.Client
 
@@ -39,33 +39,9 @@ type builder struct {
 	ding *dingTalk
 }
 
-// NewDingTalk new DingTalkBuilder
-func NewDingTalk() *builder {
-	return &builder{ding: &dingTalk{}}
-}
-
-// SetId set agentId
-func (b *builder) SetId(id int) *builder {
-	b.ding.Id = id
-	return b
-}
-
-//SetKey set app key
-func (b *builder) SetKey(key string) *builder {
-	if len(key) <= 0 {
-		panic(errors.New("key is invalid"))
-	}
-	b.ding.Key = key
-	return b
-}
-
-//SetSecret set app secret
-func (b *builder) SetSecret(secret string) *builder {
-	if len(secret) <= 0 {
-		panic(errors.New("secret is invalid"))
-	}
-	b.ding.Secret = secret
-	return b
+// NewClient new DingTalkBuilder
+func NewClient(id int, key, secret string) *builder {
+	return &builder{ding: &dingTalk{Id: id, Key: key, Secret: secret}}
 }
 
 //SetTicket set app ticket
