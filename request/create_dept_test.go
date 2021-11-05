@@ -1,22 +1,27 @@
 package request
 
 import (
-	"encoding/json"
-	"fmt"
-	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewCreateDept(t *testing.T) {
 
-	cd := NewCreateDept("golang", 0).
+	str := NewCreateDept("golang", 0).
 		SetHideDept(true).
+		SetOuterDept(true).
 		SetUserPermits("123", "456", "").
 		SetOrder(0).
-		SetDeptPermits(-1, 0, 345, 567, 345).
-		Build()
+		SetUserPermitsDeptIds(1, 0, 345, 567, 345).
+		SetDeptPermits(1, 0, 345, 567, 345).
+		Build().String()
 
-	d, err := json.Marshal(cd)
-	assert.Nil(t, err)
-	fmt.Println(string(d))
+	t.Log(str)
+}
+
+func TestNewEntryCreateDept(t *testing.T) {
+
+	str := NewCreateDept("golang", 0).
+		Build().String()
+
+	t.Log(str)
 }

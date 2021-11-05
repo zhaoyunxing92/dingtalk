@@ -1,8 +1,7 @@
 package request
 
 import (
-	"sort"
-	"strconv"
+	"encoding/json"
 	"strings"
 )
 
@@ -17,7 +16,7 @@ type UpdateUser struct {
 	Mobile string `json:"mobile,omitempty"`
 
 	//是否号码隐藏： true：隐藏 隐藏手机号后，手机号在个人资料页隐藏，但仍可对其发DING、发起钉钉免费商务电话。 false：不隐藏
-	HideMobile bool `json:"hide_mobile,omitempty"`
+	HideMobile *bool `json:"hide_mobile,omitempty"`
 
 	//分机号，长度最大50个字符。企业内必须唯一，不可重复
 	Telephone *string `json:"telephone,omitempty" validate:"omitempty,min=1,max=50"`
@@ -79,6 +78,11 @@ type UpdateUser struct {
 	LoginId *string `json:"loginId,omitempty"`
 }
 
+func (u *UpdateUser) String() string {
+	str, _ := json.Marshal(u)
+	return string(str)
+}
+
 type updateUserBuilder struct {
 	user *UpdateUser
 }
@@ -101,7 +105,7 @@ func (ub *updateUserBuilder) SetMobile(mobile string) *updateUserBuilder {
 
 // SetHideMobile 是否号码隐藏： 隐藏手机号后，手机号在个人资料页隐藏，但仍可对其发DING、发起钉钉免费商务电话。
 func (ub *updateUserBuilder) SetHideMobile(hide bool) *updateUserBuilder {
-	ub.user.HideMobile = hide
+	ub.user.HideMobile = &hide
 	return ub
 }
 
@@ -218,32 +222,9 @@ func (ub *updateUserBuilder) SetDept(id int, dept ...int) *updateUserBuilder {
 	ub.user.deptIds = append(ids, dept...)
 	return ub
 }
+
 func (ub *updateUserBuilder) Build() *UpdateUser {
-	ub.user.DeptIdList = strings.Join(ub.getDeptIds(), ",")
-	ub.user.ForceUpdateFields = strings.Join(ub.getForceUpdateFields(), ",")
+	ub.user.DeptIdList = strings.Join(removeIntDuplicates(ub.user.deptIds), ",")
+	ub.user.ForceUpdateFields = strings.Join(removeStringDuplicates(ub.user.forceUpdateFields), ",")
 	return ub.user
-}
-
-func (ub *updateUserBuilder) getDeptIds() (ids []string) {
-	deptIds := ub.user.deptIds
-	sort.Ints(deptIds)
-	for idx, id := range deptIds {
-		if (idx >= 1 && id == deptIds[idx-1]) || id < 1 {
-			continue
-		}
-		ids = append(ids, strconv.Itoa(id))
-	}
-	return ids
-}
-
-func (ub *updateUserBuilder) getForceUpdateFields() (ids []string) {
-	fields := ub.user.forceUpdateFields
-	sort.Strings(fields)
-	for idx, filed := range fields {
-		if (idx >= 1 && filed == fields[idx-1]) || len(filed) <= 0 {
-			continue
-		}
-		ids = append(ids, filed)
-	}
-	return ids
 }

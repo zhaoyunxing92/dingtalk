@@ -1,15 +1,18 @@
 package request
 
 import (
-	"encoding/json"
-	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewUpdateUser(t *testing.T) {
-	build := NewUpdateUser("").SetForceUpdateFields("").Build()
-	js, err := json.Marshal(build)
 
-	assert.Nil(t, err)
-	t.Log(string(js))
+	str := NewUpdateUser("134567").
+		SetForceUpdateFields("").
+		SetHideMobile(false).
+		SetLoginId("").
+		SetForceUpdateFields("").
+		Build().
+		String()
+
+	t.Log(str)
 }

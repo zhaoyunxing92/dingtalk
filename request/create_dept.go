@@ -1,8 +1,7 @@
 package request
 
 import (
-	"sort"
-	"strconv"
+	"encoding/json"
 	"strings"
 )
 
@@ -11,7 +10,7 @@ type CreateDept struct {
 	Name string `json:"name" validate:"required,min=1,max=64"`
 
 	//父部门ID，根部门ID为1。
-	ParentId uint `json:"parent_id" validate:"required"`
+	ParentId uint `json:"parent_id" validate:"required,min=1"`
 
 	//是否隐藏本部门：
 	//
@@ -62,7 +61,7 @@ type CreateDept struct {
 	//当outer_dept为true时，此参数生效
 	UserPermitsDeptIds string `json:"outer_permit_depts,omitempty"`
 
-	userPermitsDeptIds []uint
+	userPermitsDeptIds []int
 
 	//是否创建一个关联此部门的企业群，默认为false即不创建
 	CreateDeptGroup *bool `json:"create_dept_group,omitempty"`
@@ -81,6 +80,11 @@ type CreateDept struct {
 	SourceIdentifier string `json:"source_identifier,omitempty"`
 }
 
+func (cd *CreateDept) String() string {
+	str, _ := json.Marshal(cd)
+	return string(str)
+}
+
 type createDeptBuilder struct {
 	cd *CreateDept
 }
@@ -89,6 +93,10 @@ func NewCreateDept(name string, parentId uint) *createDeptBuilder {
 	return &createDeptBuilder{cd: &CreateDept{Name: name, ParentId: parentId}}
 }
 
+func (cdb *createDeptBuilder) SetHideDept(hide bool) *createDeptBuilder {
+	cdb.cd.HideDept = &hide
+	return cdb
+}
 func (cdb *createDeptBuilder) SetDeptPermits(deptId int, deptIds ...int) *createDeptBuilder {
 	ds := cdb.cd.deptPermits
 	ds = append(ds, deptId)
@@ -103,8 +111,38 @@ func (cdb *createDeptBuilder) SetUserPermits(userId string, userIds ...string) *
 	return cdb
 }
 
-func (cdb *createDeptBuilder) SetHideDept(hide bool) *createDeptBuilder {
-	cdb.cd.HideDept = &hide
+func (cdb *createDeptBuilder) SetOuterDept(outer bool) *createDeptBuilder {
+	cdb.cd.OuterDept = &outer
+	return cdb
+}
+
+func (cdb *createDeptBuilder) SetOuterDeptOnlySelf(self bool) *createDeptBuilder {
+	if *cdb.cd.OuterDept {
+		cdb.cd.OuterDeptOnlySelf = &self
+	}
+	return cdb
+}
+
+func (cdb *createDeptBuilder) SetUserPermitsUsers(userId string, userIds ...string) *createDeptBuilder {
+	users := cdb.cd.userPermitsUsers
+	users = append(users, userId)
+	cdb.cd.userPermitsUsers = append(users, userIds...)
+	return cdb
+}
+
+func (cdb *createDeptBuilder) SetUserPermitsDeptIds(deptId int, deptIds ...int) *createDeptBuilder {
+	ids := cdb.cd.userPermitsDeptIds
+	ids = append(ids, deptId)
+	cdb.cd.userPermitsDeptIds = append(ids, deptIds...)
+	return cdb
+}
+
+func (cdb *createDeptBuilder) SetCreateDeptGroup(group bool) *createDeptBuilder {
+	cdb.cd.CreateDeptGroup = &group
+	return cdb
+}
+func (cdb *createDeptBuilder) SetAutoApproveApply(approve bool) *createDeptBuilder {
+	cdb.cd.AutoApproveApply = &approve
 	return cdb
 }
 
@@ -113,40 +151,20 @@ func (cdb *createDeptBuilder) SetOrder(order uint) *createDeptBuilder {
 	return cdb
 }
 
+func (cdb *createDeptBuilder) SetSourceIdentifier(id string) *createDeptBuilder {
+	cdb.cd.SourceIdentifier = id
+	return cdb
+}
+
 func (cdb *createDeptBuilder) Build() *CreateDept {
-	cdb.cd.DeptPermits = strings.Join(cdb.getDeptPermits(), ",")
-	cdb.cd.UserPermits = strings.Join(cdb.getUserPermits(), ",")
-	return cdb.cd
-}
-
-func (cdb createDeptBuilder) getDeptPermits() (ids []string) {
-	if !*cdb.cd.HideDept {
-		cdb.cd.deptPermits = []int{}
-		return []string{}
+	cd := cdb.cd
+	if cd.HideDept != nil && *cd.HideDept == true {
+		cd.DeptPermits = strings.Join(removeIntDuplicates(cd.deptPermits), ",")
+		cd.UserPermits = strings.Join(removeStringDuplicates(cd.userPermits), ",")
 	}
-	deptIds := cdb.cd.deptPermits
-	sort.Ints(deptIds)
-	for i, id := range deptIds {
-		if (i >= 1 && id == deptIds[i-1]) || id < 1 {
-			continue
-		}
-		ids = append(ids, strconv.Itoa(id))
+	if cd.OuterDept != nil && *cd.OuterDept == true {
+		cd.UserPermitsDeptIds = strings.Join(removeIntDuplicates(cd.userPermitsDeptIds), ",")
+		cd.UserPermitsUsers = strings.Join(removeStringDuplicates(cd.userPermitsUsers), ",")
 	}
-	return ids
-}
-
-func (cdb createDeptBuilder) getUserPermits() (ids []string) {
-	if !*cdb.cd.HideDept {
-		cdb.cd.userPermits = []string{}
-		return []string{}
-	}
-	userIds := cdb.cd.userPermits
-	sort.Strings(userIds)
-	for i, id := range userIds {
-		if (i >= 1 && id == userIds[i-1]) || len(id) <= 0 {
-			continue
-		}
-		ids = append(ids, id)
-	}
-	return ids
+	return cd
 }

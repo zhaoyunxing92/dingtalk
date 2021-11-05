@@ -1,8 +1,7 @@
 package request
 
 import (
-	"sort"
-	"strconv"
+	"encoding/json"
 	"strings"
 )
 
@@ -56,6 +55,11 @@ type CreateUser struct {
 	LoginId string `json:"loginId,omitempty"`
 
 	Password string `json:"init_password,omitempty"`
+}
+
+func (cu *CreateUser) String() string {
+	str, _ := json.Marshal(cu)
+	return string(str)
 }
 
 //DeptOrder 员工在对应的部门中的排序
@@ -223,37 +227,6 @@ func (ub *createUserBuilder) SetPassword(pwd string) *createUserBuilder {
 }
 
 func (ub *createUserBuilder) Build() *CreateUser {
-	ub.user.DeptIdList = strings.Join(ub.getDeptIds(), ",")
+	ub.user.DeptIdList = strings.Join(removeIntDuplicates(ub.user.deptIds), ",")
 	return ub.user
-}
-
-func (ub *createUserBuilder) getDeptIds() (ids []string) {
-	deptIds := ub.user.deptIds
-	sort.Ints(deptIds)
-	for idx := range deptIds {
-		if idx > 1 && deptIds[idx] == deptIds[idx-1] {
-			continue
-		}
-		ids = append(ids, strconv.Itoa(deptIds[idx]))
-	}
-	return ids
-}
-
-//SetDept 所属部门id，可通过获取部门列表接口获取
-func (ub *createUserBuilder) setDept(dept int) *createUserBuilder {
-	ids := ub.user.deptIds
-	if !ub.hasDept(dept) {
-		ids = append(ids, dept)
-	}
-	ub.user.deptIds = ids
-	return ub
-}
-
-func (ub createUserBuilder) hasDept(dept int) bool {
-	for _, id := range ub.user.deptIds {
-		if id == dept {
-			return true
-		}
-	}
-	return false
 }

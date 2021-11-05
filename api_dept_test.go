@@ -40,6 +40,7 @@ func TestDingTalk_CreateDept(t *testing.T) {
 	res, err := client.CreateDept(
 		request.NewCreateDept("golang", 1).
 			SetHideDept(false).
+			SetDeptPermits(1,1,2).
 			SetOrder(1).
 			Build())
 
