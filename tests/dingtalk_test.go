@@ -2,19 +2,19 @@ package tests
 
 import (
 	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/v2/api"
+	"github.com/zhaoyunxing92/dingtalk/v2"
 	"log"
 	"os"
 	"strings"
 	"testing"
 )
 
-var dingTalk = api.NewDingTalk().
+var dingTalk = dingtalk.NewDingTalk().
 	SetId(1368002).
 	SetKey("dingkjy4w80esdwgjuyo").
 	SetSecret("bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW").
 	Build()
-var robot = api.NewRobot("f00184626027aafcd6b4fe07b90ec11250d78b8735282185256a0c72186a5f49")
+var robot = dingtalk.NewRobot("f00184626027aafcd6b4fe07b90ec11250d78b8735282185256a0c72186a5f49")
 
 func TestDingTalkGetToken(t *testing.T) {
 

@@ -1,4 +1,4 @@
-package api
+package dingtalk
 
 import (
 	"github.com/pkg/errors"
