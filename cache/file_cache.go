@@ -2,11 +2,13 @@ package cache
 
 import (
 	"encoding/json"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"os"
 	"strings"
 	"time"
+)
+import (
+	"github.com/pkg/errors"
 )
 
 type FileCache struct {

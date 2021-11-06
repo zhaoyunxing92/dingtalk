@@ -39,8 +39,8 @@ func TestDingTalk_GetRoleList(t *testing.T) {
 func TestDingTalk_SetUserRoleManageScope(t *testing.T) {
 
 	res, err := client.SetUserRoleManageScope(
-		request.NewSetUserRoleManageScope("1948546245774889", 2309075248).
-			SetDeptIds(560900478).
+		request.NewSetUserRoleManageScope("manager164", 1299380990).
+			//SetDeptIds(560900478).
 			Build())
 
 	assert.Nil(t, err)
@@ -59,17 +59,17 @@ func TestDingTalk_GetGroupRoles(t *testing.T) {
 
 func TestDingTalk_GetRoleDetail(t *testing.T) {
 
-	res, err := client.GetRoleDetail(1299380992)
+	res, err := client.GetRoleDetail(1299380990)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.Equal(t, res.RoleName, "负责人")
+	assert.Equal(t, res.RoleName, "主管理员")
 	assert.Equal(t, res.GroupId, 1299380989)
 }
 
 func TestDingTalk_GetRoleUserList(t *testing.T) {
 
-	res, err := client.GetRoleUserList(1299380992, 0, 10)
+	res, err := client.GetRoleUserList(1299380990, 0, 10)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
