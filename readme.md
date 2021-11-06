@@ -11,6 +11,20 @@
 首先我要感谢 [godingtalk](https://github.com/hugozhu/godingtalk) 库,我是参考他的代码写的。但是由于钉钉历史原因，很多api都更新了, 新的企业是无法获取`corpid`
 和`corpsecret`的现在也无法获取了,其次就是我有很多钉钉预警的业务需要做,于是就写了这个
 
+## 怎么使用
+
+```shell
+go get github.com/zhaoyunxing92/dingtalk/v2
+```
+
+```go
+client := NewClient(1244553273, "appkey", "AppSecret").
+	Build()
+// 获取token
+token, _ := client.GetAccessToken()
+
+fmt.Println(token)
+```
 ## 参考文档
 
 [dingtalk-callback-Crypto](https://github.com/open-dingtalk/dingtalk-callback-Crypto)
@@ -18,11 +32,11 @@
 ## 开发进度
 
 * 获取凭证 (**2**/5)
-    - [x] [获取企业内部应用的access_token](https://developers.dingtalk.com/document/app/obtain-orgapp-token)
+    - [x] [获取企业内部应用的access_token](https://developers.dingtalk.com/document/app/obtain-orgapp-token) `client#GetAccessToken`
 
-    - [ ] [服务商获取第三方应用授权企业的access_token](https://developers.dingtalk.com/document/app/obtains-the-enterprise-authorized-credential)
+    - [ ] [服务商获取第三方应用授权企业的access_token](https://developers.dingtalk.com/document/app/obtains-the-enterprise-authorized-credential) `client#GetCorpAccessToken`
 
-    - [x] [获取第三方企业应用的suite_access_token](https://developers.dingtalk.com/document/app/obtain-application-suite-ticket)
+    - [x] [获取第三方企业应用的suite_access_token](https://developers.dingtalk.com/document/app/obtain-application-suite-ticket) `client#GetSuiteAccessToken`
 
     - [ ] [获取jsapi_ticket](https://developers.dingtalk.com/document/app/obtain-jsapi_ticket)
  

@@ -9,7 +9,6 @@ import (
 type Response struct {
 	Code      int    `json:"errcode"`
 	Msg       string `json:"errmsg,omitempty"`
-	Success   bool   `json:"success,omitempty"`
 	RequestId string `json:"request_id,omitempty"`
 }
 
@@ -19,8 +18,12 @@ type Unmarshalled interface {
 }
 
 func (res *Response) CheckError() (err error) {
-	if res.Code != 0 {
+	if !res.Success() {
 		err = errors.Errorf("code:%d,msg:%s", res.Code, res.Msg)
 	}
 	return err
+}
+
+func (res *Response) Success() bool {
+	return res.Code == 0
 }

@@ -2,26 +2,16 @@ package dingtalk
 
 import (
 	"errors"
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 	"strings"
 )
 
-//GetRoleList:获取角色列表
-//offset:支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始
-//size:支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，默认值20，最大值200。
-func (ding *dingTalk) GetRoleList(offset, size int) (apps model.RoleListResponse, err error) {
-	if size > 200 || size < 0 {
-		size = 200
-	}
-	form := map[string]int{
-		"offset": offset,
-		"size":   size,
-	}
-	err = ding.Request(http.MethodPost, constant.GetRoleListKey, nil, form, &apps)
-	return apps, err
-}
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
+)
 
 //GetRoleUserList:获取指定角色的员工列表
 //roleId:角色Id
@@ -80,43 +70,6 @@ func (ding *dingTalk) GetRoleDetail(roleId int) (apps model.RoleDetailResponse, 
 	return apps, err
 }
 
-//CreateRoleGroup:创建角色组
-func (ding *dingTalk) CreateRoleGroup(name string) (apps model.CreateRoleGroupResponse, err error) {
-
-	form := map[string]string{
-		"name": name,
-	}
-	err = ding.Request(http.MethodPost, constant.CreateRoleGroupKey, nil, form, &apps)
-	return apps, err
-}
-
-//CreateRole:创建角色
-//name:角色名称
-//groupId:角色组id
-func (ding *dingTalk) CreateRole(name string, groupId int) (apps model.CreateRoleResponse, err error) {
-
-	form := map[string]interface{}{
-		"roleName": name,
-		"groupId":  groupId,
-	}
-	err = ding.Request(http.MethodPost, constant.CreateRoleKey, nil, form, &apps)
-	return apps, err
-}
-
-//UpdateRole:更新角色
-// todo:如果传入的是角色组id则会修改角色组信息
-//name:角色名称
-//roleId:角色id
-func (ding *dingTalk) UpdateRole(name string, roleId int) (apps model.Response, err error) {
-
-	form := map[string]interface{}{
-		"roleName": name,
-		"roleId":   roleId,
-	}
-	err = ding.Request(http.MethodPost, constant.UpdateRoleKey, nil, form, &apps)
-	return apps, err
-}
-
 //DeleteRole:删除角色
 // todo:如果传入的是角色组id则会删除角色组
 //roleId:角色id
@@ -126,27 +79,6 @@ func (ding *dingTalk) DeleteRole(roleId int) (apps model.Response, err error) {
 		"role_id": roleId,
 	}
 	err = ding.Request(http.MethodPost, constant.DeleteRoleKey, nil, form, &apps)
-	return apps, err
-}
-
-//RoleBatchAddUser:批量增加员工角色
-//roleIds:角色roleId列表，最多可传20个。
-//userIds:员工的userId,，最多可传20个。
-func (ding *dingTalk) RoleBatchAddUser(roleIds []string, userIds []string) (apps model.Response, err error) {
-
-	if len(roleIds) > 20 {
-		err = errors.New("一次最多20个角色")
-	}
-
-	if len(userIds) > 20 {
-		err = errors.New("一次最多20个用户")
-	}
-
-	var form = map[string]string{
-		"userIds": strings.Join(userIds, ","),
-		"roleIds": strings.Join(roleIds, ","),
-	}
-	err = ding.Request(http.MethodPost, constant.RoleBatchAddUserKey, nil, form, &apps)
 	return apps, err
 }
 
@@ -191,4 +123,39 @@ func (ding *dingTalk) RoleUpdateUserManageScope(userId string, roleId int, deptI
 	}
 	err = ding.Request(http.MethodPost, constant.RoleUpdateUserManageScopeKey, nil, form, &apps)
 	return apps, err
+}
+
+//CreateRole 创建角色
+func (ding *dingTalk) CreateRole(name string, groupId int) (apps response.CreateRole, err error) {
+
+	return apps, ding.Request(http.MethodPost, constant.CreateRoleKey, nil,
+		request.NewCreateRole(name, groupId), &apps)
+}
+
+//CreateRoleGroup 创建角色组
+func (ding *dingTalk) CreateRoleGroup(name string) (apps response.CreateRoleGroup, err error) {
+
+	return apps, ding.Request(http.MethodPost, constant.CreateRoleGroupKey, nil,
+		request.NewCreateRoleGroup(name), &apps)
+}
+
+//UpdateRole 更新角色
+func (ding *dingTalk) UpdateRole(id int, name string) (apps response.Response, err error) {
+
+	return apps, ding.Request(http.MethodPost, constant.UpdateRoleKey, nil,
+		request.NewUpdateRole(id, name), &apps)
+}
+
+//RoleAddUser  批量增加员工角色
+func (ding *dingTalk) RoleAddUser(rs []int, us []string) (apps response.Response, err error) {
+
+	return apps, ding.Request(http.MethodPost, constant.RoleBatchAddUserKey, nil,
+		request.NewRoleAddUser(rs, us), &apps)
+}
+
+//GetRoleList 获取角色列表
+func (ding *dingTalk) GetRoleList(offset, size int) (apps response.RoleList, err error) {
+
+	return apps, ding.Request(http.MethodPost, constant.GetRoleListKey, nil,
+		request.NewRoleList(offset, size), &apps)
 }

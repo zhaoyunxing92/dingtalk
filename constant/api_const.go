@@ -38,18 +38,18 @@ const (
 	GetParentDeptsByUserKey = "/topapi/v2/department/listparentbyuser" //查询指定用户的所有上级父部门路径
 	GetParentDeptsByDeptKey = "/topapi/v2/department/listparentbydept" //查询部门的所有上级父部门路径
 
-	role                         = "/topapi/role"               //角色模块
-	GetRoleListKey               = role + "/list"               //获取角色列表
-	GetRoleUserListKey           = role + "/simplelist"         //获取指定角色的员工列表
-	GetRoleGroupKey              = role + "/getrolegroup"       //获取角色组
-	GetRoleDetailKey             = role + "/getrole"            //获取角色详情
-	CreateRoleGroupKey           = "/role/add_role_group"       //创建角色组
-	CreateRoleKey                = "/role/add_role"             //创建角色
-	UpdateRoleKey                = "/role/update_role"          //更新角色
-	DeleteRoleKey                = role + "/deleterole"         //删除角色
-	RoleBatchAddUserKey          = role + "/addrolesforemps"    //批量增加员工角色
-	RoleBatchRemoveUserKey       = role + "/removerolesforemps" //批量删除员工角色
-	RoleUpdateUserManageScopeKey = role + "/scope/update"       //设定角色成员管理范围
+	role                         = "/topapi/role"                 //角色模块
+	GetRoleListKey               = "/topapi/role/list"            //获取角色列表
+	GetRoleUserListKey           = role + "/simplelist"           //获取指定角色的员工列表
+	GetRoleGroupKey              = role + "/getrolegroup"         //获取角色组
+	GetRoleDetailKey             = role + "/getrole"              //获取角色详情
+	CreateRoleGroupKey           = "/role/add_role_group"         //创建角色组
+	CreateRoleKey                = "/role/add_role"               //创建角色
+	UpdateRoleKey                = "/role/update_role"            //更新角色
+	DeleteRoleKey                = role + "/deleterole"           //删除角色
+	RoleBatchAddUserKey          = "/topapi/role/addrolesforemps" //批量增加员工角色
+	RoleBatchRemoveUserKey       = role + "/removerolesforemps"   //批量删除员工角色
+	RoleUpdateUserManageScopeKey = role + "/scope/update"         //设定角色成员管理范围
 
 	chat                = "/chat"                                   //群模块
 	CreateChatKey       = chat + "/create"                          //创建群
