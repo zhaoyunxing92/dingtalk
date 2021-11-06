@@ -34,7 +34,7 @@ func NewSetUserRoleManageScope(userId string, roleId int) *setUserRoleManageScop
 func (b *setUserRoleManageScopeBuilder) SetDeptIds(deptId int, deptIds ...int) *setUserRoleManageScopeBuilder {
 	ids := []int{deptId}
 	ids = append(ids, deptIds...)
-	b.rs.Ds = removeIntDuplicates(ids)
+	b.rs.Ds = removeIntDuplicatesToString(ids)
 	return b
 }
 

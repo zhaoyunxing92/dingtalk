@@ -23,7 +23,7 @@ func (r *RoleAddUser) String() string {
 }
 
 func NewRoleAddUser(roleIds []int, userIds []string) *RoleAddUser {
-	rs := removeIntDuplicates(roleIds)
+	rs := removeIntDuplicatesToString(roleIds)
 	us := removeStringDuplicates(userIds)
 	return &RoleAddUser{rs, strings.Join(rs, ","), us, strings.Join(us, ",")}
 }

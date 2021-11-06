@@ -227,6 +227,6 @@ func (ub *createUserBuilder) SetPassword(pwd string) *createUserBuilder {
 }
 
 func (ub *createUserBuilder) Build() *CreateUser {
-	ub.user.DeptIdList = strings.Join(removeIntDuplicates(ub.user.deptIds), ",")
+	ub.user.DeptIdList = strings.Join(removeIntDuplicatesToString(ub.user.deptIds), ",")
 	return ub.user
 }

@@ -224,7 +224,7 @@ func (ub *updateUserBuilder) SetDept(id int, dept ...int) *updateUserBuilder {
 }
 
 func (ub *updateUserBuilder) Build() *UpdateUser {
-	ub.user.DeptIdList = strings.Join(removeIntDuplicates(ub.user.deptIds), ",")
+	ub.user.DeptIdList = strings.Join(removeIntDuplicatesToString(ub.user.deptIds), ",")
 	ub.user.ForceUpdateFields = strings.Join(removeStringDuplicates(ub.user.forceUpdateFields), ",")
 	return ub.user
 }

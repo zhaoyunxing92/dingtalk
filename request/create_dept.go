@@ -159,11 +159,11 @@ func (cdb *createDeptBuilder) SetSourceIdentifier(id string) *createDeptBuilder 
 func (cdb *createDeptBuilder) Build() *CreateDept {
 	cd := cdb.cd
 	if cd.HideDept != nil && *cd.HideDept == true {
-		cd.DeptPermits = strings.Join(removeIntDuplicates(cd.deptPermits), ",")
+		cd.DeptPermits = strings.Join(removeIntDuplicatesToString(cd.deptPermits), ",")
 		cd.UserPermits = strings.Join(removeStringDuplicates(cd.userPermits), ",")
 	}
 	if cd.OuterDept != nil && *cd.OuterDept == true {
-		cd.UserPermitsDeptIds = strings.Join(removeIntDuplicates(cd.userPermitsDeptIds), ",")
+		cd.UserPermitsDeptIds = strings.Join(removeIntDuplicatesToString(cd.userPermitsDeptIds), ",")
 		cd.UserPermitsUsers = strings.Join(removeStringDuplicates(cd.userPermitsUsers), ",")
 	}
 	return cd

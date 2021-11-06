@@ -28,7 +28,6 @@ const (
 	GetInactiveUserKey        = "/topapi/inactive/user/v2/get" //获取未登录钉钉的员工列表
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope" //获取管理员通讯录权限范围
 
-	dept                    = "/department"                            //部门模块
 	CreateDeptKey           = "/topapi/v2/department/create"           //创建部门
 	DeleteDeptKey           = "/topapi/v2/department/delete"           //删除部门
 	UpdateDeptKey           = "/topapi/v2/department/update"           //更新部门
@@ -37,6 +36,10 @@ const (
 	GetSubDeptListKey       = "/topapi/v2/department/listsubid"        //获取子部门列表
 	GetParentDeptsByUserKey = "/topapi/v2/department/listparentbyuser" //查询指定用户的所有上级父部门路径
 	GetParentDeptsByDeptKey = "/topapi/v2/department/listparentbydept" //查询部门的所有上级父部门路径
+
+	CreateExtContactKey   = "/topapi/extcontact/list"            //添加外部联系人
+	GetExtContactKey      = "/topapi/extcontact/list"            //获取外部联系人列表
+	GetExtContactLabelKey = "/topapi/extcontact/listlabelgroups" //获取外部联系人标签列表
 
 	role                         = "/topapi/role"                 //角色模块
 	GetRoleListKey               = "/topapi/role/list"            //获取角色列表
