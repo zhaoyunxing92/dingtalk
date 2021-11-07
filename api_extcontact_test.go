@@ -30,7 +30,7 @@ func TestDingTalk_DeleteExtContact(t *testing.T) {
 	res, err := client.DeleteExtContact("01131104492477488")
 
 	assert.NotNil(t, err)
-	assert.Equal(t, res.Success(), false)
+	assert.Equal(t, res.Ok(), false)
 }
 
 func TestDingTalk_UpdateExtContact(t *testing.T) {

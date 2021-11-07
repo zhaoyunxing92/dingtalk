@@ -45,7 +45,7 @@ func TestDingTalk_SetUserRoleManageScope(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.Equal(t, res.Success(), true)
+	assert.Equal(t, res.Ok(), true)
 }
 
 func TestDingTalk_GetGroupRoles(t *testing.T) {
