@@ -217,13 +217,12 @@ func (ub *updateUserBuilder) SetLoginId(loginId string) *updateUserBuilder {
 
 //SetDept 所属部门id，可通过获取部门列表接口获取
 func (ub *updateUserBuilder) SetDept(id int, dept ...int) *updateUserBuilder {
-	ids := ub.user.deptIds
-	ids = append(ids, id)
-	ub.user.deptIds = append(ids, dept...)
+	ub.user.deptIds = append(dept, id)
 	return ub
 }
 
 func (ub *updateUserBuilder) Build() *UpdateUser {
+	ub.user.deptIds = removeIntDuplicates(ub.user.deptIds)
 	ub.user.DeptIdList = strings.Join(removeIntDuplicatesToString(ub.user.deptIds), ",")
 	ub.user.ForceUpdateFields = strings.Join(removeStringDuplicates(ub.user.forceUpdateFields), ",")
 	return ub.user

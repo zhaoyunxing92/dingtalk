@@ -59,9 +59,7 @@ func (ec *updateExtContactBuilder) SetTitle(title string) *updateExtContactBuild
 }
 
 func (ec *updateExtContactBuilder) SetShareDept(id int, ids ...int) *updateExtContactBuilder {
-	ds := ec.c.ShareDept
-	ds = append(ds, id)
-	ec.c.ShareDept = append(ds, ids...)
+	ec.c.ShareDept = append(ids, id)
 	return ec
 }
 
@@ -83,9 +81,7 @@ func (ec *updateExtContactBuilder) SetCompanyName(name string) *updateExtContact
 
 //SetShareUser 共享给的员工userid列表
 func (ec *updateExtContactBuilder) SetShareUser(id string, ids ...string) *updateExtContactBuilder {
-	us := ec.c.ShareUser
-	us = append(us, id)
-	ec.c.ShareUser = append(us, ids...)
+	ec.c.ShareUser = append(ids, id)
 	return ec
 }
 
