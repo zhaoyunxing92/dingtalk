@@ -39,8 +39,8 @@ func TestDingTalk_GetRoleList(t *testing.T) {
 func TestDingTalk_SetUserRoleManageScope(t *testing.T) {
 
 	res, err := client.SetUserRoleManageScope(
-		request.NewSetUserRoleManageScope("manager164", 1299380990).
-			//SetDeptIds(560900478).
+		request.NewSetUserRoleManageScope("manager164", 2309075248).
+			SetDeptIds(560900478).
 			Build())
 
 	assert.Nil(t, err)

@@ -14,7 +14,7 @@ type SetUserRoleManageScope struct {
 
 	DeptIds string `json:"dept_ids,omitempty"`
 
-	Ds []string `json:"-" validate:"max=20"`
+	Ds []string `json:"-" validate:"max=50"`
 }
 
 func (s *SetUserRoleManageScope) String() string {

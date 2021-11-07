@@ -2,11 +2,9 @@ package dingtalk
 
 import (
 	"net/http"
-	"strings"
 )
 
 import (
-	"github.com/pkg/errors"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
@@ -34,8 +32,8 @@ func (ding *dingTalk) UpdateRole(id int, name string) (apps response.Response, e
 		request.NewUpdateRole(id, name), &apps)
 }
 
-//RoleAddUser  批量增加员工角色
-func (ding *dingTalk) RoleAddUser(rs []int, us []string) (apps response.Response, err error) {
+//BatchAddUserRole  批量增加员工角色
+func (ding *dingTalk) BatchAddUserRole(rs []int, us []string) (apps response.Response, err error) {
 
 	return apps, ding.Request(http.MethodPost, constant.RoleBatchAddUserKey, nil,
 		request.NewRoleAddUser(rs, us), &apps)
@@ -54,7 +52,7 @@ func (ding *dingTalk) DeleteRole(id int) (apps response.Response, err error) {
 	return apps, ding.Request(http.MethodPost, constant.DeleteRoleKey, nil, request.NewDeleteRole(id), &apps)
 }
 
-//SetUserRoleManageScope 设定角色成员管理范围
+//SetUserRoleManageScope 设定角色成员管理范围 todo:官方接口不通
 func (ding *dingTalk) SetUserRoleManageScope(res *request.SetUserRoleManageScope) (apps response.Response, err error) {
 
 	return apps, ding.Request(http.MethodPost, constant.RoleUpdateUserManageScopeKey, nil, res, &apps)
@@ -81,23 +79,8 @@ func (ding *dingTalk) GetRoleUserList(roleId, offset, size int) (apps response.R
 		request.NewRoleUser(roleId, offset, size), &apps)
 }
 
-//RoleBatchRemoveUser:批量删除员工角色
-//roleIds:角色roleId列表，最多可传20个。
-//userIds:员工的userId,，最多可传20个。
-func (ding *dingTalk) RoleBatchRemoveUser(roleIds []string, userIds []string) (apps model.Response, err error) {
-
-	if len(roleIds) > 20 {
-		err = errors.New("一次最多20个角色")
-	}
-
-	if len(userIds) > 20 {
-		err = errors.New("一次最多20个用户")
-	}
-
-	var form = map[string]string{
-		"userIds": strings.Join(userIds, ","),
-		"roleIds": strings.Join(roleIds, ","),
-	}
-	err = ding.Request(http.MethodPost, constant.RoleBatchRemoveUserKey, nil, form, &apps)
-	return apps, err
+//BatchRemoveUserRole 批量删除员工角色
+func (ding *dingTalk) BatchRemoveUserRole(roleIds []int, userIds []string) (apps model.Response, err error) {
+	return apps, ding.Request(http.MethodPost, constant.RoleBatchRemoveUserKey, nil,
+		request.NewBatchRemoveUserRole(roleIds, userIds), &apps)
 }
