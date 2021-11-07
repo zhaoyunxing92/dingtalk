@@ -3,42 +3,26 @@ package dingtalk
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
 	"net/url"
 	"strconv"
 )
 
-// CreateChat:创建群
-// name:群名称
-// owner:群主管
-// userIds:群成员
-func (ding *dingTalk) CreateChat(name, owner string, userIds []string) (rsp model.CreateChatResponse, err error) {
+//CreateChat 创建群
+func (ding *dingTalk) CreateChat(res *request.CreatChat) (rsp response.CreatChat, err error) {
 
-	form := make(map[string]interface{}, 2)
-	form["name"] = name
-	form["owner"] = owner
-	form["useridlist"] = userIds
-
-	err = ding.Request(http.MethodPost, constant.CreateChatKey, nil, form, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.CreateChatKey, nil, res, &rsp)
 }
 
-//CreateDetailChat:创建详细的群
-func (ding *dingTalk) CreateDetailChat(res model.Request) (req model.CreateChatResponse, err error) {
+//GetChatInfo 获取群信息
+func (ding *dingTalk) GetChatInfo(chatId string) (req response.GetChatInfo, err error) {
 
-	err = ding.Request(http.MethodPost, constant.CreateChatKey, nil, res, &req)
+	query := url.Values{}
+	query.Set("chatid", chatId)
 
-	return req, err
-}
-
-//GetChatInfo:获取群信息
-func (ding *dingTalk) GetChatInfo(chatId string) (req model.GetChatInfoResponse, err error) {
-	params := url.Values{}
-	params.Set("chatid", chatId)
-
-	err = ding.Request(http.MethodGet, constant.GetChatInfoKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodGet, constant.GetChatInfoKey, query, nil, &req)
 }
 
 //UpdateChat:更新群

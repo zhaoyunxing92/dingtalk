@@ -24,14 +24,14 @@ type CreateDept struct {
 	//当hide_dept为true时，则此值生效
 	DeptPermits string `json:"dept_ds,omitempty"`
 
-	deptPermits []int
+	DeptPermit []int `json:"-" validate:"max=200"`
 
 	//指定可以查看本部门的人员userid列表，总数不能超过200
 	//
 	//当hide_dept为true时，则此值生效
 	UserPermits string `json:"user_ds,omitempty"`
 
-	userPermits []string
+	UserPermit []string `json:"-" validate:"max=200"`
 
 	//是否限制本部门成员查看通讯录：
 	//
@@ -54,14 +54,14 @@ type CreateDept struct {
 	//当outer_dept为true时，此参数生效。
 	UserPermitsUsers string `json:"outer_permit_users,omitempty"`
 
-	userPermitsUsers []string
+	UserPermitsUserIds []string `json:"-" validate:",max=200"`
 
 	//指定本部门成员可查看的通讯录部门ID列表，总数不能超过200
 	//
 	//当outer_dept为true时，此参数生效
-	UserPermitsDeptIds string `json:"outer_permit_depts,omitempty"`
+	UserPermitsDepts string `json:"outer_permit_depts,omitempty"`
 
-	userPermitsDeptIds []int
+	UserPermitsDeptIds []int `json:"-" validate:"max=200"`
 
 	//是否创建一个关联此部门的企业群，默认为false即不创建
 	CreateDeptGroup *bool `json:"create_dept_group,omitempty"`
@@ -98,16 +98,12 @@ func (cdb *createDeptBuilder) SetHideDept(hide bool) *createDeptBuilder {
 	return cdb
 }
 func (cdb *createDeptBuilder) SetDeptPermits(deptId int, deptIds ...int) *createDeptBuilder {
-	ds := cdb.cd.deptPermits
-	ds = append(ds, deptId)
-	cdb.cd.deptPermits = append(ds, deptIds...)
+	cdb.cd.DeptPermit = append(deptIds, deptId)
 	return cdb
 }
 
 func (cdb *createDeptBuilder) SetUserPermits(userId string, userIds ...string) *createDeptBuilder {
-	ds := cdb.cd.userPermits
-	ds = append(ds, userId)
-	cdb.cd.userPermits = append(ds, userIds...)
+	cdb.cd.UserPermit = append(userIds, userId)
 	return cdb
 }
 
@@ -124,16 +120,12 @@ func (cdb *createDeptBuilder) SetOuterDeptOnlySelf(self bool) *createDeptBuilder
 }
 
 func (cdb *createDeptBuilder) SetUserPermitsUsers(userId string, userIds ...string) *createDeptBuilder {
-	users := cdb.cd.userPermitsUsers
-	users = append(users, userId)
-	cdb.cd.userPermitsUsers = append(users, userIds...)
+	cdb.cd.UserPermitsUserIds = append(userIds, userId)
 	return cdb
 }
 
 func (cdb *createDeptBuilder) SetUserPermitsDeptIds(deptId int, deptIds ...int) *createDeptBuilder {
-	ids := cdb.cd.userPermitsDeptIds
-	ids = append(ids, deptId)
-	cdb.cd.userPermitsDeptIds = append(ids, deptIds...)
+	cdb.cd.UserPermitsDeptIds = append(deptIds, deptId)
 	return cdb
 }
 
@@ -159,12 +151,23 @@ func (cdb *createDeptBuilder) SetSourceIdentifier(id string) *createDeptBuilder 
 func (cdb *createDeptBuilder) Build() *CreateDept {
 	cd := cdb.cd
 	if cd.HideDept != nil && *cd.HideDept == true {
-		cd.DeptPermits = strings.Join(removeIntDuplicatesToString(cd.deptPermits), ",")
-		cd.UserPermits = strings.Join(removeStringDuplicates(cd.userPermits), ",")
+		ds := removeIntDuplicates(cd.DeptPermit)
+		us := removeStringDuplicates(cd.UserPermit)
+		cd.DeptPermits = strings.Join(removeIntDuplicatesToString(ds), ",")
+		cd.UserPermits = strings.Join(us, ",")
+
+		cd.DeptPermit = ds
+		cd.UserPermit = us
 	}
 	if cd.OuterDept != nil && *cd.OuterDept == true {
-		cd.UserPermitsDeptIds = strings.Join(removeIntDuplicatesToString(cd.userPermitsDeptIds), ",")
-		cd.UserPermitsUsers = strings.Join(removeStringDuplicates(cd.userPermitsUsers), ",")
+		deptIds := removeIntDuplicates(cd.UserPermitsDeptIds)
+		userIds := removeStringDuplicates(cd.UserPermitsUserIds)
+
+		cd.UserPermitsDepts = strings.Join(removeIntDuplicatesToString(deptIds), ",")
+		cd.UserPermitsUsers = strings.Join(userIds, ",")
+
+		cd.UserPermitsDeptIds = deptIds
+		cd.UserPermitsUserIds = userIds
 	}
 	return cd
 }

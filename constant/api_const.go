@@ -61,7 +61,7 @@ const (
 	RoleUpdateUserManageScopeKey = "/topapi/role/scope/update"    //设定角色成员管理范围
 
 	chat                = "/chat"                                   //群模块
-	CreateChatKey       = chat + "/create"                          //创建群
+	CreateChatKey       = "/chat/create"                            //创建群
 	GetChatInfoKey      = chat + "/get"                             //获取群会话
 	UpdateChatKey       = chat + "/update"                          //修改群会话
 	SendMsgToChatKey    = chat + "/send"                            //发送消息到企业群
