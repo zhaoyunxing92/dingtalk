@@ -7,16 +7,14 @@ import (
 
 func TestNewExtContact(t *testing.T) {
 
-	ec := NewExtContact().
+	ec := NewCreateExtContact("张三", "12345678941", "86", "abcde",
+		123, 123, 456).
 		SetTitle("资深开发").
 		SetAddress("杭州").
-		SetLabels(1234, 1234, 5678).
 		SetShareDept(123, 123, 678).
 		SetRemark("技术人员").
-		SetStateCode("86").
 		SetCompanyName("小番茄").
 		SetShareUser("123", "123", "456").
-		SetMobile("123456789").
 		Build()
 
 	assert.NotEmpty(t, ec)

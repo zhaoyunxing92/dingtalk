@@ -4,10 +4,10 @@ import json "encoding/json"
 
 //CreateExtContact 添加外部联系人
 type CreateExtContact struct {
-	Contact *contact `json:"contact" validate:"required"`
+	Contact *createExtContact `json:"contact" validate:"required"`
 }
 
-type contact struct {
+type createExtContact struct {
 	//职位
 	Title string `json:"title,omitempty"`
 
@@ -47,76 +47,53 @@ func (e *CreateExtContact) String() string {
 	return string(str)
 }
 
-type extContactBuilder struct {
-	c *contact
+type createExtContactBuilder struct {
+	c *createExtContact
 }
 
-func NewExtContact() *extContactBuilder {
-	return &extContactBuilder{c: &contact{}}
+func NewCreateExtContact(name, mobile, stateCode, follower string, labels ...int) *createExtContactBuilder {
+
+	return &createExtContactBuilder{c: &createExtContact{Mobile: mobile, Name: name, StateCode: stateCode,
+		FollowerUser: follower, Labels: labels}}
 }
 
-func (ec *extContactBuilder) SetTitle(title string) *extContactBuilder {
+func (ec *createExtContactBuilder) SetTitle(title string) *createExtContactBuilder {
 	ec.c.Title = title
 	return ec
 }
 
-func (ec *extContactBuilder) SetLabels(id int, ids ...int) *extContactBuilder {
-	labels := ec.c.Labels
-	labels = append(labels, id)
-	ec.c.Labels = append(labels, ids...)
-	return ec
-}
-
-func (ec *extContactBuilder) SetShareDept(id int, ids ...int) *extContactBuilder {
+func (ec *createExtContactBuilder) SetShareDept(id int, ids ...int) *createExtContactBuilder {
 	ds := ec.c.ShareDept
 	ds = append(ds, id)
 	ec.c.ShareDept = append(ds, ids...)
 	return ec
 }
 
-func (ec *extContactBuilder) SetAddress(address string) *extContactBuilder {
+func (ec *createExtContactBuilder) SetAddress(address string) *createExtContactBuilder {
 	ec.c.Address = address
 	return ec
 }
 
-func (ec *extContactBuilder) SetRemark(remark string) *extContactBuilder {
+func (ec *createExtContactBuilder) SetRemark(remark string) *createExtContactBuilder {
 	ec.c.Remark = remark
 	return ec
 }
 
-//SetFollowerUser 负责人的userId
-func (ec *extContactBuilder) SetFollowerUser(userId string) *extContactBuilder {
-	ec.c.FollowerUser = userId
-	return ec
-}
-
-//SetStateCode 手机号国家码
-func (ec *extContactBuilder) SetStateCode(stateCode string) *extContactBuilder {
-	ec.c.StateCode = stateCode
-	return ec
-}
-
 //SetCompanyName 外部联系人的企业名称
-func (ec *extContactBuilder) SetCompanyName(name string) *extContactBuilder {
+func (ec *createExtContactBuilder) SetCompanyName(name string) *createExtContactBuilder {
 	ec.c.CompanyName = name
 	return ec
 }
 
 //SetShareUser 共享给的员工userid列表
-func (ec *extContactBuilder) SetShareUser(id string, ids ...string) *extContactBuilder {
+func (ec *createExtContactBuilder) SetShareUser(id string, ids ...string) *createExtContactBuilder {
 	us := ec.c.ShareUser
 	us = append(us, id)
 	ec.c.ShareUser = append(us, ids...)
 	return ec
 }
 
-//SetMobile 外部联系人的手机号
-func (ec *extContactBuilder) SetMobile(mobile string) *extContactBuilder {
-	ec.c.Mobile = mobile
-	return ec
-}
-
-func (ec *extContactBuilder) Build() *CreateExtContact {
+func (ec *createExtContactBuilder) Build() *CreateExtContact {
 	ec.c.ShareUser = removeStringDuplicates(ec.c.ShareUser)
 	ec.c.ShareDept = removeIntDuplicates(ec.c.ShareDept)
 	ec.c.Labels = removeIntDuplicates(ec.c.Labels)

@@ -13,6 +13,7 @@ type labels struct {
 	//标签组颜色
 	Color int `json:"color"`
 
+	//标签
 	Labels []label `json:"labels"`
 }
 

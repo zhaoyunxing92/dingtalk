@@ -37,9 +37,12 @@ const (
 	GetParentDeptsByUserKey = "/topapi/v2/department/listparentbyuser" //查询指定用户的所有上级父部门路径
 	GetParentDeptsByDeptKey = "/topapi/v2/department/listparentbydept" //查询部门的所有上级父部门路径
 
-	CreateExtContactKey   = "/topapi/extcontact/list"            //添加外部联系人
-	GetExtContactKey      = "/topapi/extcontact/list"            //获取外部联系人列表
-	GetExtContactLabelKey = "/topapi/extcontact/listlabelgroups" //获取外部联系人标签列表
+	CreateExtContactKey    = "/topapi/extcontact/create"            //添加外部联系人
+	DeleteExtContactKey    = "/topapi/extcontact/delete"          //删除外部联系人
+	UpdateExtContactKey    = "/topapi/extcontact/update"          //更新外部联系人
+	GetExtContactKey       = "/topapi/extcontact/list"            //获取外部联系人列表
+	GetExtContactLabelKey  = "/topapi/extcontact/listlabelgroups" //获取外部联系人标签列表
+	GetExtContactDetailKey = "/topapi/extcontact/get"             //获取外部联系人详情
 
 	role                         = "/topapi/role"                 //角色模块
 	GetRoleListKey               = "/topapi/role/list"            //获取角色列表
