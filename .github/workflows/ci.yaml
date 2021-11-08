@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches: [ main , "2.0" ]
+  pull_request:
+    branches: "*"
+
+jobs:
+  build:
+    name: ${{ matrix.os }} - Go ${{ matrix.go_version }}
+    runs-on: ubuntu-latest
+    strategy:
+      # If you want to matrix build , you can append the following list.
+      matrix:
+        go_version:
+          - 1.15
+        os:
+          - ubuntu-latest
+
+    steps:
+      - name: Set up Go ${{ matrix.go_version }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go_version }}
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+
+      - name: gofmt
+        run: |
+          go fmt ./... && git status && [[ -z `git status -s` ]]
+          # diff -u <(echo -n) <(gofmt -d -s .)
+
+      - name: Test
+        run: go test -v ./...
+
+      - name: Post Coverage
+        run: bash <(curl -s https://codecov.io/bash)
