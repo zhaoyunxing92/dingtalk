@@ -79,5 +79,4 @@ func TestNewHideDeptUpdateDept(t *testing.T) {
 	assert.Equal(t, len(str.DeptPermit), 2)
 	assert.Nil(t, str.OuterDeptOnlySelf)
 	t.Log(str.String())
-
 }
