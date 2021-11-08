@@ -24,19 +24,19 @@ jobs:
         with:
           go-version: ${{ matrix.go_version }}
 
-      - name: check out code into the Go module directory
+      - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
-      - name: install license-header-checker
+      - name: Install license-header-checker
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
           git clone https://github.com/lsm-dev/license-header-checker.git
           cd license-header-checker
           make install
 
-      - name: check license header
+      - name: Check License Header
         run: |
-           license-header-checker -a -v -r -i vendor,license-header-checker ./header/license_header.txt . go
+           license-header-checker -a -v -r -i vendor,license-header-checker ./header/license_header.txt . go  && [[ -z `git status -s` ]]
            rm -rf license-header-checker
 
       - name: gofmt
@@ -44,7 +44,7 @@ jobs:
           go fmt ./... && git status && [[ -z `git status -s` ]]
           # diff -u <(echo -n) <(gofmt -d -s .)
 
-      - name: test request struct
+      - name: Test Request Struct
         #        run: go test -v request/...
         run: go test -v ./request
 
