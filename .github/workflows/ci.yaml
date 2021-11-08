@@ -33,7 +33,8 @@ jobs:
           cd license-header-checker && \
           make install && \
           cd .. && \
-          license-header-checker -a -v -r -i vendor,license-header-checker header/license_header.txt . go && [[ -z `git status -s` ]]
+          license-header-checker -a -v -r -i vendor,license-header-checker ./header/license_header.txt . go && \
+          [[ -z `git status -s` ]]
 
       - name: gofmt
         run: |
