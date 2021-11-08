@@ -41,11 +41,11 @@ type StatusBar struct {
 
 // oa
 type OA struct {
-	MessageUrl   string `json:"message_url" validate:"required"`         //消息点击链接地址，当发送消息为小程序时支持小程序跳转链接。
-	PcMessageUrl string `json:"pc_message_url" validate:"omitempty,url"` //PC端点击消息时跳转到的地址。
-	StatusBar    `json:"status_bar"`                                     //消息状态栏
-	Header       `json:"head" validate:"required"`                       //消息头部内容。
-	Body         `json:"body" validate:"required"`                       //消息体。
+	MessageUrl   string                            `json:"message_url" validate:"required"`         //消息点击链接地址，当发送消息为小程序时支持小程序跳转链接。
+	PcMessageUrl string                            `json:"pc_message_url" validate:"omitempty,url"` //PC端点击消息时跳转到的地址。
+	StatusBar    `json:"status_bar"`               //消息状态栏
+	Header       `json:"head" validate:"required"` //消息头部内容。
+	Body         `json:"body" validate:"required"` //消息体。
 }
 
 //OA

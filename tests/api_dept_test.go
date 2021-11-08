@@ -66,7 +66,6 @@ func TestGetDepartmentUserIds(t *testing.T) {
 	t.Log(string(js))
 }
 
-
 //TestDeleteDept:删除部门
 func TestDeleteDept(t *testing.T) {
 

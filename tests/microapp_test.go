@@ -3,6 +3,7 @@ package tests
 import (
 	"testing"
 )
+
 //测试应用列表
 func TestDingTalkGetMicroAppList(t *testing.T) {
 
@@ -24,8 +25,8 @@ func TestDingTalkGetMicroAppVisibleScopes(t *testing.T) {
 
 func TestDingTalkGetMicroAppByAgentId(t *testing.T) {
 	app, err := dingTalk.GetMicroAppByAgentId(970282753)
-	if err!=nil{
+	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%v",app)
+	t.Logf("%v", app)
 }

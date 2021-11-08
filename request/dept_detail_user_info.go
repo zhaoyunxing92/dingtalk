@@ -40,7 +40,6 @@ func NewDeptDetailUserInfo(deptId, cursor, size int) *deptDetailUserInfoBuilder 
 	return &deptDetailUserInfoBuilder{du: &DeptDetailUserInfo{DeptId: deptId, Cursor: cursor, Size: size}}
 }
 
-
 //SetOrderField 部门成员的排序规则：
 //
 //entry_asc：代表按照进入部门的时间升序。

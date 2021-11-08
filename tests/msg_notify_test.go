@@ -71,12 +71,12 @@ func TestSendOAWorkNotify(t *testing.T) {
 	//设置头
 	oa.Header.BgColor = "FFBBBBBB"
 	oa.Header.Text = "小程序消息则不会显示"
-    //pc跳转和小程序跳转
+	//pc跳转和小程序跳转
 	oa.MessageUrl = "eapp://page/component/index"
 	oa.PcMessageUrl = "https://ding-doc.dingtalk.com"
 	// 设置状态
-	oa.StatusBar.Value="处理完成"
-	oa.StatusBar.BackColor="#FFF65E5E"
+	oa.StatusBar.Value = "处理完成"
+	oa.StatusBar.BackColor = "#FFF65E5E"
 
 	res := new(model.WorkNotify)
 	res.NewOAWorkNotify(oa)

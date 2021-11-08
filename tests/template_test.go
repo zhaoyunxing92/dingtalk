@@ -20,10 +20,9 @@ func TestTemplate(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	args:=`{"agentId":1020345059,"name":"赵云兴"}`
+	args := `{"agentId":1020345059,"name":"赵云兴"}`
 	var obj map[string]interface{}
 	err = json.Unmarshal([]byte(args), &obj)
-
 
 	if err = tmpl.Execute(os.Stdout, obj); err != nil {
 		t.Fatal(err)
