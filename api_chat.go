@@ -85,3 +85,10 @@ func (ding *dingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (re
 	err = ding.Request(http.MethodGet, constant.GetChatReadUserKey, params, nil, &req)
 	return req, err
 }
+
+//GetChatQRCode 获取入群二维码链接
+func (ding *dingTalk) GetChatQRCode(chatId, userId string) (req response.ChatQRCode, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetChatQRCodeKey, nil,
+		request.NewChatQRCode(chatId, userId), &req)
+}

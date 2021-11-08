@@ -20,9 +20,17 @@ func TestDingTalk_CreateChat(t *testing.T) {
 
 func TestDingTalk_GetChatInfo(t *testing.T) {
 
-	res, err := client.GetChatInfo("chat79e713edce46ea72ea0dd60fb4f9d6f6")
+	res, err := client.GetChatInfo("chat6e43a2bd4b52bee37b03bad17720dcd8")
 
-	// chat79e713edce46ea72ea0dd60fb4f9d6f6
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
+}
+
+func TestDingTalk_GetChatQRCode(t *testing.T) {
+
+	res, err := client.GetChatQRCode("chat6e43a2bd4b52bee37b03bad17720dcd8", "manager164")
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.NotNil(t, res.Url)
 }
