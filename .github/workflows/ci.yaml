@@ -24,8 +24,15 @@ jobs:
         with:
           go-version: ${{ matrix.go_version }}
 
-      - name: Check out code into the Go module directory
+      - name: check out code into the Go module directory
         uses: actions/checkout@v2
+
+      - name: check license header
+        run: |
+          git clone https://github.com/lsm-dev/license-header-checker.git \
+          && make install \
+          && license-header-checker -a -v -r -i '' header/license_header.txt . go
+          && [[ -z `git status -s` ]]
 
       - name: gofmt
         run: |
