@@ -162,17 +162,17 @@ func (cdb *updateDeptBuilder) SetHideDept(hide bool) *updateDeptBuilder {
 
 //SetDeptPermits 指定可以查看本部门的其他部门列表，总数不能超过200,当hide_dept为true时，则此值生效
 func (cdb *updateDeptBuilder) SetDeptPermits(deptId int, deptIds ...int) *updateDeptBuilder {
-	if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
+	//if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
 		cdb.cd.DeptPermit = append(deptIds, deptId)
-	}
+	//}
 	return cdb
 }
 
 //SetUserPermits 指定可以查看本部门的人员userid列表，总数不能超过200,当hide_dept为true时，则此值生效
 func (cdb *updateDeptBuilder) SetUserPermits(userId string, userIds ...string) *updateDeptBuilder {
-	if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
+	//if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
 		cdb.cd.UserPermit = append(userIds, userId)
-	}
+	//}
 	return cdb
 }
 
@@ -188,17 +188,17 @@ func (cdb *updateDeptBuilder) SetOuterDeptOnlySelf(self bool) *updateDeptBuilder
 	return cdb
 }
 
-func (cdb *updateDeptBuilder) SetUserPermitsUsers(userId string, userIds ...string) *updateDeptBuilder {
-	if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
+func (cdb *updateDeptBuilder) SetUserPermitsUserIds(userId string, userIds ...string) *updateDeptBuilder {
+	//if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
 		cdb.cd.UserPermitsUserIds = append(userIds, userId)
-	}
+	//}
 	return cdb
 }
 
 func (cdb *updateDeptBuilder) SetUserPermitsDeptIds(deptId int, deptIds ...int) *updateDeptBuilder {
-	if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
+	//if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
 		cdb.cd.UserPermitsDeptIds = append(deptIds, deptId)
-	}
+	//}
 	return cdb
 }
 
@@ -233,13 +233,26 @@ func (cdb *updateDeptBuilder) SetDeptManagerUseridList(userId string, userIds ..
 
 func (cdb *updateDeptBuilder) Build() *UpdateDept {
 	cd := cdb.cd
+
+	ds := removeIntDuplicates(cd.DeptPermit)
+	us := removeStringDuplicates(cd.UserPermit)
+
+	deptIds := removeIntDuplicates(cd.UserPermitsDeptIds)
+	userIds := removeStringDuplicates(cd. UserPermitsUserIds)
+
+	cd.DeptPermit = ds
+	cd.UserPermit = us
+
+	cd.UserPermitsDeptIds = deptIds
+	cd.UserPermitsUserIds = userIds
+
 	if cd.HideDept != nil && *cd.HideDept == true {
-		cd.DeptPermits = strings.Join(removeIntDuplicatesToString(cd.DeptPermit), ",")
-		cd.UserPermits = strings.Join(removeStringDuplicates(cd.UserPermit), ",")
+		cd.DeptPermits = strings.Join(removeIntDuplicatesToString(ds), ",")
+		cd.UserPermits = strings.Join(us, ",")
 	}
 	if cd.OuterDept != nil && *cd.OuterDept == true {
-		cd.UserPermitsDepts = strings.Join(removeIntDuplicatesToString(cd.UserPermitsDeptIds), ",")
-		cd.UserPermitsUsers = strings.Join(removeStringDuplicates(cd.UserPermitsUserIds), ",")
+		cd.UserPermitsDepts = strings.Join(removeIntDuplicatesToString(deptIds), ",")
+		cd.UserPermitsUsers = strings.Join(userIds, ",")
 	}
 	return cd
 }

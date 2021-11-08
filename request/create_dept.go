@@ -54,7 +54,7 @@ type CreateDept struct {
 	//当outer_dept为true时，此参数生效。
 	UserPermitsUsers string `json:"outer_permit_users,omitempty"`
 
-	UserPermitsUserIds []string `json:"-" validate:",max=200"`
+	UserPermitsUserIds []string `json:"-" validate:"max=200"`
 
 	//指定本部门成员可查看的通讯录部门ID列表，总数不能超过200
 	//
@@ -119,7 +119,7 @@ func (cdb *createDeptBuilder) SetOuterDeptOnlySelf(self bool) *createDeptBuilder
 	return cdb
 }
 
-func (cdb *createDeptBuilder) SetUserPermitsUsers(userId string, userIds ...string) *createDeptBuilder {
+func (cdb *createDeptBuilder) SetUserPermitsUserIds(userId string, userIds ...string) *createDeptBuilder {
 	cdb.cd.UserPermitsUserIds = append(userIds, userId)
 	return cdb
 }
@@ -150,24 +150,25 @@ func (cdb *createDeptBuilder) SetSourceIdentifier(id string) *createDeptBuilder 
 
 func (cdb *createDeptBuilder) Build() *CreateDept {
 	cd := cdb.cd
+	ds := removeIntDuplicates(cd.DeptPermit)
+	us := removeStringDuplicates(cd.UserPermit)
+
+	deptIds := removeIntDuplicates(cd.UserPermitsDeptIds)
+	userIds := removeStringDuplicates(cd.UserPermitsUserIds)
+
+	cd.DeptPermit = ds
+	cd.UserPermit = us
+
+	cd.UserPermitsDeptIds = deptIds
+	cd.UserPermitsUserIds = userIds
 	if cd.HideDept != nil && *cd.HideDept == true {
-		ds := removeIntDuplicates(cd.DeptPermit)
-		us := removeStringDuplicates(cd.UserPermit)
 		cd.DeptPermits = strings.Join(removeIntDuplicatesToString(ds), ",")
 		cd.UserPermits = strings.Join(us, ",")
 
-		cd.DeptPermit = ds
-		cd.UserPermit = us
 	}
 	if cd.OuterDept != nil && *cd.OuterDept == true {
-		deptIds := removeIntDuplicates(cd.UserPermitsDeptIds)
-		userIds := removeStringDuplicates(cd.UserPermitsUserIds)
-
 		cd.UserPermitsDepts = strings.Join(removeIntDuplicatesToString(deptIds), ",")
 		cd.UserPermitsUsers = strings.Join(userIds, ",")
-
-		cd.UserPermitsDeptIds = deptIds
-		cd.UserPermitsUserIds = userIds
 	}
 	return cd
 }

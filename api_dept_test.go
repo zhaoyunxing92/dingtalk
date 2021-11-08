@@ -73,7 +73,7 @@ func TestDingTalk_UpdateDept(t *testing.T) {
 			SetDeptPermits(1, 554656655).
 			SetUserPermits("manager164").
 			SetUserPermitsDeptIds(1, 554656655).
-			SetUserPermitsUsers("manager164").
+			SetUserPermitsUser("manager164").
 			Build())
 
 	assert.Nil(t, err)
