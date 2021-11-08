@@ -30,7 +30,7 @@ func (ding *dingTalk) GetMicroAppByAgentId(agentId uint64) (app model.MicroApp, 
 		}
 	}
 
-	return model.MicroApp{},errors.New(fmt.Sprintf("agentId:%d is not exist",agentId))
+	return model.MicroApp{}, errors.New(fmt.Sprintf("agentId:%d is not exist", agentId))
 }
 
 //获取应用可见范围

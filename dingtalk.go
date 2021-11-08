@@ -95,8 +95,6 @@ func (b *builder) Build() *dingTalk {
 	return b.ding
 }
 
-
-
 //Request 统一请求
 func (ding *dingTalk) Request(method, path string, query url.Values, body interface{},
 	data response.Unmarshalled) (err error) {
