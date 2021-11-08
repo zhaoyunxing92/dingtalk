@@ -2,7 +2,7 @@ name: ci
 
 on:
   push:
-    branches: [ main , "2.0" ]
+    branches: [ main , "2.0", develop ]
   pull_request:
     branches: "*"
 
@@ -36,9 +36,9 @@ jobs:
 
       - name: Check License Header
         run: |
-           license-header-checker -v -a -r -i vendor,license-header-checker ./header/license_header.txt . go
-           rm -rf license-header-checker
-           [[ -z `git status -s` ]]
+          license-header-checker -v -a -r -i vendor,license-header-checker ./header/license_header.txt . go
+          rm -rf license-header-checker
+          [[ -z `git status -s` ]]
 
       - name: gofmt
         run: |
