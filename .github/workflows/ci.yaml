@@ -33,7 +33,7 @@ jobs:
           # diff -u <(echo -n) <(gofmt -d -s .)
 
       - name: Test
-        run: go test -v ./...
+        run: go test -v request/...
 
       - name: Post Coverage
         run: bash <(curl -s https://codecov.io/bash)
