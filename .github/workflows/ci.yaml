@@ -36,9 +36,9 @@ jobs:
 
       - name: Check License Header
         run: |
-           license-header-checker -a -v -r -i vendor,license-header-checker ./header/license_header.txt . go
-           [[ -z `git status -s` ]]
+           license-header-checker -v -a -r -i vendor ./header/license_header.txt . go
            rm -rf license-header-checker
+           [[ -z `git status -s` ]]
 
       - name: gofmt
         run: |
