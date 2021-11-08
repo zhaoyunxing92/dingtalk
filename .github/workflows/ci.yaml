@@ -32,6 +32,7 @@ jobs:
           git clone https://github.com/lsm-dev/license-header-checker.git && \
           cd license-header-checker && \
           make install && \
+          cd .. && \
           license-header-checker -a -v -r -i '' header/license_header.txt . go && \
           [[ -z `git status -s` ]]
 
