@@ -19,7 +19,7 @@ func TestDingTalk_CreateChat(t *testing.T) {
 }
 
 func TestDingTalk_GetChatInfo(t *testing.T) {
-
+	t.Skip()
 	_, _ = client.GetChatInfo("chat6e43a2bd4b52bee37b03bad17720dcd8")
 
 }
