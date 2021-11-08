@@ -163,7 +163,7 @@ func (cdb *updateDeptBuilder) SetHideDept(hide bool) *updateDeptBuilder {
 //SetDeptPermits 指定可以查看本部门的其他部门列表，总数不能超过200,当hide_dept为true时，则此值生效
 func (cdb *updateDeptBuilder) SetDeptPermits(deptId int, deptIds ...int) *updateDeptBuilder {
 	//if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
-		cdb.cd.DeptPermit = append(deptIds, deptId)
+	cdb.cd.DeptPermit = append(deptIds, deptId)
 	//}
 	return cdb
 }
@@ -171,7 +171,7 @@ func (cdb *updateDeptBuilder) SetDeptPermits(deptId int, deptIds ...int) *update
 //SetUserPermits 指定可以查看本部门的人员userid列表，总数不能超过200,当hide_dept为true时，则此值生效
 func (cdb *updateDeptBuilder) SetUserPermits(userId string, userIds ...string) *updateDeptBuilder {
 	//if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
-		cdb.cd.UserPermit = append(userIds, userId)
+	cdb.cd.UserPermit = append(userIds, userId)
 	//}
 	return cdb
 }
@@ -190,14 +190,14 @@ func (cdb *updateDeptBuilder) SetOuterDeptOnlySelf(self bool) *updateDeptBuilder
 
 func (cdb *updateDeptBuilder) SetUserPermitsUserIds(userId string, userIds ...string) *updateDeptBuilder {
 	//if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
-		cdb.cd.UserPermitsUserIds = append(userIds, userId)
+	cdb.cd.UserPermitsUserIds = append(userIds, userId)
 	//}
 	return cdb
 }
 
 func (cdb *updateDeptBuilder) SetUserPermitsDeptIds(deptId int, deptIds ...int) *updateDeptBuilder {
 	//if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
-		cdb.cd.UserPermitsDeptIds = append(deptIds, deptId)
+	cdb.cd.UserPermitsDeptIds = append(deptIds, deptId)
 	//}
 	return cdb
 }
@@ -238,7 +238,7 @@ func (cdb *updateDeptBuilder) Build() *UpdateDept {
 	us := removeStringDuplicates(cd.UserPermit)
 
 	deptIds := removeIntDuplicates(cd.UserPermitsDeptIds)
-	userIds := removeStringDuplicates(cd. UserPermitsUserIds)
+	userIds := removeStringDuplicates(cd.UserPermitsUserIds)
 
 	cd.DeptPermit = ds
 	cd.UserPermit = us
