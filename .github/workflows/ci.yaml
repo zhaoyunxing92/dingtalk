@@ -37,6 +37,7 @@ jobs:
       - name: check license header
         run: |
            license-header-checker -a -v -r -i vendor,license-header-checker ./header/license_header.txt . go
+           rm -rf license-header-checker
 
       - name: gofmt
         run: |
