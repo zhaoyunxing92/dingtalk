@@ -29,19 +29,20 @@ jobs:
 
       - name: check license header
         run: |
-          git clone https://github.com/lsm-dev/license-header-checker.git \
-          && cd license-header-checker
-          && make install \
-          && license-header-checker -a -v -r -i '' header/license_header.txt . go
-          && [[ -z `git status -s` ]]
+          git clone https://github.com/lsm-dev/license-header-checker.git && \
+          cd license-header-checker && \
+          make install && \
+          license-header-checker -a -v -r -i '' header/license_header.txt . go && \
+          [[ -z `git status -s` ]]
 
       - name: gofmt
         run: |
           go fmt ./... && git status && [[ -z `git status -s` ]]
           # diff -u <(echo -n) <(gofmt -d -s .)
 
-      - name: Test request struct
+      - name: test request struct
         #        run: go test -v request/...
         run: go test -v ./request
+
       - name: Post Coverage
         run: bash <(curl -s https://codecov.io/bash)
