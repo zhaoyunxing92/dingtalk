@@ -95,15 +95,15 @@ func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 	sign := crypto.GetSignature(timestamp, ding.Secret, ding.Ticket)
 
-	args := url.Values{}
-	args.Set("accessKey", ding.Key)
-	args.Set("suiteTicket", ding.Ticket)
-	args.Set("timestamp", timestamp)
-	args.Set("signature", sign)
+	query := url.Values{}
+	query.Set("accessKey", ding.Key)
+	query.Set("suiteTicket", ding.Ticket)
+	query.Set("timestamp", timestamp)
+	query.Set("signature", sign)
 
-	req := request.NewCorpAccessToken(ding.CorpId)
 	res := &response.SuiteAccessToken{}
-	if err = ding.Request(http.MethodPost, constant.CorpAccessToken, args, req, res); err != nil {
+	if err = ding.Request(http.MethodPost, constant.CorpAccessToken, query,
+		request.NewCorpAccessToken(ding.CorpId), res); err != nil {
 		return "", err
 	}
 	return res.Token, err

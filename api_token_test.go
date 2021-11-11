@@ -48,7 +48,13 @@ func TestDingTalk_GetSuiteAccessToken(t *testing.T) {
 
 func TestDingTalk_GetCorpAccessToken(t *testing.T) {
 
-	token, err := client.GetCorpAccessToken()
+	ding := NewClient(10435002, "suitegqebx814dt8immqw",
+		"AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m").
+		SetTicket("NsEyj6zdMnmmsBFwaqkB1zsANcwcV8dgh4xSKzuOa7Unwq3OeDypfUvbn7uRCwVOSy0IXzKNlwkmr7OpmNcY9i").
+		SetCorpId("ding3b1e912394011559bc961a6cb783455b").
+		Build()
+
+	token, err := ding.GetCorpAccessToken()
 	assert.Nil(t, err)
 	assert.NotNil(t, token)
 	t.Log(token)

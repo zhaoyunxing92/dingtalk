@@ -25,8 +25,10 @@ const (
 
 	// SuiteAccessToken 获取第三方企业应用的
 	SuiteAccessToken = "/service/get_suite_token"
+
 	//CorpAccessToken 服务商获取第三方应用授权企业的access_token
 	CorpAccessToken = "/service/get_corp_token"
+
 	//GetAuthInfo 获取企业授权信息
 	GetAuthInfo = "/service/get_auth_info"
 
