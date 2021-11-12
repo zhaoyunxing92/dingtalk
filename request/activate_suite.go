@@ -15,19 +15,14 @@
  * limitations under the License.
  */
 
-package crypto
+package request
 
-import (
-	"crypto/hmac"
-	"crypto/sha256"
-	"encoding/base64"
-)
+type ActivateSuite struct {
+	SuiteKey    string `json:"suite_key" validate:"required"`
+	CorpId string `json:"auth_corpid" validate:"required"`
+	Code   string `json:"permanent_code" validate:"required"`
+}
 
-//GetSignature 获取签名
-func GetSignature(timestamp, secret string, ticket string) string {
-	str := timestamp + "\n" + ticket
-	h := hmac.New(sha256.New, []byte(secret))
-	h.Write([]byte(str))
-	//return url.QueryEscape(sign)
-	return base64.StdEncoding.EncodeToString(h.Sum(nil))
+func NewActivateSuite(key, corpId, code string) *ActivateSuite {
+	return &ActivateSuite{key, corpId, code}
 }

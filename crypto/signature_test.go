@@ -24,11 +24,11 @@ import (
 )
 
 func TestGetSignature(t *testing.T) {
-	timestamp := "1629879099342"
+	timestamp := "1636725918388"
 	ticket := "ticket"
 	secret := "secret"
 	signature := GetSignature(timestamp, secret, ticket)
-	sign := "dvTTVIsYbKXSNcldIxZ1i9Aqx1WATXd2Mnb%2BAe%2Fz07A%3D"
+	sign := "LOZmXJzlQYpIu5emP6/1OF4hE3qlMzY/6y4FbDjXPbU="
 	assert.Equal(t, sign, signature)
 	fmt.Println(signature)
 }

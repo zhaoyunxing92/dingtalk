@@ -54,11 +54,25 @@ type dingTalk struct {
 	Ticket string `json:"ticket,omitempty"`
 
 	//授权企业的id
-	CorpId string `json:"corpId"`
+	CorpId string `json:"corpId,omitempty"`
 
 	Client *http.Client
 
 	Cache cache.Cache
+}
+
+type OptionFunc func(*dingTalk)
+
+func WithTicket(ticket string) OptionFunc {
+	return func(dt *dingTalk) {
+		dt.Ticket = ticket
+	}
+}
+
+func WithCorpId(corpId string) OptionFunc {
+	return func(dt *dingTalk) {
+		dt.CorpId = corpId
+	}
 }
 
 //isv 是否isv
@@ -66,50 +80,24 @@ func (ding *dingTalk) isv() bool {
 	return len(ding.Ticket) > 0 && len(ding.CorpId) > 0
 }
 
-// builder builder for dingTalk
-type builder struct {
-	ding *dingTalk
-}
-
 // NewClient new DingTalkBuilder
-func NewClient(id int, key, secret string) *builder {
-	return &builder{ding: &dingTalk{Id: id, Key: key, Secret: secret}}
-}
-
-//SetTicket set app ticket
-func (b *builder) SetTicket(ticket string) *builder {
-	if len(ticket) <= 0 {
-		panic(errors.New("ticket is invalid"))
+func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) {
+	ding = &dingTalk{Id: id, Key: key, Secret: secret}
+	for _, opt := range opts {
+		opt(ding)
 	}
-	b.ding.Ticket = ticket
-	return b
-}
-
-//SetCorpId set app ticket
-func (b *builder) SetCorpId(corpId string) *builder {
-	if len(corpId) <= 0 {
-		panic(errors.New("corpId is invalid"))
-	}
-	b.ding.CorpId = corpId
-	return b
-}
-
-//Build return dingtalk
-func (b *builder) Build() *dingTalk {
-
-	if err := validate(b); err != nil {
-		panic(err)
-	}
-	ding := b.ding
-	key := ding.Key
-	//判断是否isv
 	if ding.isv() {
 		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "isv", key}, "/"), ding.CorpId)
 	} else {
 		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "corp"}, "/"), key)
 	}
 	ding.Client = &http.Client{Timeout: 10 * time.Second}
-	return b.ding
+
+	if err := validate(ding); err != nil {
+		panic(err)
+		return nil
+	}
+	return
 }
 
 //Request 统一请求
@@ -126,8 +114,8 @@ func (ding *dingTalk) Request(method, path string, query url.Values, body interf
 		query = url.Values{}
 	}
 
-	if path != constant.GetTokenKey && path != constant.CorpAccessToken &&
-		path != constant.SuiteAccessToken {
+	if path != constant.GetTokenKey && path != constant.CorpAccessToken && path != constant.SuiteAccessToken &&
+		path != constant.GetAuthInfo && path != constant.GetAgentKey && path != constant.ActivateSuiteKey {
 		var token string
 
 		if ding.isv() {
@@ -200,6 +188,7 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 	uri, _ := url.Parse(constant.Host + path)
 	uri.RawQuery = query.Encode()
 
+	fmt.Println("url=", uri.String())
 	var (
 		req     *http.Request
 		res     *http.Response
@@ -207,7 +196,7 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 		content []byte
 	)
 
-	if method != http.MethodGet {
+	if body != nil {
 		//检查提交表单类型
 		switch body.(type) {
 		case model.UploadFile:

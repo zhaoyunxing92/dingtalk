@@ -32,6 +32,10 @@ const (
 	//GetAuthInfo 获取企业授权信息
 	GetAuthInfo = "/service/get_auth_info"
 
+	//ActivateSuiteKey 激活应用
+	ActivateSuiteKey = "/service/activate_suite"
+	GetAgentKey = "/service/get_agent"
+
 	CreateUserKey             = "/topapi/v2/user/create"       //创建用户
 	DeleteUserKey             = "/topapi/v2/user/delete"       //删除用户
 	UpdateUserKey             = "/topapi/v2/user/update"       //更新用户详情
