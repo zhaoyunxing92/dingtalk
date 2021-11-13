@@ -33,7 +33,7 @@ func (ding *dingTalk) CreateChat(res *request.CreatChat) (rsp response.CreatChat
 	return rsp, ding.Request(http.MethodPost, constant.CreateChatKey, nil, res, &rsp)
 }
 
-//GetChatInfo 获取群信息
+//GetChatInfo 获取群会话信息
 func (ding *dingTalk) GetChatInfo(chatId string) (req response.GetChatInfo, err error) {
 
 	query := url.Values{}
@@ -42,11 +42,10 @@ func (ding *dingTalk) GetChatInfo(chatId string) (req response.GetChatInfo, err 
 	return req, ding.Request(http.MethodGet, constant.GetChatInfoKey, query, nil, &req)
 }
 
-//UpdateChat:更新群
-func (ding *dingTalk) UpdateChat(res model.Request) (req model.Response, err error) {
+//UpdateChat 修改群会话
+func (ding *dingTalk) UpdateChat(res *request.UpdateChat) (req response.Response, err error) {
 
-	err = ding.Request(http.MethodPost, constant.UpdateChatKey, nil, res, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.UpdateChatKey, nil, res, &req)
 }
 
 //ChatFriendSwitch:设置禁止群成员私聊

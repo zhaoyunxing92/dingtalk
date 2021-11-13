@@ -24,9 +24,8 @@ import (
 )
 
 func TestDingTalk_CreateChat(t *testing.T) {
-	t.Skip()
 	res, err := client.CreateChat(
-		request.NewCreatChat("golang", "manager164",
+		request.NewCreatChat("dingtalk", "manager164",
 			"manager164", "manager164", "manager164").
 			Build())
 
@@ -37,13 +36,26 @@ func TestDingTalk_CreateChat(t *testing.T) {
 
 func TestDingTalk_GetChatInfo(t *testing.T) {
 	t.Skip()
-	_, _ = client.GetChatInfo("chat6e43a2bd4b52bee37b03bad17720dcd8")
+	_, _ = client.GetChatInfo("chat8ff884ef696f5717678c6280edfdbbf1")
 
+}
+
+func TestDingTalk_UpdateChat(t *testing.T) {
+
+	res, err := client.UpdateChat(
+		request.NewUpdateChat("chat8ff884ef696f5717678c6280edfdbbf1").
+			SetName("java").
+			SetShowHistory(0).
+			SetSearchable(1).
+			Build())
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 }
 
 func TestDingTalk_GetChatQRCode(t *testing.T) {
 
-	res, err := client.GetChatQRCode("chat6e43a2bd4b52bee37b03bad17720dcd8", "manager164")
+	res, err := client.GetChatQRCode("chat8ff884ef696f5717678c6280edfdbbf1", "manager164")
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
