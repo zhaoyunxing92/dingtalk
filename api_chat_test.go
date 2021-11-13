@@ -18,9 +18,12 @@
 package dingtalk
 
 import (
+	"testing"
+)
+
+import (
 	"github.com/stretchr/testify/assert"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"testing"
 )
 
 func TestDingTalk_CreateChat(t *testing.T) {
@@ -60,4 +63,20 @@ func TestDingTalk_GetChatQRCode(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 	assert.NotNil(t, res.Url)
+}
+
+func TestDingTalk_ChatFriendSwitch(t *testing.T) {
+
+	res, err := client.ChatFriendSwitch("chat8ff884ef696f5717678c6280edfdbbf1", true)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_ChatSetUserNick(t *testing.T) {
+
+	res, err := client.ChatSetUserNick("chat8ff884ef696f5717678c6280edfdbbf1", "manager164","小二")
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 }

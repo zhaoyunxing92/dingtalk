@@ -94,8 +94,9 @@ const (
 	SendMsgToChatKey    = chat + "/send"                            //发送消息到企业群
 	GetChatReadUserKey  = chat + "/getReadList"                     //查询群消息已读人员列表
 	ChatFriendSwitchKey = "/topapi/chat/member/friendswitch/update" //设置禁止群成员私聊
-	ChatSubAdminKey     = "/topapi/chat/subadmin/update"            //设置群管理员
 	GetChatQRCodeKey    = "/topapi/chat/qrcode/get"                 //获取入群二维码链接
+	ChatSetSubAdminKey  = "/topapi/chat/subadmin/update"            //设置群管理员
+	ChatSetUserNickKey  = "/topapi/chat/updategroupnick"            //设置群成员昵称
 
 	SendToConversationKey = "/message/send_to_conversation" //发送普通消息
 

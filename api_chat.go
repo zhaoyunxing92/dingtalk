@@ -48,33 +48,32 @@ func (ding *dingTalk) UpdateChat(res *request.UpdateChat) (req response.Response
 	return req, ding.Request(http.MethodPost, constant.UpdateChatKey, nil, res, &req)
 }
 
-//ChatFriendSwitch:设置禁止群成员私聊
-func (ding *dingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req model.ChatSetResponse, err error) {
+//ChatSetSubAdmin 设置群管理员
+func (ding *dingTalk) ChatSetSubAdmin(chatId, userId string, role int) (req response.Response, err error) {
 
-	form := make(map[string]interface{}, 2)
-	form["chatid"] = chatId
-	form["is_prohibit"] = prohibit
-
-	err = ding.Request(http.MethodPost, constant.ChatFriendSwitchKey, nil, form, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.ChatSetSubAdminKey, nil,
+		request.NewChatSetSubAdmin(chatId, userId, role), &req)
 }
 
-//ChatSubAdmin:设置群管理员,如果设置的用户id不存在则会返回code=400001的系统错误
-//chatId:群id
-//userId:用户id
-//role:2：添加为管理员。 3：删除该管理员。
-func (ding *dingTalk) ChatSubAdmin(chatId, userId string, role int) (req model.ChatSetResponse, err error) {
+//ChatSetUserNick 设置群成员昵称
+func (ding *dingTalk) ChatSetUserNick(chatId, userId, nick string) (req response.Response, err error) {
 
-	if role > 3 || role < 2 {
-		role = 3
-	}
-	form := make(map[string]interface{}, 3)
-	form["chatid"] = chatId
-	form["userids"] = userId
-	form["role"] = role
+	return req, ding.Request(http.MethodPost, constant.ChatSetUserNickKey, nil,
+		request.NewChatSetUserNick(chatId, userId, nick), &req)
+}
 
-	err = ding.Request(http.MethodPost, constant.ChatSubAdminKey, nil, form, &req)
-	return req, err
+//ChatFriendSwitch 设置禁止群成员私聊
+func (ding *dingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req response.Response, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.ChatFriendSwitchKey, nil,
+		request.NewChatFriendSwitch(chatId, prohibit), &req)
+}
+
+//GetChatQRCode 获取入群二维码链接
+func (ding *dingTalk) GetChatQRCode(chatId, userId string) (req response.ChatQRCode, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetChatQRCodeKey, nil,
+		request.NewChatQRCode(chatId, userId), &req)
 }
 
 //SendMsgToChat:发送消息到群
@@ -100,11 +99,4 @@ func (ding *dingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (re
 
 	err = ding.Request(http.MethodGet, constant.GetChatReadUserKey, params, nil, &req)
 	return req, err
-}
-
-//GetChatQRCode 获取入群二维码链接
-func (ding *dingTalk) GetChatQRCode(chatId, userId string) (req response.ChatQRCode, err error) {
-
-	return req, ding.Request(http.MethodPost, constant.GetChatQRCodeKey, nil,
-		request.NewChatQRCode(chatId, userId), &req)
 }
