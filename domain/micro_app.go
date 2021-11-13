@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package model
+package domain
 
 //钉钉应用
 type MicroApp struct {

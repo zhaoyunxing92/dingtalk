@@ -15,20 +15,16 @@
  * limitations under the License.
  */
 
-package dingtalk
+package request
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"net/http"
-	"net/url"
-)
+type MessageProgress struct {
+	//发送消息时使用的微应用的ID
+	AgentId int `json:"agent_id" validate:"required"`
 
-func (ding *dingTalk) MediaUpload(req domain.UploadFile) (media domain.MediaUpload, err error) {
+	//发送消息时钉钉返回的任务ID。
+	TaskId int `json:"task_id" validate:"required"`
+}
 
-	params := url.Values{}
-	params.Add("type", req.Type)
-
-	err = ding.Request(http.MethodPost, constant.MediaUploadKey, params, req, &media)
-	return media, err
+func NewMessageProgress(agentId, taskId int) *MessageProgress {
+	return &MessageProgress{agentId, taskId}
 }

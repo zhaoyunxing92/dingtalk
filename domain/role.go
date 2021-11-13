@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package model
+package domain
 
 //role:角色
 type role struct {

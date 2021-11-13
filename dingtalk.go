@@ -32,7 +32,7 @@ import (
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/cache"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/domain"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 import (
@@ -200,11 +200,11 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 	if body != nil {
 		//检查提交表单类型
 		switch body.(type) {
-		case model.UploadFile:
+		case domain.UploadFile:
 			var b bytes.Buffer
 			w := multipart.NewWriter(&b)
 
-			file := body.(model.UploadFile)
+			file := body.(domain.UploadFile)
 			fw, err := w.CreateFormFile(file.FieldName, file.FileName)
 			if err != nil {
 				return err

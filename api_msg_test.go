@@ -17,18 +17,34 @@
 
 package dingtalk
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"net/http"
-	"net/url"
-)
+import "testing"
+import "github.com/zhaoyunxing92/dingtalk/v2/request"
+import "github.com/stretchr/testify/assert"
 
-func (ding *dingTalk) MediaUpload(req domain.UploadFile) (media domain.MediaUpload, err error) {
+func TestDingTalk_SendTemplateMessage(t *testing.T) {
 
-	params := url.Values{}
-	params.Add("type", req.Type)
+	res, err := isv.SendTemplateMessage(
+		request.NewSendTemplateMessage(1332307896, "80424a44cb444c53a071aae34c0fd140").
+			SetUserIds("manager7556", "manager7556").
+			SetData("msg", "发送模板消息测试").
+			Build())
 
-	err = ding.Request(http.MethodPost, constant.MediaUploadKey, params, req, &media)
-	return media, err
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_GetMessageProgress(t *testing.T) {
+
+	res, err := isv.GetMessageProgress(1332307896, 474203371488)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_SendCorpConversationMessage_Text(t *testing.T) {
+
+	res, err := isv.SendCorpConversationMessage(request.NewTextMessage("hello"))
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 }

@@ -23,7 +23,6 @@ import (
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
@@ -97,7 +96,7 @@ func (ding *dingTalk) GetRoleUserList(roleId, offset, size int) (apps response.R
 }
 
 //BatchRemoveUserRole 批量删除员工角色
-func (ding *dingTalk) BatchRemoveUserRole(roleIds []int, userIds []string) (apps model.Response, err error) {
+func (ding *dingTalk) BatchRemoveUserRole(roleIds []int, userIds []string) (apps response.Response, err error) {
 	return apps, ding.Request(http.MethodPost, constant.RoleBatchRemoveUserKey, nil,
 		request.NewBatchRemoveUserRole(roleIds, userIds), &apps)
 }

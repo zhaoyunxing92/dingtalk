@@ -15,31 +15,27 @@
  * limitations under the License.
  */
 
-package model
+package request
 
 import (
-	"fmt"
-	translator "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
+	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
-//Response 响应
-//{"errcode":40035,"errmsg":"缺少参数 corpid or appkey"}
-type Response struct {
-	Code      int    `json:"errcode"`          //code
-	Msg       string `json:"errmsg,omitempty"` //msg
-	Success   bool   `json:"success,omitempty"`
-	RequestId string `json:"request_id,omitempty"`
-}
+func TestNewSendTemplateMessage(t *testing.T) {
+	data := make(map[string]string, 2)
+	data["name"] = "merge"
+	data["age"] = "18"
 
-//Request 请求
-type Request interface {
-	Validate(valid *validator.Validate, trans translator.Translator) error
-}
+	msg := NewSendTemplateMessage(1332307896, "80424a44cb444c53a071aae34c0fd140").
+		SetUserIds("manager164", "manager164").
+		SetMessage(data).
+		SetData("msg", "发送模板消息").
+		SetData("name", "模板消息").
+		Build()
 
-func (res *Response) CheckError() (err error) {
-	if res.Code != 0 {
-		err = fmt.Errorf("%d: %s", res.Code, res.Msg)
-	}
-	return err
+	assert.NotNil(t, msg)
+	assert.Equal(t, len(msg.UserIds), 1)
+	assert.Equal(t, len(msg.Data), 3)
+	assert.Equal(t, msg.Data["name"], "模板消息")
 }

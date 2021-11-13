@@ -19,12 +19,12 @@ package dingtalk
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/domain"
 	"net/http"
 )
 
 //SendToConversation:发送普通消息
-func (ding *dingTalk) SendToConversation(senderId, chatId string, msg model.Request) (req model.SendToConversationResponse, err error) {
+func (ding *dingTalk) SendToConversation(senderId, chatId string, msg domain.Request) (req domain.SendToConversationResponse, err error) {
 
 	form := make(map[string]interface{}, 3)
 	form["sender"] = senderId

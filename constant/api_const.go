@@ -98,7 +98,10 @@ const (
 	ChatSetSubAdminKey  = "/topapi/chat/subadmin/update"            //设置群管理员
 	ChatSetUserNickKey  = "/topapi/chat/updategroupnick"            //设置群成员昵称
 
-	SendToConversationKey = "/message/send_to_conversation" //发送普通消息
+	SendToConversationKey          = "/message/send_to_conversation"                    //发送普通消息
+	SendTemplateMessageKey         = "/topapi/message/corpconversation/sendbytemplate"  //使用模板发送工作通知消息
+	MessageProgressKey             = "/topapi/message/corpconversation/getsendprogress" //获取工作通知消息的发送进度
+	SendCorpConversationMessageKey = "/topapi/message/corpconversation/asyncsend_v2"    //发送工作通知
 
 	SendRobotMsgKey = "/robot/send" //发送机器人消息
 

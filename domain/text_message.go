@@ -15,20 +15,20 @@
  * limitations under the License.
  */
 
-package dingtalk
+package domain
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"net/http"
-	"net/url"
-)
+// 钉钉消息结构体
+type text struct {
+	Content string `json:"content" validate:"required"`
+}
 
-func (ding *dingTalk) MediaUpload(req domain.UploadFile) (media domain.MediaUpload, err error) {
+//文本消息
+type textMessage struct {
+	message
+	text `json:"text" validate:"required"`
+}
 
-	params := url.Values{}
-	params.Add("type", req.Type)
-
-	err = ding.Request(http.MethodPost, constant.MediaUploadKey, params, req, &media)
-	return media, err
+// 文本对象
+func NewTextMessage(context string) textMessage {
+	return textMessage{message: message{MsgType: "text"}, text: text{Content: context}}
 }

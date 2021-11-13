@@ -19,7 +19,7 @@ package dingtalk
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/domain"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
@@ -77,7 +77,7 @@ func (ding *dingTalk) GetChatQRCode(chatId, userId string) (req response.ChatQRC
 }
 
 //SendMsgToChat:发送消息到群
-func (ding *dingTalk) SendMsgToChat(chatId string, msg model.Request) (req model.MessageResponse, err error) {
+func (ding *dingTalk) SendMsgToChat(chatId string, msg domain.Request) (req domain.MessageResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["chatid"] = chatId
@@ -88,7 +88,7 @@ func (ding *dingTalk) SendMsgToChat(chatId string, msg model.Request) (req model
 }
 
 //GetChatMsgReadUser:查询群消息已读人员列表
-func (ding *dingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (req model.GetChatMsgReadResponse, err error) {
+func (ding *dingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (req domain.GetChatMsgReadResponse, err error) {
 	if size > 100 || size < 0 {
 		size = 100
 	}

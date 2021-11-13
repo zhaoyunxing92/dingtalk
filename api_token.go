@@ -93,15 +93,17 @@ func (ding *dingTalk) GetSuiteAccessToken() (token string, err error) {
 
 // GetCorpAccessToken 服务商获取第三方应用授权企业的access_token
 func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
-	// check ticket and corpId
-	if !ding.isv() {
-		return "", errors.New("ticket or corpId is null")
-	}
 	var (
 		ch  = ding.Cache
 		res = &response.AccessToken{}
 	)
-
+	// check ticket and corpId
+	if !ding.isv() {
+		return "", errors.New("ticket or corpId is null")
+	}
+	if err = ch.Get(res); err == nil {
+		return res.Token, nil
+	}
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 	sign := crypto.GetSignature(timestamp, ding.Secret, ding.Ticket)
 

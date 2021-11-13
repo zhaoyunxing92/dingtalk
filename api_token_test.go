@@ -25,9 +25,10 @@ import (
 var client = NewClient(1244553273, "dingkjy4w80esdwgjuyo",
 	"bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW")
 
-//var client = NewClient(1354379668, "ding4xqt9h4tb5hmovlq",
-//	"rNzB2gWYLG5ZjVtnSCxk19nmJo1FQytEG5UsvzizIGLJYkwdfITsnjBs31AKQJdM").
-//	Build()
+var isv = NewClient(10435002, "suitegqebx814dt8immqw",
+	"AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m",
+	WithTicket("60LVmSzP5zuDorEjISt2hc1imVeyKHcnTCUGUgslOBGpJXxyyQsbuBpyVhw6eunNAt3WXO0u9yfnXmcsskHNdN"),
+	WithCorpId("ding3b1e912394011559bc961a6cb783455b"))
 
 func TestDingTalk_GetAccessToken(t *testing.T) {
 
@@ -47,12 +48,7 @@ func TestDingTalk_GetSuiteAccessToken(t *testing.T) {
 
 func TestDingTalk_GetCorpAccessToken(t *testing.T) {
 
-	ding := NewClient(10435002, "suitegqebx814dt8immqw",
-		"AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m",
-		WithTicket("60LVmSzP5zuDorEjISt2hc1imVeyKHcnTCUGUgslOBGpJXxyyQsbuBpyVhw6eunNAt3WXO0u9yfnXmcsskHNdN"),
-		WithCorpId("ding3b1e912394011559bc961a6cb783455b"))
-
-	token, err := ding.GetCorpAccessToken()
+	token, err := isv.GetCorpAccessToken()
 	assert.Nil(t, err)
 	assert.NotNil(t, token)
 	t.Log(token)

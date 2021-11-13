@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package model
+package domain
 
 import (
 	"errors"

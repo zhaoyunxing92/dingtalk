@@ -23,7 +23,7 @@ import (
 	translator "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	zh_trans "github.com/go-playground/validator/v10/translations/zh"
-	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/domain"
 	"net/http"
 	"time"
 )
@@ -46,7 +46,7 @@ func NewRobot(token string) Robot {
 }
 
 //SendRobotMsg:机器人发送消息
-func (robot *Robot) SendRobotMsg(req model.Request) (res model.Response, err error) {
+func (robot *Robot) SendRobotMsg(req domain.Request) (res domain.Response, err error) {
 
 	if err = req.Validate(robot.validate, robot.trans); err != nil {
 		return res, err

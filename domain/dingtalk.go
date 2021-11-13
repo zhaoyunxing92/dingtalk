@@ -15,20 +15,31 @@
  * limitations under the License.
  */
 
-package model
+package domain
 
-type message struct {
-	MsgType string `json:"msgtype" validate:"required,oneof=text image voice file link oa markdown action_card feedCard"`
+import (
+	"fmt"
+	translator "github.com/go-playground/universal-translator"
+	"github.com/go-playground/validator/v10"
+)
+
+//Response 响应
+//{"errcode":40035,"errmsg":"缺少参数 corpid or appkey"}
+type Response struct {
+	Code      int    `json:"errcode"`          //code
+	Msg       string `json:"errmsg,omitempty"` //msg
+	Success   bool   `json:"success,omitempty"`
+	RequestId string `json:"request_id,omitempty"`
 }
 
-//MessageResponse:发送消息返回
-type MessageResponse struct {
-	Response
-	MessageId string `json:"messageId"` //指定员工的部门信息。
+//Request 请求
+type Request interface {
+	Validate(valid *validator.Validate, trans translator.Translator) error
 }
 
-//SendToConversationResponse:发送普通消息返回
-type SendToConversationResponse struct {
-	Response
-	Receiver string `json:"receiver"`
+func (res *Response) CheckError() (err error) {
+	if res.Code != 0 {
+		err = fmt.Errorf("%d: %s", res.Code, res.Msg)
+	}
+	return err
 }

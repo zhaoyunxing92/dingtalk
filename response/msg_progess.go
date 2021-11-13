@@ -15,20 +15,20 @@
  * limitations under the License.
  */
 
-package dingtalk
+package response
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"net/http"
-	"net/url"
-)
+type MessageProgress struct {
+	Response
+	progress `json:"progress"`
+}
 
-func (ding *dingTalk) MediaUpload(req domain.UploadFile) (media domain.MediaUpload, err error) {
+type progress struct {
+	//取值0~100，表示处理的百分比
+	Percent int `json:"progress_in_percent"`
 
-	params := url.Values{}
-	params.Add("type", req.Type)
-
-	err = ding.Request(http.MethodPost, constant.MediaUploadKey, params, req, &media)
-	return media, err
+	//任务执行状态：
+	//0：未开始
+	//1：处理中
+	//2：处理完毕
+	Status int `json:"status"`
 }

@@ -19,25 +19,25 @@ package dingtalk
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/domain"
 	"net/http"
 )
 
 //发送工作通知返回结果
 type WorkNotifyRep struct {
-	model.Response
+	domain.Response
 	RequestId string `json:"request_id"` //请求的id
 	TaskId    int    `json:"task_id"`    //创建的异步发送任务id
 }
 
 //获取工作通知消息的发送进度返回
 type WorkNotifyProgressRsp struct {
-	model.Response
+	domain.Response
 	workNotifyProgress `json:"progress"`
 }
 
 type WorkNotifyResultRsp struct {
-	model.Response
+	domain.Response
 	sendResult `json:"send_result"` //返回结果。
 }
 
@@ -70,7 +70,7 @@ type forbiddenList struct {
 //发送普通文本工作通知
 //部门id或用户id重复会剔除
 //发送工作通知
-func (ding *dingTalk) SendWorkNotify(res model.WorkNotifyRes) (resp WorkNotifyRep, err error) {
+func (ding *dingTalk) SendWorkNotify(res domain.WorkNotifyRes) (resp WorkNotifyRep, err error) {
 	//组装部门、用户
 	res.AssembleDept()
 	res.AssembleUser()
@@ -107,7 +107,7 @@ func (ding *dingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultR
 
 //撤回工作通知消息
 //taskId:工作通知id
-func (ding *dingTalk) RecallWorkNotifySendResult(taskId int) (rsp model.Response, err error) {
+func (ding *dingTalk) RecallWorkNotifySendResult(taskId int) (rsp domain.Response, err error) {
 	form := map[string]interface{}{
 		"agent_id":    ding.Id,
 		"msg_task_id": taskId,

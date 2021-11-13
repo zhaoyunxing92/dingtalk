@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package model
+package domain
 
 //翻译返回
 type AiResponse struct {

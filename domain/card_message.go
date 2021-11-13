@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package model
+package domain
 
 //卡片按钮
 type CardButton struct {

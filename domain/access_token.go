@@ -15,20 +15,22 @@
  * limitations under the License.
  */
 
-package dingtalk
+package domain
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"net/http"
-	"net/url"
-)
+//AccessToken 钉钉token结构体
+type AccessToken struct {
+	Response
+	Expires int16  `json:"expires_in"`   //过期时间
+	Created int64  `json:"created"`      //创建时间
+	Token   string `json:"access_token"` //token
+}
 
-func (ding *dingTalk) MediaUpload(req domain.UploadFile) (media domain.MediaUpload, err error) {
+//CreatedAt Expired.CreatedAt is when the access token is generated
+func (token *AccessToken) CreatedAt() int64 {
+	return token.Created
+}
 
-	params := url.Values{}
-	params.Add("type", req.Type)
-
-	err = ding.Request(http.MethodPost, constant.MediaUploadKey, params, req, &media)
-	return media, err
+//ExpiresIn is how soon the access token is expired
+func (token *AccessToken) ExpiresIn() int16 {
+	return token.Expires
 }
