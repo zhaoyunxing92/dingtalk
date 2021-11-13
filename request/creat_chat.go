@@ -34,39 +34,39 @@ type CreatChat struct {
 	//0：不可查看
 	//
 	//如果不传值，代表不可查看。
-	ShowHistory *int `json:"showHistoryType,omitempty"`
+	ShowHistory *int `json:"showHistoryType,omitempty" validate:"omitempty,max=1,min=0"`
 
 	//群是否可以被搜索：
 	//
 	//0（默认）：不可搜索
 	//
 	//1：可搜索
-	Searchable *int `json:"searchable,omitempty"`
+	Searchable *int `json:"searchable,omitempty" validate:"omitempty,max=1,min=0"`
 
 	//入群是否需要验证
 	//
 	//0（默认）：不验证
 	//
 	//1：入群验证
-	Validation *int `json:"validationType,omitempty"`
+	Validation *int `json:"validationType,omitempty" validate:"omitempty,max=1,min=0"`
 
 	//@all 使用范围：
 	//
 	//0（默认）：所有人可使用
 	//
 	//1：仅群主可@all
-	MentionAllAuthority *int `json:"mentionAllAuthority,omitempty"`
+	MentionAllAuthority *int `json:"mentionAllAuthority,omitempty" validate:"omitempty,max=1,min=0"`
 
 	//群管理类型：
 	//
 	//0（默认）：所有人可管理
 	//1：仅群主可管理
-	ManagementType *int `json:"managementType,omitempty"`
+	ManagementType *int `json:"managementType,omitempty" validate:"omitempty,max=1,min=0"`
 
 	//是否开启群禁言：
 	//0（默认）：不禁言
 	//1：全员禁言
-	ChatBannedType *int `json:"chatBannedType,omitempty"`
+	ChatBannedType *int `json:"chatBannedType,omitempty" validate:"omitempty,max=1,min=0"`
 }
 
 type creatChatBuilder struct {

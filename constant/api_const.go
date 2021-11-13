@@ -90,7 +90,7 @@ const (
 	chat                = "/chat"                                   //群模块
 	CreateChatKey       = "/chat/create"                            //创建群
 	GetChatInfoKey      = chat + "/get"                             //获取群会话
-	UpdateChatKey       = chat + "/update"                          //修改群会话
+	UpdateChatKey       = "/chat/update"                            //修改群会话
 	SendMsgToChatKey    = chat + "/send"                            //发送消息到企业群
 	GetChatReadUserKey  = chat + "/getReadList"                     //查询群消息已读人员列表
 	ChatFriendSwitchKey = "/topapi/chat/member/friendswitch/update" //设置禁止群成员私聊
