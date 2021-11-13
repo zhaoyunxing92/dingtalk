@@ -75,7 +75,7 @@ func TestDingTalk_ChatFriendSwitch(t *testing.T) {
 
 func TestDingTalk_ChatSetUserNick(t *testing.T) {
 
-	res, err := client.ChatSetUserNick("chat8ff884ef696f5717678c6280edfdbbf1", "manager164","小二")
+	res, err := client.ChatSetUserNick("chat8ff884ef696f5717678c6280edfdbbf1", "manager164", "小二")
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)

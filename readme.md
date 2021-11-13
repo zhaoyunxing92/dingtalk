@@ -84,12 +84,14 @@ fmt.Println(token)
         - [x] [获取外部联系人列表](https://developers.dingtalk.com/document/app/obtain-the-external-contact-list) `client.GetExtContact`
         - [x] [获取外部联系人标签列表](https://developers.dingtalk.com/document/app/obtains-a-list-of-external-contact-tags) `client.GetExtContactLabel`
         - [x] [获取外部联系人详情](https://developers.dingtalk.com/document/app/obtains-the-external-contact-details-of-an-enterprise) `client.GetExtContactDetail`
-* 群会话管理(**5**/5)
+* 群会话管理(**7**/7)
     - [x] [创建群会话](https://developers.dingtalk.com/document/app/create-group-session) `client.CreateChat`
     - [x] [获取群会话信息](https://developers.dingtalk.com/document/app/obtain-a-group-session) `client.GetChatInfo`
     - [x] [修改群会话](https://developers.dingtalk.com/document/app/modify-a-group-session)  `client.UpdateChat`
-    - [x] [设置禁止群成员私聊](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-private-chat)
-    - [x] [设置群管理员](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-chat-admin)
+    - [x] [设置禁止群成员私聊](https://developers.dingtalk.com/document/app/set-private-chat) `client.ChatFriendSwitch`
+    - [x] [获取入群二维码链接](https://developers.dingtalk.com/document/app/obtain-a-qr-code-link) `client.GetChatQRCode`
+    - [x] [设置群管理员](https://developers.dingtalk.com/document/app/set-chat-admin)  `client.ChatSetSubAdmin`
+    - [x] [设置群成员昵称](https://developers.dingtalk.com/document/app/set-a-group-nickname)  `client.ChatSetUserNick`
 * 消息通知(4/6)
     - 工作通知
         - [x] [发送工作通知](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-work-notifications)
