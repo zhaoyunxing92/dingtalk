@@ -115,7 +115,8 @@ func (ding *dingTalk) Request(method, path string, query url.Values, body interf
 	}
 
 	if path != constant.GetTokenKey && path != constant.CorpAccessToken && path != constant.SuiteAccessToken &&
-		path != constant.GetAuthInfo && path != constant.GetAgentKey && path != constant.ActivateSuiteKey {
+		path != constant.GetAuthInfo && path != constant.GetAgentKey && path != constant.ActivateSuiteKey &&
+		path != constant.GetSSOTokenKey && path != constant.GetUnactiveCorpKey && path != constant.ReauthCorpKey {
 		var token string
 
 		if ding.isv() {
@@ -260,4 +261,8 @@ func validate(s interface{}) error {
 		return errors.New(strings.Join(slice, ","))
 	}
 	return nil
+}
+
+func (ding *dingTalk) name() {
+
 }

@@ -29,7 +29,7 @@ type AccessToken struct {
 	Token string `json:"access_token"`
 }
 
-//CreatedAt Expired.CreatedAt is when the access token is generated
+//CreatedAt is when the access token is generated
 func (token *AccessToken) CreatedAt() int64 {
 	return token.Create
 }

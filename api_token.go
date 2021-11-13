@@ -57,13 +57,16 @@ func (ding *dingTalk) GetAccessToken() (token string, err error) {
 	}
 	res.Create = time.Now().Unix()
 	if err = ch.Set(res); err != nil {
-		return "", err
+		return res.Token, err
 	}
 	return res.Token, nil
 }
 
 // GetSuiteAccessToken 获取第三方企业应用的suite_access_token
 func (ding *dingTalk) GetSuiteAccessToken() (token string, err error) {
+	if !ding.isv() {
+		return "", errors.New("ticket or corpId is null")
+	}
 	var (
 		ch  = cache.NewFileCache(strings.Join([]string{".token", "suite"}, "/"), ding.Key)
 		res = &response.SuiteAccessToken{}
@@ -83,7 +86,7 @@ func (ding *dingTalk) GetSuiteAccessToken() (token string, err error) {
 	}
 	res.Create = time.Now().Unix()
 	if err = ch.Set(res); err != nil {
-		return "", err
+		return res.Token, err
 	}
 	return res.Token, err
 }
@@ -114,7 +117,50 @@ func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
 	}
 	res.Create = time.Now().Unix()
 	if err = ch.Set(res); err != nil {
-		return "", err
+		return res.Token, err
 	}
 	return res.Token, err
+}
+
+//GetSSOToken 获取微应用后台免登的access_token
+func (ding *dingTalk) GetSSOToken(corpId, secret string) (token string, err error) {
+	var (
+		ch  = cache.NewFileCache(strings.Join([]string{".token", "sso"}, "/"), ding.Key)
+		res = &response.AccessToken{}
+	)
+	if err = ch.Get(res); err == nil {
+		return res.Token, nil
+	}
+	query := url.Values{}
+	query.Set("corpid", corpId)
+	query.Set("corpsecret", secret)
+
+	if err = ding.Request(http.MethodGet, constant.GetSSOTokenKey, query, nil, res); err != nil {
+		return "", err
+	}
+	res.Create = time.Now().Unix()
+	if err = ch.Set(res); err != nil {
+		return res.Token, err
+	}
+	return res.Token, nil
+}
+
+//GetJsApiTicket 获取jsapi_ticket
+func (ding *dingTalk) GetJsApiTicket() (ticket string, err error) {
+	var (
+		ch  = cache.NewFileCache(strings.Join([]string{".token", "ticket"}, "/"), ding.Key)
+		res = &response.JsApiTicket{}
+	)
+	if err = ch.Get(res); err == nil {
+		return res.Ticket, nil
+	}
+
+	if err = ding.Request(http.MethodGet, constant.GetJsApiTicketKey, nil, nil, res); err != nil {
+		return "", err
+	}
+	res.Create = time.Now().Unix()
+	if err = ch.Set(res); err != nil {
+		return res.Ticket, err
+	}
+	return res.Ticket, nil
 }

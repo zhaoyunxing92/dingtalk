@@ -25,7 +25,6 @@ import (
 var client = NewClient(1244553273, "dingkjy4w80esdwgjuyo",
 	"bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW")
 
-
 //var client = NewClient(1354379668, "ding4xqt9h4tb5hmovlq",
 //	"rNzB2gWYLG5ZjVtnSCxk19nmJo1FQytEG5UsvzizIGLJYkwdfITsnjBs31AKQJdM").
 //	Build()
@@ -57,4 +56,22 @@ func TestDingTalk_GetCorpAccessToken(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, token)
 	t.Log(token)
+}
+
+func TestDingTalk_GetSSOToken(t *testing.T) {
+
+	token, err := client.GetSSOToken("dingc7c5220402493357f2c783f7214b6d69", "")
+
+	assert.NotNil(t, err)
+	assert.Nil(t, token)
+	t.Log(token)
+}
+
+func TestDingTalk_GetJsApiTicket(t *testing.T) {
+
+	ticket, err := client.GetJsApiTicket()
+
+	assert.Nil(t, err)
+	assert.NotNil(t, ticket)
+	t.Log(ticket)
 }

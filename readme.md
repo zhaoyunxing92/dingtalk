@@ -19,12 +19,13 @@ go get github.com/zhaoyunxing92/dingtalk/v2
 
 ```go
 client := NewClient(1244553273, "appkey", "AppSecret").
-	Build()
+Build()
 // 获取token
 token, _ := client.GetAccessToken()
 
 fmt.Println(token)
 ```
+
 ## 参考文档
 
 [dingtalk-callback-Crypto](https://github.com/open-dingtalk/dingtalk-callback-Crypto)
@@ -33,10 +34,10 @@ fmt.Println(token)
 
 * 获取凭证 (**2**/5)
     - [x] [获取企业内部应用的access_token](https://developers.dingtalk.com/document/app/obtain-orgapp-token) `client#GetAccessToken`
-    - [ ] [服务商获取第三方应用授权企业的access_token](https://developers.dingtalk.com/document/app/obtains-the-enterprise-authorized-credential) `client#GetCorpAccessToken`
+    - [x] [服务商获取第三方应用授权企业的access_token](https://developers.dingtalk.com/document/app/obtains-the-enterprise-authorized-credential) `client#GetCorpAccessToken`
     - [x] [获取第三方企业应用的suite_access_token](https://developers.dingtalk.com/document/app/obtain-application-suite-ticket) `client#GetSuiteAccessToken`
-    - [ ] [获取jsapi_ticket](https://developers.dingtalk.com/document/app/obtain-jsapi_ticket)
-    - [ ] [获取微应用后台免登的SsoToken](https://developers.dingtalk.com/document/app/obtain-the-ssotoken-for-micro-application-background-logon-free)
+    - [x] [获取jsapi_ticket](https://developers.dingtalk.com/document/app/obtain-jsapi_ticket) `client#GetJsApiTicket`
+    - [x] [获取微应用后台免登的SsoToken](https://developers.dingtalk.com/document/app/obtain-the-ssotoken-for-micro-application-background-logon-free) `client#GetSSOToken`
 * 通讯录管理
     - 用户管理(**14**/14)
         - [x] [创建用户](https://developers.dingtalk.com/document/app/user-information-creation)
@@ -70,7 +71,8 @@ fmt.Println(token)
         - [x] [删除角色](https://developers.dingtalk.com/document/app/delete-role-information) `client#DeleteRole`
         - [x] [批量删除员工角色](https://developers.dingtalk.com/document/app/delete-the-color-information-of-employee-corners-in-batches) `client#BatchRemoveUserRole`
         - [x] [批量删除员工角色](https://developers.dingtalk.com/document/app/delete-the-color-information-of-employee-corners-in-batches) `client#BatchRemoveUserRole`
-        - [x] [设定角色成员管理范围](https://developers.dingtalk.com/document/app/update-role-member-management-department-scope) `client#SetUserRoleManageScope` 官方接口不通
+        - [x] [设定角色成员管理范围](https://developers.dingtalk.com/document/app/update-role-member-management-department-scope) `client#SetUserRoleManageScope`
+          官方接口不通
         - [x] [获取角色组列表](https://developers.dingtalk.com/document/app/obtains-the-role-group-information) `client#GetGroupRoles`
         - [x] [获取角色列表](https://developers.dingtalk.com/document/app/obtains-a-list-of-enterprise-roles) `client#GetRoleList`
         - [x] [获取角色详情](https://developers.dingtalk.com/document/app/queries-role-details) `client#GetRoleDetail`
@@ -98,7 +100,14 @@ fmt.Println(token)
         - [x] [发送消息到企业群](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-chat-messages)
         - [x] [查询群消息已读人员列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-the-list-of-people-who-have-read-a-group-1)
         - [x] [发送普通消息](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-normal-messages)
-* 钉钉运动
+
+* 应用授权(**5**/6)
+    - [x] [激活应用](https://developers.dingtalk.com/document/app/activate-suite) `client#ActivateSuite`
+    - [x] [获取授权应用的基本信息](https://developers.dingtalk.com/document/app/obtains-application-information-of-an-enterprise)  `client#GetAgentInfo`
+    - [x] [获取企业授权信息](https://developers.dingtalk.com/document/app/obtains-the-basic-information-of-an-enterprise) `client#GetAuthInfo`
+    - [ ] [获取授权企业的永久授权码](https://developers.dingtalk.com/document/app/obtain-a-permanent-authorization-code) 
+    - [x] [获取应用未激活的企业列表](https://developers.dingtalk.com/document/app/obtains-a-list-of-enterprises-whose-applications-are-not-activated) `client#GetUnactiveCorpIds`
+    - [x] [重新授权未激活应用的企业](https://developers.dingtalk.com/document/app/re-authorize-enterprises-whose-applications-are-not-activated) `client#ReauthCorp`
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)

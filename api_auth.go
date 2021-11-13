@@ -55,9 +55,6 @@ func (ding *dingTalk) GetAuthInfo(corpId string) (rsp response.CorpAuthInfo, err
 
 // ActivateSuite 激活应用
 func (ding *dingTalk) ActivateSuite(corpId, code string) (rsp response.CorpAuthInfo, err error) {
-	if !ding.isv() {
-		return response.CorpAuthInfo{}, errors.New("ticket or corpId is null")
-	}
 
 	token, err := ding.GetSuiteAccessToken()
 	if err != nil {
@@ -73,9 +70,7 @@ func (ding *dingTalk) ActivateSuite(corpId, code string) (rsp response.CorpAuthI
 
 // GetAgentInfo 获取授权应用的基本信息
 func (ding *dingTalk) GetAgentInfo(agentId int, corpId string) (rsp response.AgentInfo, err error) {
-	if !ding.isv() {
-		return response.AgentInfo{}, errors.New("ticket or corpId is null")
-	}
+
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 	sign := crypto.GetSignature(timestamp, ding.Secret, ding.Ticket)
 
@@ -93,4 +88,29 @@ func (ding *dingTalk) GetAgentInfo(agentId int, corpId string) (rsp response.Age
 
 	return rsp, ding.Request(http.MethodPost, constant.GetAgentKey, query,
 		request.NewAgentInfo(agentId, ding.Key, corpId), &rsp)
+}
+
+// GetUnactiveCorp 获取应用未激活的企业列表
+func (ding *dingTalk) GetUnactiveCorpIds(appId int) (rsp response.UnactiveCorp, err error) {
+	token, err := ding.GetSuiteAccessToken()
+	if err != nil {
+		return response.UnactiveCorp{}, err
+	}
+	query := url.Values{}
+	query.Set("suite_access_token", token)
+
+	return rsp, ding.Request(http.MethodPost, constant.GetUnactiveCorpKey, query, request.NewUnactiveCorp(appId), &rsp)
+}
+
+// ReauthCorp 重新授权未激活应用的企业
+func (ding *dingTalk) ReauthCorp(appId int, corpId string, corpIds ...string) (rsp response.Response, err error) {
+	token, err := ding.GetSuiteAccessToken()
+	if err != nil {
+		return response.Response{}, err
+	}
+	query := url.Values{}
+	query.Set("suite_access_token", token)
+
+	return rsp, ding.Request(http.MethodPost, constant.ReauthCorpKey, query,
+		request.NewReauthCorp(appId, append(corpIds, corpId)), &rsp)
 }
