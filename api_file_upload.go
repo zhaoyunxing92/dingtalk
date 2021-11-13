@@ -1,21 +1,34 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/model"
-	"github.com/zhaoyunxing92/dingtalk/global"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 	"net/url"
 )
 
-func (talk *DingTalk) MediaUpload(req model.UploadFile) (media model.MediaUpload, err error) {
+func (ding *dingTalk) MediaUpload(req model.UploadFile) (media model.MediaUpload, err error) {
 
-	//参数验证
-	if err = req.Validate(talk.validate, talk.trans); err != nil {
-		return model.MediaUpload{}, err
-	}
 	params := url.Values{}
 	params.Add("type", req.Type)
 
-	err = talk.request(http.MethodPost, global.MediaUploadKey, params, req, &media)
+	err = ding.Request(http.MethodPost, constant.MediaUploadKey, params, req, &media)
 	return media, err
 }

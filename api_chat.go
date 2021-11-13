@@ -1,66 +1,62 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
 	"net/url"
 	"strconv"
 )
 
-// CreateChat:创建群
-// name:群名称
-// owner:群主管
-// userIds:群成员
-func (talk *DingTalk) CreateChat(name, owner string, userIds []string) (rsp model.CreateChatResponse, err error) {
+//CreateChat 创建群
+func (ding *dingTalk) CreateChat(res *request.CreatChat) (rsp response.CreatChat, err error) {
 
-	form := make(map[string]interface{}, 2)
-	form["name"] = name
-	form["owner"] = owner
-	form["useridlist"] = userIds
-
-	err = talk.request(http.MethodPost, global.CreateChatKey, nil, form, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.CreateChatKey, nil, res, &rsp)
 }
 
-//CreateDetailChat:创建详细的群
-func (talk *DingTalk) CreateDetailChat(res model.Request) (req model.CreateChatResponse, err error) {
+//GetChatInfo 获取群信息
+func (ding *dingTalk) GetChatInfo(chatId string) (req response.GetChatInfo, err error) {
 
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return req, err
-	}
-	err = talk.request(http.MethodPost, global.CreateChatKey, nil, res, &req)
+	query := url.Values{}
+	query.Set("chatid", chatId)
 
-	return req, err
-}
-
-//GetChatInfo:获取群信息
-func (talk *DingTalk) GetChatInfo(chatId string) (req model.GetChatInfoResponse, err error) {
-	params := url.Values{}
-	params.Set("chatid", chatId)
-
-	err = talk.request(http.MethodGet, global.GetChatInfoKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodGet, constant.GetChatInfoKey, query, nil, &req)
 }
 
 //UpdateChat:更新群
-func (talk *DingTalk) UpdateChat(res model.Request) (req model.Response, err error) {
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return req, err
-	}
-	err = talk.request(http.MethodPost, global.UpdateChatKey, nil, res, &req)
+func (ding *dingTalk) UpdateChat(res model.Request) (req model.Response, err error) {
+
+	err = ding.Request(http.MethodPost, constant.UpdateChatKey, nil, res, &req)
 	return req, err
 }
 
 //ChatFriendSwitch:设置禁止群成员私聊
-func (talk *DingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req model.ChatSetResponse, err error) {
+func (ding *dingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req model.ChatSetResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["chatid"] = chatId
 	form["is_prohibit"] = prohibit
 
-	err = talk.request(http.MethodPost, global.ChatFriendSwitchKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.ChatFriendSwitchKey, nil, form, &req)
 	return req, err
 }
 
@@ -68,7 +64,7 @@ func (talk *DingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req model.
 //chatId:群id
 //userId:用户id
 //role:2：添加为管理员。 3：删除该管理员。
-func (talk *DingTalk) ChatSubAdmin(chatId, userId string, role int) (req model.ChatSetResponse, err error) {
+func (ding *dingTalk) ChatSubAdmin(chatId, userId string, role int) (req model.ChatSetResponse, err error) {
 
 	if role > 3 || role < 2 {
 		role = 3
@@ -78,27 +74,23 @@ func (talk *DingTalk) ChatSubAdmin(chatId, userId string, role int) (req model.C
 	form["userids"] = userId
 	form["role"] = role
 
-	err = talk.request(http.MethodPost, global.ChatSubAdminKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.ChatSubAdminKey, nil, form, &req)
 	return req, err
 }
 
 //SendMsgToChat:发送消息到群
-func (talk *DingTalk) SendMsgToChat(chatId string, msg model.Request) (req model.MessageResponse, err error) {
-
-	if err = msg.Validate(talk.validate, talk.trans); err != nil {
-		return req, err
-	}
+func (ding *dingTalk) SendMsgToChat(chatId string, msg model.Request) (req model.MessageResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["chatid"] = chatId
 	form["msg"] = msg
 
-	err = talk.request(http.MethodPost, global.SendMsgToChatKey, nil, form, &req)
+	err = ding.Request(http.MethodPost, constant.SendMsgToChatKey, nil, form, &req)
 	return req, err
 }
 
 //GetChatMsgReadUser:查询群消息已读人员列表
-func (talk *DingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (req model.GetChatMsgReadResponse, err error) {
+func (ding *dingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (req model.GetChatMsgReadResponse, err error) {
 	if size > 100 || size < 0 {
 		size = 100
 	}
@@ -107,6 +99,13 @@ func (talk *DingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (re
 	params.Set("cursor", strconv.Itoa(cursor))
 	params.Set("size", strconv.Itoa(size))
 
-	err = talk.request(http.MethodGet, global.GetChatReadUserKey, params, nil, &req)
+	err = ding.Request(http.MethodGet, constant.GetChatReadUserKey, params, nil, &req)
 	return req, err
+}
+
+//GetChatQRCode 获取入群二维码链接
+func (ding *dingTalk) GetChatQRCode(chatId, userId string) (req response.ChatQRCode, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetChatQRCodeKey, nil,
+		request.NewChatQRCode(chatId, userId), &req)
 }

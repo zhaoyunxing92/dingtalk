@@ -1,163 +1,95 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
-	"net/url"
-	"strconv"
 )
 
-// CreateDept:创建部门
-// name:部门名称
-// parentId:父部门id
-func (talk *DingTalk) CreateDept(name string, parentId int) (rsp model.DeptCreateResponse, err error) {
+//CreateDept 创建部门
+func (ding *dingTalk) CreateDept(res *request.CreateDept) (rsp response.CreateDept, err error) {
 
-	form := make(map[string]interface{}, 2)
-	form["name"] = name
-	form["parentid"] = parentId
-
-	err = talk.request(http.MethodPost, global.CreateDeptKey, nil, form, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.CreateDeptKey, nil, res, &rsp)
 }
 
-//CreateDetailDept:创建详细的部门
-func (talk *DingTalk) CreateDetailDept(res model.CreateDetailDeptRequest) (req model.DeptCreateResponse, err error) {
+//DeleteDept 删除部门
+func (ding *dingTalk) DeleteDept(deptId int) (rsp response.Response, err error) {
 
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return req, err
-	}
-	//组装参数
-	res.JoinOuterPermitUsers()
-	res.JoinOuterPermitDepts()
-	res.JoinDeptPermits()
-	res.JoinUserPermits()
-
-	err = talk.request(http.MethodPost, global.CreateDeptKey, nil, res, &req)
-
-	return req, err
+	return rsp, ding.Request(http.MethodPost, constant.DeleteDeptKey, nil, request.NewDeleteDept(deptId), &rsp)
 }
 
-//GetDeptDetail:获取部门详情
-func (talk *DingTalk) GetDeptDetail(deptId int, lang string) (rsp model.DeptDetail, err error) {
+//UpdateDept 更新部门
+func (ding *dingTalk) UpdateDept(res *request.UpdateDept) (rsp response.Response, err error) {
 
-	if lang != "en_US" {
-		lang = "zh_CN"
-	}
-
-	params := url.Values{}
-	params.Set("id", strconv.Itoa(deptId))
-	params.Set("lang", lang)
-
-	err = talk.request(http.MethodGet, global.GetDeptDetailKey, params, nil, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.UpdateDeptKey, nil, res, &rsp)
 }
 
-//DeleteDept:删除部门
-func (talk *DingTalk) DeleteDept(deptId int) (rsp model.Response, err error) {
+//GetDeptDetail 获取部门详情
+func (ding *dingTalk) GetDeptDetail(res *request.DeptDetail) (rsp response.DeptDetail, err error) {
 
-	params := url.Values{}
-	params.Set("id", strconv.Itoa(deptId))
-
-	err = talk.request(http.MethodGet, global.DeleteDeptKey, params, nil, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.GetDeptDetailKey, nil, res, &rsp)
 }
 
-//UpdateDept:更新部门
-func (talk *DingTalk) UpdateDept(res model.CreateDetailDeptRequest) (rsp model.DeptCreateResponse, err error) {
+//GetDeptList 获取部门列表
+func (ding *dingTalk) GetDeptList(res *request.DeptList) (rsp response.DeptList, err error) {
 
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return rsp, err
-	}
-	//组装参数
-	res.JoinOuterPermitUsers()
-	res.JoinOuterPermitDepts()
-	res.JoinDeptPermits()
-	res.JoinUserPermits()
-	res.JoinDeptManagerUserIds()
-
-	err = talk.request(http.MethodPost, global.UpdateDeptKey, nil, res, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.GetDeptListKey, nil, res, &rsp)
 }
 
-//GetSubDeptList:获取子部门列表
-func (talk *DingTalk) GetSubDeptList(deptId int, lang string, fetch bool) (rsp model.GetSubDeptResponse, err error) {
+//GetSubDeptList 获取子部门列表
+func (ding *dingTalk) GetSubDeptList(deptId int) (rsp response.SubDeptList, err error) {
 
-	if lang != "en_US" {
-		lang = "zh_CN"
-	}
-
-	params := url.Values{}
-	params.Set("id", strconv.Itoa(deptId))
-	params.Set("lang", lang)
-	params.Set("fetch_child", strconv.FormatBool(fetch))
-
-	err = talk.request(http.MethodGet, global.GetSubDeptListKey, params, nil, &rsp)
-
-	return rsp, err
+	return rsp, ding.Request(http.MethodPost, constant.GetSubDeptListKey, nil, request.NewSubDept(deptId), &rsp)
 }
 
-//GetDeptUserIds:获取部门用户userid列表
-//deptId:部门id
-func (talk *DingTalk) GetDeptUserIds(deptId int) (req model.DeptUserIdsResponse, err error) {
+//GetDeptUserIds 获取部门用户userid列表
+func (ding *dingTalk) GetDeptUserIds(du *request.DeptUserId) (req response.DeptUserId, err error) {
 
-	params := url.Values{}
-	params.Set("deptId", strconv.Itoa(deptId))
-
-	err = talk.request(http.MethodGet, global.GetDeptUserIdKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetDeptUserIdKey, nil, du, &req)
 }
 
-//GetDeptUserDetail:获取部门用户详情
-func (talk *DingTalk) GetDeptUserDetail(deptId, offset, size int, lang string) (req model.GetDeptUserDetailResponse, err error) {
-	if lang != "en_US" {
-		lang = "zh_CN"
-	}
+//GetDeptSimpleUserInfo 获取部门用户基础信息
+func (ding *dingTalk) GetDeptSimpleUserInfo(res *request.DeptSimpleUserInfo) (req response.DeptSimpleUserInfo,
+	err error) {
 
-	if size < 0 || size > 100 {
-		size = 100
-	}
-	params := url.Values{}
-	params.Set("lang", lang)
-	params.Set("department_id", strconv.Itoa(deptId))
-	params.Set("offset", strconv.Itoa(offset))
-	params.Set("size", strconv.Itoa(size))
-	params.Set("order", "entry_desc")
-
-	err = talk.request(http.MethodGet, global.GetDeptUserDetailKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetDeptSimpleUserKey, nil, res, &req)
 }
 
-//GetDeptUserDetail:获取子部门ID列表
-func (talk *DingTalk) GetSubDeptIds(deptId int) (req model.GetSubDeptIdsResponse, err error) {
+//GetDeptDetailUserInfo 获取部门用户详情
+func (ding *dingTalk) GetDeptDetailUserInfo(res *request.DeptDetailUserInfo) (req response.DeptDetailUserInfo,
+	err error) {
 
-	params := url.Values{}
-	params.Set("id", strconv.Itoa(deptId))
-
-	err = talk.request(http.MethodGet, global.GetSubDeptIdsKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetDeptDetailUserKey, nil, res, &req)
 }
 
-//GetParentIdsByUserId:查询指定用户的所有上级父部门路径
-func (talk *DingTalk) GetParentIdsByUserId(userId string) (req model.GetParentIdsByUserIdResponse, err error) {
+//GetParentIdsByUserId 获取指定用户的所有父部门列表
+func (ding *dingTalk) GetParentIdsByUserId(userId string) (req response.GetParentIdsByUserId, err error) {
 
-	params := url.Values{}
-	params.Set("userId", userId)
-
-	err = talk.request(http.MethodGet, global.GetParentDeptsByUserKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetParentDeptsByUserKey, nil,
+		request.NewGetParentIdsByUserId(userId), &req)
 }
 
-//GetParentIdsByUserId:查询部门的所有上级父部门路径
-func (talk *DingTalk) GetParentIdsByDeptId(deptId int) (req model.GetParentIdsByDeptIdResponse, err error) {
+//GetParentIdsByDeptId 获取指定部门的所有父部门列表
+func (ding *dingTalk) GetParentIdsByDeptId(deptId int) (req response.GetParentIdsByDeptId, err error) {
 
-	params := url.Values{}
-	params.Set("id", strconv.Itoa(deptId))
-
-	err = talk.request(http.MethodGet, global.GetParentDeptsByDeptKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetParentDeptsByDeptKey, nil,
+		request.NewGetParentIdsByDeptId(deptId), &req)
 }

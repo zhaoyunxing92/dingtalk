@@ -1,194 +1,103 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dingtalk
 
 import (
-	"errors"
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
-	"strings"
 )
 
-//GetRoleList:获取角色列表
-//offset:支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始
-//size:支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，默认值20，最大值200。
-func (talk *DingTalk) GetRoleList(offset, size int) (apps model.RoleListResponse, err error) {
-	if size > 200 || size < 0 {
-		size = 200
-	}
-	form := map[string]int{
-		"offset": offset,
-		"size":   size,
-	}
-	err = talk.request(http.MethodPost, global.GetRoleListKey, nil, form, &apps)
-	return apps, err
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
+)
+
+//CreateRole 创建角色
+func (ding *dingTalk) CreateRole(name string, groupId int) (apps response.CreateRole, err error) {
+
+	return apps, ding.Request(http.MethodPost, constant.CreateRoleKey, nil,
+		request.NewCreateRole(name, groupId), &apps)
 }
 
-//GetRoleUserList:获取指定角色的员工列表
-//roleId:角色Id
-//offset:支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始
-//size:支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，默认值20，最大值200。
-//
-//{
-//    "errcode": 0,
-//    "result": {
-//        "hasMore": false,
-//        "list": [
-//            {
-//                "name": "xx",
-//                "userid": "xx"
-//            },
-//            {
-//                "name": "xx",
-//                "userid": "xx"
-//            }
-//        ]
-//    },
-//    "request_id": "y5y017a37yhd"
-//}
-func (talk *DingTalk) GetRoleUserList(roleId, offset, size int) (apps model.RoleUserListResponse, err error) {
-	if size > 200 || size < 0 {
-		size = 200
-	}
-	form := map[string]int{
-		"role_id": roleId,
-		"offset":  offset,
-		"size":    size,
-	}
-	err = talk.request(http.MethodPost, global.GetRoleUserListKey, nil, form, &apps)
-	return apps, err
+//CreateRoleGroup 创建角色组
+func (ding *dingTalk) CreateRoleGroup(name string) (apps response.CreateRoleGroup, err error) {
+
+	return apps, ding.Request(http.MethodPost, constant.CreateRoleGroupKey, nil,
+		request.NewCreateRoleGroup(name), &apps)
 }
 
-//GetRoleGroup:获取角色组
-//groupId:组id
-func (talk *DingTalk) GetRoleGroup(groupId int) (apps model.RoleGroupResponse, err error) {
+//UpdateRole 更新角色
+func (ding *dingTalk) UpdateRole(id int, name string) (apps response.Response, err error) {
 
-	form := map[string]int{
-		"group_id": groupId,
-	}
-	err = talk.request(http.MethodPost, global.GetRoleGroupKey, nil, form, &apps)
-	return apps, err
+	return apps, ding.Request(http.MethodPost, constant.UpdateRoleKey, nil,
+		request.NewUpdateRole(id, name), &apps)
 }
 
-//GetRoleDetail:获取角色详情
-//todo：如果你传的是角色组id，那么会返回角色组的信息
-func (talk *DingTalk) GetRoleDetail(roleId int) (apps model.RoleDetailResponse, err error) {
+//BatchAddUserRole  批量增加员工角色
+func (ding *dingTalk) BatchAddUserRole(rs []int, us []string) (apps response.Response, err error) {
 
-	form := map[string]int{
-		"roleId": roleId,
-	}
-	err = talk.request(http.MethodPost, global.GetRoleDetailKey, nil, form, &apps)
-	return apps, err
+	return apps, ding.Request(http.MethodPost, constant.RoleBatchAddUserKey, nil,
+		request.NewRoleAddUser(rs, us), &apps)
 }
 
-//CreateRoleGroup:创建角色组
-func (talk *DingTalk) CreateRoleGroup(name string) (apps model.CreateRoleGroupResponse, err error) {
+//GetRoleList 获取角色列表
+func (ding *dingTalk) GetRoleList(offset, size int) (apps response.RoleList, err error) {
 
-	form := map[string]string{
-		"name": name,
-	}
-	err = talk.request(http.MethodPost, global.CreateRoleGroupKey, nil, form, &apps)
-	return apps, err
+	return apps, ding.Request(http.MethodPost, constant.GetRoleListKey, nil,
+		request.NewRoleList(offset, size), &apps)
 }
 
-//CreateRole:创建角色
-//name:角色名称
-//groupId:角色组id
-func (talk *DingTalk) CreateRole(name string, groupId int) (apps model.CreateRoleResponse, err error) {
+//DeleteRole 删除角色
+func (ding *dingTalk) DeleteRole(id int) (apps response.Response, err error) {
 
-	form := map[string]interface{}{
-		"roleName": name,
-		"groupId":  groupId,
-	}
-	err = talk.request(http.MethodPost, global.CreateRoleKey, nil, form, &apps)
-	return apps, err
+	return apps, ding.Request(http.MethodPost, constant.DeleteRoleKey, nil, request.NewDeleteRole(id), &apps)
 }
 
-//UpdateRole:更新角色
-// todo:如果传入的是角色组id则会修改角色组信息
-//name:角色名称
-//roleId:角色id
-func (talk *DingTalk) UpdateRole(name string, roleId int) (apps model.Response, err error) {
+//SetUserRoleManageScope 设定角色成员管理范围 todo:官方接口不通
+func (ding *dingTalk) SetUserRoleManageScope(res *request.SetUserRoleManageScope) (apps response.Response, err error) {
 
-	form := map[string]interface{}{
-		"roleName": name,
-		"roleId":   roleId,
-	}
-	err = talk.request(http.MethodPost, global.UpdateRoleKey, nil, form, &apps)
-	return apps, err
+	return apps, ding.Request(http.MethodPost, constant.RoleUpdateUserManageScopeKey, nil, res, &apps)
 }
 
-//DeleteRole:删除角色
-// todo:如果传入的是角色组id则会删除角色组
-//roleId:角色id
-func (talk *DingTalk) DeleteRole(roleId int) (apps model.Response, err error) {
+//GetGroupRoles 获取角色组列表
+func (ding *dingTalk) GetGroupRoles(groupId int) (apps response.GroupRole, err error) {
 
-	form := map[string]int{
-		"role_id": roleId,
-	}
-	err = talk.request(http.MethodPost, global.DeleteRoleKey, nil, form, &apps)
-	return apps, err
+	return apps, ding.Request(http.MethodPost, constant.GetRoleGroupKey, nil,
+		request.NewGroupRole(groupId), &apps)
 }
 
-//RoleBatchAddUser:批量增加员工角色
-//roleIds:角色roleId列表，最多可传20个。
-//userIds:员工的userId,，最多可传20个。
-func (talk *DingTalk) RoleBatchAddUser(roleIds []string, userIds []string) (apps model.Response, err error) {
+//GetRoleDetail 获取角色详情
+func (ding *dingTalk) GetRoleDetail(roleId int) (apps response.RoleDetail, err error) {
 
-	if len(roleIds) > 20 {
-		err = errors.New("一次最多20个角色")
-	}
-
-	if len(userIds) > 20 {
-		err = errors.New("一次最多20个用户")
-	}
-
-	var form = map[string]string{
-		"userIds": strings.Join(userIds, ","),
-		"roleIds": strings.Join(roleIds, ","),
-	}
-	err = talk.request(http.MethodPost, global.RoleBatchAddUserKey, nil, form, &apps)
-	return apps, err
+	return apps, ding.Request(http.MethodPost, constant.GetRoleDetailKey, nil,
+		request.NewRoleDetail(roleId), &apps)
 }
 
-//RoleBatchRemoveUser:批量删除员工角色
-//roleIds:角色roleId列表，最多可传20个。
-//userIds:员工的userId,，最多可传20个。
-func (talk *DingTalk) RoleBatchRemoveUser(roleIds []string, userIds []string) (apps model.Response, err error) {
+//GetRoleUserList 获取指定角色的员工列表
+func (ding *dingTalk) GetRoleUserList(roleId, offset, size int) (apps response.RoleUser, err error) {
 
-	if len(roleIds) > 20 {
-		err = errors.New("一次最多20个角色")
-	}
-
-	if len(userIds) > 20 {
-		err = errors.New("一次最多20个用户")
-	}
-
-	var form = map[string]string{
-		"userIds": strings.Join(userIds, ","),
-		"roleIds": strings.Join(roleIds, ","),
-	}
-	err = talk.request(http.MethodPost, global.RoleBatchRemoveUserKey, nil, form, &apps)
-	return apps, err
+	return apps, ding.Request(http.MethodPost, constant.GetRoleUserListKey, nil,
+		request.NewRoleUser(roleId, offset, size), &apps)
 }
 
-//RoleUpdateUserManageScope:设定角色成员管理范围
-//userId:用户id
-//roleId:角色id
-//deptIds:部门ID列表数。最多50个，不传则设置范围为所有人
-func (talk *DingTalk) RoleUpdateUserManageScope(userId string, roleId int, deptIds []int) (apps model.Response, err error) {
-
-	if deptIds != nil && len(deptIds) > 50 {
-		err = errors.New("最多50个部门")
-	}
-
-	var form = map[string]interface{}{
-		"userid":  userId,
-		"role_id": roleId,
-	}
-
-	if deptIds != nil {
-		form["dept_ids"] = deptIds
-	}
-	err = talk.request(http.MethodPost, global.RoleUpdateUserManageScopeKey, nil, form, &apps)
-	return apps, err
+//BatchRemoveUserRole 批量删除员工角色
+func (ding *dingTalk) BatchRemoveUserRole(roleIds []int, userIds []string) (apps model.Response, err error) {
+	return apps, ding.Request(http.MethodPost, constant.RoleBatchRemoveUserKey, nil,
+		request.NewBatchRemoveUserRole(roleIds, userIds), &apps)
 }

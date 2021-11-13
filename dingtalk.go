@@ -1,59 +1,268 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dingtalk
 
 import (
-	"github.com/go-playground/locales/en"
-	"github.com/go-playground/locales/zh"
-	translator "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
-	zh_trans "github.com/go-playground/validator/v10/translations/zh"
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"mime/multipart"
 	"net/http"
 	"net/url"
+	"strings"
 	"time"
 )
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/cache"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
+)
+import (
+	"github.com/go-playground/validator/v10"
+	"github.com/pkg/errors"
+)
 
-type DingTalk struct {
-	AgentId   int    //应用id
-	AppKey    string //应用key
-	AppSecret string //应用秘钥
-	client    *http.Client
-	cache     global.Cache
-	validate  *validator.Validate //参数校验
-	trans     translator.Translator
+type dingTalk struct {
+	// 企业内部应用对应:AgentId，如果是应套件:SuiteId
+	Id int `json:"id,omitempty" validate:"required"`
+
+	// 企业内部应用对应:AppKey，套件对应:SuiteKey
+	Key string `json:"key,omitempty" validate:"required"`
+
+	//企业内部对应:AppSecret，套件对应:SuiteSecret
+	Secret string `json:"secret,omitempty" validate:"required"`
+
+	// isv 钉钉开放平台会向应用的回调URL推送的suite_ticket（约5个小时推送一次）
+	Ticket string `json:"ticket,omitempty"`
+
+	//授权企业的id
+	CorpId string `json:"corpId,omitempty"`
+
+	Client *http.Client
+
+	Cache cache.Cache
 }
 
-// 创建钉钉客户端
-func NewDingTalk(agentId int, appKey, appSecret string) *DingTalk {
-	validate := validator.New()
-	uni := translator.New(en.New(), zh.New())
-	trans, _ := uni.GetTranslator("zh")
-	_ = zh_trans.RegisterDefaultTranslations(validate, trans)
+type OptionFunc func(*dingTalk)
 
-	return &DingTalk{agentId, appKey, appSecret, &http.Client{
-		Timeout: 10 * time.Second,
-	}, global.NewFileCache(".token", appKey), validate, trans}
-}
-
-//GetToken：获取token
-func (talk *DingTalk) GetToken() (token string, err error) {
-	cache := talk.cache
-	var accessToken model.AccessToken
-	//先缓存中获取
-	if err = cache.Get(&accessToken); err == nil {
-		return accessToken.Token, nil
+func WithTicket(ticket string) OptionFunc {
+	return func(dt *dingTalk) {
+		dt.Ticket = ticket
 	}
-	//读取本地文件
+}
+
+func WithCorpId(corpId string) OptionFunc {
+	return func(dt *dingTalk) {
+		dt.CorpId = corpId
+	}
+}
+
+//isv 是否isv
+func (ding *dingTalk) isv() bool {
+	return len(ding.Ticket) > 0 && len(ding.CorpId) > 0
+}
+
+// NewClient new DingTalkBuilder
+func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) {
+	ding = &dingTalk{Id: id, Key: key, Secret: secret}
+	for _, opt := range opts {
+		opt(ding)
+	}
+	if ding.isv() {
+		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "isv", key}, "/"), ding.CorpId)
+	} else {
+		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "corp"}, "/"), key)
+	}
+	ding.Client = &http.Client{Timeout: 10 * time.Second}
+
+	if err := validate(ding); err != nil {
+		panic(err)
+		return nil
+	}
+	return
+}
+
+//Request 统一请求
+func (ding *dingTalk) Request(method, path string, query url.Values, body interface{},
+	data response.Unmarshalled) (err error) {
+
+	if body != nil {
+		if err = validate(body); err != nil {
+			return err
+		}
+	}
+
+	if query == nil {
+		query = url.Values{}
+	}
+
+	if path != constant.GetTokenKey && path != constant.CorpAccessToken && path != constant.SuiteAccessToken &&
+		path != constant.GetAuthInfo && path != constant.GetAgentKey && path != constant.ActivateSuiteKey &&
+		path != constant.GetSSOTokenKey && path != constant.GetUnactiveCorpKey && path != constant.ReauthCorpKey {
+		var token string
+
+		if ding.isv() {
+			if token, err = ding.GetCorpAccessToken(); err != nil {
+				return err
+			}
+		} else {
+			if token, err = ding.GetAccessToken(); err != nil {
+				return err
+			}
+		}
+		//set token
+		query.Set("access_token", token)
+	}
+	return ding.httpRequest(method, path, query, body, data)
+}
+
+func (robot *Robot) send(form interface{}, data response.Unmarshalled) (err error) {
 	args := url.Values{}
-	args.Set("appkey", talk.AppKey)
-	args.Set("appsecret", talk.AppSecret)
+	args.Set("access_token", robot.Token)
 
-	if err = talk.request(http.MethodGet, global.GetTokenKey, args, nil, &accessToken); err != nil {
-		return "", err
+	return robot.httpRequest(http.MethodPost, constant.SendRobotMsgKey, args, form, data)
+}
+
+func (robot *Robot) httpRequest(method, path string, query url.Values, body interface{},
+	data response.Unmarshalled) error {
+
+	client := robot.client
+
+	uri, _ := url.Parse(constant.Host + path)
+	uri.RawQuery = query.Encode()
+
+	var (
+		req     *http.Request
+		res     *http.Response
+		err     error
+		content []byte
+	)
+
+	//表单不为空
+	d, _ := json.Marshal(body)
+	fmt.Println(string(d))
+
+	req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
+	req.Header.Set("Content-Type", "application/json")
+
+	if res, err = client.Do(req); err != nil {
+		return err
 	}
-	accessToken.Created = time.Now().Unix()
-	if err = cache.Set(&accessToken); err != nil {
-		return "", err
+
+	defer res.Body.Close()
+	if res.StatusCode != 200 {
+		return errors.New("dingtalk server error: " + res.Status)
 	}
-	return accessToken.Token, nil
+
+	if content, err = ioutil.ReadAll(res.Body); err != nil {
+		return err
+	}
+	fmt.Println(string(content))
+	if err = json.Unmarshal(content, data); err != nil {
+		return err
+	}
+	return data.CheckError()
+}
+
+func (ding *dingTalk) httpRequest(method, path string, query url.Values, body interface{},
+	data response.Unmarshalled) error {
+
+	client := ding.Client
+	uri, _ := url.Parse(constant.Host + path)
+	uri.RawQuery = query.Encode()
+
+	fmt.Println("url=", uri.String())
+	var (
+		req     *http.Request
+		res     *http.Response
+		err     error
+		content []byte
+	)
+
+	if body != nil {
+		//检查提交表单类型
+		switch body.(type) {
+		case model.UploadFile:
+			var b bytes.Buffer
+			w := multipart.NewWriter(&b)
+
+			file := body.(model.UploadFile)
+			fw, err := w.CreateFormFile(file.FieldName, file.FileName)
+			if err != nil {
+				return err
+			}
+			if _, err = io.Copy(fw, file.Reader); err != nil {
+				return err
+			}
+			if err = w.Close(); err != nil {
+				return err
+			}
+			req, _ = http.NewRequest(method, uri.String(), &b)
+			req.Header.Set("Content-Type", w.FormDataContentType())
+		default:
+			//表单不为空
+			d, _ := json.Marshal(body)
+			fmt.Println(string(d))
+			req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
+			req.Header.Set("Content-Type", "application/json; charset=utf-8")
+		}
+	} else {
+		req, _ = http.NewRequest(method, uri.String(), nil)
+	}
+
+	if res, err = client.Do(req); err != nil {
+		return err
+	}
+
+	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		return errors.New("dingtalk server error: " + res.Status)
+	}
+
+	if content, err = ioutil.ReadAll(res.Body); err != nil {
+		return err
+	}
+	fmt.Println("content=", string(content))
+	if err = json.Unmarshal(content, data); err != nil {
+		return err
+	}
+
+	return data.CheckError()
+}
+
+// validate 参数验证
+func validate(s interface{}) error {
+	v := validator.New()
+	if err := v.Struct(s); err != nil {
+		errs := err.(validator.ValidationErrors)
+		var slice []string
+		for _, msg := range errs {
+			slice = append(slice, msg.Error())
+		}
+		return errors.New(strings.Join(slice, ","))
+	}
+	return nil
+}
+
+func (ding *dingTalk) name() {
+
 }

@@ -1,8 +1,25 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"github.com/zhaoyunxing92/dingtalk/model"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 )
 
@@ -53,53 +70,49 @@ type forbiddenList struct {
 //发送普通文本工作通知
 //部门id或用户id重复会剔除
 //发送工作通知
-func (talk *DingTalk) SendWorkNotify(res model.WorkNotifyRes) (resp WorkNotifyRep, err error) {
+func (ding *dingTalk) SendWorkNotify(res model.WorkNotifyRes) (resp WorkNotifyRep, err error) {
 	//组装部门、用户
 	res.AssembleDept()
 	res.AssembleUser()
-	res.SetAgentId(talk.AgentId)
-	//字段验证
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return resp, err
-	}
+	res.SetAgentId(ding.Id)
 
-	err = talk.request(http.MethodPost, global.SendCorpConversationKey, nil, res, &resp)
+	err = ding.Request(http.MethodPost, constant.SendCorpConversationKey, nil, res, &resp)
 
 	return resp, err
 }
 
 //获取工作通知消息的发送进度，仅支持查询24小时内的任务。
 //taskId:工作通知id
-func (talk *DingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressRsp, err error) {
+func (ding *dingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressRsp, err error) {
 	form := map[string]interface{}{
-		"agent_id": talk.AgentId,
+		"agent_id": ding.Id,
 		"task_id":  taskId,
 	}
-	err = talk.request(http.MethodPost, global.GetSendProgressKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.GetSendProgressKey, nil, form, &rsp)
 
 	return rsp, err
 }
 
 //获取工作通知消息的发送结果
 //taskId:工作通知id
-func (talk *DingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultRsp, err error) {
+func (ding *dingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultRsp, err error) {
 	form := map[string]interface{}{
-		"agent_id": talk.AgentId,
+		"agent_id": ding.Id,
 		"task_id":  taskId,
 	}
-	err = talk.request(http.MethodPost, global.GetSendResultKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.GetSendResultKey, nil, form, &rsp)
 
 	return rsp, err
 }
 
 //撤回工作通知消息
 //taskId:工作通知id
-func (talk *DingTalk) RecallWorkNotifySendResult(taskId int) (rsp model.Response, err error) {
+func (ding *dingTalk) RecallWorkNotifySendResult(taskId int) (rsp model.Response, err error) {
 	form := map[string]interface{}{
-		"agent_id":    talk.AgentId,
+		"agent_id":    ding.Id,
 		"msg_task_id": taskId,
 	}
-	err = talk.request(http.MethodPost, global.RecallCorpConversationKey, nil, form, &rsp)
+	err = ding.Request(http.MethodPost, constant.RecallCorpConversationKey, nil, form, &rsp)
 
 	return rsp, err
 }

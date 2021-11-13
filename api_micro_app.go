@@ -1,26 +1,43 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dingtalk
 
 import (
 	"errors"
 	"fmt"
-	"github.com/zhaoyunxing92/dingtalk/model"
-	"github.com/zhaoyunxing92/dingtalk/global"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/model"
 	"net/http"
 )
 
 //获取应用列表
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications
-func (talk *DingTalk) GetMicroAppList() (apps model.MicroAppList, err error) {
+func (ding *dingTalk) GetMicroAppList() (apps model.MicroAppList, err error) {
 
-	err = talk.request(http.MethodPost, global.MicroAppListKey, nil, nil, &apps)
+	err = ding.Request(http.MethodPost, constant.MicroAppListKey, nil, nil, &apps)
 
 	return apps, err
 }
 
 //根据id获取应用
-func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app model.MicroApp, err error) {
+func (ding *dingTalk) GetMicroAppByAgentId(agentId uint64) (app model.MicroApp, err error) {
 	var apps model.MicroAppList
-	if apps, err = talk.GetMicroAppList(); err != nil {
+	if apps, err = ding.GetMicroAppList(); err != nil {
 		return model.MicroApp{}, err
 	}
 
@@ -30,15 +47,15 @@ func (talk *DingTalk) GetMicroAppByAgentId(agentId uint64) (app model.MicroApp, 
 		}
 	}
 
-	return model.MicroApp{},errors.New(fmt.Sprintf("agentId:%d is not exist",agentId))
+	return model.MicroApp{}, errors.New(fmt.Sprintf("agentId:%d is not exist", agentId))
 }
 
 //获取应用可见范围
 //https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range
-func (talk *DingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes model.MicroAppVisibleScopes, err error) {
+func (ding *dingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes model.MicroAppVisibleScopes, err error) {
 	form := map[string]interface{}{
 		"agentId": agentId,
 	}
-	err = talk.request(http.MethodPost, global.MicroAppVisibleScopesKey, nil, form, &scopes)
+	err = ding.Request(http.MethodPost, constant.MicroAppVisibleScopesKey, nil, form, &scopes)
 	return scopes, err
 }

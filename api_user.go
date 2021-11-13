@@ -1,153 +1,108 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/global"
-	"github.com/zhaoyunxing92/dingtalk/model"
 	"net/http"
 	"net/url"
 	"strconv"
 )
 
-//CreateUser:创建用户
-//name:姓名
-//mobile:手机号
-//deptId:部门
-func (talk *DingTalk) CreateUser(name, mobile string, deptIds []int) (req model.UserIdResponse, err error) {
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
+)
 
-	form := map[string]interface{}{
-		"name":       name,
-		"mobile":     mobile,
-		"department": deptIds,
+import (
+	"github.com/pkg/errors"
+)
+
+//CreateUser 创建用户
+func (ding *dingTalk) CreateUser(user *request.CreateUser) (req response.CreateUser, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.CreateUserKey, nil, user, &req)
+}
+
+//UpdateUser 更新用户信息
+func (ding *dingTalk) UpdateUser(user *request.UpdateUser) (req response.Response, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.UpdateUserKey, nil, user, &req)
+}
+
+//DeleteUser 删除用户
+func (ding *dingTalk) DeleteUser(userId string) (req response.Response, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.DeleteUserKey, nil, request.NewDeleteUser(userId), &req)
+}
+
+//GetUserDetail 根据userid获取用户详情
+func (ding *dingTalk) GetUserDetail(user *request.UserDetail) (req response.UserDetail, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetUserDetailKey, nil, user, &req)
+}
+
+//GetUserIdByUnionId 根据unionid获取用户userid
+func (ding *dingTalk) GetUserIdByUnionId(res *request.UnionIdGetUserId) (req response.UnionIdGetUserId, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetUserIdByUnionIdKey, nil, res, &req)
+}
+
+//GetUserIdByMobile 根据手机号获取userid
+func (ding *dingTalk) GetUserIdByMobile(res *request.MobileGetUserId) (req response.MobileGetUserId, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetUserIdByMobileKey, nil, res, &req)
+}
+
+//GetOrgAdminUser 获取管理员列表
+func (ding *dingTalk) GetOrgAdminUser() (req response.OrgAdminUser, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetOrgAdminUserKey, nil, nil, &req)
+}
+
+//GetOrgAdminScope 获取管理员通讯录权限范围
+func (ding *dingTalk) GetOrgAdminScope(res *request.AdminUserScope) (req response.AdminUserScope, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetOrgAdminScopeKey, nil, res, &req)
+}
+
+//GetUserCanAccessApplet 获取管理员的应用管理权限
+func (ding *dingTalk) GetUserCanAccessApplet(appId int, userId string) (req response.UserCanAccessApplet, err error) {
+
+	if !ding.isv() {
+		return response.UserCanAccessApplet{}, errors.New("应用必须是产品方案商所开发")
 	}
 
-	err = talk.request(http.MethodPost, global.CreateUserKey, nil, form, &req)
-	return req, err
+	query := url.Values{}
+	query.Set("appId", strconv.Itoa(appId))
+	query.Set("userId", userId)
+
+	return req, ding.Request(http.MethodGet, constant.GetUserCanAccessAppletKey, query, nil, &req)
 }
 
-//CreateDetailUser:创建详细的用户
-func (talk *DingTalk) CreateDetailUser(res model.Request) (req model.UserIdResponse, err error) {
+//GetUserCount 获取员工人数
+func (ding *dingTalk) GetUserCount(res *request.UserCount) (req response.UserCont, err error) {
 
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return req, err
-	}
-	err = talk.request(http.MethodPost, global.CreateUserKey, nil, res, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetUserCountKey, nil, res, &req)
 }
 
-//DeleteUser:删除用户
-//userId:员工唯一标识userid
-func (talk *DingTalk) DeleteUser(userId string) (req model.Response, err error) {
+//GetInactiveUser 获取未登录钉钉的员工列表
+func (ding *dingTalk) GetInactiveUser(res *request.InactiveUser) (req response.InactiveUser, err error) {
 
-	params := url.Values{}
-	params.Set("userid", userId)
-
-	err = talk.request(http.MethodGet, global.DeleteUserKey, params, nil, &req)
-	return req, err
-}
-
-//UpdateUser:更新用户
-//res:员工信息
-//TODO:PositionInDepts:只用写一个，因为写多了也是无用的
-func (talk *DingTalk) UpdateUser(res model.Request) (req model.Response, err error) {
-
-	if err = res.Validate(talk.validate, talk.trans); err != nil {
-		return req, err
-	}
-
-	err = talk.request(http.MethodPost, global.UpdateUserKey, nil, res, &req)
-	return req, err
-}
-
-//GetUserDetail:获取用户
-//userId:用户id
-//lang:语言，默认是zh_CN
-func (talk *DingTalk) GetUserDetail(userId, lang string) (req model.UserDetail, err error) {
-
-	if lang != "en_US" {
-		lang = "zh_CN"
-	}
-
-	params := url.Values{}
-	params.Set("userid", userId)
-	params.Set("lang", lang)
-
-	err = talk.request(http.MethodGet, global.GetUserKey, params, nil, &req)
-	return req, err
-}
-
-//GetUserIdByUnionId:根据unionid获取userid
-//unionId:员工在当前开发者企业账号范围内的唯一标识
-func (talk *DingTalk) GetUserIdByUnionId(unionId string) (req model.UserIdResponse, err error) {
-
-	params := url.Values{}
-	params.Set("unionid", unionId)
-
-	err = talk.request(http.MethodGet, global.GetUserIdByUnionIdKey, params, nil, &req)
-	return req, err
-}
-
-//GetUserIdByMobile:根据手机号获取userid
-//unionId:员工在当前开发者企业账号范围内的唯一标识
-func (talk *DingTalk) GetUserIdByMobile(mobile string) (req model.UserIdResponse, err error) {
-
-	params := url.Values{}
-	params.Set("mobile", mobile)
-
-	err = talk.request(http.MethodGet, global.GetUserIdByMobileKey, params, nil, &req)
-	return req, err
-}
-
-//GetOrgUserCount:获取企业员工人数
-//active:0:包含未激活钉钉的人员数量,1:不包含未激活钉钉的人员数量
-func (talk *DingTalk) GetOrgUserCount(active int) (req model.OrgUserCountResponse, err error) {
-
-	if active < 0 || active > 2 {
-		active = 0
-	}
-
-	params := url.Values{}
-	params.Set("onlyActive", strconv.Itoa(active))
-
-	err = talk.request(http.MethodGet, global.GetOrgUserCountKey, params, nil, &req)
-	return req, err
-}
-
-//GetOrgInactiveUser:获取未登录钉钉的员工列表
-//active:0:包含未激活钉钉的人员数量,1:不包含未激活钉钉的人员数量
-func (talk *DingTalk) GetOrgInactiveUser(date string, offset, size int) (req model.InactiveUserResponse, err error) {
-	if size < 0 || size > 100 {
-		size = 100
-	}
-
-	form := make(map[string]interface{}, 3)
-	form["query_date"] = date
-	form["offset"] = offset
-	form["size"] = size
-
-	err = talk.request(http.MethodPost, global.GetOrgInactiveUserKey, nil, form, &req)
-	return req, err
-}
-
-//GetOrgAdminUser:获取未登录钉钉的员工列表
-func (talk *DingTalk) GetOrgAdminUser() (req model.OrgAdminUserResponse, err error) {
-	err = talk.request(http.MethodGet, global.GetOrgAdminUserKey, nil, nil, &req)
-	return req, err
-}
-
-//GetOrgAdminScope:获取管理员通讯录权限范围
-func (talk *DingTalk) GetOrgAdminScope(userId string) (req model.OrgAdminScopeResponse, err error) {
-	form := make(map[string]string, 1)
-	form["userid"] = userId
-
-	err = talk.request(http.MethodPost, global.GetOrgAdminScopeKey, nil, form, &req)
-	return req, err
-}
-
-//GetUserByAuthCode:通过免登码获取用户信息(v2)
-func (talk *DingTalk) GetUserByAuthCode(code string) (req model.UserGetByCodeResponse, err error) {
-	form := make(map[string]string, 1)
-	form["code"] = code
-
-	err = talk.request(http.MethodPost, global.GetUserByAuthCodeKey, nil, form, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.GetInactiveUserKey, nil, res, &req)
 }
