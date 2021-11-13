@@ -27,7 +27,6 @@ type CorpAuthInfo struct {
 
 // ChannelAuthInfo 授权的服务窗应用信息列表
 type ChannelAuthInfo struct {
-
 	ChannelAgents []ChannelAgent `json:"channelAgent"`
 }
 type AuthUserInfo struct {
@@ -106,7 +105,7 @@ type ChannelAgent struct {
 
 	//授权方应用Id
 	AgentId int `json:"agentid"`
-	
+
 	//授权方应用头像。
 	Logo string `json:"logo_url"`
 

@@ -91,7 +91,7 @@ func (ding *dingTalk) GetAgentInfo(agentId int, corpId string) (rsp response.Age
 }
 
 // GetUnactiveCorp 获取应用未激活的企业列表
-func (ding *dingTalk) GetUnactiveCorpIds(appId int) (rsp response.UnactiveCorp, err error) {
+func (ding *dingTalk) GetUnactiveCorp(appId int) (rsp response.UnactiveCorp, err error) {
 	token, err := ding.GetSuiteAccessToken()
 	if err != nil {
 		return response.UnactiveCorp{}, err

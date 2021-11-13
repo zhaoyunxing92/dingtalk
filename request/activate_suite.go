@@ -18,9 +18,9 @@
 package request
 
 type ActivateSuite struct {
-	SuiteKey    string `json:"suite_key" validate:"required"`
-	CorpId string `json:"auth_corpid" validate:"required"`
-	Code   string `json:"permanent_code" validate:"required"`
+	SuiteKey string `json:"suite_key" validate:"required"`
+	CorpId   string `json:"auth_corpid" validate:"required"`
+	Code     string `json:"permanent_code" validate:"required"`
 }
 
 func NewActivateSuite(key, corpId, code string) *ActivateSuite {
