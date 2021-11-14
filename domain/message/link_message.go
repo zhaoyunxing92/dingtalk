@@ -53,7 +53,7 @@ func (l *linkMessage) MessageType() string {
 
 func NewLinkMessage(title, desc, mediaId, url string) *linkMessage {
 	msg := &linkMessage{}
-	msg.MsgType=msg.MessageType()
-	msg.link= link{title, desc, mediaId, url}
+	msg.MsgType = msg.MessageType()
+	msg.link = link{title, desc, mediaId, url}
 	return msg
 }
