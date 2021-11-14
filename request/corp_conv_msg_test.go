@@ -26,6 +26,7 @@ import (
 func TestNewCorpConvMessage(t *testing.T) {
 	conv := NewCorpConvMessage(message.NewTextMessage("hello dubbo-go")).
 		SetUserIds("1123", "12358", "788444").
+		SetAgentId(12345678).
 		Build()
 
 	err := validate(conv)
