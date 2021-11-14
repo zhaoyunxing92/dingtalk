@@ -1,6 +1,6 @@
 [![codecov](https://codecov.io/gh/zhaoyunxing92/dingtalk/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhaoyunxing92/dingtalk)
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues-raw/zhaoyunxing92/dingtalk.svg?style=popout)
-
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_shield)
 
 ![dingtalk](./image/dingtalk.png)
 
