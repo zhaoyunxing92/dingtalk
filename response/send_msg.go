@@ -17,9 +17,15 @@
 
 package response
 
-type SendChatMessage struct {
+type SendMessage struct {
 	Response
 
-	//指定员工的部门信息。
-	MessageId string `json:"messageId"`
+	//有效接收消息的员工的userid。
+	//
+	//接收者可以是单聊接收者或者群聊会话里的接收者，如果接收者是当前接口调用所使用的企业的员工，则是有效接收者。
+	//
+	//接口返回所有有效接收者的userid。
+	//
+	//非有效接收者是收不到消息的。
+	Receiver string `json:"receiver"`
 }

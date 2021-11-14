@@ -15,11 +15,19 @@
  * limitations under the License.
  */
 
-package response
+package dingtalk
 
-type SendChatMessage struct {
-	Response
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
+	"net/http"
+)
 
-	//指定员工的部门信息。
-	MessageId string `json:"messageId"`
+//SendMessage 发送普通消息
+func (ding *dingTalk) SendMessage(senderId, chatId string, msg message.Message) (req response.SendMessage, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.SendToConversationKey, nil,
+		request.NewSendMessage(senderId, chatId, msg), &req)
 }

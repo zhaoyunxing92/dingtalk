@@ -103,7 +103,8 @@ fmt.Println(token)
     - 企业群消息
         - [x] [发送消息到企业群](https://developers.dingtalk.com/document/app/send-group-messages) `client.SendChatMessage`
         - [x] [查询群消息已读人员列表](https://developers.dingtalk.com/document/app/queries-the-list-of-people-who-have-read-a-group) `client.GetChatMsgReadUser`
-        - [x] [发送普通消息](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-normal-messages)
+    - 普通消息
+        - [x] [发送普通消息](https://developers.dingtalk.com/document/app/send-normal-messages) `client.SendMessage`
 
 * 应用授权(**5**/6)
     - [x] [激活应用](https://developers.dingtalk.com/document/app/activate-suite) `client.ActivateSuite`
