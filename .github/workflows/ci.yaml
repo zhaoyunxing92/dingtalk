@@ -49,5 +49,8 @@ jobs:
         #        run: go test -v request/...
         run: go test -v ./request
 
+      - name: echo token
+        run: echo ${{ secrets.CODECOV_TOKEN }}
+
       - name: Post Coverage
         run: CODECOV_TOKEN=${{ secrets.CODECOV_TOKEN }}  bash <(curl -s https://codecov.io/bash)
