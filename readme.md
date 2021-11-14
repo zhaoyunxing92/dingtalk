@@ -94,13 +94,15 @@ fmt.Println(token)
     - [x] [设置群成员昵称](https://developers.dingtalk.com/document/app/set-a-group-nickname)  `client.ChatSetUserNick`
 * 消息通知(4/6)
     - 工作通知
-        - [x] [发送工作通知](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-work-notifications)
-        - [x] [获取工作通知消息的发送进度](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-work-notification-progess)
-        - [x] [获取工作通知消息的发送结果](https://ding-doc.dingtalk.com/document#/org-dev-guide/get-work-notification-result)
-        - [x] [撤回工作通知消息](https://ding-doc.dingtalk.com/document#/org-dev-guide/withdrawal-work-notification)
+        - [x] [使用模板发送工作通知消息](https://developers.dingtalk.com/document/app/work-notification-templating-send-notification-interface) `client.SendTemplateMessage`
+        - [x] [发送工作通知](https://developers.dingtalk.com/document/app/asynchronous-sending-of-enterprise-session-messages) `client.SendCorpConvMessage`
+        - [x] [更新工作通知状态栏](https://developers.dingtalk.com/document/app/update-work-notification-status-bar) `client.UpdateCorpConvMessageStatus`
+        - [x] [获取工作通知消息的发送进度](https://developers.dingtalk.com/document/app/obtain-the-sending-progress-of-asynchronous-sending-of-enterprise-session) `client.GetCorpConvMsgProgress`
+        - [x] [获取工作通知消息的发送结果](https://developers.dingtalk.com/document/app/gets-the-result-of-sending-messages-asynchronously-to-the-enterprise) `client.GetMessageSendResult`
+        - [x] [撤回工作通知消息](https://developers.dingtalk.com/document/app/notification-of-work-withdrawal) `client.RecallCorpConvMessage`
     - 企业群消息
-        - [x] [发送消息到企业群](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-chat-messages)
-        - [x] [查询群消息已读人员列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-the-list-of-people-who-have-read-a-group-1)
+        - [x] [发送消息到企业群](https://developers.dingtalk.com/document/app/send-group-messages) `client.SendChatMessage`
+        - [x] [查询群消息已读人员列表](https://developers.dingtalk.com/document/app/queries-the-list-of-people-who-have-read-a-group) `client.GetChatMsgReadUser`
         - [x] [发送普通消息](https://ding-doc.dingtalk.com/document#/org-dev-guide/send-normal-messages)
 
 * 应用授权(**5**/6)

@@ -19,7 +19,6 @@ package dingtalk
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
 	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
@@ -78,22 +77,21 @@ func (ding *dingTalk) GetChatQRCode(chatId, userId string) (req response.ChatQRC
 }
 
 //SendChatMessage 发送消息到群
-func (ding *dingTalk) SendChatMessage(chatId string, msg message.Message) (req message.MessageResponse, err error) {
+func (ding *dingTalk) SendChatMessage(chatId string, msg message.Message) (req response.SendChatMessage, err error) {
 
 	return req, ding.Request(http.MethodPost, constant.SendChatMessageKey, nil,
 		request.NewSendChatMessage(chatId, msg), &req)
 }
 
-//GetChatMsgReadUser:查询群消息已读人员列表
-func (ding *dingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (req domain.GetChatMsgReadResponse, err error) {
+//GetChatMsgReadUser 查询群消息已读人员列表
+func (ding *dingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (req response.ChatMsgReadUser, err error) {
 	if size > 100 || size < 0 {
 		size = 100
 	}
-	params := url.Values{}
-	params.Set("messageId", messageId)
-	params.Set("cursor", strconv.Itoa(cursor))
-	params.Set("size", strconv.Itoa(size))
+	query := url.Values{}
+	query.Set("messageId", messageId)
+	query.Set("cursor", strconv.Itoa(cursor))
+	query.Set("size", strconv.Itoa(size))
 
-	err = ding.Request(http.MethodGet, constant.GetChatReadUserKey, params, nil, &req)
-	return req, err
+	return req, ding.Request(http.MethodGet, constant.GetChatReadUserKey, query, nil, &req)
 }

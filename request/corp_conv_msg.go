@@ -25,7 +25,7 @@ import (
 // CorpConvMessage 工作通知
 type CorpConvMessage struct {
 	//发送消息时使用的微应用的ID。
-	AgentId int `json:"agent_id"`
+	AgentId int `json:"agent_id" validate:"required"`
 
 	//接收者的企业内部用户的userId列表，最大用户列表长度100。
 	UserIds []string `json:"-" validate:"lte=100"`

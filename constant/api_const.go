@@ -104,6 +104,7 @@ const (
 	GetMessageSendResultKey        = "/topapi/message/corpconversation/getsendresult"     //获取工作通知消息的发送结果
 	SendCorpConversationMessageKey = "/topapi/message/corpconversation/asyncsend_v2"      //发送工作通知
 	UpdateCorpConvMessageStatusKey = "/topapi/message/corpconversation/status_bar/update" //更新工作通知状态栏
+	RecallCorpConvMessageKey       = "/topapi/message/corpconversation/recall"            //撤回工作通知消息
 
 	SendRobotMsgKey = "/robot/send" //发送机器人消息
 

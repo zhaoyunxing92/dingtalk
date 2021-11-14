@@ -38,10 +38,10 @@ func TestDingTalk_SendTemplateMessage(t *testing.T) {
 
 func TestDingTalk_GetMessageProgress(t *testing.T) {
 
-	//res, err := client.GetMessageProgress(1332307896, 474307154979)
-	res, err := isv.GetMessageProgress(
+	//res, err := client.GetCorpConvMsgProgress(1332307896, 474307154979)
+	res, err := isv.GetCorpConvMsgProgress(
 		request.NewMessageProgress(474307154979).
-		SetAgentId(1332307896).
+			SetAgentId(1332307896).
 			Build())
 
 	assert.Nil(t, err)
@@ -49,10 +49,11 @@ func TestDingTalk_GetMessageProgress(t *testing.T) {
 }
 
 func TestDingTalk_SendCorpConvMessage_Text(t *testing.T) {
-	msg := message.NewTextMessage("hello dubbo-go")
+	msg := message.NewTextMessage("可以撤回的消息")
 
 	res, err := isv.SendCorpConvMessage(
 		request.NewCorpConvMessage(msg).
+			SetAgentId(1332307896).
 			SetUserIds("manager7556").
 			Build())
 
@@ -225,6 +226,17 @@ func TestDingTalk_GetMessageSendResult(t *testing.T) {
 
 	res, err := isv.GetMessageSendResult(
 		request.NewMessageProgress(474355389948).
+			SetAgentId(1332307896).
+			Build())
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_RecallCorpConvMessage(t *testing.T) {
+
+	res, err := isv.RecallCorpConvMessage(
+		request.NewRecallCorpConvMessage(472428178475).
 			SetAgentId(1332307896).
 			Build())
 

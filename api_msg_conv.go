@@ -57,8 +57,8 @@ func (ding *dingTalk) UpdateCorpConvMessageStatus(req *request.UpdateCorpConvMsg
 	return rsp, ding.Request(http.MethodPost, constant.UpdateCorpConvMessageStatusKey, nil, req, &rsp)
 }
 
-// GetMessageProgress 获取工作通知消息的发送进度
-func (ding *dingTalk) GetMessageProgress(req *request.MessageProgress) (rsp response.MessageProgress, err error) {
+// GetCorpConvMsgProgress 获取工作通知消息的发送进度
+func (ding *dingTalk) GetCorpConvMsgProgress(req *request.MessageProgress) (rsp response.MessageProgress, err error) {
 	if !ding.isv() {
 		req.AgentId = ding.Id
 	}
@@ -71,4 +71,12 @@ func (ding *dingTalk) GetMessageSendResult(req *request.MessageProgress) (rsp re
 		req.AgentId = ding.Id
 	}
 	return rsp, ding.Request(http.MethodPost, constant.GetMessageSendResultKey, nil, req, &rsp)
+}
+
+// RecallCorpConvMessage 撤回工作通知消息
+func (ding *dingTalk) RecallCorpConvMessage(req *request.RecallCorpConvMessage) (rsp response.Response, err error) {
+	if !ding.isv() {
+		req.AgentId = ding.Id
+	}
+	return rsp, ding.Request(http.MethodPost, constant.RecallCorpConvMessageKey, nil, req, &rsp)
 }
