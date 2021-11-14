@@ -1,3 +1,7 @@
+[![codecov](https://codecov.io/gh/zhaoyunxing92/dingtalk/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhaoyunxing92/dingtalk)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues-raw/zhaoyunxing92/dingtalk.svg?style=popout)
+
+
 ![dingtalk](./image/dingtalk.png)
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
