@@ -33,12 +33,13 @@ const (
 	GetAuthInfo = "/service/get_auth_info"
 
 	//ActivateSuiteKey 激活应用
-	ActivateSuiteKey   = "/service/activate_suite"
-	GetAgentKey        = "/service/get_agent"
-	GetSSOTokenKey     = "/sso/gettoken"
-	GetJsApiTicketKey  = "/get_jsapi_ticket"
-	GetUnactiveCorpKey = "/service/get_unactive_corp"
-	ReauthCorpKey      = "/service/reauth_corp"
+	ActivateSuiteKey        = "/service/activate_suite"
+	GetAgentKey             = "/service/get_agent"
+	GetSSOTokenKey          = "/sso/gettoken"
+	GetJsApiTicketKey       = "/get_jsapi_ticket"
+	GetUnactiveCorpKey      = "/service/get_unactive_corp"
+	ReauthCorpKey           = "/service/reauth_corp"
+	GetCorpPermanentCodeKey = "/service/get_permanent_code"
 
 	CreateUserKey             = "/topapi/v2/user/create"       //创建用户
 	DeleteUserKey             = "/topapi/v2/user/delete"       //删除用户

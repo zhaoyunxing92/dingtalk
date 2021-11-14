@@ -2,8 +2,7 @@
 [![ci](https://github.com/zhaoyunxing92/dingtalk/actions/workflows/ci.yaml/badge.svg?branch=develop)](https://github.com/zhaoyunxing92/dingtalk/actions)
 [![codecov](https://codecov.io/gh/zhaoyunxing92/dingtalk/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhaoyunxing92/dingtalk)
 [![issues](https://img.shields.io/bitbucket/issues-raw/zhaoyunxing92/dingtalk.svg?style=popout)](https://github.com/zhaoyunxing92/dingtalk/issues)
-[!fossa status](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_shield)
-
+[![fossa status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_shield)
 
 ![dingtalk](./image/dingtalk.png)
 
@@ -113,11 +112,11 @@ fmt.Println(token)
     - 普通消息
         - [x] [发送普通消息](https://developers.dingtalk.com/document/app/send-normal-messages) `client.SendMessage`
 
-* 应用授权(**5**/6)
+* 应用授权(**6**/6)
     - [x] [激活应用](https://developers.dingtalk.com/document/app/activate-suite) `client.ActivateSuite`
     - [x] [获取授权应用的基本信息](https://developers.dingtalk.com/document/app/obtains-application-information-of-an-enterprise)  `client.GetAgentInfo`
     - [x] [获取企业授权信息](https://developers.dingtalk.com/document/app/obtains-the-basic-information-of-an-enterprise) `client.GetAuthInfo`
-    - [ ] [获取授权企业的永久授权码](https://developers.dingtalk.com/document/app/obtain-a-permanent-authorization-code) 
+    - [x] [获取授权企业的永久授权码](https://developers.dingtalk.com/document/app/obtain-a-permanent-authorization-code) `client.GetCorpPermanentCode`
     - [x] [获取应用未激活的企业列表](https://developers.dingtalk.com/document/app/obtains-a-list-of-enterprises-whose-applications-are-not-activated) `client.GetUnactiveCorpIds`
     - [x] [重新授权未激活应用的企业](https://developers.dingtalk.com/document/app/re-authorize-enterprises-whose-applications-are-not-activated) `client.ReauthCorp`
 
