@@ -117,9 +117,9 @@ fmt.Println(token)
     - [x] [发送普通消息](https://developers.dingtalk.com/document/app/send-normal-messages) `client.SendMessage`
 
 * 身份验证
- - [x] [通过免登码获取用户信息](https://developers.dingtalk.com/document/app/obtain-the-userid-of-a-user-by-using-the-log-free) `client.GetUserInfoByCode`
- - [x] [获取应用管理员的身份信息](https://developers.dingtalk.com/document/app/exchange-code-for-the-identity-information-of-a-microapplication-administrator)
- - [x] [根据sns临时授权码获取用户信息](https://developers.dingtalk.com/document/app/obtain-the-user-information-based-on-the-sns-temporary-authorization)
+  - [x] [通过免登码获取用户信息](https://developers.dingtalk.com/document/app/obtain-the-userid-of-a-user-by-using-the-log-free) `client.GetUserInfoByCode`
+  - [x] [获取应用管理员的身份信息](https://developers.dingtalk.com/document/app/exchange-code-for-the-identity-information-of-a-microapplication-administrator)
+  - [x] [根据sns临时授权码获取用户信息](https://developers.dingtalk.com/document/app/obtain-the-user-information-based-on-the-sns-temporary-authorization)
 
 * 应用授权(**6**/6)
   - [x] [激活应用](https://developers.dingtalk.com/document/app/activate-suite) `client.ActivateSuite`
