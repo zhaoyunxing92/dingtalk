@@ -51,3 +51,5 @@ jobs:
 
       - name: Post Coverage
         run: bash <(curl -s https://codecov.io/bash)
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
