@@ -75,5 +75,11 @@ func TestDingTalk_ReauthCorp(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
+}
 
+func TestDingTalk_GetCorpPermanentCode(t *testing.T) {
+	res, err := isv.GetCorpPermanentCode("3aa3572685c93be1a0b2a6b3dba88d4f")
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 }

@@ -90,6 +90,19 @@ func (ding *dingTalk) GetAgentInfo(agentId int, corpId string) (rsp response.Age
 		request.NewAgentInfo(agentId, ding.Key, corpId), &rsp)
 }
 
+// GetCorpPermanentCode 获取授权企业的永久授权码
+func (ding *dingTalk) GetCorpPermanentCode(code string) (rsp response.CorpPermanentCode, err error) {
+	token, err := ding.GetSuiteAccessToken()
+	if err != nil {
+		return response.CorpPermanentCode{}, err
+	}
+	query := url.Values{}
+	query.Set("suite_access_token", token)
+
+	return rsp, ding.Request(http.MethodPost, constant.GetCorpPermanentCodeKey, query,
+		request.NewCorpPermanentCode(code), &rsp)
+}
+
 // GetUnactiveCorp 获取应用未激活的企业列表
 func (ding *dingTalk) GetUnactiveCorp(appId int) (rsp response.UnactiveCorp, err error) {
 	token, err := ding.GetSuiteAccessToken()
