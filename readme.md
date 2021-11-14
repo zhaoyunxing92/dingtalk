@@ -1,4 +1,5 @@
 ![dingtalk](./image/dingtalk.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_shield)
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
 
@@ -139,3 +140,6 @@ fmt.Println(token)
   
   
   
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_large)
