@@ -22,8 +22,8 @@ import (
 	"strings"
 )
 
-// CorpConversationMessage 工作通知
-type CorpConversationMessage struct {
+// CorpConvMessage 工作通知
+type CorpConvMessage struct {
 	//发送消息时使用的微应用的ID。
 	AgentId int `json:"agent_id"`
 
@@ -43,30 +43,35 @@ type CorpConversationMessage struct {
 	Msg message.Message `json:"msg,omitempty" validate:"required"`
 }
 
-type corpConversationMessageBuilder struct {
-	cm *CorpConversationMessage
+type corpConvMessageBuilder struct {
+	cm *CorpConvMessage
 }
 
-func NewCorpConversationMessage(msg message.Message) *corpConversationMessageBuilder {
-	return &corpConversationMessageBuilder{cm: &CorpConversationMessage{Msg: msg}}
+func NewCorpConvMessage(msg message.Message) *corpConvMessageBuilder {
+	return &corpConvMessageBuilder{cm: &CorpConvMessage{Msg: msg}}
 }
 
-func (sb *corpConversationMessageBuilder) SetUserIds(userId string, userIds ...string) *corpConversationMessageBuilder {
+func (sb *corpConvMessageBuilder) SetAgentId(agentId int) *corpConvMessageBuilder {
+	sb.cm.AgentId = agentId
+	return sb
+}
+
+func (sb *corpConvMessageBuilder) SetUserIds(userId string, userIds ...string) *corpConvMessageBuilder {
 	sb.cm.UserIds = append(userIds, userId)
 	return sb
 }
 
-func (sb *corpConversationMessageBuilder) SetDeptIds(deptId int, deptIds ...int) *corpConversationMessageBuilder {
+func (sb *corpConvMessageBuilder) SetDeptIds(deptId int, deptIds ...int) *corpConvMessageBuilder {
 	sb.cm.DeptIds = append(deptIds, deptId)
 	return sb
 }
 
-func (sb *corpConversationMessageBuilder) SetAllUser(all bool) *corpConversationMessageBuilder {
+func (sb *corpConvMessageBuilder) SetAllUser(all bool) *corpConvMessageBuilder {
 	sb.cm.All = &all
 	return sb
 }
 
-func (sb *corpConversationMessageBuilder) Build() *CorpConversationMessage {
+func (sb *corpConvMessageBuilder) Build() *CorpConvMessage {
 	cm := sb.cm
 	cm.DeptIds = removeIntDuplicates(cm.DeptIds)
 	cm.DeptIdList = strings.Join(removeIntDuplicatesToString(cm.DeptIds), ",")

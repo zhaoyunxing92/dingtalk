@@ -91,17 +91,19 @@ const (
 	CreateChatKey       = "/chat/create"                            //创建群
 	GetChatInfoKey      = chat + "/get"                             //获取群会话
 	UpdateChatKey       = "/chat/update"                            //修改群会话
-	SendMsgToChatKey    = chat + "/send"                            //发送消息到企业群
+	SendChatMessageKey  = chat + "/send"                            //发送消息到企业群
 	GetChatReadUserKey  = chat + "/getReadList"                     //查询群消息已读人员列表
 	ChatFriendSwitchKey = "/topapi/chat/member/friendswitch/update" //设置禁止群成员私聊
 	GetChatQRCodeKey    = "/topapi/chat/qrcode/get"                 //获取入群二维码链接
 	ChatSetSubAdminKey  = "/topapi/chat/subadmin/update"            //设置群管理员
 	ChatSetUserNickKey  = "/topapi/chat/updategroupnick"            //设置群成员昵称
 
-	SendToConversationKey          = "/message/send_to_conversation"                    //发送普通消息
-	SendTemplateMessageKey         = "/topapi/message/corpconversation/sendbytemplate"  //使用模板发送工作通知消息
-	MessageProgressKey             = "/topapi/message/corpconversation/getsendprogress" //获取工作通知消息的发送进度
-	SendCorpConversationMessageKey = "/topapi/message/corpconversation/asyncsend_v2"    //发送工作通知
+	SendToConversationKey          = "/message/send_to_conversation"                      //发送普通消息
+	SendTemplateMessageKey         = "/topapi/message/corpconversation/sendbytemplate"    //使用模板发送工作通知消息
+	MessageProgressKey             = "/topapi/message/corpconversation/getsendprogress"   //获取工作通知消息的发送进度
+	GetMessageSendResultKey        = "/topapi/message/corpconversation/getsendresult"     //获取工作通知消息的发送结果
+	SendCorpConversationMessageKey = "/topapi/message/corpconversation/asyncsend_v2"      //发送工作通知
+	UpdateCorpConvMessageStatusKey = "/topapi/message/corpconversation/status_bar/update" //更新工作通知状态栏
 
 	SendRobotMsgKey = "/robot/send" //发送机器人消息
 

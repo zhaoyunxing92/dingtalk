@@ -38,17 +38,21 @@ func TestDingTalk_SendTemplateMessage(t *testing.T) {
 
 func TestDingTalk_GetMessageProgress(t *testing.T) {
 
-	res, err := isv.GetMessageProgress(1332307896, 474307154979)
+	//res, err := client.GetMessageProgress(1332307896, 474307154979)
+	res, err := isv.GetMessageProgress(
+		request.NewMessageProgress(474307154979).
+		SetAgentId(1332307896).
+			Build())
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
 
-func TestDingTalk_SendCorpConversationMessage_Text(t *testing.T) {
+func TestDingTalk_SendCorpConvMessage_Text(t *testing.T) {
 	msg := message.NewTextMessage("hello dubbo-go")
 
-	res, err := isv.SendCorpConversationMessage(
-		request.NewCorpConversationMessage(msg).
+	res, err := isv.SendCorpConvMessage(
+		request.NewCorpConvMessage(msg).
 			SetUserIds("manager7556").
 			Build())
 
@@ -56,13 +60,13 @@ func TestDingTalk_SendCorpConversationMessage_Text(t *testing.T) {
 	assert.NotNil(t, res)
 }
 
-func TestDingTalk_SendCorpConversationMessage_Link(t *testing.T) {
+func TestDingTalk_SendCorpConvMessage_Link(t *testing.T) {
 
 	msg := message.NewLinkMessage("消息标题，建议100字符以内",
 		"消息描述，建议500字符以内", "@lADOADmaWMzazQKA", "https://github.com/zhaoyunxing92/dingtalk")
 
-	res, err := isv.SendCorpConversationMessage(
-		request.NewCorpConversationMessage(msg).
+	res, err := isv.SendCorpConvMessage(
+		request.NewCorpConvMessage(msg).
 			SetUserIds("manager7556").
 			Build())
 
@@ -70,12 +74,12 @@ func TestDingTalk_SendCorpConversationMessage_Link(t *testing.T) {
 	assert.NotNil(t, res)
 }
 
-func TestDingTalk_SendCorpConversationMessage_Image(t *testing.T) {
+func TestDingTalk_SendCorpConvMessage_Image(t *testing.T) {
 
 	msg := message.NewImageMessages("@lADOADmaWMzazQKA")
 
-	res, err := isv.SendCorpConversationMessage(
-		request.NewCorpConversationMessage(msg).
+	res, err := isv.SendCorpConvMessage(
+		request.NewCorpConvMessage(msg).
 			SetUserIds("manager7556").
 			Build())
 
@@ -83,11 +87,11 @@ func TestDingTalk_SendCorpConversationMessage_Image(t *testing.T) {
 	assert.NotNil(t, res)
 }
 
-func TestDingTalk_SendCorpConversationMessage_File(t *testing.T) {
+func TestDingTalk_SendCorpConvMessage_File(t *testing.T) {
 	msg := message.NewFileMessage("@lADOADmaWMzazQKA")
 
-	res, err := isv.SendCorpConversationMessage(
-		request.NewCorpConversationMessage(msg).
+	res, err := isv.SendCorpConvMessage(
+		request.NewCorpConvMessage(msg).
 			SetUserIds("manager7556").
 			Build())
 
@@ -95,11 +99,11 @@ func TestDingTalk_SendCorpConversationMessage_File(t *testing.T) {
 	assert.NotNil(t, res)
 }
 
-func TestDingTalk_SendCorpConversationMessage_Voice(t *testing.T) {
+func TestDingTalk_SendCorpConvMessage_Voice(t *testing.T) {
 	voice := message.NewVoiceMessage("@lADOADmaWMzazQKA", 10)
 
-	res, err := client.SendCorpConversationMessage(
-		request.NewCorpConversationMessage(voice).
+	res, err := client.SendCorpConvMessage(
+		request.NewCorpConvMessage(voice).
 			SetUserIds("manager7556").
 			Build())
 
@@ -107,11 +111,11 @@ func TestDingTalk_SendCorpConversationMessage_Voice(t *testing.T) {
 	assert.NotNil(t, res)
 }
 
-func TestDingTalk_SendCorpConversationMessage_OA(t *testing.T) {
+func TestDingTalk_SendCorpConvMessage_OA(t *testing.T) {
 	msg := message.NewOaMessage("消息的头部标题", "FFBBBBBB", "http://dingtalk.com",
 		"http://dingtalk.com")
 
-	msg.Body.Title = "消息体标题"
+	msg.Body.Title = "消息体标题消息体标题"
 	msg.Body.Content = "消息体的内容，最多显示3行"
 	msg.Body.MediaId = "@lADOADmaWMzazQKA"
 	msg.Body.Forms = []message.Form{
@@ -130,8 +134,9 @@ func TestDingTalk_SendCorpConversationMessage_OA(t *testing.T) {
 	msg.StatusBar.Value = "进行中"
 	msg.StatusBar.BackColor = "0xFFF65E5E"
 
-	res, err := isv.SendCorpConversationMessage(
-		request.NewCorpConversationMessage(msg).
+	res, err := isv.SendCorpConvMessage(
+		request.NewCorpConvMessage(msg).
+			SetAgentId(1332307896).
 			SetUserIds("manager7556").
 			Build())
 
@@ -139,7 +144,7 @@ func TestDingTalk_SendCorpConversationMessage_OA(t *testing.T) {
 	assert.NotNil(t, res)
 }
 
-func TestDingTalk_SendCorpConversationMessage_Markdown(t *testing.T) {
+func TestDingTalk_SendCorpConvMessage_Markdown(t *testing.T) {
 	markdown := `# 这是支持markdown的文本
 ## 标题2
 * 列表1
@@ -148,8 +153,8 @@ func TestDingTalk_SendCorpConversationMessage_Markdown(t *testing.T) {
 
 	msg := message.NewMarkDownMessage("首屏会话透出的展示内容", markdown)
 
-	res, err := client.SendCorpConversationMessage(
-		request.NewCorpConversationMessage(msg).
+	res, err := client.SendCorpConvMessage(
+		request.NewCorpConvMessage(msg).
 			SetUserIds("manager164").
 			Build())
 
@@ -157,7 +162,7 @@ func TestDingTalk_SendCorpConversationMessage_Markdown(t *testing.T) {
 	assert.NotNil(t, res)
 }
 
-func TestDingTalk_SendCorpConversationMessage_Card(t *testing.T) {
+func TestDingTalk_SendCorpConvMessage_Card(t *testing.T) {
 	content := `# 这是支持markdown的文本
 ## 标题2
 * 列表1
@@ -170,8 +175,8 @@ func TestDingTalk_SendCorpConversationMessage_Card(t *testing.T) {
 	msg.SingleTitle = "查看详情"
 	msg.SingleUrl = "https://open.dingtalk.com"
 
-	res, err := client.SendCorpConversationMessage(
-		request.NewCorpConversationMessage(msg).
+	res, err := client.SendCorpConvMessage(
+		request.NewCorpConvMessage(msg).
 			SetUserIds("manager164").
 			Build())
 
@@ -179,7 +184,7 @@ func TestDingTalk_SendCorpConversationMessage_Card(t *testing.T) {
 	assert.NotNil(t, res)
 }
 
-func TestDingTalk_SendCorpConversationMessage_CardButtons(t *testing.T) {
+func TestDingTalk_SendCorpConvMessage_CardButtons(t *testing.T) {
 	content := `# 这是支持markdown的文本
 ## 标题2
 * 列表1
@@ -195,9 +200,32 @@ func TestDingTalk_SendCorpConversationMessage_CardButtons(t *testing.T) {
 		{"两个按钮", "https://www.tmall.com"},
 	}
 
-	res, err := client.SendCorpConversationMessage(
-		request.NewCorpConversationMessage(msg).
+	res, err := client.SendCorpConvMessage(
+		request.NewCorpConvMessage(msg).
 			SetUserIds("manager164").
+			Build())
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_UpdateCorpConvMessageStatus(t *testing.T) {
+
+	res, err := isv.UpdateCorpConvMessageStatus(
+		request.NewUpdateCorpConvMsgStatus(472420145901, "完成").
+			SetAgentId(1332307896).
+			SetStatusBgColor("0xFF78C06E").
+			Build())
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_GetMessageSendResult(t *testing.T) {
+
+	res, err := isv.GetMessageSendResult(
+		request.NewMessageProgress(474355389948).
+			SetAgentId(1332307896).
 			Build())
 
 	assert.Nil(t, err)

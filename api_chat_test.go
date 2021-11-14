@@ -18,6 +18,7 @@
 package dingtalk
 
 import (
+	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
 	"testing"
 )
 
@@ -76,6 +77,35 @@ func TestDingTalk_ChatFriendSwitch(t *testing.T) {
 func TestDingTalk_ChatSetUserNick(t *testing.T) {
 
 	res, err := client.ChatSetUserNick("chat8ff884ef696f5717678c6280edfdbbf1", "manager164", "小二")
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_SendMsgToChat(t *testing.T) {
+	msg := message.NewOaMessage("消息的头部标题", "FFBBBBBB", "http://dingtalk.com",
+		"http://dingtalk.com")
+
+	msg.Body.Title = "消息体标题消息体标题"
+	msg.Body.Content = "消息体的内容，最多显示3行"
+	msg.Body.MediaId = "@lADOADmaWMzazQKA"
+	msg.Body.Forms = []message.Form{
+		{Key: "姓名", Value: "张三"},
+		{Key: "年龄", Value: "20"},
+		{Key: "身高", Value: "1.8m"},
+		{Key: "体重", Value: "70kg"},
+		{Key: "学历", Value: "本科"},
+		{Key: "爱好", Value: "打球、听歌"},
+	}
+	msg.Rich.Num = "15.6"
+	msg.Rich.Unit = "元"
+
+	msg.Author = "李四"
+
+	msg.StatusBar.Value = "进行中"
+	msg.StatusBar.BackColor = "0xFFF65E5E"
+
+	res, err := client.SendChatMessage("chat8ff884ef696f5717678c6280edfdbbf1", msg)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)

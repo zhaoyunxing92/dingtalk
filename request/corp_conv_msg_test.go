@@ -17,27 +17,18 @@
 
 package request
 
-type MessageProgress struct {
-	//发送消息时使用的微应用的ID
-	AgentId int `json:"agent_id" validate:"required"`
+import (
+	"github.com/stretchr/testify/assert"
+	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
+	"testing"
+)
 
-	//发送消息时钉钉返回的任务ID。
-	TaskId int `json:"task_id" validate:"required"`
-}
+func TestNewCorpConvMessage(t *testing.T) {
+	conv := NewCorpConvMessage(message.NewTextMessage("hello dubbo-go")).
+		SetUserIds("1123", "12358", "788444").
+		Build()
 
-type messageProgressBuilder struct {
-	mp *MessageProgress
-}
+	err := validate(conv)
 
-func NewMessageProgress(taskId int) *messageProgressBuilder {
-	return &messageProgressBuilder{mp: &MessageProgress{TaskId: taskId}}
-}
-
-func (b *messageProgressBuilder) SetAgentId(agentId int) *messageProgressBuilder {
-	b.mp.AgentId = agentId
-	return b
-}
-
-func (b *messageProgressBuilder) Build() *MessageProgress {
-	return b.mp
+	assert.Nil(t, err)
 }

@@ -77,15 +77,11 @@ func (ding *dingTalk) GetChatQRCode(chatId, userId string) (req response.ChatQRC
 		request.NewChatQRCode(chatId, userId), &req)
 }
 
-//SendMsgToChat:发送消息到群
-func (ding *dingTalk) SendMsgToChat(chatId string, msg domain.Request) (req message.MessageResponse, err error) {
+//SendChatMessage 发送消息到群
+func (ding *dingTalk) SendChatMessage(chatId string, msg message.Message) (req message.MessageResponse, err error) {
 
-	form := make(map[string]interface{}, 2)
-	form["chatid"] = chatId
-	form["msg"] = msg
-
-	err = ding.Request(http.MethodPost, constant.SendMsgToChatKey, nil, form, &req)
-	return req, err
+	return req, ding.Request(http.MethodPost, constant.SendChatMessageKey, nil,
+		request.NewSendChatMessage(chatId, msg), &req)
 }
 
 //GetChatMsgReadUser:查询群消息已读人员列表

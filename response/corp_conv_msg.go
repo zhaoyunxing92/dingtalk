@@ -17,7 +17,7 @@
 
 package response
 
-type CorpConversationMessage struct {
+type CorpConvMessage struct {
 	Response
 
 	TaskId int `json:"task_id"`

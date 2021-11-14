@@ -39,16 +39,36 @@ func (ding *dingTalk) SendTemplateMessage(req *request.SendTemplateMessage) (rsp
 	return rsp, ding.Request(http.MethodPost, constant.SendTemplateMessageKey, nil, req, &rsp)
 }
 
-// SendCorpConversationMessage 发送工作通知
-func (ding *dingTalk) SendCorpConversationMessage(req *request.CorpConversationMessage) (rsp response.CorpConversationMessage,
+// SendCorpConvMessage 发送工作通知
+func (ding *dingTalk) SendCorpConvMessage(req *request.CorpConvMessage) (rsp response.CorpConvMessage,
 	err error) {
-	req.AgentId = ding.Id
+	if !ding.isv() {
+		req.AgentId = ding.Id
+	}
 	return rsp, ding.Request(http.MethodPost, constant.SendCorpConversationMessageKey, nil, req, &rsp)
 }
 
-// GetMessageProgress 获取工作通知消息的发送进度
-func (ding *dingTalk) GetMessageProgress(agentId, taskId int) (rsp response.MessageProgress, err error) {
+// UpdateCorpConvMessageStatus 更新工作通知状态栏
+func (ding *dingTalk) UpdateCorpConvMessageStatus(req *request.UpdateCorpConvMsgStatus) (rsp response.Response,
+	err error) {
+	if !ding.isv() {
+		req.AgentId = ding.Id
+	}
+	return rsp, ding.Request(http.MethodPost, constant.UpdateCorpConvMessageStatusKey, nil, req, &rsp)
+}
 
-	return rsp, ding.Request(http.MethodPost, constant.MessageProgressKey, nil,
-		request.NewMessageProgress(agentId, taskId), &rsp)
+// GetMessageProgress 获取工作通知消息的发送进度
+func (ding *dingTalk) GetMessageProgress(req *request.MessageProgress) (rsp response.MessageProgress, err error) {
+	if !ding.isv() {
+		req.AgentId = ding.Id
+	}
+	return rsp, ding.Request(http.MethodPost, constant.MessageProgressKey, nil, req, &rsp)
+}
+
+// GetMessageSendResult 获取工作通知消息的发送结果
+func (ding *dingTalk) GetMessageSendResult(req *request.MessageProgress) (rsp response.MessageSendResult, err error) {
+	if !ding.isv() {
+		req.AgentId = ding.Id
+	}
+	return rsp, ding.Request(http.MethodPost, constant.GetMessageSendResultKey, nil, req, &rsp)
 }
