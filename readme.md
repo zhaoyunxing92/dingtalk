@@ -8,14 +8,11 @@
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
 
-[dingtalk](https://github.com/zhaoyunxing92/dingtalk/v2)
-是基于新版的[钉钉开发平台api文档](https://ding-doc.dingtalk.com/document#/org-dev-guide)
-开发，也就是说在你使用之前是需要在[钉钉开发者后台](https://open-dev.dingtalk.com/#/index) 创建一个小程序或应用
+[dingtalk](https://github.com/zhaoyunxing92/dingtalk/v2) 是基于新版的 [钉钉开发平台api文档](https://developers.dingtalk.com/document/app) 开发，也就是说在你使用之前是需要在[钉钉开发者后台](https://open-dev.dingtalk.com/#/index) 创建一个小程序或应用
 
 ## 为什么有它
 
-首先我要感谢 [godingtalk](https://github.com/hugozhu/godingtalk) 库,我是参考他的代码写的。但是由于钉钉历史原因，很多api都更新了, 新的企业是无法获取`corpid`
-和`corpsecret`的现在也无法获取了,其次就是我有很多钉钉预警的业务需要做,于是就写了这个
+首先我要感谢 [godingtalk](https://github.com/hugozhu/godingtalk) 库,我是参考他的代码写的。但是由于钉钉历史原因，很多api都更新了,其次就是我有很多钉钉预警的业务需要做,于是就写了这个
 
 ## 怎么使用
 
