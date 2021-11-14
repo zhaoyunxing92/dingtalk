@@ -49,6 +49,8 @@ const (
 	GetInactiveUserKey        = "/topapi/inactive/user/v2/get" //获取未登录钉钉的员工列表
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope" //获取管理员通讯录权限范围
 	GetUserInfoByCodeKey      = "/topapi/v2/user/getuserinfo"  //通过免登码获取用户信息
+	GetSSOUserInfoKey         = "/sso/getuserinfo"             //获取应用管理员的身份信息
+	GetSNSUserInfoKey         = "/sns/getuserinfo_bycode"      //根据sns临时授权码获取用户信息
 
 	CreateDeptKey            = "/topapi/v2/department/create"           //创建部门
 	DeleteDeptKey            = "/topapi/v2/department/delete"           //删除部门
