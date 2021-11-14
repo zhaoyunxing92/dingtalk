@@ -262,7 +262,3 @@ func validate(s interface{}) error {
 	}
 	return nil
 }
-
-func (ding *dingTalk) name() {
-
-}

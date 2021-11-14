@@ -15,23 +15,26 @@
  * limitations under the License.
  */
 
-package dingtalk
+package message
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
-	"net/http"
-)
+//文件消息
+type file struct {
+	//媒体文件ID。引用的媒体文件最大10MB。可以通过上传媒体文件接口获取。
+	MediaId string `json:"media_id" validate:"required"`
+}
 
-//SendToConversation:发送普通消息
-func (ding *dingTalk) SendToConversation(senderId, chatId string, msg domain.Request) (req message.SendToConversationResponse, err error) {
+type fileMessage struct {
+	message
+	file `json:"file" validate:"required"`
+}
 
-	form := make(map[string]interface{}, 3)
-	form["sender"] = senderId
-	form["cid"] = chatId
-	form["msg"] = msg
+func (f *fileMessage) MessageType() string {
+	return "file"
+}
 
-	err = ding.Request(http.MethodPost, constant.SendToConversationKey, nil, form, &req)
-	return req, err
+func NewFileMessage(mediaId string) *fileMessage {
+	msg := &fileMessage{}
+	msg.MsgType = msg.MessageType()
+	msg.file = file{MediaId: mediaId}
+	return msg
 }

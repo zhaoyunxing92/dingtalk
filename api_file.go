@@ -18,20 +18,20 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
 	"net/http"
+	"net/url"
 )
 
-//SendToConversation:发送普通消息
-func (ding *dingTalk) SendToConversation(senderId, chatId string, msg domain.Request) (req message.SendToConversationResponse, err error) {
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/domain"
+)
 
-	form := make(map[string]interface{}, 3)
-	form["sender"] = senderId
-	form["cid"] = chatId
-	form["msg"] = msg
+//MediaUpload 上传媒体文件
+func (ding *dingTalk) MediaUpload(req domain.UploadFile) (media domain.MediaUpload, err error) {
 
-	err = ding.Request(http.MethodPost, constant.SendToConversationKey, nil, form, &req)
-	return req, err
+	params := url.Values{}
+	params.Add("type", req.Type)
+
+	return media, ding.Request(http.MethodPost, constant.MediaUploadKey, params, req, &media)
 }

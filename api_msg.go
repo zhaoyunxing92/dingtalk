@@ -30,7 +30,8 @@ import (
 import "github.com/pkg/errors"
 
 // SendTemplateMessage 使用模板发送工作通知消息
-func (ding *dingTalk) SendTemplateMessage(req *request.SendTemplateMessage) (rsp response.SendTemplateMessage, err error) {
+func (ding *dingTalk) SendTemplateMessage(req *request.SendTemplateMessage) (rsp response.SendTemplateMessage,
+	err error) {
 	if !ding.isv() {
 		return response.SendTemplateMessage{}, errors.New("只支持isv调用")
 	}
@@ -39,8 +40,9 @@ func (ding *dingTalk) SendTemplateMessage(req *request.SendTemplateMessage) (rsp
 }
 
 // SendCorpConversationMessage 发送工作通知
-func (ding *dingTalk) SendCorpConversationMessage(req *request.CorpConversationMessage) (rsp response.SendTemplateMessage, err error) {
-
+func (ding *dingTalk) SendCorpConversationMessage(req *request.CorpConversationMessage) (rsp response.CorpConversationMessage,
+	err error) {
+	req.AgentId = ding.Id
 	return rsp, ding.Request(http.MethodPost, constant.SendCorpConversationMessageKey, nil, req, &rsp)
 }
 

@@ -15,18 +15,14 @@
  * limitations under the License.
  */
 
-package domain
-
-import (
-	"errors"
-	translator "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
-	"strings"
-)
+package message
 
 type markdown struct {
+	//首屏会话透出的展示内容
 	Title string `json:"title" validate:"required"`
-	Text  string `json:"text" validate:"required"`
+
+	//markdown格式的消息，建议500字符以内
+	Text string `json:"text" validate:"required"`
 }
 
 //markdown消息
@@ -35,19 +31,10 @@ type markdownMessage struct {
 	markdown `json:"markdown" validate:"required"`
 }
 
-func newMarkDownMessage(title, content string) markdownMessage {
-	return markdownMessage{message{MsgType: "markdown"}, markdown{title, content}}
+func (v *markdownMessage) MessageType() string {
+	return "markdown"
 }
 
-//请求参数验证
-func (req *markdownMessage) Validate(valid *validator.Validate, trans translator.Translator) error {
-	if err := valid.Struct(req); err != nil {
-		errs := err.(validator.ValidationErrors)
-		var slice []string
-		for _, msg := range errs {
-			slice = append(slice, msg.Translate(trans))
-		}
-		return errors.New(strings.Join(slice, ","))
-	}
-	return nil
+func NewMarkDownMessage(title, content string) *markdownMessage {
+	return &markdownMessage{message{MsgType: "markdown"}, markdown{title, content}}
 }

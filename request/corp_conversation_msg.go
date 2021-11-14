@@ -17,6 +17,11 @@
 
 package request
 
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
+	"strings"
+)
+
 // CorpConversationMessage 工作通知
 type CorpConversationMessage struct {
 	//发送消息时使用的微应用的ID。
@@ -33,19 +38,40 @@ type CorpConversationMessage struct {
 	DeptIds []int `json:"-" validate:"lte=20"`
 
 	//是否发送给企业全部用户。当设置为false时必须指定userid_list或dept_id_list其中一个参数的值。
-	All bool `json:"to_all_user"`
+	All *bool `json:"to_all_user,omitempty"`
 
-	Msg interface{} `json:"msg" validate:"required"`
+	Msg message.Message `json:"msg,omitempty" validate:"required"`
 }
 
 type corpConversationMessageBuilder struct {
 	cm *CorpConversationMessage
 }
 
-func NewCorpConversationMessage(agentId int) *corpConversationMessageBuilder {
-	return &corpConversationMessageBuilder{cm: &CorpConversationMessage{AgentId: agentId}}
+func NewCorpConversationMessage(msg message.Message) *corpConversationMessageBuilder {
+	return &corpConversationMessageBuilder{cm: &CorpConversationMessage{Msg: msg}}
+}
+
+func (sb *corpConversationMessageBuilder) SetUserIds(userId string, userIds ...string) *corpConversationMessageBuilder {
+	sb.cm.UserIds = append(userIds, userId)
+	return sb
+}
+
+func (sb *corpConversationMessageBuilder) SetDeptIds(deptId int, deptIds ...int) *corpConversationMessageBuilder {
+	sb.cm.DeptIds = append(deptIds, deptId)
+	return sb
+}
+
+func (sb *corpConversationMessageBuilder) SetAllUser(all bool) *corpConversationMessageBuilder {
+	sb.cm.All = &all
+	return sb
 }
 
 func (sb *corpConversationMessageBuilder) Build() *CorpConversationMessage {
-	return sb.cm
+	cm := sb.cm
+	cm.DeptIds = removeIntDuplicates(cm.DeptIds)
+	cm.DeptIdList = strings.Join(removeIntDuplicatesToString(cm.DeptIds), ",")
+
+	cm.UserIds = removeStringDuplicates(cm.UserIds)
+	cm.UserIdList = strings.Join(cm.UserIds, ",")
+	return cm
 }

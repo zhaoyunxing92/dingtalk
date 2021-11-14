@@ -15,23 +15,29 @@
  * limitations under the License.
  */
 
-package dingtalk
+package message
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
-	"net/http"
-)
+import "github.com/zhaoyunxing92/dingtalk/v2/domain"
 
-//SendToConversation:发送普通消息
-func (ding *dingTalk) SendToConversation(senderId, chatId string, msg domain.Request) (req message.SendToConversationResponse, err error) {
+type message struct {
+	//消息类型
+	MsgType string `json:"msgtype" validate:"required,oneof=text image voice file link oa markdown action_card feedCard"`
+}
 
-	form := make(map[string]interface{}, 3)
-	form["sender"] = senderId
-	form["cid"] = chatId
-	form["msg"] = msg
+//Message 消息结构
+type Message interface {
+	//MessageType 消息类型
+	MessageType() string
+}
 
-	err = ding.Request(http.MethodPost, constant.SendToConversationKey, nil, form, &req)
-	return req, err
+//MessageResponse:发送消息返回
+type MessageResponse struct {
+	domain.Response
+	MessageId string `json:"messageId"` //指定员工的部门信息。
+}
+
+//SendToConversationResponse:发送普通消息返回
+type SendToConversationResponse struct {
+	domain.Response
+	Receiver string `json:"receiver"`
 }

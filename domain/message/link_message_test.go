@@ -15,20 +15,14 @@
  * limitations under the License.
  */
 
-package dingtalk
+package message
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"net/http"
-	"net/url"
-)
+import "testing"
 
-func (ding *dingTalk) MediaUpload(req domain.UploadFile) (media domain.MediaUpload, err error) {
+func TestNewLinkMessage(t *testing.T) {
 
-	params := url.Values{}
-	params.Add("type", req.Type)
+	l := NewLinkMessage("消息标题，建议100字符以内",
+		"消息描述，建议500字符以内","@lADOADmaWMzazQKA","http://dingtalk.com")
 
-	err = ding.Request(http.MethodPost, constant.MediaUploadKey, params, req, &media)
-	return media, err
+	t.Log(l.String())
 }

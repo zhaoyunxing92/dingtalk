@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package domain
+package message
 
 import (
 	"errors"
@@ -24,25 +24,31 @@ import (
 	"strings"
 )
 
-//链接消息
-type link struct {
-	Title    string `json:"title" validate:"required,max=100,min=1"`  //消息标题，建议100字符以内。
-	Describe string `json:"text" validate:"required,max=500,min=1"`   //消息描述，建议500字符以内。
-	MediaId  string `json:"picUrl" validate:"required,max=500,min=1"` //图片地址，可以通过上传媒体文件接口获取。
-	Url      string `json:"messageUrl" validate:"required"`           //消息点击链接地址，当发送消息为小程序时支持小程序跳转链接
+//"title": "时代的火车向前开1",
+//"messageURL": "https://www.dingtalk.com/",
+//"picURL": "https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png"
+//
+type FeedCardLink struct {
+	Title  string `json:"title" validate:"required"`      //单条信息文本。
+	Url    string `json:"messageURL" validate:"required"` //点击单条信息到跳转链接。
+	BkgUrl string `json:"picURL"  validate:"required"`    //单条信息后面图片的URL。
 }
 
-type linkMessage struct {
+type feedCard struct {
+	Links []FeedCardLink `json:"links"`
+}
+
+type feedCardMessage struct {
 	message
-	link `json:"link" validate:"required"`
+	feedCard `json:"feedCard"`
 }
 
-func NewLinkMessage() *linkMessage {
-	return &linkMessage{message: message{MsgType: "link"}}
+func NewFeedCardMessage(links []FeedCardLink) feedCardMessage {
+	return feedCardMessage{message{MsgType: "feedCard"}, feedCard{Links: links}}
 }
 
 //请求参数验证
-func (req linkMessage) Validate(valid *validator.Validate, trans translator.Translator) error {
+func (req feedCardMessage) Validate(valid *validator.Validate, trans translator.Translator) error {
 	if err := valid.Struct(req); err != nil {
 		errs := err.(validator.ValidationErrors)
 		var slice []string

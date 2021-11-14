@@ -20,6 +20,7 @@ package dingtalk
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/domain"
+	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 	"net/http"
@@ -77,7 +78,7 @@ func (ding *dingTalk) GetChatQRCode(chatId, userId string) (req response.ChatQRC
 }
 
 //SendMsgToChat:发送消息到群
-func (ding *dingTalk) SendMsgToChat(chatId string, msg domain.Request) (req domain.MessageResponse, err error) {
+func (ding *dingTalk) SendMsgToChat(chatId string, msg domain.Request) (req message.MessageResponse, err error) {
 
 	form := make(map[string]interface{}, 2)
 	form["chatid"] = chatId

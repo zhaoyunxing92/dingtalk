@@ -17,24 +17,33 @@
 
 package request
 
+import "io"
 
-type Message struct {
-	//消息类型
-	MsgType string `json:"msgtype" validate:"required,oneof=text image voice file link oa markdown action_card feedCard"`
+type MediaUpload struct {
+	//媒体文件类型：
+	//
+	//image：图片，图片最大1MB。支持上传jpg、gif、png、bmp格式。
+	//
+	//voice：语音，语音文件最大2MB。支持上传amr、mp3、wav格式。
+	//
+	//video：视频，视频最大10MB。支持上传mp4格式。
+	//
+	//file：普通文件，最大10MB。支持上传doc、docx、xls、xlsx、ppt、pptx、zip、pdf、rar格式。
+	Type string `json:"type" validate:"required,oneof=image voice file video"`
+
+	//要上传的媒体文件
+	Media fileItem `json:"media" validate:"required"`
+
+	// 要上传的文件路径
+	Path string `json:"-"  validate:"required"`
+
+	Reader io.Reader `validate:"required"`
 }
 
-// 钉钉消息结构体
-type text struct {
-	Content string `json:"content" validate:"required"`
-}
+type fileItem struct {
+	//文件名称
+	FileName string `validate:"required"`
 
-//文本消息
-type textMessage struct {
-	Message
-	text `json:"text" validate:"required"`
-}
-
-// NewTextMessage 文本对象
-func NewTextMessage(context string) *textMessage {
-	return &textMessage{Message: Message{MsgType: "text"}, text: text{Content: context}}
+	//字段名称
+	FieldName string `validate:"required"`
 }

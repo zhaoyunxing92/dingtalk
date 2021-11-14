@@ -15,23 +15,27 @@
  * limitations under the License.
  */
 
-package dingtalk
+package message
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
-	"net/http"
-)
+//图片消息
+type image struct {
+	MediaId string `json:"media_id" validate:"required"`
+}
 
-//SendToConversation:发送普通消息
-func (ding *dingTalk) SendToConversation(senderId, chatId string, msg domain.Request) (req message.SendToConversationResponse, err error) {
+//文本消息
+type imageMessage struct {
+	message
+	image `json:"image" validate:"required"`
+}
 
-	form := make(map[string]interface{}, 3)
-	form["sender"] = senderId
-	form["cid"] = chatId
-	form["msg"] = msg
+func (im *imageMessage) MessageType() string {
+	return "image"
+}
 
-	err = ding.Request(http.MethodPost, constant.SendToConversationKey, nil, form, &req)
-	return req, err
+//NewImageMessages 文本对象
+func NewImageMessages(mediaId string) *imageMessage {
+	msg := &imageMessage{}
+	msg.MsgType = msg.MessageType()
+	msg.image = image{MediaId: mediaId}
+	return msg
 }
