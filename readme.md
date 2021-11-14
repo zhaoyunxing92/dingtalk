@@ -118,7 +118,7 @@ fmt.Println(token)
 
 * 身份验证
   - [x] [通过免登码获取用户信息](https://developers.dingtalk.com/document/app/obtain-the-userid-of-a-user-by-using-the-log-free) `client.GetUserInfoByCode`
-  - [x] [获取应用管理员的身份信息](https://developers.dingtalk.com/document/app/exchange-code-for-the-identity-information-of-a-microapplication-administrator)
+  - [x] [获取应用管理员的身份信息](https://developers.dingtalk.com/document/app/exchange-code-for-the-identity-information-of-a-microapplication-administrator) `client.GetSSOUserInfo`
   - [x] [根据sns临时授权码获取用户信息](https://developers.dingtalk.com/document/app/obtain-the-user-information-based-on-the-sns-temporary-authorization)
 
 * 应用授权(**6**/6)

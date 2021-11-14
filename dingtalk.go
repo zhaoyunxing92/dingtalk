@@ -56,6 +56,9 @@ type dingTalk struct {
 	//授权企业的id
 	CorpId string `json:"corpId,omitempty"`
 
+	//在开发者后台的基本信息 > 开发信息（旧版）页面获取微应用管理后台SSOSecret
+	SSOSecret string `json:"SSOSecret"`
+
 	Client *http.Client
 
 	Cache cache.Cache
@@ -72,6 +75,12 @@ func WithTicket(ticket string) OptionFunc {
 func WithCorpId(corpId string) OptionFunc {
 	return func(dt *dingTalk) {
 		dt.CorpId = corpId
+	}
+}
+
+func WithSSOSecret(secret string) OptionFunc {
+	return func(dt *dingTalk) {
+		dt.SSOSecret = secret
 	}
 }
 
@@ -114,7 +123,7 @@ func (ding *dingTalk) Request(method, path string, query url.Values, body interf
 		query = url.Values{}
 	}
 
-	if path != constant.GetTokenKey && path != constant.CorpAccessToken && path != constant.SuiteAccessToken &&
+	if !query.Has("access_token") && path != constant.GetTokenKey && path != constant.CorpAccessToken && path != constant.SuiteAccessToken &&
 		path != constant.GetAuthInfo && path != constant.GetAgentKey && path != constant.ActivateSuiteKey &&
 		path != constant.GetSSOTokenKey && path != constant.GetUnactiveCorpKey && path != constant.ReauthCorpKey &&
 		path != constant.GetCorpPermanentCodeKey {
