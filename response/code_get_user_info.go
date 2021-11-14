@@ -15,19 +15,44 @@
  * limitations under the License.
  */
 
-package request
+package response
 
-type ActivateSuite struct {
-	//第三方应用的SuiteKey
-	SuiteKey string `json:"suite_key,omitempty" validate:"required"`
-
-	//授权企业的CorpId。
-	CorpId string `json:"auth_corpid,omitempty" validate:"required"`
-
-	//授权企业的永久授权码
-	PermanentCode string `json:"permanent_code,omitempty" validate:"required"`
+type CodeGetUserInfo struct {
+	Response
+	codeGetUserInfo `json:"result"`
 }
 
-func NewActivateSuite(suiteKey, corpId, permanentCode string) *ActivateSuite {
-	return &ActivateSuite{suiteKey, corpId, permanentCode}
+type codeGetUserInfo struct {
+	//用户名字
+	Name string `json:"name"`
+
+	//用户unionId
+	UnionId string `json:"unionid"`
+
+	//用户的userid
+	UserId string `json:"userid"`
+
+	//用户关联的unionId
+	AssociatedUnionId string `json:"associated_unionid"`
+
+	//级别。
+	//
+	//1：主管理员
+	//
+	//2：子管理员
+	//
+	//100：老板
+	//
+	//0：其他（如普通员工）
+	Level int `json:"sys_level"`
+
+	//是否是管理员。
+	//
+	//true：是
+	//
+	//false：不是
+	Admin bool `json:"sys"`
+
+	//设备ID
+	DeviceId string `json:"device_id"`
 }

@@ -22,24 +22,17 @@ const (
 	GetTokenKey              = "/gettoken"                 //获取access_token
 	MicroAppListKey          = "/microapp/list"            //获取应用列表
 	MicroAppVisibleScopesKey = "/microapp/visible_scopes"  //获取应用可见范围
+	GetSSOTokenKey           = "/sso/gettoken"             //获取微应用后台免登的access_token
+	GetJsApiTicketKey        = "/get_jsapi_ticket"         //获取jsapi_ticket
 
-	// SuiteAccessToken 获取第三方企业应用的
-	SuiteAccessToken = "/service/get_suite_token"
-
-	//CorpAccessToken 服务商获取第三方应用授权企业的access_token
-	CorpAccessToken = "/service/get_corp_token"
-
-	//GetAuthInfo 获取企业授权信息
-	GetAuthInfo = "/service/get_auth_info"
-
-	//ActivateSuiteKey 激活应用
-	ActivateSuiteKey        = "/service/activate_suite"
-	GetAgentKey             = "/service/get_agent"
-	GetSSOTokenKey          = "/sso/gettoken"
-	GetJsApiTicketKey       = "/get_jsapi_ticket"
-	GetUnactiveCorpKey      = "/service/get_unactive_corp"
-	ReauthCorpKey           = "/service/reauth_corp"
-	GetCorpPermanentCodeKey = "/service/get_permanent_code"
+	SuiteAccessToken        = "/service/get_suite_token"    //获取第三方企业应用的
+	CorpAccessToken         = "/service/get_corp_token"     //服务商获取第三方应用授权企业的access_token
+	GetAuthInfo             = "/service/get_auth_info"      //获取企业授权信息
+	ActivateSuiteKey        = "/service/activate_suite"     //激活应用
+	GetAgentKey             = "/service/get_agent"          //获取授权应用的基本信息
+	GetUnactiveCorpKey      = "/service/get_unactive_corp"  //获取应用未激活的企业列表
+	ReauthCorpKey           = "/service/reauth_corp"        //重新授权未激活应用的企业
+	GetCorpPermanentCodeKey = "/service/get_permanent_code" //获取授权企业的永久授权码
 
 	CreateUserKey             = "/topapi/v2/user/create"       //创建用户
 	DeleteUserKey             = "/topapi/v2/user/delete"       //删除用户
@@ -55,15 +48,18 @@ const (
 	GetUserCountKey           = "/topapi/user/count"           //获取员工人数
 	GetInactiveUserKey        = "/topapi/inactive/user/v2/get" //获取未登录钉钉的员工列表
 	GetOrgAdminScopeKey       = "/topapi/user/get_admin_scope" //获取管理员通讯录权限范围
+	GetUserInfoByCodeKey      = "/topapi/v2/user/getuserinfo"  //通过免登码获取用户信息
 
-	CreateDeptKey           = "/topapi/v2/department/create"           //创建部门
-	DeleteDeptKey           = "/topapi/v2/department/delete"           //删除部门
-	UpdateDeptKey           = "/topapi/v2/department/update"           //更新部门
-	GetDeptDetailKey        = "/topapi/v2/department/get"              //获取部门详情
-	GetDeptListKey          = "/topapi/v2/department/listsub"          //获取部门详情
-	GetSubDeptListKey       = "/topapi/v2/department/listsubid"        //获取子部门列表
-	GetParentDeptsByUserKey = "/topapi/v2/department/listparentbyuser" //查询指定用户的所有上级父部门路径
-	GetParentDeptsByDeptKey = "/topapi/v2/department/listparentbydept" //查询部门的所有上级父部门路径
+	CreateDeptKey            = "/topapi/v2/department/create"           //创建部门
+	DeleteDeptKey            = "/topapi/v2/department/delete"           //删除部门
+	UpdateDeptKey            = "/topapi/v2/department/update"           //更新部门
+	GetDeptDetailKey         = "/topapi/v2/department/get"              //获取部门详情
+	GetDeptListKey           = "/topapi/v2/department/listsub"          //获取部门详情
+	GetSubDeptListKey        = "/topapi/v2/department/listsubid"        //获取子部门列表
+	GetParentDeptsByUserKey  = "/topapi/v2/department/listparentbyuser" //查询指定用户的所有上级父部门路径
+	GetParentDeptsByDeptKey  = "/topapi/v2/department/listparentbydept" //查询部门的所有上级父部门路径
+	GetIndustryDeptDetailKey = "/topapi/industry/department/get"        //获取外部联系人详情
+	GetIndustryDeptKey       = "/topapi/industry/department/list"       //获取部门列表
 
 	CreateExtContactKey    = "/topapi/extcontact/create"          //添加外部联系人
 	DeleteExtContactKey    = "/topapi/extcontact/delete"          //删除外部联系人
@@ -72,28 +68,23 @@ const (
 	GetExtContactLabelKey  = "/topapi/extcontact/listlabelgroups" //获取外部联系人标签列表
 	GetExtContactDetailKey = "/topapi/extcontact/get"             //获取外部联系人详情
 
-	GetIndustryDeptDetailKey = "/topapi/industry/department/get"  //获取外部联系人详情
-	GetIndustryDeptKey       = "/topapi/industry/department/list" //获取部门列表
+	GetRoleListKey               = "/topapi/role/list"               //获取角色列表
+	GetRoleUserListKey           = "/topapi/role/simplelist"         //获取指定角色的员工列表
+	GetRoleGroupKey              = "/topapi/role/getrolegroup"       //获取角色组
+	GetRoleDetailKey             = "/topapi/role/getrole"            //获取角色详情
+	CreateRoleGroupKey           = "/role/add_role_group"            //创建角色组
+	CreateRoleKey                = "/role/add_role"                  //创建角色
+	UpdateRoleKey                = "/role/update_role"               //更新角色
+	DeleteRoleKey                = "/topapi/role/deleterole"         //删除角色
+	RoleBatchAddUserKey          = "/topapi/role/addrolesforemps"    //批量增加员工角色
+	RoleBatchRemoveUserKey       = "/topapi/role/removerolesforemps" //批量删除员工角色
+	RoleUpdateUserManageScopeKey = "/topapi/role/scope/update"       //设定角色成员管理范围
 
-	role                         = "/topapi/role"                 //角色模块
-	GetRoleListKey               = "/topapi/role/list"            //获取角色列表
-	GetRoleUserListKey           = "/topapi/role/simplelist"      //获取指定角色的员工列表
-	GetRoleGroupKey              = "/topapi/role/getrolegroup"    //获取角色组
-	GetRoleDetailKey             = "/topapi/role/getrole"         //获取角色详情
-	CreateRoleGroupKey           = "/role/add_role_group"         //创建角色组
-	CreateRoleKey                = "/role/add_role"               //创建角色
-	UpdateRoleKey                = "/role/update_role"            //更新角色
-	DeleteRoleKey                = "/topapi/role/deleterole"      //删除角色
-	RoleBatchAddUserKey          = "/topapi/role/addrolesforemps" //批量增加员工角色
-	RoleBatchRemoveUserKey       = role + "/removerolesforemps"   //批量删除员工角色
-	RoleUpdateUserManageScopeKey = "/topapi/role/scope/update"    //设定角色成员管理范围
-
-	chat                = "/chat"                                   //群模块
 	CreateChatKey       = "/chat/create"                            //创建群
-	GetChatInfoKey      = chat + "/get"                             //获取群会话
+	GetChatInfoKey      = "/chat/get"                               //获取群会话
 	UpdateChatKey       = "/chat/update"                            //修改群会话
-	SendChatMessageKey  = chat + "/send"                            //发送消息到企业群
-	GetChatReadUserKey  = chat + "/getReadList"                     //查询群消息已读人员列表
+	SendChatMessageKey  = "/chat/send"                              //发送消息到企业群
+	GetChatReadUserKey  = "/chat/getReadList"                       //查询群消息已读人员列表
 	ChatFriendSwitchKey = "/topapi/chat/member/friendswitch/update" //设置禁止群成员私聊
 	GetChatQRCodeKey    = "/topapi/chat/qrcode/get"                 //获取入群二维码链接
 	ChatSetSubAdminKey  = "/topapi/chat/subadmin/update"            //设置群管理员

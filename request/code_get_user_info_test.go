@@ -17,17 +17,13 @@
 
 package request
 
-type ActivateSuite struct {
-	//第三方应用的SuiteKey
-	SuiteKey string `json:"suite_key,omitempty" validate:"required"`
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
-	//授权企业的CorpId。
-	CorpId string `json:"auth_corpid,omitempty" validate:"required"`
+func TestNewCodeGetUserInfo(t *testing.T) {
+	info := NewCodeGetUserInfo("3aa3572685c93be1a0b2a6b3dba88d4f")
 
-	//授权企业的永久授权码
-	PermanentCode string `json:"permanent_code,omitempty" validate:"required"`
-}
-
-func NewActivateSuite(suiteKey, corpId, permanentCode string) *ActivateSuite {
-	return &ActivateSuite{suiteKey, corpId, permanentCode}
+	assert.NotNil(t, info)
 }
