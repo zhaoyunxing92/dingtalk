@@ -47,7 +47,7 @@ jobs:
 
       - name: Test Request Struct
         #        run: go test -v request/...
-        run: go test -v ./request
+        run: go test -v ./request -race -coverprofile=coverage.txt -covermode=atomic -v
 
       - name: Post Coverage
-        run: bash <(curl -s https://codecov.io/bash)
+        run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
