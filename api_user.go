@@ -106,3 +106,10 @@ func (ding *dingTalk) GetInactiveUser(res *request.InactiveUser) (req response.I
 
 	return req, ding.Request(http.MethodPost, constant.GetInactiveUserKey, nil, res, &req)
 }
+
+//GetUserInfoByCode 通过免登码获取用户信息
+func (ding *dingTalk) GetUserInfoByCode(code string) (req response.CodeGetUserInfo, err error) {
+
+	return req, ding.Request(http.MethodPost, constant.GetUserInfoByCodeKey, nil,
+		request.NewCodeGetUserInfo(code), &req)
+}

@@ -126,3 +126,11 @@ func TestDingTalk_GetUserCanAccessApplet(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, req.Access)
 }
+
+func TestDingTalk_GetUserInfoByCode(t *testing.T) {
+
+	req, err := isv.GetUserInfoByCode("ed61dbdbd5733577b7fe9e7d993b0a00")
+
+	assert.Nil(t, err)
+	assert.NotNil(t, req)
+}
