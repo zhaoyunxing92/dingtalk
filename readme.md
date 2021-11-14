@@ -2,7 +2,7 @@
 [![ci](https://github.com/zhaoyunxing92/dingtalk/actions/workflows/ci.yaml/badge.svg?branch=develop)](https://github.com/zhaoyunxing92/dingtalk/actions)
 [![codecov](https://codecov.io/gh/zhaoyunxing92/dingtalk/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhaoyunxing92/dingtalk)
 [![issues](https://img.shields.io/bitbucket/issues-raw/zhaoyunxing92/dingtalk.svg?style=popout)](https://github.com/zhaoyunxing92/dingtalk/issues)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_shield)
+[!fossa status](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_shield)
 
 
 ![dingtalk](./image/dingtalk.png)
