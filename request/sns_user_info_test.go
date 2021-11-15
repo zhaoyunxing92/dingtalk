@@ -15,24 +15,16 @@
  * limitations under the License.
  */
 
-package dingtalk
+package request
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"github.com/zhaoyunxing92/dingtalk/v2/response"
-	"net/http"
-	"net/url"
+	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-)
+func TestNewSnsUserInfo(t *testing.T) {
+	info := NewSnsUserInfo("1234343454")
 
-//MediaUpload 上传媒体文件
-func (ding *dingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
-
-	query := url.Values{}
-	query.Add("type", req.Genre)
-
-	return media, ding.Request(http.MethodPost, constant.MediaUploadKey, query, req, &media)
+	assert.NotNil(t, info)
+	assert.Equal(t, info.AutoCode, "1234343454")
 }

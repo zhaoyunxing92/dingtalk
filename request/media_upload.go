@@ -17,9 +17,19 @@
 
 package request
 
-import "io"
+import (
+	"io"
+	"os"
+	"path"
+)
 
-type MediaUpload struct {
+import (
+	"github.com/pkg/errors"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
+)
+
+//UploadFile 上传文件
+type UploadFile struct {
 	//媒体文件类型：
 	//
 	//image：图片，图片最大1MB。支持上传jpg、gif、png、bmp格式。
@@ -29,21 +39,21 @@ type MediaUpload struct {
 	//video：视频，视频最大10MB。支持上传mp4格式。
 	//
 	//file：普通文件，最大10MB。支持上传doc、docx、xls、xlsx、ppt、pptx、zip、pdf、rar格式。
-	Type string `json:"type" validate:"required,oneof=image voice file video"`
+	Genre string `validate:"required,oneof=image voice file video"`
 
-	//要上传的媒体文件
-	Media fileItem `json:"media" validate:"required"`
-
-	// 要上传的文件路径
-	Path string `json:"-"  validate:"required"`
-
-	Reader io.Reader `validate:"required"`
-}
-
-type fileItem struct {
-	//文件名称
+	// 文件名称
 	FileName string `validate:"required"`
 
 	//字段名称
 	FieldName string `validate:"required"`
+
+	Reader io.Reader `validate:"required"`
+}
+
+func NewUploadFile(src string, genre file.Genre) UploadFile {
+	f, err := os.Open(src)
+	if err != nil {
+		panic(errors.WithStack(err))
+	}
+	return UploadFile{string(genre), path.Base(src), "media", f}
 }

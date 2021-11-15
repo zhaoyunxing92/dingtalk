@@ -15,24 +15,20 @@
  * limitations under the License.
  */
 
-package dingtalk
+package request
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"github.com/zhaoyunxing92/dingtalk/v2/response"
-	"net/http"
-	"net/url"
+	"github.com/stretchr/testify/assert"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
+	"testing"
 )
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-)
+func TestNewUploadFile(t *testing.T) {
 
-//MediaUpload 上传媒体文件
-func (ding *dingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
+	f := NewUploadFile("../image/dingtalk.png", file.Image)
 
-	query := url.Values{}
-	query.Add("type", req.Genre)
-
-	return media, ding.Request(http.MethodPost, constant.MediaUploadKey, query, req, &media)
+	assert.NotNil(t, f)
+	assert.Equal(t, f.Genre, string(file.Image))
+	assert.Equal(t, f.FileName, "dingtalk.png")
+	assert.Equal(t, f.FieldName, "media")
 }

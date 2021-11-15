@@ -15,24 +15,17 @@
  * limitations under the License.
  */
 
-package dingtalk
+package response
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"github.com/zhaoyunxing92/dingtalk/v2/response"
-	"net/http"
-	"net/url"
-)
+type MediaUpload struct {
+	Response
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-)
+	// 媒体文件类型
+	Genre string `json:"type"`
 
-//MediaUpload 上传媒体文件
-func (ding *dingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
+	// 媒体文件上传后获取的唯一标识
+	MediaId string `json:"media_id"`
 
-	query := url.Values{}
-	query.Add("type", req.Genre)
-
-	return media, ding.Request(http.MethodPost, constant.MediaUploadKey, query, req, &media)
+	// 媒体文件上传时间戳
+	CreatTime int `json:"created_at"`
 }

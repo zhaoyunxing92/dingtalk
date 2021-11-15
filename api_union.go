@@ -17,22 +17,4 @@
 
 package dingtalk
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"github.com/zhaoyunxing92/dingtalk/v2/response"
-	"net/http"
-	"net/url"
-)
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-)
-
-//MediaUpload 上传媒体文件
-func (ding *dingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
-
-	query := url.Values{}
-	query.Add("type", req.Genre)
-
-	return media, ding.Request(http.MethodPost, constant.MediaUploadKey, query, req, &media)
-}
