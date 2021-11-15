@@ -18,9 +18,11 @@
 package dingtalk
 
 import (
+	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
 	"net/http"
 	"net/url"
 	"strconv"
+	"time"
 )
 
 import (
@@ -123,7 +125,7 @@ func (ding *dingTalk) GetSSOUserInfo(code string) (req response.SSOUserInfo, err
 	)
 
 	if len(corpId) <= 0 || len(secret) <= 0 {
-		return response.SSOUserInfo{}, err
+		return response.SSOUserInfo{}, errors.New("corpId和SSOSecret不能为空")
 	}
 
 	if token, err = ding.GetSSOToken(corpId, secret); err != nil {
@@ -137,26 +139,16 @@ func (ding *dingTalk) GetSSOUserInfo(code string) (req response.SSOUserInfo, err
 	return req, ding.Request(http.MethodGet, constant.GetSSOUserInfoKey, query, nil, &req)
 }
 
-//GetSNSUserInfo 根据sns临时授权码获取用户信息
+//GetSnsUserInfo 根据sns临时授权码获取用户信息
 //该接口获取的用户信息仅用于扫码登录第三方网站、钉钉内免登第三方网站和使用钉钉账号登录第三方网站的场景。
-func (ding *dingTalk) GetSNSUserInfo(code string) (req response.SSOUserInfo, err error) {
-	var (
-		corpId = ding.CorpId
-		secret = ding.SSOSecret
-		token  string
-	)
-
-	if len(corpId) <= 0 || len(secret) <= 0 {
-		return response.SSOUserInfo{}, err
-	}
-
-	if token, err = ding.GetSSOToken(corpId, secret); err != nil {
-		return response.SSOUserInfo{}, err
-	}
+func (ding *dingTalk) GetSnsUserInfo(code string) (req response.SnsUserInfo, err error) {
+	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
+	sign := crypto.GetAvoidLoginSignature(timestamp, ding.Secret)
 
 	query := url.Values{}
-	query.Set("code", code)
-	query.Set("access_token", token)
+	query.Set("accessKey", ding.Key)
+	query.Set("timestamp", timestamp)
+	query.Set("signature", sign)
 
-	return req, ding.Request(http.MethodPost, constant.GetSNSUserInfoKey, query, nil, &req)
+	return req, ding.Request(http.MethodPost, constant.GetSNSUserInfoKey, query, request.NewSnsUserInfo(code), &req)
 }

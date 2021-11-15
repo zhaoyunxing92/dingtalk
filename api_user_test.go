@@ -137,7 +137,7 @@ func TestDingTalk_GetUserInfoByCode(t *testing.T) {
 
 func TestDingTalk_GetSSOUserInfo(t *testing.T) {
 
-	req, err := client.GetSSOUserInfo("689635c61c2430b187410fc9ccfda645")
+	req, err := client.GetSSOUserInfo("4d878735fab43af2bfabe6af990856b3")
 
 	assert.Nil(t, err)
 	assert.NotNil(t, req)

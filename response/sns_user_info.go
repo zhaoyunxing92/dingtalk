@@ -17,7 +17,7 @@
 
 package response
 
-type SNSUserInfo struct {
+type SnsUserInfo struct {
 	Response
 	snsUserInfo `json:"user_info"`
 }
