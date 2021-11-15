@@ -144,7 +144,7 @@ fmt.Println(token)
   - [x] [ASR 一句话语音识别](https://ding-doc.dingtalk.com/document#/org-dev-guide/asr-short-sentence-recognition)
 
 * 文件存储 (**1**/10)
-  - [x] [上传媒体文件](https://ding-doc.dingtalk.com/document#/org-dev-guide/upload-media-files-1)
+  - [x] [上传媒体文件](https://developers.dingtalk.com/document/app/upload-media-files) `client.MediaUpload`
   - [ ] [新增文件到用户自定义空间](https://ding-doc.dingtalk.com/document#/org-dev-guide/add-file-to-custom-space-2)
   - [ ] [发送钉盘文件给指定用户](https://ding-doc.dingtalk.com/document#/org-dev-guide/sends-a-dingtalk-disk-file-to-a-specified-user)
   - [ ] [获取企业下的自定义空间](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtain-user-space-under-the-enterprise-2)
@@ -154,6 +154,7 @@ fmt.Println(token)
   - [ ] [开启分块上传事务](https://ding-doc.dingtalk.com/document#/org-dev-guide/enable-multipart-upload-transaction)
   - [ ] [提交文件上传事务](https://ding-doc.dingtalk.com/document#/org-dev-guide/submit-a-file-upload-transaction)
   - [ ] [上传文件块](https://ding-doc.dingtalk.com/document#/org-dev-guide/upload-file-blocks)
-  
-  
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_large)
   
