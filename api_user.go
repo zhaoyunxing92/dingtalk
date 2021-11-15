@@ -119,7 +119,7 @@ func (ding *dingTalk) GetUserInfoByCode(code string) (req response.CodeGetUserIn
 //GetSSOUserInfo 获取应用管理员的身份信息
 func (ding *dingTalk) GetSSOUserInfo(code string) (req response.SSOUserInfo, err error) {
 	var (
-		corpId = ding.CorpId
+		corpId = ding.corpId
 		secret = ding.SSOSecret
 		token  string
 	)
