@@ -41,11 +41,11 @@ func (ding *dingTalk) GetAuthInfo(corpId string) (rsp response.CorpAuthInfo, err
 		return response.CorpAuthInfo{}, errors.New("ticket or corpId is null")
 	}
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
-	sign := crypto.GetSignature(timestamp, ding.Secret, ding.Ticket)
+	sign := crypto.GetSignature(timestamp, ding.Secret, ding.ticket)
 
 	query := url.Values{}
 	query.Set("accessKey", ding.Key)
-	query.Set("suiteTicket", ding.Ticket)
+	query.Set("suiteTicket", ding.ticket)
 	query.Set("timestamp", timestamp)
 	query.Set("signature", sign)
 
@@ -72,7 +72,7 @@ func (ding *dingTalk) ActivateSuite(corpId, code string) (rsp response.CorpAuthI
 func (ding *dingTalk) GetAgentInfo(agentId int, corpId string) (rsp response.AgentInfo, err error) {
 
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
-	sign := crypto.GetSignature(timestamp, ding.Secret, ding.Ticket)
+	sign := crypto.GetSignature(timestamp, ding.Secret, ding.ticket)
 
 	token, err := ding.GetSuiteAccessToken()
 	if err != nil {
@@ -84,7 +84,7 @@ func (ding *dingTalk) GetAgentInfo(agentId int, corpId string) (rsp response.Age
 	query.Set("timestamp", timestamp)
 	query.Set("accessKey", ding.Key)
 	query.Set("signature", sign)
-	query.Set("suiteTicket", ding.Ticket)
+	query.Set("suiteTicket", ding.ticket)
 
 	return rsp, ding.Request(http.MethodPost, constant.GetAgentKey, query,
 		request.NewAgentInfo(agentId, ding.Key, corpId), &rsp)

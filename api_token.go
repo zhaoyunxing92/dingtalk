@@ -40,7 +40,7 @@ import (
 //GetAccessToken 获取token
 func (ding *dingTalk) GetAccessToken() (token string, err error) {
 	var (
-		ch  = ding.Cache
+		ch  = ding.cache
 		res = &response.AccessToken{}
 	)
 	//先缓存中获取
@@ -78,7 +78,7 @@ func (ding *dingTalk) GetSuiteAccessToken() (token string, err error) {
 	req := request.NewSuiteAccessToken().
 		SetKey(ding.Key).
 		SetSecret(ding.Secret).
-		SetTicket(ding.Ticket).
+		SetTicket(ding.ticket).
 		Build()
 
 	if err = ding.Request(http.MethodPost, constant.SuiteAccessToken, nil, req, res); err != nil {
@@ -94,7 +94,7 @@ func (ding *dingTalk) GetSuiteAccessToken() (token string, err error) {
 // GetCorpAccessToken 服务商获取第三方应用授权企业的access_token
 func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
 	var (
-		ch  = ding.Cache
+		ch  = ding.cache
 		res = &response.AccessToken{}
 	)
 	// check ticket and corpId
@@ -105,16 +105,16 @@ func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
 		return res.Token, nil
 	}
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
-	sign := crypto.GetSignature(timestamp, ding.Secret, ding.Ticket)
+	sign := crypto.GetSignature(timestamp, ding.Secret, ding.ticket)
 
 	query := url.Values{}
 	query.Set("accessKey", ding.Key)
 	query.Set("timestamp", timestamp)
-	query.Set("suiteTicket", ding.Ticket)
+	query.Set("suiteTicket", ding.ticket)
 	query.Set("signature", sign)
 
 	if err = ding.Request(http.MethodPost, constant.CorpAccessToken, query,
-		request.NewCorpAccessToken(ding.CorpId), res); err != nil {
+		request.NewCorpAccessToken(ding.corpId), res); err != nil {
 		return "", err
 	}
 	res.Create = time.Now().Unix()

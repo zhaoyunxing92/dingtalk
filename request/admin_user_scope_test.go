@@ -17,13 +17,20 @@
 
 package request
 
-//AgentInfo 获取授权应用的基本信息
-type AgentInfo struct {
-	AgentId  int    `json:"agentid" validate:"required"`
-	SuiteKey string `json:"suite_key" validate:"required"`
-	CorpId   string `json:"auth_corpid" validate:"required"`
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
+
+func TestNewAdminUserScope(t *testing.T) {
+
+	scope := NewAdminUserScope("123456")
+
+	assert.NotNil(t, scope)
 }
 
-func NewAgentInfo(agentId int, key, corpId string) *AgentInfo {
-	return &AgentInfo{agentId, key, corpId}
+func TestAdminUserScope_String(t *testing.T) {
+	scope := NewAdminUserScope("123456").String()
+
+	assert.NotNil(t, scope)
 }

@@ -48,33 +48,33 @@ type dingTalk struct {
 	Key string `json:"key,omitempty" validate:"required"`
 
 	//企业内部对应:AppSecret，套件对应:SuiteSecret
-	Secret string `json:"secret,omitempty" validate:"required"`
+	Secret string `json:"Secret,omitempty" validate:"required"`
 
 	// isv 钉钉开放平台会向应用的回调URL推送的suite_ticket（约5个小时推送一次）
-	Ticket string `json:"ticket,omitempty"`
+	ticket string
 
 	//授权企业的id
-	CorpId string `json:"corpId,omitempty"`
+	corpId string
 
 	//在开发者后台的基本信息 > 开发信息（旧版）页面获取微应用管理后台SSOSecret
 	SSOSecret string `json:"SSOSecret"`
 
-	Client *http.Client
+	client *http.Client
 
-	Cache cache.Cache
+	cache cache.Cache
 }
 
 type OptionFunc func(*dingTalk)
 
 func WithTicket(ticket string) OptionFunc {
 	return func(dt *dingTalk) {
-		dt.Ticket = ticket
+		dt.ticket = ticket
 	}
 }
 
 func WithCorpId(corpId string) OptionFunc {
 	return func(dt *dingTalk) {
-		dt.CorpId = corpId
+		dt.corpId = corpId
 	}
 }
 
@@ -86,7 +86,7 @@ func WithSSOSecret(secret string) OptionFunc {
 
 //isv 是否isv
 func (ding *dingTalk) isv() bool {
-	return len(ding.Ticket) > 0 && len(ding.CorpId) > 0
+	return len(ding.ticket) > 0 && len(ding.corpId) > 0
 }
 
 // NewClient new DingTalkBuilder
@@ -95,12 +95,13 @@ func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) 
 	for _, opt := range opts {
 		opt(ding)
 	}
+
 	if ding.isv() {
-		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "isv", key}, "/"), ding.CorpId)
+		ding.cache = cache.NewFileCache(strings.Join([]string{".token", "isv", key}, "/"), ding.corpId)
 	} else {
-		ding.Cache = cache.NewFileCache(strings.Join([]string{".token", "corp"}, "/"), key)
+		ding.cache = cache.NewFileCache(strings.Join([]string{".token", "corp"}, "/"), key)
 	}
-	ding.Client = &http.Client{Timeout: 10 * time.Second}
+	ding.client = &http.Client{Timeout: 10 * time.Second}
 
 	if err := validate(ding); err != nil {
 		panic(err)
@@ -177,7 +178,8 @@ func (robot *Robot) httpRequest(method, path string, query url.Values, body inte
 		return err
 	}
 
-	defer res.Body.Close()
+	defer func(b io.ReadCloser) { _ = b.Close() }(res.Body)
+
 	if res.StatusCode != 200 {
 		return errors.New("dingtalk server error: " + res.Status)
 	}
@@ -195,11 +197,10 @@ func (robot *Robot) httpRequest(method, path string, query url.Values, body inte
 func (ding *dingTalk) httpRequest(method, path string, query url.Values, body interface{},
 	data response.Unmarshalled) error {
 
-	client := ding.Client
+	client := ding.client
 	uri, _ := url.Parse(constant.Api + path)
 	uri.RawQuery = query.Encode()
 
-	fmt.Println("url=", uri.String())
 	var (
 		req     *http.Request
 		res     *http.Response
@@ -212,10 +213,11 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 		switch body.(type) {
 		case request.UploadFile:
 			var b bytes.Buffer
-			w := multipart.NewWriter(&b)
+			var fw io.Writer
 
+			w := multipart.NewWriter(&b)
 			file := body.(request.UploadFile)
-			fw, err := w.CreateFormFile(file.FieldName, file.FileName)
+			fw, err = w.CreateFormFile(file.FieldName, file.FileName)
 			if err != nil {
 				return err
 			}
@@ -230,7 +232,6 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 		default:
 			//表单不为空
 			d, _ := json.Marshal(body)
-			fmt.Println(string(d))
 			req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
 			req.Header.Set("Content-Type", "application/json; charset=utf-8")
 		}
@@ -242,7 +243,7 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 		return err
 	}
 
-	defer res.Body.Close()
+	defer func(b io.ReadCloser) { _ = b.Close() }(res.Body)
 
 	if res.StatusCode != 200 {
 		return errors.New("dingtalk server error: " + res.Status)
@@ -251,11 +252,10 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 	if content, err = ioutil.ReadAll(res.Body); err != nil {
 		return err
 	}
-	fmt.Println("content=", string(content))
+
 	if err = json.Unmarshal(content, data); err != nil {
 		return err
 	}
-
 	return data.CheckError()
 }
 
