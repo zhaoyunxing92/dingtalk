@@ -21,6 +21,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -32,7 +33,6 @@ import (
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/cache"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 import (
@@ -156,7 +156,7 @@ func (robot *Robot) httpRequest(method, path string, query url.Values, body inte
 
 	client := robot.client
 
-	uri, _ := url.Parse(constant.Host + path)
+	uri, _ := url.Parse(constant.Api + path)
 	uri.RawQuery = query.Encode()
 
 	var (
@@ -196,7 +196,7 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 	data response.Unmarshalled) error {
 
 	client := ding.Client
-	uri, _ := url.Parse(constant.Host + path)
+	uri, _ := url.Parse(constant.Api + path)
 	uri.RawQuery = query.Encode()
 
 	fmt.Println("url=", uri.String())
@@ -210,11 +210,11 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 	if body != nil {
 		//检查提交表单类型
 		switch body.(type) {
-		case domain.UploadFile:
+		case request.UploadFile:
 			var b bytes.Buffer
 			w := multipart.NewWriter(&b)
 
-			file := body.(domain.UploadFile)
+			file := body.(request.UploadFile)
 			fw, err := w.CreateFormFile(file.FieldName, file.FileName)
 			if err != nil {
 				return err

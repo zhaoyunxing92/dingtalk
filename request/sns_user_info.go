@@ -15,24 +15,19 @@
  * limitations under the License.
  */
 
-package dingtalk
+package request
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"github.com/zhaoyunxing92/dingtalk/v2/response"
-	"net/http"
-	"net/url"
-)
+type SnsUserInfo struct {
+	//用户授权的临时授权码，只能使用一次。获取方法请参考：
+	//
+	//扫码登录第三方网站：开发流程
+	//
+	//免登第三方网站：开发流程
+	//
+	//使用钉钉账号登录第三方网站：开发流程
+	AutoCode string `json:"tmp_auth_code,omitempty" validate:"required"`
+}
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-)
-
-//MediaUpload 上传媒体文件
-func (ding *dingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
-
-	query := url.Values{}
-	query.Add("type", req.Genre)
-
-	return media, ding.Request(http.MethodPost, constant.MediaUploadKey, query, req, &media)
+func NewSnsUserInfo(code string) *SnsUserInfo {
+	return &SnsUserInfo{code}
 }

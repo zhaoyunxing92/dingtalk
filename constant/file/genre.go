@@ -15,24 +15,20 @@
  * limitations under the License.
  */
 
-package dingtalk
+package file
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"github.com/zhaoyunxing92/dingtalk/v2/response"
-	"net/http"
-	"net/url"
+type Genre string
+
+const (
+	//Image 图片，图片最大1MB。支持上传jpg、gif、png、bmp格式
+	Image = Genre("image")
+
+	//Voice 语音，语音文件最大2MB。支持上传amr、mp3、wav格式
+	Voice = Genre("voice")
+
+	//Video 视频，视频最大10MB。支持上传mp4格式
+	Video = Genre("video")
+
+	//File 普通文件，最大10MB。支持上传doc、docx、xls、xlsx、ppt、pptx、zip、pdf、rar格式
+	File = Genre("file")
 )
-
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-)
-
-//MediaUpload 上传媒体文件
-func (ding *dingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
-
-	query := url.Values{}
-	query.Add("type", req.Genre)
-
-	return media, ding.Request(http.MethodPost, constant.MediaUploadKey, query, req, &media)
-}

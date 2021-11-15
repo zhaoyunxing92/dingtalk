@@ -46,7 +46,7 @@ func TestDingTalk_SendMessage(t *testing.T) {
 	msg.StatusBar.Value = "进行中"
 	msg.StatusBar.BackColor = "0xFFF65E5E"
 
-	res, err := client.SendMessage("manager164", "chat9cb7a619552c07849fb7546b115ff123", msg)
+	res, err := client.SendMessage("manager164", "315039647", msg)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)

@@ -18,21 +18,16 @@
 package dingtalk
 
 import (
+	"github.com/stretchr/testify/assert"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"github.com/zhaoyunxing92/dingtalk/v2/response"
-	"net/http"
-	"net/url"
+	"testing"
 )
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-)
+func TestDingTalk_MediaUpload(t *testing.T) {
 
-//MediaUpload 上传媒体文件
-func (ding *dingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
+	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
 
-	query := url.Values{}
-	query.Add("type", req.Genre)
-
-	return media, ding.Request(http.MethodPost, constant.MediaUploadKey, query, req, &media)
+	assert.Nil(t, err)
+	assert.NotNil(t, res.MediaId)
 }
