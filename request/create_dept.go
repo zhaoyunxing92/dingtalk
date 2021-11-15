@@ -113,6 +113,7 @@ func (cdb *createDeptBuilder) SetHideDept(hide bool) *createDeptBuilder {
 	cdb.cd.HideDept = &hide
 	return cdb
 }
+
 func (cdb *createDeptBuilder) SetDeptPermits(deptId int, deptIds ...int) *createDeptBuilder {
 	cdb.cd.DeptPermit = append(deptIds, deptId)
 	return cdb
@@ -149,6 +150,7 @@ func (cdb *createDeptBuilder) SetCreateDeptGroup(group bool) *createDeptBuilder 
 	cdb.cd.CreateDeptGroup = &group
 	return cdb
 }
+
 func (cdb *createDeptBuilder) SetAutoApproveApply(approve bool) *createDeptBuilder {
 	cdb.cd.AutoApproveApply = &approve
 	return cdb
