@@ -17,13 +17,14 @@
 package constant
 
 const (
-	Api                      = "https://oapi.dingtalk.com" //钉钉ap域名
-	NewApi                   = "https://api.dingtalk.com"  //全新一代的钉钉API域名
-	GetTokenKey              = "/gettoken"                 //获取access_token
-	MicroAppListKey          = "/microapp/list"            //获取应用列表
-	MicroAppVisibleScopesKey = "/microapp/visible_scopes"  //获取应用可见范围
-	GetSSOTokenKey           = "/sso/gettoken"             //获取微应用后台免登的access_token
-	GetJsApiTicketKey        = "/get_jsapi_ticket"         //获取jsapi_ticket
+	Api    = "https://oapi.dingtalk.com" //钉钉ap域名
+	NewApi = "https://api.dingtalk.com"  //全新一代的钉钉API域名
+
+	GetTokenKey              = "/gettoken"                //获取access_token
+	MicroAppListKey          = "/microapp/list"           //获取应用列表
+	MicroAppVisibleScopesKey = "/microapp/visible_scopes" //获取应用可见范围
+	GetSSOTokenKey           = "/sso/gettoken"            //获取微应用后台免登的access_token
+	GetJsApiTicketKey        = "/get_jsapi_ticket"        //获取jsapi_ticket
 
 	SuiteAccessToken        = "/service/get_suite_token"    //获取第三方企业应用的
 	CorpAccessToken         = "/service/get_corp_token"     //服务商获取第三方应用授权企业的access_token
@@ -120,4 +121,8 @@ const (
 	UpdateCallBackKey          = callback + "/update_call_back"            //更新事件回调接口
 	GetCallBackFailedDetailKey = callback + "/get_call_back_failed_result" //获取回调失败的结果
 	DeleteCallBackKey          = callback + "/delete_call_back"            //删除事件回调接口
+
+	CreateCooperateCorpKey = "/v1.0/contact/cooperateCorps" //创建合作空间
+
+	CreateDriveSpacesKey = "/v1.0/drive/spaces" //新建空间
 )

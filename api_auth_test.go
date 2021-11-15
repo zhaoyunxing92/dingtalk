@@ -23,12 +23,7 @@ import (
 
 func TestDingTalk_GetAuthInfo(t *testing.T) {
 
-	ding := NewClient(10435002, "suitegqebx814dt8immqw",
-		"AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m",
-		WithTicket("60LVmSzP5zuDorEjISt2hc1imVeyKHcnTCUGUgslOBGpJXxyyQsbuBpyVhw6eunNAt3WXO0u9yfnXmcsskHNdN"),
-		WithCorpId("ding3b1e912394011559bc961a6cb783455b"))
-
-	res, err := ding.GetAuthInfo("ding3b1e912394011559bc961a6cb783455b")
+	res, err := isv.GetAuthInfo("ding3b1e912394011559bc961a6cb783455b")
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
@@ -37,12 +32,7 @@ func TestDingTalk_GetAuthInfo(t *testing.T) {
 
 func TestDingTalk_GetAgentInfo(t *testing.T) {
 
-	ding := NewClient(10435002, "suitegqebx814dt8immqw",
-		"AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m",
-		WithTicket("60LVmSzP5zuDorEjISt2hc1imVeyKHcnTCUGUgslOBGpJXxyyQsbuBpyVhw6eunNAt3WXO0u9yfnXmcsskHNdN"),
-		WithCorpId("ding3b1e912394011559bc961a6cb783455b"))
-
-	res, err := ding.GetAgentInfo(1332307896, "ding3b1e912394011559bc961a6cb783455b")
+	res, err := isv.GetAgentInfo(1332307896, "ding3b1e912394011559bc961a6cb783455b")
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
@@ -51,12 +41,7 @@ func TestDingTalk_GetAgentInfo(t *testing.T) {
 
 func TestDingTalk_GetUnactiveCorp(t *testing.T) {
 
-	ding := NewClient(10435002, "suitegqebx814dt8immqw",
-		"AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m",
-		WithTicket("60LVmSzP5zuDorEjISt2hc1imVeyKHcnTCUGUgslOBGpJXxyyQsbuBpyVhw6eunNAt3WXO0u9yfnXmcsskHNdN"),
-		WithCorpId("ding3b1e912394011559bc961a6cb783455b"))
-
-	res, err := ding.GetUnactiveCorp(45829)
+	res, err := isv.GetUnactiveCorp(45829)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
@@ -65,12 +50,7 @@ func TestDingTalk_GetUnactiveCorp(t *testing.T) {
 
 func TestDingTalk_ReauthCorp(t *testing.T) {
 
-	ding := NewClient(10435002, "suitegqebx814dt8immqw",
-		"AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m",
-		WithTicket("60LVmSzP5zuDorEjISt2hc1imVeyKHcnTCUGUgslOBGpJXxyyQsbuBpyVhw6eunNAt3WXO0u9yfnXmcsskHNdN"),
-		WithCorpId("ding3b1e912394011559bc961a6cb783455b"))
-
-	res, err := ding.ReauthCorp(45829, "ding3b1e912394011559bc961a6cb783455b")
+	res, err := isv.ReauthCorp(45829, "ding3b1e912394011559bc961a6cb783455b")
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)

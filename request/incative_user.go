@@ -31,7 +31,7 @@ type InactiveUser struct {
 	DeptIds []int `json:"dept_ids,omitempty"`
 
 	//支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始
-	Offset int `json:"offset" validate:"required,min=0"`
+	Offset *int `json:"offset" validate:"required,min=0"`
 
 	//支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，最大100
 	Size int `json:"size" validate:"required,max=100"`
@@ -45,7 +45,7 @@ type inactiveUserBuilder struct {
 }
 
 func NewInactiveUser(active bool, offset, size int, date string) *inactiveUserBuilder {
-	return &inactiveUserBuilder{iu: &InactiveUser{Active: active, Offset: offset, Size: size, Date: date}}
+	return &inactiveUserBuilder{iu: &InactiveUser{Active: active, Offset: &offset, Size: size, Date: date}}
 }
 
 func (receiver *inactiveUserBuilder) SetDeptIds(deptId int, ids ...int) *inactiveUserBuilder {

@@ -123,10 +123,11 @@ func (ding *dingTalk) Request(method, path string, query url.Values, body interf
 		query = url.Values{}
 	}
 
-	if !query.Has("access_token") && path != constant.GetTokenKey && path != constant.CorpAccessToken && path != constant.SuiteAccessToken &&
-		path != constant.GetAuthInfo && path != constant.GetAgentKey && path != constant.ActivateSuiteKey &&
-		path != constant.GetSSOTokenKey && path != constant.GetUnactiveCorpKey && path != constant.ReauthCorpKey &&
-		path != constant.GetCorpPermanentCodeKey {
+	if !query.Has("access_token") && path != constant.GetTokenKey && path != constant.CorpAccessToken &&
+		path != constant.SuiteAccessToken && path != constant.GetAuthInfo && path != constant.GetAgentKey &&
+		path != constant.ActivateSuiteKey && path != constant.GetSSOTokenKey && path != constant.GetUnactiveCorpKey &&
+		path != constant.ReauthCorpKey && path != constant.GetCorpPermanentCodeKey {
+
 		var token string
 
 		if ding.isv() {
@@ -194,18 +195,27 @@ func (robot *Robot) httpRequest(method, path string, query url.Values, body inte
 }
 
 func (ding *dingTalk) httpRequest(method, path string, query url.Values, body interface{},
-	data response.Unmarshalled) error {
-
-	client := ding.client
-	uri, _ := url.Parse(constant.Api + path)
-	uri.RawQuery = query.Encode()
+	response response.Unmarshalled) error {
 
 	var (
-		req     *http.Request
-		res     *http.Response
-		err     error
-		content []byte
+		req    *http.Request
+		res    *http.Response
+		err    error
+		data   []byte
+		client = ding.client
+		uri    *url.URL
+		token  string
+		newApi = isNewApi(path)
 	)
+
+	if newApi {
+		token = query.Get("access_token")
+		query.Del("access_token")
+		uri, _ = url.Parse(constant.NewApi + path)
+	} else {
+		uri, _ = url.Parse(constant.Api + path)
+	}
+	uri.RawQuery = query.Encode()
 
 	if body != nil {
 		//检查提交表单类型
@@ -238,24 +248,32 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 		req, _ = http.NewRequest(method, uri.String(), nil)
 	}
 
+	if newApi {
+		req.Header.Set("x-acs-dingtalk-access-token", token)
+	}
+
 	if res, err = client.Do(req); err != nil {
 		return err
 	}
 
 	defer func(b io.ReadCloser) { _ = b.Close() }(res.Body)
 
-	if res.StatusCode != 200 {
-		return errors.New("dingtalk server error: " + res.Status)
-	}
-
-	if content, err = ioutil.ReadAll(res.Body); err != nil {
+	if data, err = ioutil.ReadAll(res.Body); err != nil {
 		return err
 	}
 
-	if err = json.Unmarshal(content, data); err != nil {
+	switch res.StatusCode {
+	case 400:
+		return errors.Errorf("dingtalk server error: status=%d", res.StatusCode)
+	case 500:
+		return errors.Errorf("dingtalk server error,status=%d", res.StatusCode)
+	}
+
+	if err = json.Unmarshal(data, response); err != nil {
 		return err
 	}
-	return data.CheckError()
+	fmt.Println("res=", string(data))
+	return response.CheckError()
 }
 
 // validate 参数验证
@@ -270,4 +288,8 @@ func validate(s interface{}) error {
 		return errors.New(strings.Join(slice, ","))
 	}
 	return nil
+}
+
+func isNewApi(path string) bool {
+	return strings.HasPrefix(path, "/v1.0/")
 }

@@ -58,7 +58,7 @@ func TestDingTalk_DeleteUser(t *testing.T) {
 
 func TestDingTalk_GetUserDetail(t *testing.T) {
 
-	detail, err := client.GetUserDetail(request.NewUserDetail("1948546245774889").Build())
+	detail, err := client.GetUserDetail(request.NewUserDetail("manager164").Build())
 
 	assert.Nil(t, err)
 	assert.NotNil(t, detail.Code)
@@ -128,7 +128,7 @@ func TestDingTalk_GetUserCanAccessApplet(t *testing.T) {
 
 func TestDingTalk_GetUserInfoByCode(t *testing.T) {
 
-	req, err := isv.GetUserInfoByCode("ed61dbdbd5733577b7fe9e7d993b0a00")
+	req, err := client.GetUserInfoByCode("19f4d6df07b63bcf910f91cbe26b4c66")
 
 	assert.Nil(t, err)
 	assert.NotNil(t, req)
