@@ -29,12 +29,12 @@ jobs:
 
       - name: Install imports-formatter
         run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
           go get -u github.com/dubbogo/tools@v1.0.3
 
       - name: Install license-header-checker
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
+          echo $PATH
           git clone https://github.com/lsm-dev/license-header-checker.git
           cd license-header-checker
           make install
@@ -46,7 +46,7 @@ jobs:
 
       - name: gofmt
         run: |
-          go fmt ./... && imports-formatter && git status && [[ -z `git status -s` ]]
+          go fmt ./...  && git status && [[ -z `git status -s` ]]
           # diff -u <(echo -n) <(gofmt -d -s .)
 
       - name: Test Request Struct
