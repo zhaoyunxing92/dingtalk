@@ -23,7 +23,7 @@ import (
 )
 
 var client = NewClient(1244553273, "dingkjy4w80esdwgjuyo",
-	"bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW",WithLevel(zap.DebugLevel))
+	"bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW", WithLevel(zap.DebugLevel))
 
 //var client = NewClient(1279842668, "dingsoxqy0cobtzqmxud",
 //	"rqKkOr54z2iwVnV8Y0tT1TYua0hPEX78PdytG-cP6JKj7m-V3A3zKt8xQZt3B5Oy")
