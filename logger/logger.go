@@ -1,4 +1,4 @@
-package main
+package logger
 
 import (
 	"go.uber.org/zap"
@@ -6,20 +6,6 @@ import (
 	"os"
 )
 
-func main() {
-
-	encoder := getEncoder()
-	core := zapcore.NewCore(encoder, zapcore.AddSync(os.Stdout), zapcore.InfoLevel)
-
-	logger := zap.New(core, zap.AddCaller())
-
-	logger.Info("hello")
-	logger.Error("dsfsdf")
-	//logger.With("")
-
-	logger.With().Debug("msg info")
-
-}
 func getEncoder() zapcore.Encoder {
 	encoder := zapcore.NewConsoleEncoder(zapcore.EncoderConfig{
 		MessageKey:     "msg",
@@ -35,4 +21,11 @@ func getEncoder() zapcore.Encoder {
 		EncodeDuration: zapcore.SecondsDurationEncoder,
 	})
 	return encoder
+}
+
+func GetLogger(level zapcore.Level) *zap.Logger {
+	encoder := getEncoder()
+	core := zapcore.NewCore(encoder, zapcore.AddSync(os.Stdout), level)
+
+	return zap.New(core, zap.AddCaller())
 }
