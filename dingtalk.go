@@ -64,7 +64,7 @@ type dingTalk struct {
 	// 日志级别
 	Level zapcore.Level
 
-	log *zap.Logger
+	log *zap.SugaredLogger
 
 	client *http.Client
 
@@ -117,7 +117,7 @@ func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) 
 	}
 	ding.client = &http.Client{Timeout: 10 * time.Second}
 
-	ding.log = logger.GetLogger(ding.Level)
+	ding.log = logger.GetLogger(ding.Level).Sugar()
 
 	if err := validate(ding); err != nil {
 		panic(err)
@@ -279,15 +279,17 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 	if data, err = ioutil.ReadAll(res.Body); err != nil {
 		return err
 	}
-	log := ding.log.With(zap.String("path", path), zap.String("method", method),
-		zap.String("body", string(form)), zap.String("token", token), zap.String("res", string(data)))
+
+	log := ding.log.With(zap.Bool("new", newApi), zap.String("method", method), zap.String("path", path),
+		zap.String("body", string(form)), zap.String("token", token),
+		zap.ByteString("res", data))
 
 	switch res.StatusCode {
 	case 400:
-		log.Error("ding fail status code 400")
+		log.Errorf("ding fail status code %d", res.StatusCode)
 		return errors.Errorf("dingtalk server error: status=%d", res.StatusCode)
 	case 500:
-		log.Error("ding fail status code 500")
+		log.Errorf("ding fail status code %d", res.StatusCode)
 		return errors.Errorf("dingtalk server error,status=%d", res.StatusCode)
 	}
 
