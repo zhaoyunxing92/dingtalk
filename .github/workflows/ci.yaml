@@ -29,7 +29,7 @@ jobs:
 
       - name: Install imports-formatter
         run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
+          export PATH=$PATH:$(go env GOROOT)/bin
           go get -u github.com/dubbogo/tools@v1.0.3
 
       - name: Install license-header-checker
