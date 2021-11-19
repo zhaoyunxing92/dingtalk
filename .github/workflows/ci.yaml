@@ -30,7 +30,7 @@ jobs:
       - name: Install imports-formatter
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
-          git clone git@github.com:dubbogo/tools.git
+          git clone https://github.com/dubbogo/tools.git
           cd tools/cmd/imports-formatter
           go install
 
@@ -52,6 +52,7 @@ jobs:
           imports-formatter -path . -module github.com/zhaoyunxing92/dingtalk/v2 -bl false
           rm -rf tools
           [[ -z `git status -s` ]]
+
       - name: gofmt
         run: |
           go fmt ./... && && git status && [[ -z `git status -s` ]]
