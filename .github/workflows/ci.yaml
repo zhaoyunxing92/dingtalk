@@ -33,6 +33,7 @@ jobs:
           git clone https://github.com/dubbogo/tools.git
           cd tools/cmd/imports-formatter
           go install
+          rm -rf tools
 
       - name: Install license-header-checker
         run: |
@@ -40,18 +41,16 @@ jobs:
           git clone https://github.com/lsm-dev/license-header-checker.git
           cd license-header-checker
           make install
+          rm -rf license-header-checker
 
       - name: Check License Header
         run: |
-          pwd
           license-header-checker -v -a -r -i vendor,license-header-checker,tools ./header/license_header.txt . go
-          rm -rf license-header-checker
           git status && [[ -z `git status -s` ]]
 
       - name: Check improts
         run: |
           imports-formatter -path . -module github.com/zhaoyunxing92/dingtalk/v2 -bl false
-          rm -rf tools
           git status && [[ -z `git status -s` ]]
 
       - name: gofmt
