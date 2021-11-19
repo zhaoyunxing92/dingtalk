@@ -16,7 +16,9 @@
 
 package request
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type AdminUserScope struct {
 	UserId string `json:"userid" validate:"required"`

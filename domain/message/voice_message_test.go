@@ -16,7 +16,9 @@
 
 package message
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNewVoiceMessage(t *testing.T) {
 	v := NewVoiceMessage("@lADOADmaWMzazQKA", 10)

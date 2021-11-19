@@ -20,7 +20,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -29,14 +28,22 @@ import (
 	"strings"
 	"time"
 )
+
+import (
+	"github.com/go-playground/validator/v10"
+
+	"github.com/pkg/errors"
+
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
+)
+
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/cache"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/logger"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
-)
-import (
-	"github.com/go-playground/validator/v10"
-	"github.com/pkg/errors"
 )
 
 type dingTalk struct {
@@ -56,7 +63,12 @@ type dingTalk struct {
 	corpId string
 
 	//在开发者后台的基本信息 > 开发信息（旧版）页面获取微应用管理后台SSOSecret
-	SSOSecret string `json:"SSOSecret"`
+	SSOSecret string
+
+	// 日志级别
+	Level zapcore.Level
+
+	log *zap.SugaredLogger
 
 	client *http.Client
 
@@ -83,6 +95,12 @@ func WithSSOSecret(secret string) OptionFunc {
 	}
 }
 
+func WithLevel(level zapcore.Level) OptionFunc {
+	return func(dt *dingTalk) {
+		dt.Level = level
+	}
+}
+
 //isv 是否isv
 func (ding *dingTalk) isv() bool {
 	return len(ding.ticket) > 0 && len(ding.corpId) > 0
@@ -90,7 +108,8 @@ func (ding *dingTalk) isv() bool {
 
 // NewClient new DingTalkBuilder
 func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) {
-	ding = &dingTalk{Id: id, Key: key, Secret: secret}
+	ding = &dingTalk{Id: id, Key: key, Secret: secret, Level: zapcore.InfoLevel}
+
 	for _, opt := range opts {
 		opt(ding)
 	}
@@ -101,6 +120,8 @@ func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) 
 		ding.cache = cache.NewFileCache(strings.Join([]string{".token", "corp"}, "/"), key)
 	}
 	ding.client = &http.Client{Timeout: 10 * time.Second}
+
+	ding.log = logger.GetLogger(ding.Level).Sugar()
 
 	if err := validate(ding); err != nil {
 		panic(err)
@@ -201,7 +222,8 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 		req    *http.Request
 		res    *http.Response
 		err    error
-		data   []byte
+		form   []byte //body 数据
+		data   []byte //返回数据
 		client = ding.client
 		uri    *url.URL
 		token  string
@@ -240,8 +262,8 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 			req.Header.Set("Content-Type", w.FormDataContentType())
 		default:
 			//表单不为空
-			d, _ := json.Marshal(body)
-			req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(d))
+			form, _ = json.Marshal(body)
+			req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(form))
 			req.Header.Set("Content-Type", "application/json; charset=utf-8")
 		}
 	} else {
@@ -262,17 +284,23 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 		return err
 	}
 
+	log := ding.log.With(zap.Bool("new", newApi), zap.String("method", method), zap.String("path", path),
+		zap.String("body", string(form)), zap.String("token", token),
+		zap.ByteString("res", data))
+
 	switch res.StatusCode {
 	case 400:
+		log.Errorf("ding fail status code %d", res.StatusCode)
 		return errors.Errorf("dingtalk server error: status=%d", res.StatusCode)
 	case 500:
+		log.Errorf("ding fail status code %d", res.StatusCode)
 		return errors.Errorf("dingtalk server error,status=%d", res.StatusCode)
 	}
 
 	if err = json.Unmarshal(data, response); err != nil {
 		return err
 	}
-	fmt.Println("res=", string(data))
+	log.Debug("request succeed")
 	return response.CheckError()
 }
 

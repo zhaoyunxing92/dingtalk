@@ -16,7 +16,9 @@
 
 package request
 
-import "strings"
+import (
+	"strings"
+)
 
 type BatchRemoveUserRole struct {
 	RoleIds string `json:"roleIds"`

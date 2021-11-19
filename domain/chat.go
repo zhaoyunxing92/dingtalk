@@ -18,9 +18,13 @@ package domain
 
 import (
 	"errors"
-	translator "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
 	"strings"
+)
+
+import (
+	translator "github.com/go-playground/universal-translator"
+
+	"github.com/go-playground/validator/v10"
 )
 
 type CreateChat struct {

@@ -16,7 +16,9 @@
 
 package message
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNewTextMessage(t *testing.T) {
 	msg := NewTextMessage("test")

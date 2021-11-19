@@ -16,7 +16,9 @@
 
 package message
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNewLinkMessage(t *testing.T) {
 

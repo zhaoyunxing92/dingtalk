@@ -17,11 +17,15 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"testing"
 )
+
 import (
 	"github.com/stretchr/testify/assert"
+)
+
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
 
 func TestDingTalk_CreateExtContact(t *testing.T) {

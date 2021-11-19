@@ -16,7 +16,9 @@
 
 package request
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type UserDetail struct {
 	UserId string `json:"userid" validate:"required"`

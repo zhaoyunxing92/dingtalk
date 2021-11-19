@@ -19,6 +19,7 @@ package dingtalk
 import (
 	"net/http"
 )
+
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"

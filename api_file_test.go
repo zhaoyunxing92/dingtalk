@@ -17,10 +17,16 @@
 package dingtalk
 
 import (
+	"testing"
+)
+
+import (
 	"github.com/stretchr/testify/assert"
+)
+
+import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"testing"
 )
 
 func TestDingTalk_MediaUpload(t *testing.T) {

@@ -18,9 +18,13 @@ package message
 
 import (
 	"errors"
-	translator "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
 	"strings"
+)
+
+import (
+	translator "github.com/go-playground/universal-translator"
+
+	"github.com/go-playground/validator/v10"
 )
 
 //"title": "时代的火车向前开1",

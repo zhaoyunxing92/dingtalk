@@ -17,7 +17,6 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -25,13 +24,14 @@ import (
 )
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"github.com/zhaoyunxing92/dingtalk/v2/response"
+	"github.com/pkg/errors"
 )
 
 import (
-	"github.com/pkg/errors"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 
 //CreateUser 创建用户

@@ -18,8 +18,11 @@ package crypto
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"testing"
+)
+
+import (
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetSignature(t *testing.T) {

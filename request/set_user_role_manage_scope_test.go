@@ -16,7 +16,9 @@
 
 package request
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNewSetUserRoleManageScope(t *testing.T) {
 

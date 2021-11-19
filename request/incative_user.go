@@ -16,7 +16,9 @@
 
 package request
 
-import "sort"
+import (
+	"sort"
+)
 
 //InactiveUser 获取未登录钉钉的员工列表
 type InactiveUser struct {
