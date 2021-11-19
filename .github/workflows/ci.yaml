@@ -34,12 +34,12 @@ jobs:
           cd tools/cmd/imports-formatter
           go install
 
-      - name: Install license-header-checker
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          git clone https://github.com/lsm-dev/license-header-checker.git
-          cd license-header-checker
-          make install
+#      - name: Install license-header-checker
+#        run: |
+#          export PATH=$PATH:$(go env GOPATH)/bin
+#          git clone https://github.com/lsm-dev/license-header-checker.git
+#          cd license-header-checker
+#          make install
 
 #      - name: Check License Header
 #        run: |
