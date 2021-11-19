@@ -45,6 +45,7 @@ jobs:
 
       - name: Check License Header
         run: |
+          ls -al
           license-header-checker -v -a -r -i vendor,license-header-checker,tools ./header/license_header.txt . go
           git status && [[ -z `git status -s` ]]
 
