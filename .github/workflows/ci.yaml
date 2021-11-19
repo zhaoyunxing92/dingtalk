@@ -52,11 +52,11 @@ jobs:
         run: |
           imports-formatter -path . -module github.com/zhaoyunxing92/dingtalk/v2 -bl false
           rm -rf tools
-          [[ -z `git status -s` ]]
+          git status && [[ -z `git status -s` ]]
 
       - name: gofmt
         run: |
-          go fmt ./... && && git status && [[ -z `git status -s` ]]
+          go fmt ./... &&  git status && [[ -z `git status -s` ]]
           # diff -u <(echo -n) <(gofmt -d -s .)
 
       - name: Test Request Struct
