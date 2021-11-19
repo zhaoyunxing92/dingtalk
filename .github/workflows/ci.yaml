@@ -33,7 +33,6 @@ jobs:
           git clone https://github.com/dubbogo/tools.git
           cd tools/cmd/imports-formatter
           go install
-          rm -rf tools
 
       - name: Install license-header-checker
         run: |
@@ -41,10 +40,11 @@ jobs:
           git clone https://github.com/lsm-dev/license-header-checker.git
           cd license-header-checker
           make install
-          rm -rf license-header-checker
 
       - name: Check License Header
         run: |
+          rm -rf ./license-header-checker
+          rm -rf ./tools
           ls -al
           license-header-checker -v -a -r -i vendor,license-header-checker,tools ./header/license_header.txt . go
           git status && [[ -z `git status -s` ]]
