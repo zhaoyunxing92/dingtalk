@@ -16,7 +16,9 @@
 
 package request
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type DeleteUser struct {
 	UserId string `json:"userid" validate:"required"`

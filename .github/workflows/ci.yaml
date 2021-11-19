@@ -1,4 +1,4 @@
-name: dingtalk
+name: ci
 
 on:
   push:

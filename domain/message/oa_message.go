@@ -16,7 +16,9 @@
 
 package message
 
-import json "encoding/json"
+import (
+	json "encoding/json"
+)
 
 //oaMessageHeader 消息的头
 type oaMessageHeader struct {

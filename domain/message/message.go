@@ -16,7 +16,9 @@
 
 package message
 
-import "github.com/zhaoyunxing92/dingtalk/v2/domain"
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/domain"
+)
 
 type message struct {
 	//消息类型

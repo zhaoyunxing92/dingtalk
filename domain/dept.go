@@ -18,10 +18,14 @@ package domain
 
 import (
 	"errors"
-	translator "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
 	"strconv"
 	"strings"
+)
+
+import (
+	translator "github.com/go-playground/universal-translator"
+
+	"github.com/go-playground/validator/v10"
 )
 
 //Dept:部门实体

@@ -16,7 +16,9 @@
 
 package message
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNewOaMessage(t *testing.T) {
 

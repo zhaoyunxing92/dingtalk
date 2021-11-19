@@ -16,7 +16,9 @@
 
 package request
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type DeleteDept struct {
 	DeptId int `json:"dept_id" validate:"required"`

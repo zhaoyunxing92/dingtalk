@@ -17,14 +17,22 @@
 package dingtalk
 
 import (
-	"github.com/go-playground/locales/en"
-	"github.com/go-playground/locales/zh"
-	translator "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
-	zh_trans "github.com/go-playground/validator/v10/translations/zh"
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
 	"net/http"
 	"time"
+)
+
+import (
+	"github.com/go-playground/locales/en"
+	"github.com/go-playground/locales/zh"
+
+	translator "github.com/go-playground/universal-translator"
+
+	"github.com/go-playground/validator/v10"
+	zh_trans "github.com/go-playground/validator/v10/translations/zh"
+)
+
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/domain"
 )
 
 type Robot struct {

@@ -16,7 +16,9 @@
 
 package message
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 //CardButton 卡片按钮
 type CardButton struct {

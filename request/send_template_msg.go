@@ -17,8 +17,11 @@
 package request
 
 import (
-	"github.com/pkg/errors"
 	"strings"
+)
+
+import (
+	"github.com/pkg/errors"
 )
 
 type SendTemplateMessage struct {

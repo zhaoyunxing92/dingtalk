@@ -16,7 +16,9 @@
 
 package message
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 // 钉钉消息结构体
 type text struct {

@@ -18,9 +18,13 @@ package domain
 
 import (
 	"errors"
-	translator "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator/v10"
 	"strings"
+)
+
+import (
+	translator "github.com/go-playground/universal-translator"
+
+	"github.com/go-playground/validator/v10"
 )
 
 /*
@@ -50,7 +54,6 @@ import (
 	"email":"test@xxx.com"
 }
 */
-
 type User struct {
 	Id              string      `json:"userid,omitempty" validate:"omitempty,max=64,min=1"`    //员工唯一标识ID（不可修改），企业内必须唯一。长度为1~64个字符，如果不传，将自动生成一个userid。
 	UnionId         string      `json:"unionid,omitempty"`                                     //员工在当前开发者企业账号范围内的唯一标识，系统生成，固定值，不会改变。

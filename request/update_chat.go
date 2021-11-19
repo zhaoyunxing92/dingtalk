@@ -16,7 +16,9 @@
 
 package request
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type UpdateChat struct {
 	ChatId string `json:"chatid" validate:"required"`

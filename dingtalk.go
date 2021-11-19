@@ -20,10 +20,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/zhaoyunxing92/dingtalk/v2/logger"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -32,14 +28,22 @@ import (
 	"strings"
 	"time"
 )
+
+import (
+	"github.com/go-playground/validator/v10"
+
+	"github.com/pkg/errors"
+
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
+)
+
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/cache"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/logger"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
-)
-import (
-	"github.com/go-playground/validator/v10"
-	"github.com/pkg/errors"
 )
 
 type dingTalk struct {

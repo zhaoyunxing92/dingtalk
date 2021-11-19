@@ -17,11 +17,17 @@
 package dingtalk
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
 	"testing"
 )
-import "github.com/zhaoyunxing92/dingtalk/v2/request"
-import "github.com/stretchr/testify/assert"
+
+import (
+	"github.com/stretchr/testify/assert"
+)
+
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+)
 
 func TestDingTalk_SendTemplateMessage(t *testing.T) {
 

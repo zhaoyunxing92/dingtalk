@@ -17,9 +17,13 @@
 package dingtalk
 
 import (
-	"github.com/stretchr/testify/assert"
-	"go.uber.org/zap"
 	"testing"
+)
+
+import (
+	"github.com/stretchr/testify/assert"
+
+	"go.uber.org/zap"
 )
 
 var client = NewClient(1244553273, "dingkjy4w80esdwgjuyo",

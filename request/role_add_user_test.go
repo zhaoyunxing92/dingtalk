@@ -18,9 +18,12 @@ package request
 
 import (
 	"errors"
-	"github.com/go-playground/validator/v10"
 	"strings"
 	"testing"
+)
+
+import (
+	"github.com/go-playground/validator/v10"
 )
 
 func TestNewRoleAddUser(t *testing.T) {

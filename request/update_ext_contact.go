@@ -16,7 +16,9 @@
 
 package request
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 //UpdateExtContact 更新外部联系人
 type UpdateExtContact struct {

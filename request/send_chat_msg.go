@@ -16,7 +16,9 @@
 
 package request
 
-import "github.com/zhaoyunxing92/dingtalk/v2/domain/message"
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
+)
 
 type SendChatMessage struct {
 	//群会话的ID
