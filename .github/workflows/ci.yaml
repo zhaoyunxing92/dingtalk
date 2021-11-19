@@ -29,6 +29,7 @@ jobs:
 
       - name: Install imports-formatter
         run: |
+          pwd
           export PATH=$PATH:$(go env GOPATH)/bin
           git clone https://github.com/dubbogo/tools.git
           cd tools/cmd/imports-formatter
@@ -36,6 +37,7 @@ jobs:
 
       - name: Install license-header-checker
         run: |
+          pwd
           export PATH=$PATH:$(go env GOPATH)/bin
           git clone https://github.com/lsm-dev/license-header-checker.git
           cd license-header-checker
@@ -43,6 +45,7 @@ jobs:
 
       - name: Check License Header
         run: |
+          pwd
           license-header-checker -v -a -r -i vendor,license-header-checker,tools ./header/license_header.txt . go
           rm -rf license-header-checker
           [[ -z `git status -s` ]]
