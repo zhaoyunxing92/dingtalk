@@ -2,7 +2,6 @@
 [![ci](https://github.com/zhaoyunxing92/dingtalk/actions/workflows/ci.yaml/badge.svg)](https://github.com/zhaoyunxing92/dingtalk/actions)
 [![codecov](https://codecov.io/gh/zhaoyunxing92/dingtalk/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhaoyunxing92/dingtalk)
 [![issues](https://img.shields.io/bitbucket/issues-raw/zhaoyunxing92/dingtalk.svg?style=popout)](https://github.com/zhaoyunxing92/dingtalk/issues)
-[![fossa status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_shield)
 
 ![dingtalk](./image/dingtalk.png)
 
@@ -154,7 +153,3 @@ fmt.Println(token)
   - [ ] [开启分块上传事务](https://ding-doc.dingtalk.com/document#/org-dev-guide/enable-multipart-upload-transaction)
   - [ ] [提交文件上传事务](https://ding-doc.dingtalk.com/document#/org-dev-guide/submit-a-file-upload-transaction)
   - [ ] [上传文件块](https://ding-doc.dingtalk.com/document#/org-dev-guide/upload-file-blocks)
-
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzhaoyunxing92%2Fdingtalk?ref=badge_large)
-  
