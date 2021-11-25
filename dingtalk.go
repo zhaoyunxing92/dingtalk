@@ -298,6 +298,7 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 	}
 
 	if err = json.Unmarshal(data, response); err != nil {
+		log.Error(err)
 		return err
 	}
 	log.Debug("request succeed")
