@@ -33,8 +33,8 @@ func TestCreateTodoBuilder_Build(t *testing.T) {
 		SetDingNotify().
 		Build()
 
-	assert.Equal(t, todo.Urls.App,"https://developers.dingtalk.com")
-	assert.Equal(t, todo.Urls.Pc,"https://baidu.com")
+	assert.Equal(t, todo.Urls.App, "https://developers.dingtalk.com")
+	assert.Equal(t, todo.Urls.Pc, "https://baidu.com")
 
 	t.Log(todo.String())
 }
