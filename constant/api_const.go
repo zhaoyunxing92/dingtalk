@@ -125,4 +125,6 @@ const (
 	CreateCooperateCorpKey = "/v1.0/contact/cooperateCorps" //创建合作空间
 
 	CreateDriveSpacesKey = "/v1.0/drive/spaces" //新建空间
+
+	GetDingIndexKey = "/v1.0/contact/dingIndexs" //获取企业最新钉钉指数信息
 )
