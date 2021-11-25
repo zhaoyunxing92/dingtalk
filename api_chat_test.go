@@ -30,6 +30,7 @@ import (
 )
 
 func TestDingTalk_CreateChat(t *testing.T) {
+	t.Skip()
 	res, err := client.CreateChat(
 		request.NewCreatChat("dingtalk", "manager164",
 			"manager164", "manager164", "manager164").
@@ -41,16 +42,18 @@ func TestDingTalk_CreateChat(t *testing.T) {
 }
 
 func TestDingTalk_GetChatInfo(t *testing.T) {
-	t.Skip()
-	_, _ = client.GetChatInfo("chat8ff884ef696f5717678c6280edfdbbf1")
+	res, err := client.GetChatInfo("chat8ff884ef696f5717678c6280edfdbbf1")
 
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.Equal(t, res.Name,"ci测试群")
 }
 
 func TestDingTalk_UpdateChat(t *testing.T) {
 
 	res, err := client.UpdateChat(
 		request.NewUpdateChat("chat8ff884ef696f5717678c6280edfdbbf1").
-			SetName("java").
+			SetName("ci测试群").
 			SetShowHistory(0).
 			SetSearchable(1).
 			Build())
