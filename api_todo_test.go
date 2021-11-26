@@ -30,17 +30,20 @@ import (
 
 func TestDingTalk_CreateTodo(t *testing.T) {
 
-	todo := request.NewCreateTodo("ABNiSWeAolg5OETyYT60wdQiEiE", "测试代办").
+	todo := request.NewCreateTodo("ABNiSWeAolg5OETyYT60wdQiEiE", "使用api接口创建代办").
 		SetDesc("使用api接口创建代办").
 		SetAppUrl("https://developers.dingtalk.com").
 		SetPcUrl("https://baidu.com").
+		SetDueTime(1640484524000).
+		SetPriority(40).
 		SetExecutors("ABNiSWeAolg5OETyYT60wdQiEiE").
 		SetParticipants("ABNiSWeAolg5OETyYT60wdQiEiE").
-		SetDingNotify().
+		//SetDingNotify().
 		Build()
 
 	res, err := client.CreateTodo(todo)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
+	assert.Equal(t, res.CreatorId,"ABNiSWeAolg5OETyYT60wdQiEiE")
 }
