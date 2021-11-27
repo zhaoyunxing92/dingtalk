@@ -35,3 +35,10 @@ func (ding *dingTalk) CreateTodo(res *request.CreateTodo) (req response.CreateTo
 	query.Set("operatorId", res.CreatorId)
 	return req, ding.Request(http.MethodPost, fmt.Sprintf(constant.CreateTodoKey, res.CreatorId), nil, res, &req)
 }
+
+//GetTodoDetail 获取钉钉待办任务详情
+func (ding *dingTalk) GetTodoDetail(unionId, taskId string) (req response.GetTodoDetail, err error) {
+
+	return req, ding.Request(http.MethodPost, fmt.Sprintf(constant.GetTodoDetailKey, unionId, taskId), nil,
+		nil, &req)
+}

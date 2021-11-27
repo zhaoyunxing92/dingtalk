@@ -16,7 +16,7 @@
 
 package response
 
-type CreateTodo struct {
+type GetTodoDetail struct {
 	Response
 
 	//待办ID
@@ -67,11 +67,23 @@ type CreateTodo struct {
 	//更新者的unionId
 	ModifierId string `json:"modifierId"`
 
+	//租户ID
+	TenantId string `json:"tenantId"`
+
+	//租户类型。
+	//user：个人
+	//org：企业
+	//group：群
+	TenantType string `json:"tenantType"`
+
 	//接入应用标识
 	BizTag string `json:"bizTag"`
 
 	//请求ID
 	RequestId string `json:"requestId"`
+
+	//待办卡片类型ID
+	CardTypeId string `json:"cardTypeId"`
 
 	//生成的待办是否仅展示在执行者的待办列表中
 	OnlyShowExecutor bool `json:"isOnlyShowExecutor"`
@@ -82,20 +94,4 @@ type CreateTodo struct {
 	//30：紧急
 	//40：非常紧急
 	Priority int `json:"priority"`
-
-	//待办通知配置
-	NotifyConfigs notifyConfigs `json:"notifyConfigs"`
-}
-
-type detailUrl struct {
-	//APP端详情页url跳转地址
-	App string `json:"appUrl,omitempty"`
-
-	//PC端详情页url跳转地址
-	Pc string `json:"pcUrl,omitempty"`
-}
-
-//notifyConfigs 待办通知配置
-type notifyConfigs struct {
-	Ding string `json:"dingNotify,omitempty"`
 }
