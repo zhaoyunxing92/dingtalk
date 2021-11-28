@@ -24,6 +24,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/spaces"
+)
+
 func TestDingTalk_CreateDriveSpaces(t *testing.T) {
 	t.Skip()
 	res, err := client.CreateDriveSpaces("golang", "ABNiSWeAolg5OETyYT60wdQiEiE")
@@ -38,4 +42,12 @@ func TestDingTalk_DeleteDriveSpaces(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
+}
+
+func TestDingTalk_GetDriveSpaces(t *testing.T) {
+	res, err := client.GetDriveSpaces("ABNiSWeAolg5OETyYT60wdQiEiE", spaces.Org, "", 5)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.Equal(t, len(res.Spaces), 5)
 }
