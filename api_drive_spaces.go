@@ -90,3 +90,12 @@ func (ding *dingTalk) GetDriveSpacesFiles(res *request.GetDriveSpacesFiles) (rsp
 	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesFilesKey, res.SpaceId), query,
 		nil, &rsp)
 }
+
+//GetDriveSpacesFileInfo 查询文件（夹）信息
+func (ding *dingTalk) GetDriveSpacesFileInfo(spaceId, fileId, unionId string) (rsp response.GetDriveSpacesFileInfo, err error) {
+	query := url.Values{}
+	query.Set("unionId", unionId)
+
+	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesFileInfoKey, spaceId, fileId),
+		query, nil, &rsp)
+}

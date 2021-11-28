@@ -69,3 +69,10 @@ func TestDingTalk_GetDriveSpacesFiles(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
+
+func TestDingTalk_GetDriveSpacesFileInfo(t *testing.T) {
+
+	res, err := client.GetDriveSpacesFileInfo("3452011774", "3452011774")
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}

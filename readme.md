@@ -205,7 +205,8 @@ imports-formatter
         - [x] [获取空间列表](https://developers.dingtalk.com/document/app/queries-a-space-list) `client.GetDriveSpaces`
         - [x] [获取空间信息](https://developers.dingtalk.com/document/app/obtain-space-information) `client.GetDriveSpacesInfo`
     - 文件管理
-        - [x] [查询文件（夹）列表](https://developers.dingtalk.com/document/app/obtain-the-file-list) `client.CreateDriveSpaces`
+        - [x] [查询文件（夹）列表](https://developers.dingtalk.com/document/app/obtain-the-file-list) `client.GetDriveSpacesFiles`
+        - [x] [查询文件（夹）信息](https://developers.dingtalk.com/document/app/obtain-file-information) `client.GetDriveSpacesFileInfo`
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
