@@ -14,28 +14,11 @@
  * limitations under the License.
  */
 
-package dingtalk
+package response
 
-import (
-	"testing"
-)
+type DeleteDriveSpaces struct {
+	Response
 
-import (
-	"github.com/stretchr/testify/assert"
-)
-
-func TestDingTalk_CreateDriveSpaces(t *testing.T) {
-	t.Skip()
-	res, err := client.CreateDriveSpaces("golang", "ABNiSWeAolg5OETyYT60wdQiEiE")
-
-	assert.Nil(t, err)
-	assert.NotNil(t, res)
-}
-
-func TestDingTalk_DeleteDriveSpaces(t *testing.T) {
-	t.Skip()
-	res, err := client.DeleteDriveSpaces("5296669223", "ABNiSWeAolg5OETyYT60wdQiEiE")
-
-	assert.Nil(t, err)
-	assert.NotNil(t, res)
+	//请求ID
+	RequestId string `json:"requestId"`
 }
