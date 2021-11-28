@@ -27,6 +27,6 @@ import (
 func TestNewGetTodoList(t *testing.T) {
 	list := NewGetTodoList("token", false)
 
-	assert.Nil(t, list)
+	assert.NotNil(t, list)
 	assert.Equal(t, list.Token, "token")
 }
