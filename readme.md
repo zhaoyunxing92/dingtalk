@@ -28,6 +28,48 @@ token, _ := client.GetAccessToken()
 fmt.Println(token)
 ```
 
+## 一个api的诞生过程
+> `dingtalk.go`文件里面已经对网络请求封装好了所以写起来会方便很多，下面从简单的 [创建用户](https://developers.dingtalk.com/document/app/user-information-creation) 说起
+
+### 安装工具
+
+#### 格式import的
+
+```shell
+go get -u github.com/dubbogo/tools/cmd/imports-formatter@v1.0.7
+```
+#### 添加license
+
+```shell
+go get -u github.com/lsm-dev/license-header-checker/cmd/license-header-checker@v1.2.0
+```
+### 在`request`目录下创建一个文件`create_user.go`
+
+### 按照文档写参数，注意如果遇到参数校验可以使用[validate](https://github.com/go-playground/validator) tag标记
+
+### 在`response`目录里面也创建一个文件`create_user.go`必须包含`Response`结构体
+
+```go
+type CreateUser struct {
+	Response
+	createUserResponse `json:"result"`
+}
+
+type createUserResponse struct {
+	UserId string `json:"userid"`
+}
+```
+### 文件添加`license`
+
+```shell
+license-header-checker -v -a -r -i vendor,license-header-checker,tools ./header/license_header.txt . go
+```
+### import格式化
+
+```shell
+imports-formatter
+```
+
 ## 参考文档
 
 [dingtalk-callback-Crypto](https://github.com/open-dingtalk/dingtalk-callback-Crypto)
