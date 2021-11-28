@@ -126,6 +126,7 @@ const (
 
 	CreateDriveSpacesKey = "/v1.0/drive/spaces"    //新建空间
 	DeleteDriveSpacesKey = "/v1.0/drive/spaces/%s" //删除空间
+	GetDriveSpacesKey    = "/v1.0/drive/spaces"    //获取空间列表
 
 	GetDingIndexKey = "/v1.0/contact/dingIndexs" //获取企业最新钉钉指数信息
 

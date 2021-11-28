@@ -201,6 +201,8 @@ imports-formatter
 * 钉盘
     - 空间管理
         - [x] [新建空间](https://developers.dingtalk.com/document/app/new-space) `client.CreateDriveSpaces`
+        - [x] [删除空间](https://developers.dingtalk.com/document/app/delete-a-space) `client.DeleteDriveSpaces`
+        - [x] [获取空间列表](https://developers.dingtalk.com/document/app/queries-a-space-list) `client.GetDriveSpaces`
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)

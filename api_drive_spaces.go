@@ -20,10 +20,12 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strconv"
 )
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/spaces"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
@@ -42,4 +44,16 @@ func (ding *dingTalk) DeleteDriveSpaces(spaceId, unionId string) (rsp response.D
 	query.Set("unionId", unionId)
 
 	return rsp, ding.Request(http.MethodDelete, fmt.Sprintf(constant.DeleteDriveSpacesKey, spaceId), query, nil, &rsp)
+}
+
+//GetDriveSpaces 获取空间列表
+func (ding *dingTalk) GetDriveSpaces(unionId string, spaceType spaces.SpaceType, token string, size int) (rsp response.GetDriveSpaces, err error) {
+
+	query := url.Values{}
+	query.Set("spaceType", string(spaceType))
+	query.Set("unionId", unionId)
+	query.Set("nextToken", token)
+	query.Set("maxResults", strconv.Itoa(size))
+
+	return rsp, ding.Request(http.MethodGet, constant.GetDriveSpacesKey, query, nil, &rsp)
 }
