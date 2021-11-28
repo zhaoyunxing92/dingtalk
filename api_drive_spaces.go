@@ -17,7 +17,9 @@
 package dingtalk
 
 import (
+	"fmt"
 	"net/http"
+	"net/url"
 )
 
 import (
@@ -31,4 +33,13 @@ func (ding *dingTalk) CreateDriveSpaces(name, unionId string) (rsp response.Crea
 
 	return rsp, ding.Request(http.MethodPost, constant.CreateDriveSpacesKey, nil,
 		request.NewCreateDriveSpaces(name, unionId), &rsp)
+}
+
+//DeleteDriveSpaces 删除空间
+func (ding *dingTalk) DeleteDriveSpaces(spaceId, unionId string) (rsp response.DeleteDriveSpaces, err error) {
+
+	query := url.Values{}
+	query.Set("unionId", unionId)
+
+	return rsp, ding.Request(http.MethodDelete, fmt.Sprintf(constant.DeleteDriveSpacesKey, spaceId), query, nil, &rsp)
 }
