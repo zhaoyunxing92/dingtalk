@@ -128,6 +128,15 @@ fmt.Println(token)
   - [x] [获取应用未激活的企业列表](https://developers.dingtalk.com/document/app/obtains-a-list-of-enterprises-whose-applications-are-not-activated) `client.GetUnactiveCorpIds`
   - [x] [重新授权未激活应用的企业](https://developers.dingtalk.com/document/app/re-authorize-enterprises-whose-applications-are-not-activated) `client.ReauthCorp`
 
+* 待办任务
+  - [x] [新增钉钉待办任务](https://developers.dingtalk.com/document/app/add-dingtalk-to-do-task) `client.CreateTodo`
+  - [x] [获取钉钉待办任务详情](https://developers.dingtalk.com/document/app/obtain-dingtalk-pending-tasks-details) `client.GetTodoDetail`
+  - [x] [删除钉钉待办任务](https://developers.dingtalk.com/document/app/delete-dingtalk-to-do-tasks) `client.DeleteTodo`
+  - [x] [更新钉钉待办任务](https://developers.dingtalk.com/document/app/update-dingtalk-to-do-tasks) `client.UpdateTodo`
+  - [x] [更新钉钉待办执行者状态](https://developers.dingtalk.com/document/app/update-dingtalk-to-do-status) `client.UpdateTodoDone`
+  - [x] [根据sourceId获取钉钉待办任务详情](https://developers.dingtalk.com/document/app/you-can-call-this-operation-to-query-the-details-about) `client.GetTodoListBySourceId`
+  - [x] [查询企业下用户待办列表](https://developers.dingtalk.com/document/app/query-the-to-do-list-of-enterprise-users) `client.GetTodoList`
+
 * 应用管理 (**3**/4)
   - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
   - [x] [获取员工可见的应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-list-of-applications-visible-to-an-employee)
