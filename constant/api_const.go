@@ -128,5 +128,6 @@ const (
 
 	GetDingIndexKey = "/v1.0/contact/dingIndexs" //获取企业最新钉钉指数信息
 
-	CreateTodoKey = "/v1.0/todo/users/%s/tasks" //新增钉钉待办任务
+	CreateTodoKey    = "/v1.0/todo/users/%s/tasks"    //新增钉钉待办任务
+	GetTodoDetailKey = "/v1.0/todo/users/%s/tasks/%s" //获取钉钉待办任务详情
 )

@@ -19,6 +19,7 @@ package dingtalk
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 import (
@@ -28,7 +29,16 @@ import (
 )
 
 //CreateTodo 新增钉钉待办任务
-func (ding *dingTalk) CreateTodo(res *request.CreateTodo) (req response.CorpDingIndex, err error) {
+func (ding *dingTalk) CreateTodo(res *request.CreateTodo) (req response.CreateTodo, err error) {
 
+	query := url.Values{}
+	query.Set("operatorId", res.CreatorId)
 	return req, ding.Request(http.MethodPost, fmt.Sprintf(constant.CreateTodoKey, res.CreatorId), nil, res, &req)
+}
+
+//GetTodoDetail 获取钉钉待办任务详情
+func (ding *dingTalk) GetTodoDetail(unionId, taskId string) (req response.GetTodoDetail, err error) {
+
+	return req, ding.Request(http.MethodPost, fmt.Sprintf(constant.GetTodoDetailKey, unionId, taskId), nil,
+		nil, &req)
 }

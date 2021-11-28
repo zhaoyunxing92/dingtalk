@@ -289,20 +289,25 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 		zap.ByteString("res", data))
 
 	switch res.StatusCode {
+	case 200:
+		if err = json.Unmarshal(data, response); err != nil {
+			log.Error(err)
+			return err
+		}
+		log.Debug("request succeed")
+		return response.CheckError()
 	case 400:
-		log.Errorf("ding fail status code %d", res.StatusCode)
-		return errors.Errorf("dingtalk server error: status=%d", res.StatusCode)
+		log.Errorf("ding fail status code %d,res:%s", res.StatusCode, data)
+		return errors.Errorf("dingtalk server error,res:%s", data)
+	case 404:
+		log.Errorf("ding fail status code %d,res:%s", res.StatusCode, data)
+		return errors.Errorf("dingtalk server error,res:%s", data)
 	case 500:
-		log.Errorf("ding fail status code %d", res.StatusCode)
-		return errors.Errorf("dingtalk server error,status=%d", res.StatusCode)
+		log.Errorf("ding fail status code %d,res:%s", res.StatusCode, data)
+		return errors.Errorf("dingtalk server error,res:%s", data)
 	}
-
-	if err = json.Unmarshal(data, response); err != nil {
-		log.Error(err)
-		return err
-	}
-	log.Debug("request succeed")
-	return response.CheckError()
+	log.Error("ding fail")
+	return errors.New("ding fail")
 }
 
 // validate 参数验证
