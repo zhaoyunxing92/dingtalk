@@ -128,6 +128,11 @@ const (
 
 	GetDingIndexKey = "/v1.0/contact/dingIndexs" //获取企业最新钉钉指数信息
 
-	CreateTodoKey    = "/v1.0/todo/users/%s/tasks"    //新增钉钉待办任务
-	GetTodoDetailKey = "/v1.0/todo/users/%s/tasks/%s" //获取钉钉待办任务详情
+	CreateTodoKey            = "/v1.0/todo/users/%s/tasks"                   //新增钉钉待办任务
+	GetTodoDetailKey         = "/v1.0/todo/users/%s/tasks/%s"                //获取钉钉待办任务详情
+	DeleteTodoKey            = "/v1.0/todo/users/%s/tasks/%s"                //删除钉钉待办任务
+	UpdateTodoKey            = "/v1.0/todo/users/%s/tasks/%s"                //更新钉钉待办任务
+	UpdateTodoDoneKey        = "/v1.0/todo/users/%s/tasks/%s/executorStatus" //更新钉钉待办执行者状态
+	GetTodoListBySourceIdKey = "/v1.0/todo/users/%s/tasks/sources/%s"        //根据sourceId获取钉钉待办任务详情
+	GetTodoListKey           = "/v1.0/todo/users/%s/org/tasks/query"         //查询企业下用户待办列表
 )
