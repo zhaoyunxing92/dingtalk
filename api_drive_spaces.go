@@ -57,3 +57,12 @@ func (ding *dingTalk) GetDriveSpaces(unionId string, spaceType spaces.SpaceType,
 
 	return rsp, ding.Request(http.MethodGet, constant.GetDriveSpacesKey, query, nil, &rsp)
 }
+
+//GetDriveSpacesInfo 获取空间信息
+func (ding *dingTalk) GetDriveSpacesInfo(spaceId, unionId string) (rsp response.CreateDriveSpaces, err error) {
+
+	query := url.Values{}
+	query.Set("unionId", unionId)
+
+	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesInfoKey, spaceId), query, nil, &rsp)
+}

@@ -51,3 +51,11 @@ func TestDingTalk_GetDriveSpaces(t *testing.T) {
 	assert.NotNil(t, res)
 	assert.Equal(t, len(res.Spaces), 5)
 }
+
+func TestDingTalk_GetDriveSpacesInfo(t *testing.T) {
+	res, err := client.GetDriveSpacesInfo("3452011774", "ABNiSWeAolg5OETyYT60wdQiEiE")
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.Equal(t, res.Name, "全员文件夹")
+}
