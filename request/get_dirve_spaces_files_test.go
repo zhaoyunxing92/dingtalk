@@ -17,6 +17,7 @@
 package request
 
 import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/order"
 	"testing"
 )
 
@@ -25,6 +26,10 @@ import (
 )
 
 func TestNewGetDriveSpacesFiles(t *testing.T) {
-	files := NewGetDriveSpacesFiles("", "", 10).Build()
+	files := NewGetDriveSpacesFiles("", "", 10).
+		SetToken("token").
+		SetOrderType(order.CreateTimeAsc).
+		SetParentId("parent").
+		Build()
 	assert.NotNil(t, files)
 }
