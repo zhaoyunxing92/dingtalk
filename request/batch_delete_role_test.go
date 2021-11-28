@@ -24,15 +24,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/order"
-)
+func TestNewBatchRemoveUserRole(t *testing.T) {
+	role := NewBatchRemoveUserRole([]int{1, 2, 1}, []string{"123", "123"})
 
-func TestNewGetDriveSpacesFiles(t *testing.T) {
-	files := NewGetDriveSpacesFiles("", "", 10).
-		SetToken("token").
-		SetOrderType(order.CreateTimeAsc).
-		SetParentId("parent").
-		Build()
-	assert.NotNil(t, files)
+	assert.NotNil(t, role)
+	assert.Equal(t, len(role.RS), 2)
+	assert.Equal(t, len(role.US), 1)
 }

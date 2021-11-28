@@ -24,15 +24,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/order"
-)
+func TestNewChatFriendSwitch(t *testing.T) {
 
-func TestNewGetDriveSpacesFiles(t *testing.T) {
-	files := NewGetDriveSpacesFiles("", "", 10).
-		SetToken("token").
-		SetOrderType(order.CreateTimeAsc).
-		SetParentId("parent").
-		Build()
-	assert.NotNil(t, files)
+	chat := NewChatFriendSwitch("chat", false)
+
+	assert.NotNil(t, chat)
+	assert.Equal(t, chat.ChatId, "chat")
+	assert.Equal(t, chat.Prohibit, false)
 }

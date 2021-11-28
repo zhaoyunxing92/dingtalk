@@ -24,15 +24,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/order"
-)
-
-func TestNewGetDriveSpacesFiles(t *testing.T) {
-	files := NewGetDriveSpacesFiles("", "", 10).
-		SetToken("token").
-		SetOrderType(order.CreateTimeAsc).
-		SetParentId("parent").
-		Build()
-	assert.NotNil(t, files)
+func TestNewCorpAccessToken(t *testing.T) {
+	corp := NewCorpAccessToken("corp")
+	assert.NotNil(t, corp)
 }
