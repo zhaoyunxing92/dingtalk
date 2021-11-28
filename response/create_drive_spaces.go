@@ -14,20 +14,37 @@
  * limitations under the License.
  */
 
-package dingtalk
+package response
 
-import (
-	"testing"
-)
+type CreateDriveSpaces struct {
+	Response
+	//请求ID
+	RequestId string `json:"requestId"`
 
-import (
-	"github.com/stretchr/testify/assert"
-)
+	//空间ID
+	SpaceId string `json:"spaceId"`
 
-func TestDingTalk_CreateDriveSpaces(t *testing.T) {
-	t.Skip()
-	res, err := client.CreateDriveSpaces("golang", "ABNiSWeAolg5OETyYT60wdQiEiE")
+	//空间名称
+	Name string `json:"spaceName"`
 
-	assert.Nil(t, err)
-	assert.NotNil(t, res)
+	//空间类型
+	Type string `json:"spaceType"`
+
+	//空间总额度
+	Quota int `json:"quota"`
+
+	//空间已使用额度
+	UsedQuota int `json:"usedQuota"`
+
+	//授权模式，取值：
+	//
+	//acl：acl授权
+	//custom：自定义授权
+	PermissionMode string `json:"permissionMode"`
+
+	//创建时间
+	CreateTime string `json:"createTime"`
+
+	//修改时间
+	ModifyTime string `json:"modifyTime"`
 }

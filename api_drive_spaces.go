@@ -27,7 +27,8 @@ import (
 )
 
 //CreateDriveSpaces 新建空间
-func (ding *dingTalk) CreateDriveSpaces(res *request.CreateDriveSpaces) (rsp response.CreatChat, err error) {
+func (ding *dingTalk) CreateDriveSpaces(name, unionId string) (rsp response.CreateDriveSpaces, err error) {
 
-	return rsp, ding.Request(http.MethodPost, constant.CreateDriveSpacesKey, nil, res, &rsp)
+	return rsp, ding.Request(http.MethodPost, constant.CreateDriveSpacesKey, nil,
+		request.NewCreateDriveSpaces(name, unionId), &rsp)
 }
