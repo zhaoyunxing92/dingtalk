@@ -66,3 +66,27 @@ func (ding *dingTalk) GetDriveSpacesInfo(spaceId, unionId string) (rsp response.
 
 	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesInfoKey, spaceId), query, nil, &rsp)
 }
+
+//GetDriveSpacesFiles 查询文件（夹）列表
+//order 取值：
+//createTimeAsc：按创建时间升序
+//createTimeDesc：按创建时间降序
+//modifyTimeAsc：按修改时间升序
+//modifyTimeDesc：按修改时间降序
+//nameAsc：按名称升序
+//nameDesc：按名称降序
+//sizeAsc：按大小升序
+//sizeDesc：按大小降序
+//默认值：createTimeDesc
+func (ding *dingTalk) GetDriveSpacesFiles(res *request.GetDriveSpacesFiles) (rsp response.GetDriveSpacesFiles, err error) {
+
+	query := url.Values{}
+	query.Set("parentId", res.ParentId)
+	query.Set("unionId", res.UnionId)
+	query.Set("nextToken", res.Token)
+	query.Set("maxResults", strconv.Itoa(res.Size))
+	query.Set("orderType", res.OrderType)
+
+	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesFilesKey, res.SpaceId), query,
+		nil, &rsp)
+}

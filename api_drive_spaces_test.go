@@ -26,6 +26,7 @@ import (
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/spaces"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
 
 func TestDingTalk_CreateDriveSpaces(t *testing.T) {
@@ -58,4 +59,13 @@ func TestDingTalk_GetDriveSpacesInfo(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 	assert.Equal(t, res.Name, "全员文件夹")
+}
+
+func TestDingTalk_GetDriveSpacesFiles(t *testing.T) {
+	files := request.NewGetDriveSpacesFiles("3452011774", "ABNiSWeAolg5OETyYT60wdQiEiE", 10).
+		Build()
+
+	res, err := client.GetDriveSpacesFiles(files)
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 }
