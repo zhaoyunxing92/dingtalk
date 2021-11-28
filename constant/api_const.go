@@ -129,6 +129,9 @@ const (
 	GetDriveSpacesKey     = "/v1.0/drive/spaces"    //获取空间列表
 	GetDriveSpacesInfoKey = "/v1.0/drive/spaces/%s" //获取空间信息
 
+	GetDriveSpacesFilesKey    = "/v1.0/drive/spaces/%s/files"    //查询文件（夹）列表
+	GetDriveSpacesFileInfoKey = "/v1.0/drive/spaces/%s/files/%s" //查询文件（夹）信息
+
 	GetDingIndexKey = "/v1.0/contact/dingIndexs" //获取企业最新钉钉指数信息
 
 	CreateTodoKey            = "/v1.0/todo/users/%s/tasks"                   //新增钉钉待办任务
