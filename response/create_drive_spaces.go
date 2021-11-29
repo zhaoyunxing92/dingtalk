@@ -18,8 +18,6 @@ package response
 
 type CreateDriveSpaces struct {
 	Response
-	//请求ID
-	RequestId string `json:"requestId"`
 
 	//空间ID
 	SpaceId string `json:"spaceId"`

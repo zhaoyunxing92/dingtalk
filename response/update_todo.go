@@ -21,7 +21,4 @@ type UpdateTodo struct {
 
 	//更新结果
 	Result bool `json:"result"`
-
-	//请求ID
-	RequestId string `json:"requestId"`
 }

@@ -14,21 +14,34 @@
  * limitations under the License.
  */
 
-package conflict
+package policy
 
-type Conflict string
+//ConflictPolicy 文件名称冲突策略
+type ConflictPolicy string
+
+//DeletePolicy 删除策略
+type DeletePolicy string
 
 //文件名称冲突策略
 const (
 	//AutoRename 自动重命名
-	AutoRename = Conflict("autoRename")
+	AutoRename = ConflictPolicy("autoRename")
 
 	//Overwrite 覆写
-	Overwrite = Conflict("overwrite")
+	Overwrite = ConflictPolicy("overwrite")
 
 	//ReturnExisting 返回已存在文件
-	ReturnExisting = Conflict("returnExisting")
+	ReturnExisting = ConflictPolicy("returnExisting")
 
 	//ReturnError 返回已存在文件
-	ReturnError = Conflict("returnError")
+	ReturnError = ConflictPolicy("returnError")
+)
+
+//删除策略
+const (
+	//ToRecycle 删除到回收站
+	ToRecycle = DeletePolicy("toRecycle")
+
+	//Completely 彻底删除
+	Completely = DeletePolicy("completely")
 )

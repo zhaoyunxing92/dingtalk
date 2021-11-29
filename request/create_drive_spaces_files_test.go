@@ -25,15 +25,15 @@ import (
 )
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/conflict"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/policy"
 )
 
 func TestNewCreateDriveSpacesFiles(t *testing.T) {
 
 	f := NewCreateDriveSpacesFiles("unionId", "spaceId", "golang", file.Folder).
 		SetParentId("parentId").
-		SetConflictPolicy(conflict.Overwrite).
+		SetConflictPolicy(policy.Overwrite).
 		SetMediaId("mediaId").
 		Build()
 
@@ -44,5 +44,5 @@ func TestNewCreateDriveSpacesFiles(t *testing.T) {
 	assert.Equal(t, f.FileName, "golang")
 	assert.Equal(t, f.ParentId, "parentId")
 	assert.Equal(t, f.FileType, string(file.Folder))
-	assert.Equal(t, f.ConflictPolicy, string(conflict.Overwrite))
+	assert.Equal(t, f.ConflictPolicy, string(policy.Overwrite))
 }
