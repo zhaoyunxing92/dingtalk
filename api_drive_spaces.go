@@ -25,6 +25,7 @@ import (
 
 import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/policy"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/spaces"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
@@ -38,7 +39,7 @@ func (ding *dingTalk) CreateDriveSpaces(name, unionId string) (rsp response.Crea
 }
 
 //DeleteDriveSpaces 删除空间
-func (ding *dingTalk) DeleteDriveSpaces(spaceId, unionId string) (rsp response.DeleteDriveSpaces, err error) {
+func (ding *dingTalk) DeleteDriveSpaces(spaceId, unionId string) (rsp response.Response, err error) {
 
 	query := url.Values{}
 	query.Set("unionId", unionId)
@@ -111,4 +112,16 @@ func (ding *dingTalk) CreateDriveSpacesFiles(res *request.CreateDriveSpacesFiles
 
 	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.CreateDriveSpacesFileKey, res.SpaceId), nil,
 		res, &rsp)
+}
+
+//DeleteDriveSpacesFiles 删除文件（夹）
+func (ding *dingTalk) DeleteDriveSpacesFiles(spaceId, fileId, unionId string,
+	policy policy.DeletePolicy) (rsp response.Response, err error) {
+
+	query := url.Values{}
+	query.Set("unionId", unionId)
+	query.Set("deletePolicy", string(policy))
+
+	return rsp, ding.Request(http.MethodDelete, fmt.Sprintf(constant.DeleteDriveSpacesFilesKey, spaceId, fileId), query,
+		nil, &rsp)
 }

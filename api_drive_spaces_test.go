@@ -25,8 +25,8 @@ import (
 )
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/conflict"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/policy"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/spaces"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
@@ -86,11 +86,19 @@ func TestDingTalk_CreateDriveSpacesFiles(t *testing.T) {
 
 	f := request.NewCreateDriveSpacesFiles("ABNiSWeAolg5OETyYT60wdQiEiE", "3452011774",
 		"golang", file.Folder).
-		SetConflictPolicy(conflict.Overwrite).
+		SetConflictPolicy(policy.Overwrite).
 		Build()
 
 	res, err := client.CreateDriveSpacesFiles(f)
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 	assert.Equal(t, res.FileName, "golang")
+}
+
+func TestDingTalk_DeleteDriveSpacesFiles(t *testing.T) {
+
+	res, err := client.DeleteDriveSpacesFiles("3452011774", "47459660818",
+		"ABNiSWeAolg5OETyYT60wdQiEiE", policy.Completely)
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 }

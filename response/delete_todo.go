@@ -21,7 +21,4 @@ type DeleteTodo struct {
 
 	//删除结果
 	Result bool `json:"result"`
-
-	//请求ID
-	RequestId string `json:"requestId"`
 }

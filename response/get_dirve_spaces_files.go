@@ -19,9 +19,6 @@ package response
 type GetDriveSpacesFiles struct {
 	Response
 
-	//请求ID
-	RequestId string `json:"requestId"`
-
 	//下一页的游标，为空字符串则表示分页结束
 	Token string `json:"nextToken"`
 

@@ -79,9 +79,6 @@ type GetTodoDetail struct {
 	//接入应用标识
 	BizTag string `json:"bizTag"`
 
-	//请求ID
-	RequestId string `json:"requestId"`
-
 	//待办卡片类型ID
 	CardTypeId string `json:"cardTypeId"`
 

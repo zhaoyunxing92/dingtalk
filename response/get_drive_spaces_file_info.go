@@ -18,8 +18,6 @@ package response
 
 type GetDriveSpacesFileInfo struct {
 	Response
-	//请求ID
-	RequestId string `json:"requestId"`
 
 	spacesFile
 }

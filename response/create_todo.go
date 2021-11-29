@@ -70,9 +70,6 @@ type CreateTodo struct {
 	//接入应用标识
 	BizTag string `json:"bizTag"`
 
-	//请求ID
-	RequestId string `json:"requestId"`
-
 	//生成的待办是否仅展示在执行者的待办列表中
 	OnlyShowExecutor bool `json:"isOnlyShowExecutor"`
 

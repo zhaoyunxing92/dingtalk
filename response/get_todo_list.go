@@ -19,9 +19,6 @@ package response
 type GetTodoList struct {
 	Response
 
-	//请求ID
-	RequestId string `json:"requestId"`
-
 	TotalCount int `json:"totalCount"`
 
 	//下一次请求的token
