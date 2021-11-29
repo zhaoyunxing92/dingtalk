@@ -43,11 +43,13 @@ func (ding *dingTalk) DeleteDriveSpaces(spaceId, unionId string) (rsp response.D
 	query := url.Values{}
 	query.Set("unionId", unionId)
 
-	return rsp, ding.Request(http.MethodDelete, fmt.Sprintf(constant.DeleteDriveSpacesKey, spaceId), query, nil, &rsp)
+	return rsp, ding.Request(http.MethodDelete, fmt.Sprintf(constant.DeleteDriveSpacesKey, spaceId), query,
+		nil, &rsp)
 }
 
 //GetDriveSpaces 获取空间列表
-func (ding *dingTalk) GetDriveSpaces(unionId string, spaceType spaces.SpaceType, token string, size int) (rsp response.GetDriveSpaces, err error) {
+func (ding *dingTalk) GetDriveSpaces(unionId string, spaceType spaces.SpaceType, token string,
+	size int) (rsp response.GetDriveSpaces, err error) {
 
 	query := url.Values{}
 	query.Set("spaceType", string(spaceType))
@@ -64,7 +66,8 @@ func (ding *dingTalk) GetDriveSpacesInfo(spaceId, unionId string) (rsp response.
 	query := url.Values{}
 	query.Set("unionId", unionId)
 
-	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesInfoKey, spaceId), query, nil, &rsp)
+	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesInfoKey, spaceId), query, nil,
+		&rsp)
 }
 
 //GetDriveSpacesFiles 查询文件（夹）列表
@@ -78,7 +81,8 @@ func (ding *dingTalk) GetDriveSpacesInfo(spaceId, unionId string) (rsp response.
 //sizeAsc：按大小升序
 //sizeDesc：按大小降序
 //默认值：createTimeDesc
-func (ding *dingTalk) GetDriveSpacesFiles(res *request.GetDriveSpacesFiles) (rsp response.GetDriveSpacesFiles, err error) {
+func (ding *dingTalk) GetDriveSpacesFiles(res *request.GetDriveSpacesFiles) (rsp response.GetDriveSpacesFiles,
+	err error) {
 
 	query := url.Values{}
 	query.Set("parentId", res.ParentId)
@@ -92,10 +96,19 @@ func (ding *dingTalk) GetDriveSpacesFiles(res *request.GetDriveSpacesFiles) (rsp
 }
 
 //GetDriveSpacesFileInfo 查询文件（夹）信息
-func (ding *dingTalk) GetDriveSpacesFileInfo(spaceId, fileId, unionId string) (rsp response.GetDriveSpacesFileInfo, err error) {
+func (ding *dingTalk) GetDriveSpacesFileInfo(spaceId, fileId, unionId string) (rsp response.GetDriveSpacesFileInfo,
+	err error) {
 	query := url.Values{}
 	query.Set("unionId", unionId)
 
 	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesFileInfoKey, spaceId, fileId),
 		query, nil, &rsp)
+}
+
+//CreateDriveSpacesFiles 添加文件（夹）
+func (ding *dingTalk) CreateDriveSpacesFiles(res *request.CreateDriveSpacesFiles) (rsp response.GetDriveSpacesFileInfo,
+	err error) {
+
+	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.CreateDriveSpacesFileKey, res.SpaceId), nil,
+		res, &rsp)
 }

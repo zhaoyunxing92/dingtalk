@@ -77,9 +77,7 @@ func TestNewEntryUserPermitsUserIdsCreateDept(t *testing.T) {
 		Build()
 
 	assert.NotNil(t, str)
-	//assert.Equal(t, len(str.UserPermitsUserIds), 2)
 	assert.Equal(t, len(str.UserPermitsDeptIds), 3)
-	//assert.Equal(t, len(str.UserPermit), 2)
 	assert.Equal(t, len(str.DeptPermit), 3)
 	t.Log(str.String())
 

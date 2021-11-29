@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
-package file
+package conflict
 
-type Genre string
+type Conflict string
 
+//文件名称冲突策略
 const (
-	//Image 图片，图片最大1MB。支持上传jpg、gif、png、bmp格式
-	Image = Genre("image")
+	//AutoRename 自动重命名
+	AutoRename = Conflict("autoRename")
 
-	//Voice 语音，语音文件最大2MB。支持上传amr、mp3、wav格式
-	Voice = Genre("voice")
+	//Overwrite 覆写
+	Overwrite = Conflict("overwrite")
 
-	//Video 视频，视频最大10MB。支持上传mp4格式
-	Video = Genre("video")
+	//ReturnExisting 返回已存在文件
+	ReturnExisting = Conflict("returnExisting")
 
-	//File 普通文件，最大10MB。支持上传doc、docx、xls、xlsx、ppt、pptx、zip、pdf、rar格式
-	File = Genre("file")
-
-	//Folder 文件夹
-	Folder = Genre("folder")
+	//ReturnError 返回已存在文件
+	ReturnError = Conflict("returnError")
 )
