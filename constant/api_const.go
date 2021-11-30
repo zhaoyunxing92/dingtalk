@@ -129,10 +129,11 @@ const (
 	GetDriveSpacesKey     = "/v1.0/drive/spaces"    //获取空间列表
 	GetDriveSpacesInfoKey = "/v1.0/drive/spaces/%s" //获取空间信息
 
-	GetDriveSpacesFilesKey    = "/v1.0/drive/spaces/%s/files"    //查询文件（夹）列表
-	GetDriveSpacesFileInfoKey = "/v1.0/drive/spaces/%s/files/%s" //查询文件（夹）信息
-	CreateDriveSpacesFileKey  = "/v1.0/drive/spaces/%s/files"    //添加文件（夹）
-	DeleteDriveSpacesFilesKey = "/v1.0/drive/spaces/%s/files/%s" //删除文件（夹）
+	GetDriveSpacesFilesKey    = "/v1.0/drive/spaces/%s/files"         //查询文件（夹）列表
+	GetDriveSpacesFileInfoKey = "/v1.0/drive/spaces/%s/files/%s"      //查询文件（夹）信息
+	CreateDriveSpacesFileKey  = "/v1.0/drive/spaces/%s/files"         //添加文件（夹）
+	DeleteDriveSpacesFilesKey = "/v1.0/drive/spaces/%s/files/%s"      //删除文件（夹）
+	MoveDriveSpacesFilesKey   = "/v1.0/drive/spaces/%s/files/%s/move" //移动文件（夹）
 
 	GetDingIndexKey = "/v1.0/contact/dingIndexs" //获取企业最新钉钉指数信息
 

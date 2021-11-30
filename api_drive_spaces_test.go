@@ -85,7 +85,7 @@ func TestDingTalk_GetDriveSpacesFileInfo(t *testing.T) {
 func TestDingTalk_CreateDriveSpacesFiles(t *testing.T) {
 
 	f := request.NewCreateDriveSpacesFiles("ABNiSWeAolg5OETyYT60wdQiEiE", "3452011774",
-		"golang", file.Folder).
+		"move", file.Folder).
 		SetConflictPolicy(policy.Overwrite).
 		Build()
 
@@ -99,6 +99,18 @@ func TestDingTalk_DeleteDriveSpacesFiles(t *testing.T) {
 
 	res, err := client.DeleteDriveSpacesFiles("3452011774", "47459660818",
 		"ABNiSWeAolg5OETyYT60wdQiEiE", policy.Completely)
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
+
+func TestDingTalk_MoveDriveSpacesFiles(t *testing.T) {
+	files := request.NewMoveDriveSpacesFiles("3452011774", "47494266429",
+		"47494327156", "ABNiSWeAolg5OETyYT60wdQiEiE").
+		SetTargetParentId("3452011774").
+		SetConflictPolicy(policy.Overwrite).
+		Build()
+
+	res, err := client.MoveDriveSpacesFiles(files)
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
