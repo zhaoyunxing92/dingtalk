@@ -210,6 +210,7 @@ imports-formatter
         - [x] [添加文件（夹）](https://developers.dingtalk.com/document/app/add-file) `client.CreateDriveSpacesFiles`
         - [x] [删除文件（夹）](https://developers.dingtalk.com/document/app/delete-objects) `client.DeleteDriveSpacesFiles`
         - [x] [移动文件（夹）](https://developers.dingtalk.com/document/app/move-a-file) `client.MoveDriveSpacesFiles`
+        - [x] [修改文件（夹）名](https://developers.dingtalk.com/document/app/rename-a-file) `client.RenameDriveSpacesFiles`
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)

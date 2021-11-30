@@ -127,8 +127,17 @@ func (ding *dingTalk) DeleteDriveSpacesFiles(spaceId, fileId, unionId string,
 }
 
 //MoveDriveSpacesFiles 移动文件（夹）
-func (ding *dingTalk) MoveDriveSpacesFiles(res *request.MoveDriveSpacesFiles) (rsp response.GetDriveSpacesFileInfo, err error) {
+func (ding *dingTalk) MoveDriveSpacesFiles(res *request.MoveDriveSpacesFiles) (rsp response.GetDriveSpacesFileInfo,
+	err error) {
 
 	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.MoveDriveSpacesFilesKey, res.SpaceId, res.FileId),
 		nil, res, &rsp)
+}
+
+//RenameDriveSpacesFiles 修改文件（夹）名
+func (ding *dingTalk) RenameDriveSpacesFiles(spaceId, fileId, newFileName,
+	unionId string) (rsp response.GetDriveSpacesFileInfo, err error) {
+
+	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.RenameDriveSpacesFilesKey, spaceId, fileId),
+		nil, request.NewRenameDriveSpacesFiles(newFileName, unionId), &rsp)
 }

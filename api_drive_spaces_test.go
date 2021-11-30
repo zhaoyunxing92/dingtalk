@@ -114,3 +114,12 @@ func TestDingTalk_MoveDriveSpacesFiles(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
+
+func TestDingTalk_RenameDriveSpacesFiles(t *testing.T) {
+
+	res, err := client.RenameDriveSpacesFiles("3452011774", "47494266429",
+		"newName", "ABNiSWeAolg5OETyYT60wdQiEiE")
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.Equal(t, res.FileName, "newName")
+}
