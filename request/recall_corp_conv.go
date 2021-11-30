@@ -24,19 +24,6 @@ type RecallCorpConvMessage struct {
 	TaskId int `json:"msg_task_id" validate:"required"`
 }
 
-type recallCorpConvMessageBuilder struct {
-	mp *RecallCorpConvMessage
-}
-
-func NewRecallCorpConvMessage(taskId int) *recallCorpConvMessageBuilder {
-	return &recallCorpConvMessageBuilder{mp: &RecallCorpConvMessage{TaskId: taskId}}
-}
-
-func (b *recallCorpConvMessageBuilder) SetAgentId(agentId int) *recallCorpConvMessageBuilder {
-	b.mp.AgentId = agentId
-	return b
-}
-
-func (b *recallCorpConvMessageBuilder) Build() *RecallCorpConvMessage {
-	return b.mp
+func NewRecallCorpConvMessage(agentId, taskId int) *RecallCorpConvMessage {
+	return &RecallCorpConvMessage{agentId, taskId}
 }

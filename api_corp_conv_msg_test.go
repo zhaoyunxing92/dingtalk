@@ -43,11 +43,7 @@ func TestDingTalk_SendTemplateMessage(t *testing.T) {
 
 func TestDingTalk_GetMessageProgress(t *testing.T) {
 
-	//res, err := client.GetCorpConvMsgProgress(1332307896, 474307154979)
-	res, err := isv.GetCorpConvMsgProgress(
-		request.NewMessageProgress(474307154979).
-			SetAgentId(1332307896).
-			Build())
+	res, err := client.GetMessageSendResult(1332307896, 474307154979)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
@@ -229,10 +225,7 @@ func TestDingTalk_UpdateCorpConvMessageStatus(t *testing.T) {
 
 func TestDingTalk_GetMessageSendResult(t *testing.T) {
 
-	res, err := isv.GetMessageSendResult(
-		request.NewMessageProgress(474355389948).
-			SetAgentId(1332307896).
-			Build())
+	res, err := isv.GetMessageSendResult(1332307896, 474307154979)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
@@ -240,10 +233,7 @@ func TestDingTalk_GetMessageSendResult(t *testing.T) {
 
 func TestDingTalk_RecallCorpConvMessage(t *testing.T) {
 
-	res, err := isv.RecallCorpConvMessage(
-		request.NewRecallCorpConvMessage(472428178475).
-			SetAgentId(1332307896).
-			Build())
+	res, err := isv.RecallCorpConvMessage(472428178475, 1332307896)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)

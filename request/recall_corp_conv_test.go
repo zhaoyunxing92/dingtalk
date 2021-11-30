@@ -16,14 +16,18 @@
 
 package request
 
-type MessageProgress struct {
-	//发送消息时使用的微应用的ID
-	AgentId int `json:"agent_id" validate:"required"`
+import (
+	"testing"
+)
 
-	//发送消息时钉钉返回的任务ID。
-	TaskId int `json:"task_id" validate:"required"`
-}
+import (
+	"github.com/stretchr/testify/assert"
+)
 
-func NewMessageProgress(agentId, taskId int) *MessageProgress {
-	return &MessageProgress{agentId, taskId}
+func TestNewRecallCorpConvMessage(t *testing.T) {
+	message := NewRecallCorpConvMessage(472428178475, 1332307896)
+
+	assert.NotNil(t, message)
+	assert.Equal(t, message.AgentId, 472428178475)
+	assert.Equal(t, message.TaskId, 1332307896)
 }
