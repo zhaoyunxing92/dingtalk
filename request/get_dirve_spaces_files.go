@@ -58,7 +58,7 @@ func NewGetDriveSpacesFiles(spaceId, unionId string, size int) *getDriveSpacesFi
 	return &getDriveSpacesFilesBuilder{file: &GetDriveSpacesFiles{SpaceId: spaceId, UnionId: unionId, Size: size}}
 }
 
-func (b *getDriveSpacesFilesBuilder) SetOrderType(order order.OrderType) *getDriveSpacesFilesBuilder {
+func (b *getDriveSpacesFilesBuilder) SetOrderType(order order.FileOrder) *getDriveSpacesFilesBuilder {
 	b.file.OrderType = string(order)
 	return b
 }

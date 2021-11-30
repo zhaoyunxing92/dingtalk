@@ -16,14 +16,25 @@
 
 package request
 
-type MessageProgress struct {
-	//发送消息时使用的微应用的ID
-	AgentId int `json:"agent_id" validate:"required"`
+import (
+	"testing"
+)
 
-	//发送消息时钉钉返回的任务ID。
-	TaskId int `json:"task_id" validate:"required"`
-}
+import (
+	"github.com/stretchr/testify/assert"
+)
 
-func NewMessageProgress(agentId, taskId int) *MessageProgress {
-	return &MessageProgress{agentId, taskId}
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
+)
+
+func TestNewDeptList(t *testing.T) {
+	build := NewDeptList().
+		SetDeptId(123).
+		SetLanguage(language.ZH_CN).
+		Build()
+
+	assert.NotNil(t, build)
+	assert.Equal(t, build.DeptId, 123)
+	assert.Equal(t, build.Language, string(language.ZH_CN))
 }

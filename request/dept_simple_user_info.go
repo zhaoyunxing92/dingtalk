@@ -16,6 +16,11 @@
 
 package request
 
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/order"
+)
+
 //DeptSimpleUserInfo 获取部门用户基础信息
 type DeptSimpleUserInfo struct {
 	//部门ID，根部门ID为1
@@ -70,8 +75,8 @@ func NewDeptSimpleUserInfo(deptId, cursor, size int) *deptSimpleUserInfoBuilder 
 //custom：代表用户定义(未定义时按照拼音)排序。
 //
 //默认值：custom。
-func (dub *deptSimpleUserInfoBuilder) SetOrderField(orderField string) *deptSimpleUserInfoBuilder {
-	dub.du.OrderField = orderField
+func (dub *deptSimpleUserInfoBuilder) SetOrderField(order order.DeptOrder) *deptSimpleUserInfoBuilder {
+	dub.du.OrderField = string(order)
 	return dub
 }
 
@@ -82,8 +87,8 @@ func (dub *deptSimpleUserInfoBuilder) SetContainAccessLimit(containAccessLimit b
 }
 
 //SetLanguage 通讯录语言，默认zh_CN。如果是英文，请传入en_US。
-func (dub *deptSimpleUserInfoBuilder) SetLanguage(language string) *deptSimpleUserInfoBuilder {
-	dub.du.Language = language
+func (dub *deptSimpleUserInfoBuilder) SetLanguage(language language.Language) *deptSimpleUserInfoBuilder {
+	dub.du.Language = string(language)
 	return dub
 }
 

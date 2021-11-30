@@ -59,25 +59,28 @@ func (ding *dingTalk) UpdateCorpConvMessageStatus(req *request.UpdateCorpConvMsg
 }
 
 // GetCorpConvMsgProgress 获取工作通知消息的发送进度
-func (ding *dingTalk) GetCorpConvMsgProgress(req *request.MessageProgress) (rsp response.MessageProgress, err error) {
+func (ding *dingTalk) GetCorpConvMsgProgress(agentId, taskId int) (rsp response.MessageProgress, err error) {
 	if !ding.isv() {
-		req.AgentId = ding.Id
+		agentId = ding.Id
 	}
-	return rsp, ding.Request(http.MethodPost, constant.MessageProgressKey, nil, req, &rsp)
+	return rsp, ding.Request(http.MethodPost, constant.MessageProgressKey, nil,
+		request.NewMessageProgress(agentId, taskId), &rsp)
 }
 
 // GetMessageSendResult 获取工作通知消息的发送结果
-func (ding *dingTalk) GetMessageSendResult(req *request.MessageProgress) (rsp response.MessageSendResult, err error) {
+func (ding *dingTalk) GetMessageSendResult(agentId, taskId int) (rsp response.MessageSendResult, err error) {
 	if !ding.isv() {
-		req.AgentId = ding.Id
+		agentId = ding.Id
 	}
-	return rsp, ding.Request(http.MethodPost, constant.GetMessageSendResultKey, nil, req, &rsp)
+	return rsp, ding.Request(http.MethodPost, constant.GetMessageSendResultKey, nil,
+		request.NewMessageProgress(agentId, taskId), &rsp)
 }
 
 // RecallCorpConvMessage 撤回工作通知消息
-func (ding *dingTalk) RecallCorpConvMessage(req *request.RecallCorpConvMessage) (rsp response.Response, err error) {
+func (ding *dingTalk) RecallCorpConvMessage(agentId, taskId int) (rsp response.Response, err error) {
 	if !ding.isv() {
-		req.AgentId = ding.Id
+		agentId = ding.Id
 	}
-	return rsp, ding.Request(http.MethodPost, constant.RecallCorpConvMessageKey, nil, req, &rsp)
+	return rsp, ding.Request(http.MethodPost, constant.RecallCorpConvMessageKey, nil,
+		request.NewRecallCorpConvMessage(agentId, taskId), &rsp)
 }

@@ -16,6 +16,10 @@
 
 package request
 
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
+)
+
 type DeptList struct {
 	//父部门ID。
 	//
@@ -39,8 +43,8 @@ func (db *deptListBuilder) SetDeptId(deptId int) *deptListBuilder {
 	return db
 }
 
-func (db *deptListBuilder) SetLanguage(language string) *deptListBuilder {
-	db.dl.Language = language
+func (db *deptListBuilder) SetLanguage(language language.Language) *deptListBuilder {
+	db.dl.Language = string(language)
 	return db
 }
 

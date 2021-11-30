@@ -16,6 +16,10 @@
 
 package request
 
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
+)
+
 type DeptDetail struct {
 	DeptId int `json:"dept_id" validate:"required"`
 
@@ -31,8 +35,8 @@ func NewDeptDetail(deptId int) *deptDetailBuilder {
 	return &deptDetailBuilder{d: &DeptDetail{DeptId: deptId}}
 }
 
-func (db *deptDetailBuilder) SetLanguage(language string) *deptDetailBuilder {
-	db.d.Language = language
+func (db *deptDetailBuilder) SetLanguage(language language.Language) *deptDetailBuilder {
+	db.d.Language = string(language)
 	return db
 }
 

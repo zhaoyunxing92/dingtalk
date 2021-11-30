@@ -16,14 +16,18 @@
 
 package request
 
-type MessageProgress struct {
-	//发送消息时使用的微应用的ID
-	AgentId int `json:"agent_id" validate:"required"`
+import (
+	"testing"
+)
 
-	//发送消息时钉钉返回的任务ID。
-	TaskId int `json:"task_id" validate:"required"`
-}
+import (
+	"github.com/stretchr/testify/assert"
+)
 
-func NewMessageProgress(agentId, taskId int) *MessageProgress {
-	return &MessageProgress{agentId, taskId}
+func TestNewCreateRole(t *testing.T) {
+	role := NewCreateRole("name", 1234)
+
+	assert.NotNil(t, role)
+	assert.Equal(t, role.Name, "name")
+	assert.Equal(t, role.GroupId, 1234)
 }

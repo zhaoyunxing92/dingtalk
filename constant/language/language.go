@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package request
+package language
 
-type MessageProgress struct {
-	//发送消息时使用的微应用的ID
-	AgentId int `json:"agent_id" validate:"required"`
+type Language string
 
-	//发送消息时钉钉返回的任务ID。
-	TaskId int `json:"task_id" validate:"required"`
-}
+const (
+	//ZH_CN 中文
+	ZH_CN = Language("zh_CN")
 
-func NewMessageProgress(agentId, taskId int) *MessageProgress {
-	return &MessageProgress{agentId, taskId}
-}
+	//EN_US 英文
+	EN_US = Language("en_US")
+)
