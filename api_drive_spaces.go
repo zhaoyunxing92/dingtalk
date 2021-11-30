@@ -125,3 +125,10 @@ func (ding *dingTalk) DeleteDriveSpacesFiles(spaceId, fileId, unionId string,
 	return rsp, ding.Request(http.MethodDelete, fmt.Sprintf(constant.DeleteDriveSpacesFilesKey, spaceId, fileId), query,
 		nil, &rsp)
 }
+
+//MoveDriveSpacesFiles 移动文件（夹）
+func (ding *dingTalk) MoveDriveSpacesFiles(res *request.MoveDriveSpacesFiles) (rsp response.GetDriveSpacesFileInfo, err error) {
+
+	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.MoveDriveSpacesFilesKey, res.SpaceId, res.FileId),
+		nil, res, &rsp)
+}
