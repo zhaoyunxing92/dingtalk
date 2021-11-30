@@ -29,13 +29,12 @@ import (
 )
 
 func TestNewMoveDriveSpacesFiles(t *testing.T) {
-	files := NewMoveDriveSpacesFiles("spaceId", "targetSpaceId", "fileId", "unionId").
+	files := NewMoveDriveSpacesFiles("spaceId", "fileId", "targetSpaceId", "unionId").
 		SetTargetParentId("targetParentId").
 		SetConflictPolicy(policy.Overwrite).
 		Build()
 
 	assert.NotNil(t, files)
-	assert.Equal(t, files.FileId, "fileId")
 	assert.Equal(t, files.FileId, "fileId")
 	assert.Equal(t, files.SpaceId, "spaceId")
 	assert.Equal(t, files.UnionId, "unionId")
