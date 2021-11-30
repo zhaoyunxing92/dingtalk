@@ -1,12 +1,12 @@
 [![dingtalk](./image/dingtalk.png)](https://developers.dingtalk.com/document/app)
 
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/zhaoyunxing92/dingtalk/main?logo=CodeIgniter)
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![ci](https://github.com/zhaoyunxing92/dingtalk/actions/workflows/ci.yaml/badge.svg)](https://github.com/zhaoyunxing92/dingtalk/actions)
 [![codecov](https://codecov.io/gh/zhaoyunxing92/dingtalk/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhaoyunxing92/dingtalk)
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/zhaoyunxing92/dingtalk/main?logo=CodeIgniter)
 [![issues](https://img.shields.io/github/issues/zhaoyunxing92/dingtalk?color=ff69b4)](https://github.com/zhaoyunxing92/dingtalk/issues)
 [![GitHub milestone](https://img.shields.io/github/milestones/progress/zhaoyunxing92/dingtalk/1)](https://github.com/zhaoyunxing92/dingtalk/milestone/1?closed=1)
-[![tag](https://img.shields.io/github/v/tag/zhaoyunxing92/dingtalk?color=green&style=social&logo=appveyor)](https://github.com/zhaoyunxing92/dingtalk/releases/tag/v2.0.2)
+[![tag](https://img.shields.io/github/v/tag/zhaoyunxing92/dingtalk?color=green&logo=AzurePipelines)](https://github.com/zhaoyunxing92/dingtalk/releases/tag/v2.0.2)
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
 
