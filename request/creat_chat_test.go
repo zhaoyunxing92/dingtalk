@@ -27,6 +27,12 @@ import (
 func TestNewCreatChat(t *testing.T) {
 	c := NewCreatChat("golang", "manager164",
 		"1948546245774889", "16347147862675011", "1948546245774889").
+		SetSearchable(1).
+		SetValidation(1).
+		SetShowHistory(1).
+		SetManagementType(1).
+		SetChatBannedType(1).
+		SetMentionAllAuthority(1).
 		Build()
 
 	assert.NotNil(t, c)
