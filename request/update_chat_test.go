@@ -27,11 +27,19 @@ import (
 func TestNewUpdateChat(t *testing.T) {
 
 	chat := NewUpdateChat("123ewer").
+		SetName("name").
+		SetOwner("name").
+		SetIcon("name").
+		SetSearchable(0).
+		SetValidation(0).
+		SetShowHistory(0).
+		SetChatBannedType(0).
+		SetManagementType(0).
+		SetMentionAllAuthority(0).
 		SetAddUsers("123456", "123456", "123").
 		SetDelUsers("123456", "123456", "123").
 		SetExtUsers("123456", "123456", "123").
 		SetDelExtUsers("123456", "123456", "123").
-		SetShowHistory(0).
 		Build()
 
 	err := validate(chat)
@@ -41,4 +49,5 @@ func TestNewUpdateChat(t *testing.T) {
 	assert.Equal(t, len(chat.DelUsers), 2)
 	assert.Equal(t, len(chat.ExtUsers), 2)
 	assert.Equal(t, len(chat.DelExtUsers), 2)
+	t.Log(chat.String())
 }

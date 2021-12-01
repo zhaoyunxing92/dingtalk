@@ -25,8 +25,7 @@ go get github.com/zhaoyunxing92/dingtalk/v2
 ```
 
 ```go
-client := NewClient(1244553273, "appkey", "AppSecret").
-Build()
+client := NewClient(1244553273, "appkey", "AppSecret")
 // 获取token
 token, _ := client.GetAccessToken()
 
