@@ -136,6 +136,9 @@ const (
 	MoveDriveSpacesFilesKey   = "/v1.0/drive/spaces/%s/files/%s/move"   //移动文件（夹）
 	RenameDriveSpacesFilesKey = "/v1.0/drive/spaces/%s/files/%s/rename" //修改文件（夹）名
 
+	GetDriveSpacesFilesDownloadInfoKey = "/v1.0/drive/spaces/%s/files/%s/downloadInfos" //获取文件下载信息
+	GetDriveSpacesFilesUploadInfoKey   = "/v1.0/drive/spaces/%s/files/%s/uploadInfos"   //获取文件上传信息
+
 	GetDingIndexKey = "/v1.0/contact/dingIndexs" //获取企业最新钉钉指数信息
 
 	CreateTodoKey            = "/v1.0/todo/users/%s/tasks"                   //新增钉钉待办任务
