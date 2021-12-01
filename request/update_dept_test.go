@@ -31,6 +31,13 @@ func TestNewUpdateDept(t *testing.T) {
 		SetOuterDept(true).
 		SetUserPermits("123", "456", "").
 		SetOrder(0).
+		SetParentId(0).
+		SetName("name").
+		SetCreateDeptGroup(false).
+		SetAutoApproveApply(false).
+		SetAutoAddUser(false).
+		SetSourceIdentifier("id").
+		SetDeptManagerUseridList("id", "1234").
 		SetUserPermitsUserIds("123", "123", "", "456").
 		SetUserPermitsDeptIds(1, 0, 345, 567, 345).
 		SetDeptPermits(1, 0, 345, 567, 345).

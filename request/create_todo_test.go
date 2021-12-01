@@ -38,6 +38,7 @@ func TestCreateTodoBuilder_Build(t *testing.T) {
 		SetDueTime(12345).
 		SetExecutors("123", "456").
 		SetParticipants("123", "456").
+		SetSourceId("123").
 		SetPriority(priority.Lower).
 		Build()
 
