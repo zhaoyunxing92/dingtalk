@@ -27,6 +27,7 @@ import (
 func TestNewDeleteUser(t *testing.T) {
 	user := NewDeleteUser("userid")
 
+	t.Log(user.String())
 	assert.NotNil(t, user)
 	assert.Equal(t, user.UserId, "userid")
 }

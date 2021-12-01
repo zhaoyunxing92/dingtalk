@@ -17,7 +17,6 @@
 package request
 
 import (
-	"encoding/json"
 	"testing"
 )
 
@@ -29,7 +28,6 @@ func TestNewUserDetail(t *testing.T) {
 
 	build := NewUserDetail("").SetLanguage("ch").Build()
 
-	js, err := json.Marshal(build)
-	assert.Nil(t, err)
-	t.Log(string(js))
+	assert.NotNil(t, build)
+	t.Log(build.String())
 }
