@@ -29,6 +29,10 @@ func TestNewCreateDept(t *testing.T) {
 	str := NewCreateDept("golang", 0).
 		SetHideDept(true).
 		SetOuterDept(true).
+		SetOuterDeptOnlySelf(true).
+		SetCreateDeptGroup(true).
+		SetAutoApproveApply(true).
+		SetSourceIdentifier("id").
 		SetUserPermits("123", "456", "").
 		SetOrder(0).
 		SetUserPermitsUserIds("123", "123", "", "456").
