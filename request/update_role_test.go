@@ -24,17 +24,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewUpdateTodo(t *testing.T) {
-	todo := NewUpdateTodo("qwweer", "eretrtr").
-		SetSubject("subject").
-		SetDesc("desc").
-		SetDueTime(12345).
-		SetDone(false).
-		SetExecutors("123", "456").
-		SetParticipants("123", "456").
-		Build()
+func TestNewUpdateRole(t *testing.T) {
+	role := NewUpdateRole(123, "name")
 
-	assert.NotNil(t, todo)
-	assert.Equal(t, todo.UnionId, "qwweer")
-	assert.Equal(t, todo.TaskId, "eretrtr")
+	assert.NotNil(t, role)
+	assert.Equal(t, role.Id, 123)
+	assert.Equal(t, role.Name, "name")
 }

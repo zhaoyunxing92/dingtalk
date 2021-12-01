@@ -24,17 +24,20 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewUpdateTodo(t *testing.T) {
-	todo := NewUpdateTodo("qwweer", "eretrtr").
-		SetSubject("subject").
-		SetDesc("desc").
-		SetDueTime(12345).
-		SetDone(false).
-		SetExecutors("123", "456").
-		SetParticipants("123", "456").
-		Build()
+func TestRemoveStringDuplicates(t *testing.T) {
+	ids := removeStringDuplicates([]string{"123", "123", "456"})
+	assert.NotNil(t, ids)
+	assert.Equal(t, len(ids), 2)
+}
 
-	assert.NotNil(t, todo)
-	assert.Equal(t, todo.UnionId, "qwweer")
-	assert.Equal(t, todo.TaskId, "eretrtr")
+func TestRemoveIntDuplicatesToString(t *testing.T) {
+	ids := removeIntDuplicatesToString([]int{123, 123, 456})
+	assert.NotNil(t, ids)
+	assert.Equal(t, len(ids), 2)
+}
+
+func TestRemoveIntDuplicates(t *testing.T) {
+	ids := removeIntDuplicates([]int{123, 123, 456})
+	assert.NotNil(t, ids)
+	assert.Equal(t, len(ids), 2)
 }

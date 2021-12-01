@@ -32,6 +32,7 @@ func TestNewSendTemplateMessage(t *testing.T) {
 	msg := NewSendTemplateMessage(1332307896, "80424a44cb444c53a071aae34c0fd140").
 		SetUserIds("manager164", "manager164").
 		SetMessage(data).
+		SetDeptIds(123, 456).
 		SetData("msg", "发送模板消息").
 		SetData("name", "模板消息").
 		Build()

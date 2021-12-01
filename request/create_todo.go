@@ -20,6 +20,11 @@ import (
 	"encoding/json"
 )
 
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/priority"
+)
+
+//CreateTodo 新增钉钉待办任务
 type CreateTodo struct {
 	// 业务系统侧的唯一标识ID，即业务ID。
 	SourceId string `json:"sourceId,omitempty"`
@@ -95,6 +100,7 @@ func (c *createTodoBuilder) SetDesc(desc string) *createTodoBuilder {
 	return c
 }
 
+//SetDueTime 截止时间，Unix时间戳，单位毫秒。
 func (c *createTodoBuilder) SetDueTime(time int) *createTodoBuilder {
 	c.todo.DueTime = &time
 	return c
@@ -126,8 +132,15 @@ func (c *createTodoBuilder) SetPcUrl(url string) *createTodoBuilder {
 	return c
 }
 
-func (c *createTodoBuilder) SetPriority(priority int) *createTodoBuilder {
-	c.todo.Priority = &priority
+//SetPriority 优先级，取值：
+//10：较低
+//20：普通
+//30：紧急
+//40：非常紧急
+func (c *createTodoBuilder) SetPriority(level priority.Level) *createTodoBuilder {
+	l := new(priority.Level)
+	*l = level
+	c.todo.Priority = (*int)(l)
 	return c
 }
 

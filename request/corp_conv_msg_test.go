@@ -32,9 +32,13 @@ func TestNewCorpConvMessage(t *testing.T) {
 	conv := NewCorpConvMessage(message.NewTextMessage("hello dubbo-go")).
 		SetUserIds("1123", "12358", "788444").
 		SetAgentId(12345678).
+		SetAllUser(false).
+		SetDeptIds(123, 123, 456).
 		Build()
 
 	err := validate(conv)
 
 	assert.Nil(t, err)
+	assert.Equal(t, len(conv.UserIds), 3)
+	assert.Equal(t, len(conv.DeptIds), 2)
 }
