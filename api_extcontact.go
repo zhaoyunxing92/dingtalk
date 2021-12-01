@@ -56,7 +56,7 @@ func (ding *dingTalk) GetExtContact(offset, size int) (rsp response.GetExtContac
 func (ding *dingTalk) GetExtContactLabel(offset, size int) (rsp response.GetExtContactLabel, err error) {
 
 	return rsp, ding.Request(http.MethodPost, constant.GetExtContactLabelKey, nil,
-		request.NewGetExtContactLabel(offset, size), &rsp)
+		request.NewGetExtContact(offset, size), &rsp)
 }
 
 //GetExtContactDetail 获取外部联系人详情

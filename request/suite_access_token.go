@@ -25,29 +25,6 @@ type SuiteAccessToken struct {
 	Ticket string `json:"suite_ticket" validate:"required"`
 }
 
-type suiteAccessTokenBuilder struct {
-	sat *SuiteAccessToken
-}
-
-func NewSuiteAccessToken() *suiteAccessTokenBuilder {
-	return &suiteAccessTokenBuilder{sat: &SuiteAccessToken{}}
-}
-
-func (s *suiteAccessTokenBuilder) SetKey(key string) *suiteAccessTokenBuilder {
-	s.sat.Key = key
-	return s
-}
-
-func (s *suiteAccessTokenBuilder) SetSecret(secret string) *suiteAccessTokenBuilder {
-	s.sat.Secret = secret
-	return s
-}
-
-func (s *suiteAccessTokenBuilder) SetTicket(ticket string) *suiteAccessTokenBuilder {
-	s.sat.Ticket = ticket
-	return s
-}
-
-func (s *suiteAccessTokenBuilder) Build() *SuiteAccessToken {
-	return s.sat
+func NewSuiteAccessToken(key, secret, ticket string) *SuiteAccessToken {
+	return &SuiteAccessToken{key, secret, ticket}
 }

@@ -14,26 +14,19 @@
  * limitations under the License.
  */
 
-package message
+package request
 
 import (
-	"github.com/zhaoyunxing92/dingtalk/v2/domain"
+	"testing"
 )
 
-type message struct {
-	//消息类型
-	MsgType string `json:"msgtype" validate:"required,oneof=text image voice file link oa markdown action_card feedCard"`
-}
+import (
+	"github.com/stretchr/testify/assert"
+)
 
-//Message 消息结构
-type Message interface {
+func TestNewGetExtContactDetail(t *testing.T) {
+	detail := NewGetExtContactDetail("userId")
 
-	//MessageType 消息类型
-	MessageType() string
-}
-
-//Response 发送消息返回
-type Response struct {
-	domain.Response
-	MessageId string `json:"messageId"`
+	assert.NotNil(t, detail)
+	assert.Equal(t, detail.UserId, "userId")
 }
