@@ -36,8 +36,7 @@ fmt.Println(token)
 ### 日志级别设置
 
 ```go
-var client = NewClient(1244553273, "dingkjy4w80esdwgjuyo",
-"bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW", WithLevel(zap.DebugLevel))
+client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
 ```
 
 ### `isv`和企业内部开发切换
