@@ -14,27 +14,26 @@
  * limitations under the License.
  */
 
-package request
+package priority
 
-import (
-	"testing"
+//Level 优先级
+type Level int
+
+//优先级，取值：
+//10：较低
+//20：普通
+//30：紧急
+//40：非常紧急
+const (
+	//Lower 较低
+	Lower = Level(10)
+
+	//Ordinary 普通
+	Ordinary = Level(20)
+
+	//Emergency 紧急
+	Emergency = Level(30)
+
+	//Urgent 非常紧急
+	Urgent = Level(40)
 )
-
-import (
-	"github.com/stretchr/testify/assert"
-)
-
-func TestNewUpdateTodo(t *testing.T) {
-	todo := NewUpdateTodo("qwweer", "eretrtr").
-		SetSubject("subject").
-		SetDesc("desc").
-		SetDueTime(12345).
-		SetDone(false).
-		SetExecutors("123", "456").
-		SetParticipants("123", "456").
-		Build()
-
-	assert.NotNil(t, todo)
-	assert.Equal(t, todo.UnionId, "qwweer")
-	assert.Equal(t, todo.TaskId, "eretrtr")
-}

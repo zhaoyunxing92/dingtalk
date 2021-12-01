@@ -24,17 +24,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewUpdateTodo(t *testing.T) {
-	todo := NewUpdateTodo("qwweer", "eretrtr").
-		SetSubject("subject").
-		SetDesc("desc").
-		SetDueTime(12345).
-		SetDone(false).
-		SetExecutors("123", "456").
-		SetParticipants("123", "456").
+func TestNewUpdateCorpConvMsgStatus(t *testing.T) {
+	status := NewUpdateCorpConvMsgStatus(123, "value").
+		SetAgentId(123).
+		SetStatusBgColor("#fff").
 		Build()
 
-	assert.NotNil(t, todo)
-	assert.Equal(t, todo.UnionId, "qwweer")
-	assert.Equal(t, todo.TaskId, "eretrtr")
+	assert.NotNil(t, status)
+	assert.Equal(t, status.TaskId, 123)
+	assert.Equal(t, status.AgentId, 123)
+	assert.Equal(t, status.StatusBgColor, "#fff")
 }

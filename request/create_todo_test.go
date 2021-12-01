@@ -24,6 +24,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/priority"
+)
+
 func TestCreateTodoBuilder_Build(t *testing.T) {
 
 	todo := NewCreateTodo("ABNiSWeAolg5OETyYT60wdQiEiE", "测试代办").
@@ -31,10 +35,14 @@ func TestCreateTodoBuilder_Build(t *testing.T) {
 		SetAppUrl("https://developers.dingtalk.com").
 		SetPcUrl("https://baidu.com").
 		SetDingNotify().
+		SetDueTime(12345).
+		SetExecutors("123", "456").
+		SetParticipants("123", "456").
+		SetPriority(priority.Lower).
 		Build()
 
-	assert.Equal(t, todo.Urls.App, "https://developers.dingtalk.com")
 	assert.Equal(t, todo.Urls.Pc, "https://baidu.com")
+	assert.Equal(t, todo.Urls.App, "https://developers.dingtalk.com")
 
 	t.Log(todo.String())
 }

@@ -28,7 +28,7 @@ type CreateUser struct {
 
 	Mobile string `json:"mobile" validate:"required"`
 
-	HideMobile bool `json:"hide_mobile,omitempty"`
+	HideMobile *bool `json:"hide_mobile,omitempty"`
 
 	Telephone string `json:"telephone,omitempty" validate:"omitempty,min=1,max=50"`
 
@@ -58,13 +58,13 @@ type CreateUser struct {
 
 	Extension string `json:"extension,omitempty" validate:"omitempty,max=2000"`
 
-	SeniorMode bool `json:"senior_mode,omitempty"`
+	SeniorMode *bool `json:"senior_mode,omitempty"`
 
-	HiredDate int `json:"hired_date,omitempty"`
+	HiredDate *int `json:"hired_date,omitempty"`
 
 	LoginEmail string `json:"login_email,omitempty"`
 
-	ExclusiveAccount bool `json:"exclusive_account,omitempty"`
+	ExclusiveAccount *bool `json:"exclusive_account,omitempty"`
 
 	ExclusiveAccountType string `json:"exclusive_account_type,omitempty" validate:"omitempty,oneof=sso dingtalk"`
 
@@ -125,7 +125,7 @@ func (ub *createUserBuilder) SetMobile(mobile string) *createUserBuilder {
 
 // SetHideMobile 是否号码隐藏： 隐藏手机号后，手机号在个人资料页隐藏，但仍可对其发DING、发起钉钉免费商务电话。
 func (ub *createUserBuilder) SetHideMobile(hide bool) *createUserBuilder {
-	ub.user.HideMobile = hide
+	ub.user.HideMobile = &hide
 	return ub
 }
 
@@ -205,13 +205,13 @@ func (ub *createUserBuilder) SetExtension(ext string) *createUserBuilder {
 //true：开启。 开启后，手机号码对所有员工隐藏。普通员工无法对其发DING、发起钉钉免费商务电话。高管之间不受影响。
 //false：不开启。
 func (ub *createUserBuilder) SetSeniorMode(senior bool) *createUserBuilder {
-	ub.user.SeniorMode = senior
+	ub.user.SeniorMode = &senior
 	return ub
 }
 
 //SetHiredDate 入职时间，Unix时间戳，单位毫秒
 func (ub *createUserBuilder) SetHiredDate(hireDate int) *createUserBuilder {
-	ub.user.HiredDate = hireDate
+	ub.user.HiredDate = &hireDate
 	return ub
 }
 
@@ -223,7 +223,7 @@ func (ub *createUserBuilder) SetLoginEmail(loginEmail string) *createUserBuilder
 
 //SetExclusiveAccount 是否专属帐号。 为true时，不能指定loginEmail或mobile）
 func (ub *createUserBuilder) SetExclusiveAccount(exclusive bool) *createUserBuilder {
-	ub.user.ExclusiveAccount = exclusive
+	ub.user.ExclusiveAccount = &exclusive
 	return ub
 }
 

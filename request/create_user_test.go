@@ -20,13 +20,38 @@ import (
 	"testing"
 )
 
+import (
+	"github.com/stretchr/testify/assert"
+)
+
 func TestNewCreateUser(t *testing.T) {
 
-	str := NewCreateUser("zhangsan", "18357154439", 123, 123, 7890, 123456, 123456).
+	user := NewCreateUser("zhangsan", "18357154439", 123, 123, 7890, 123456, 123456).
 		SetDeptOrder(123, 1).
 		SetDeptOrder(456, 2).
-		Build().
-		String()
+		SetName("lisi").
+		SetMobile("110").
+		SetHideMobile(false).
+		SetTelephone("telephone").
+		SetJobNumber("1234").
+		SetTitle("开发").
+		SetEmail("email").
+		SetOrgEmail("org").
+		SetOrgEmailType("type").
+		SetRemark("牛逼开发").
+		SetManagerUserId("managerUserId").
+		SetWorkPlace("work").
+		SetDeptTitle(123, "开发").
+		SetDeptTitle(456, "测试").
+		SetExtension("测试").
+		SetSeniorMode(true).
+		SetHiredDate(123456789).
+		SetLoginEmail("login").
+		SetExclusiveAccount(true).
+		SetSetExclusiveAccountType("exclusive").
+		SetLoginId("login").
+		SetPassword("pwd").
+		Build()
 
-	t.Log(str)
+	assert.NotNil(t, user)
 }
