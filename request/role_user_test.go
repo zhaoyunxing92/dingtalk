@@ -16,14 +16,18 @@
 
 package request
 
-type GetExtContactLabel struct {
-	//支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始
-	Offset int `json:"offset"`
+import (
+	"testing"
+)
 
-	//支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，最大100
-	Size int `json:"size" validate:"max=100"`
-}
+import (
+	"github.com/stretchr/testify/assert"
+)
 
-func NewGetExtContactLabel(offset, size int) *GetExtContactLabel {
-	return &GetExtContactLabel{offset, size}
+func TestNewRoleUser(t *testing.T) {
+	user := NewRoleUser(123, 0, 100)
+	assert.NotNil(t, user)
+	assert.Equal(t, user.Offset, 0)
+	assert.Equal(t, user.Size, 100)
+	assert.Equal(t, user.RoleId, 123)
 }

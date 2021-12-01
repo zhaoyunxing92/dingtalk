@@ -74,11 +74,7 @@ func (ding *dingTalk) GetSuiteAccessToken() (token string, err error) {
 	if err = ch.Get(res); err == nil {
 		return res.Token, nil
 	}
-	req := request.NewSuiteAccessToken().
-		SetKey(ding.Key).
-		SetSecret(ding.Secret).
-		SetTicket(ding.ticket).
-		Build()
+	req := request.NewSuiteAccessToken(ding.Key, ding.Secret, ding.ticket)
 
 	if err = ding.Request(http.MethodPost, constant.SuiteAccessToken, nil, req, res); err != nil {
 		return "", err
