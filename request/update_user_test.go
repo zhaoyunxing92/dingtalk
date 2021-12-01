@@ -20,12 +20,34 @@ import (
 	"testing"
 )
 
+import (
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
+)
+
 func TestNewUpdateUser(t *testing.T) {
 
 	str := NewUpdateUser("134567").
 		SetForceUpdateFields("").
 		SetHideMobile(false).
+		SetSeniorMode(false).
+		SetHiredDate(1).
+		SetLanguage(language.EN_US).
+		SetExtension("ext").
 		SetLoginId("").
+		SetDeptTitle(123, "开发").
+		SetDept(123, 456, 789).
+		SetWorkPlace("work").
+		SetRemark("remark").
+		SetOrgEmailType("remark").
+		SetOrgEmail("remark").
+		SetEmail("remark").
+		SetTitle("remark").
+		SetMobile("remark").
+		SetName("remark").
+		SetManagerUserId("remark").
+		SetTelephone("remark").
+		SetJobNumber("remark").
+		SetDeptOrder(123, 1).
 		SetForceUpdateFields("").
 		Build().
 		String()
