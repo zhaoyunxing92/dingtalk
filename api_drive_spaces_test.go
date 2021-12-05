@@ -145,3 +145,11 @@ func TestDingTalk_GetDriveSpacesFilesDownloadInfo(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
+
+func TestDingTalk_GetDriveSpacesFilesPermissions(t *testing.T) {
+
+	res, err := client.GetDriveSpacesFilesPermissions("3452011774", "47494266429",
+		"ABNiSWeAolg5OETyYT60wdQiEiE")
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}

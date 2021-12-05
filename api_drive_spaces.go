@@ -176,3 +176,14 @@ func (ding *dingTalk) GetDriveSpacesFilesUploadInfo(res *request.GetDriveSpacesF
 	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.GetDriveSpacesFilesUploadInfoKey, res.SpaceId, res.ParentId),
 		query, nil, &rsp)
 }
+
+//GetDriveSpacesFilesPermissions 获取权限列表
+func (ding *dingTalk) GetDriveSpacesFilesPermissions(spaceId, fileId, unionId string) (rsp response.DriveSpacesFilesPermissions,
+	err error) {
+
+	query := url.Values{}
+	query.Set("unionId", unionId)
+
+	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesFilesPermissionsKey, spaceId, fileId),
+		query, nil, &rsp)
+}
