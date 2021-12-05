@@ -139,6 +139,9 @@ const (
 	GetDriveSpacesFilesDownloadInfoKey = "/v1.0/drive/spaces/%s/files/%s/downloadInfos" //获取文件下载信息
 	GetDriveSpacesFilesUploadInfoKey   = "/v1.0/drive/spaces/%s/files/%s/uploadInfos"   //获取文件上传信息
 
+	GetDriveSpacesFilesPermissionsKey = "/v1.0/drive/spaces/%s/files/%s/permissions" //获取权限列表
+	AddDriveSpacesFilesPermissionsKey = "/v1.0/drive/spaces/%s/files/%s/permissions" //添加权限
+
 	GetDingIndexKey = "/v1.0/contact/dingIndexs" //获取企业最新钉钉指数信息
 
 	CreateTodoKey            = "/v1.0/todo/users/%s/tasks"                   //新增钉钉待办任务
