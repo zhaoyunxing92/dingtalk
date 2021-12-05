@@ -187,3 +187,11 @@ func (ding *dingTalk) GetDriveSpacesFilesPermissions(spaceId, fileId, unionId st
 	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesFilesPermissionsKey, spaceId, fileId),
 		query, nil, &rsp)
 }
+
+//AddDriveSpacesFilesPermissions 添加权限
+func (ding *dingTalk) AddDriveSpacesFilesPermissions(res *request.AddDriveSpacesFilesPermissions) (rsp response.DriveSpacesFilesPermissions,
+	err error) {
+
+	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.AddDriveSpacesFilesPermissionsKey, res.SpaceId, res.FileId),
+		nil, res, &rsp)
+}

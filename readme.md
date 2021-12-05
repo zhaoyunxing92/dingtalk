@@ -212,6 +212,9 @@ imports-formatter
         - [x] [删除文件（夹）](https://developers.dingtalk.com/document/app/delete-objects) `client.DeleteDriveSpacesFiles`
         - [x] [移动文件（夹）](https://developers.dingtalk.com/document/app/move-a-file) `client.MoveDriveSpacesFiles`
         - [x] [修改文件（夹）名](https://developers.dingtalk.com/document/app/rename-a-file) `client.RenameDriveSpacesFiles`
+    - 权限管理
+        - [x] [获取权限列表](https://developers.dingtalk.com/document/app/obtain-a-permission-list) `client.GetDriveSpacesFilesPermissions`
+        - [x] [添加权限](https://developers.dingtalk.com/document/app/add-permissions) `client.AddDriveSpacesFilesPermissions`
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
