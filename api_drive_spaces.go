@@ -141,3 +141,38 @@ func (ding *dingTalk) RenameDriveSpacesFiles(spaceId, fileId, newFileName,
 	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.RenameDriveSpacesFilesKey, spaceId, fileId),
 		nil, request.NewRenameDriveSpacesFiles(newFileName, unionId), &rsp)
 }
+
+//GetDriveSpacesFilesDownloadInfo 获取文件下载信息
+func (ding *dingTalk) GetDriveSpacesFilesDownloadInfo(spaceId, fileId,
+	unionId string) (rsp response.GetDriveSpacesFileInfo, err error) {
+
+	query := url.Values{}
+	query.Set("unionId", unionId)
+	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesFilesDownloadInfoKey, spaceId, fileId),
+		query, nil, &rsp)
+}
+
+//GetDriveSpacesFilesUploadInfo 获取文件上传信息
+func (ding *dingTalk) GetDriveSpacesFilesUploadInfo(res *request.GetDriveSpacesFilesUploadInfo) (rsp response.GetDriveSpacesFileInfo, err error) {
+
+	if err = validate(res); err != nil {
+		return response.GetDriveSpacesFileInfo{}, err
+	}
+
+	query := url.Values{}
+	query.Set("md5", res.Md5)
+	query.Set("unionId", res.UnionId)
+	query.Set("fileName", res.FileName)
+	query.Set("fileSize", strconv.Itoa(res.FileSize))
+
+	if len(res.ConflictPolicy) >= 0 {
+		query.Set("addConflictPolicy", res.ConflictPolicy)
+	}
+
+	if len(res.MediaId) >= 0 {
+		query.Set("mediaId", res.MediaId)
+	}
+
+	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.GetDriveSpacesFilesUploadInfoKey, res.SpaceId, res.ParentId),
+		query, nil, &rsp)
+}

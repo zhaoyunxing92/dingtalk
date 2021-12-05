@@ -82,10 +82,24 @@ func TestDingTalk_GetDriveSpacesFileInfo(t *testing.T) {
 	assert.Equal(t, res.FileExtension, "pdf")
 }
 
-func TestDingTalk_CreateDriveSpacesFiles(t *testing.T) {
+func TestDingTalk_CreateDriveSpacesFiles_Folder(t *testing.T) {
 
 	f := request.NewCreateDriveSpacesFiles("ABNiSWeAolg5OETyYT60wdQiEiE", "3452011774",
-		"move", file.Folder).
+		"dingtalk", file.Folder).
+		SetConflictPolicy(policy.Overwrite).
+		Build()
+
+	res, err := client.CreateDriveSpacesFiles(f)
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.Equal(t, res.FileName, "golang")
+}
+
+func TestDingTalk_CreateDriveSpacesFiles_File(t *testing.T) {
+
+	f := request.NewCreateDriveSpacesFiles("ABNiSWeAolg5OETyYT60wdQiEiE", "3452011774",
+		"dingtalk.png", file.File).
+		SetMediaId("@lALPDeREWzc3zXBgzQJA").
 		SetConflictPolicy(policy.Overwrite).
 		Build()
 
@@ -122,4 +136,12 @@ func TestDingTalk_RenameDriveSpacesFiles(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 	assert.Equal(t, res.FileName, "newName")
+}
+
+func TestDingTalk_GetDriveSpacesFilesDownloadInfo(t *testing.T) {
+
+	res, err := client.GetDriveSpacesFilesDownloadInfo("3452011774", "47494266429",
+		"ABNiSWeAolg5OETyYT60wdQiEiE")
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 }
