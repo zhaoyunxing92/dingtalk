@@ -19,9 +19,7 @@ package request
 import (
 	"encoding/json"
 	"strings"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
 )
 

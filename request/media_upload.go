@@ -20,13 +20,8 @@ import (
 	"io"
 	"os"
 	"path"
-)
 
-import (
 	"github.com/pkg/errors"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
 )
 

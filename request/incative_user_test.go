@@ -19,9 +19,7 @@ package request
 import (
 	"encoding/json"
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 

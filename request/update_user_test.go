@@ -18,9 +18,7 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
 )
 
