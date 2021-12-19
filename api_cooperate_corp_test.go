@@ -18,18 +18,12 @@ package dingtalk
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
 
 func TestDingTalk_CreateCooperateCorp(t *testing.T) {
-
 	res, err := client.CreateCooperateCorp(
 		request.NewCreateCooperateCorp("合作空间").
 			Build())

@@ -18,61 +18,59 @@ package request
 
 import (
 	"encoding/json"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/priority"
 )
 
-//CreateTodo 新增钉钉待办任务
+// CreateTodo 新增钉钉待办任务
 type CreateTodo struct {
 	// 业务系统侧的唯一标识ID，即业务ID。
 	SourceId string `json:"sourceId,omitempty"`
 
-	//待办标题
+	// 待办标题
 	Subject string `json:"subject" validate:"required"`
 
-	//创建者的unionId
+	// 创建者的unionId
 	CreatorId string `json:"creatorId" validate:"required"`
 
-	//待办备注描述
+	// 待办备注描述
 	Desc string `json:"description,omitempty"`
 
-	//截止时间，Unix时间戳，单位毫秒。
+	// 截止时间，Unix时间戳，单位毫秒。
 	DueTime *int `json:"dueTime,omitempty"`
 
-	//执行者的unionId
+	// 执行者的unionId
 	Executors []string `json:"executorIds,omitempty"`
 
-	//参与者的unionId
+	// 参与者的unionId
 	Participants []string `json:"participantIds,omitempty"`
 
-	//详情页url跳转地址。
+	// 详情页url跳转地址。
 	Urls *detailUrl `json:"detailUrl,omitempty"`
 
-	//生成的待办是否仅展示在执行者的待办列表中
+	// 生成的待办是否仅展示在执行者的待办列表中
 	OnlyShowExecutor *bool `json:"isOnlyShowExecutor,omitempty"`
 
-	//优先级，取值：
-	//10：较低
-	//20：普通
-	//30：紧急
-	//40：非常紧急
+	// 优先级，取值：
+	// 10：较低
+	// 20：普通
+	// 30：紧急
+	// 40：非常紧急
 	Priority *int `json:"priority,omitempty"`
 
-	//待办通知配置
+	// 待办通知配置
 	NotifyConfigs *notifyConfigs `json:"notifyConfigs,omitempty"`
 }
 
 type detailUrl struct {
-	//APP端详情页url跳转地址
+	// APP端详情页url跳转地址
 	App string `json:"appUrl,omitempty"`
 
-	//PC端详情页url跳转地址
+	// PC端详情页url跳转地址
 	Pc string `json:"pcUrl,omitempty"`
 }
 
-//notifyConfigs 待办通知配置
+// notifyConfigs 待办通知配置
 type notifyConfigs struct {
 	Ding string `json:"dingNotify,omitempty"`
 }
@@ -100,7 +98,7 @@ func (c *createTodoBuilder) SetDesc(desc string) *createTodoBuilder {
 	return c
 }
 
-//SetDueTime 截止时间，Unix时间戳，单位毫秒。
+// SetDueTime 截止时间，Unix时间戳，单位毫秒。
 func (c *createTodoBuilder) SetDueTime(time int) *createTodoBuilder {
 	c.todo.DueTime = &time
 	return c
@@ -132,11 +130,11 @@ func (c *createTodoBuilder) SetPcUrl(url string) *createTodoBuilder {
 	return c
 }
 
-//SetPriority 优先级，取值：
-//10：较低
-//20：普通
-//30：紧急
-//40：非常紧急
+// SetPriority 优先级，取值：
+// 10：较低
+// 20：普通
+// 30：紧急
+// 40：非常紧急
 func (c *createTodoBuilder) SetPriority(level priority.Level) *createTodoBuilder {
 	l := new(priority.Level)
 	*l = level
@@ -144,7 +142,7 @@ func (c *createTodoBuilder) SetPriority(level priority.Level) *createTodoBuilder
 	return c
 }
 
-//SetDingNotify DING通知配置，目前仅支持取值为1，表示应用内DING。
+// SetDingNotify DING通知配置，目前仅支持取值为1，表示应用内DING。
 func (c *createTodoBuilder) SetDingNotify() *createTodoBuilder {
 	c.todo.NotifyConfigs = &notifyConfigs{Ding: "1"}
 	return c

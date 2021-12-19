@@ -27,11 +27,11 @@ type Response struct {
 	Msg       string `json:"errmsg,omitempty"`
 	Success   bool   `json:"success,omitempty"`
 	RequestId string `json:"request_id,omitempty"`
-	//todo:新版的api使用TraceId
+	// todo:新版的api使用TraceId
 	TraceId string `json:"requestId,omitempty"`
 }
 
-//Unmarshalled 统一检查返回异常异常
+// Unmarshalled 统一检查返回异常异常
 type Unmarshalled interface {
 	CheckError() error
 }

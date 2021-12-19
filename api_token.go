@@ -22,13 +22,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
-)
 
-import (
 	"github.com/pkg/errors"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/cache"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
@@ -36,17 +31,17 @@ import (
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 
-//GetAccessToken 获取token
+// GetAccessToken 获取token
 func (ding *dingTalk) GetAccessToken() (token string, err error) {
 	var (
 		ch  = ding.cache
 		res = &response.AccessToken{}
 	)
-	//先缓存中获取
+	// 先缓存中获取
 	if err = ch.Get(res); err == nil {
 		return res.Token, nil
 	}
-	//读取本地文件
+	// 读取本地文件
 	args := url.Values{}
 	args.Set("appkey", ding.Key)
 	args.Set("appsecret", ding.Secret)
@@ -119,7 +114,7 @@ func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
 	return res.Token, err
 }
 
-//GetSSOToken 获取微应用后台免登的access_token
+// GetSSOToken 获取微应用后台免登的access_token
 func (ding *dingTalk) GetSSOToken(corpId, secret string) (token string, err error) {
 	var (
 		ch  = cache.NewFileCache(strings.Join([]string{".token", "sso"}, "/"), ding.Key)
@@ -142,7 +137,7 @@ func (ding *dingTalk) GetSSOToken(corpId, secret string) (token string, err erro
 	return res.Token, nil
 }
 
-//GetJsApiTicket 获取jsapi_ticket
+// GetJsApiTicket 获取jsapi_ticket
 func (ding *dingTalk) GetJsApiTicket() (ticket string, err error) {
 	var (
 		ch  = cache.NewFileCache(strings.Join([]string{".token", "ticket"}, "/"), ding.Key)

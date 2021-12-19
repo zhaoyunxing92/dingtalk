@@ -19,32 +19,32 @@ package response
 type GetDriveSpacesFiles struct {
 	Response
 
-	//下一页的游标，为空字符串则表示分页结束
+	// 下一页的游标，为空字符串则表示分页结束
 	Token string `json:"nextToken"`
 
-	//文件列表
+	// 文件列表
 	SpacesFiles []spacesFile `json:"files"`
 }
 
 type spacesFile struct {
-	//钉盘空间ID
+	// 钉盘空间ID
 	SpaceId string `json:"spaceId"`
 
-	//父目录ID
+	// 父目录ID
 	ParentId string `json:"parentId"`
 
-	//文件ID
+	// 文件ID
 	FileId string `json:"fileId"`
 
-	//文件名称
+	// 文件名称
 	FileName string `json:"fileName"`
 
-	//文件路径
+	// 文件路径
 	FilePath string `json:"filePath"`
 
-	//文件类型。
-	//file：文件
-	//folder：文件夹
+	// 文件类型。
+	// file：文件
+	// folder：文件夹
 	FileType string `json:"fileType"`
 
 	//文件内容类型，取值：
@@ -61,21 +61,21 @@ type spacesFile struct {
 	//other：其他
 	ContentType string `json:"contentType"`
 
-	//文件后缀名
+	// 文件后缀名
 	FileExtension string `json:"fileExtension"`
 
-	//文件大小
+	// 文件大小
 	FileSize int `json:"fileSize"`
 
-	//创建时间
+	// 创建时间
 	CreateTime string `json:"createTime"`
 
-	//修改时间
+	// 修改时间
 	ModifyTime string `json:"modifyTime"`
 
-	//创建者ID
+	// 创建者ID
 	Creator string `json:"creator"`
 
-	//修改者ID
+	// 修改者ID
 	Modifier string `json:"modifier"`
 }

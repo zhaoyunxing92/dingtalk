@@ -17,14 +17,14 @@
 package message
 
 type markdown struct {
-	//首屏会话透出的展示内容
+	// 首屏会话透出的展示内容
 	Title string `json:"title" validate:"required"`
 
-	//markdown格式的消息，建议500字符以内
+	// markdown格式的消息，建议500字符以内
 	Text string `json:"text" validate:"required"`
 }
 
-//markdown消息
+// markdown消息
 type markdownMessage struct {
 	message
 	markdown `json:"markdown" validate:"required"`

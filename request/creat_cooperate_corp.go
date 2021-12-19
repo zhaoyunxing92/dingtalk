@@ -16,15 +16,15 @@
 
 package request
 
-//CreateCooperateCorp 创建合作空间
+// CreateCooperateCorp 创建合作空间
 type CreateCooperateCorp struct {
-	//合作空间组织名称
+	// 合作空间组织名称
 	Name string `json:"orgName" validate:"required"`
 
-	//合作空间的logo
+	// 合作空间的logo
 	LogoMediaId string `json:"logoMediaId,omitempty"`
 
-	//行业code
+	// 行业code
 	IndustryCode int `json:"industryCode,omitempty"`
 }
 

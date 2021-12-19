@@ -18,14 +18,11 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewUnactiveCorp(t *testing.T) {
-
 	corp := NewUnactiveCorp(123456)
 	assert.NotNil(t, corp)
 }

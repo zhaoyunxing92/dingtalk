@@ -20,72 +20,62 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 
-//CreateChat 创建群
+// CreateChat 创建群
 func (ding *dingTalk) CreateChat(res *request.CreatChat) (rsp response.CreatChat, err error) {
-
 	return rsp, ding.Request(http.MethodPost, constant.CreateChatKey, nil, res, &rsp)
 }
 
-//GetChatInfo 获取群会话信息
+// GetChatInfo 获取群会话信息
 func (ding *dingTalk) GetChatInfo(chatId string) (req response.GetChatInfo, err error) {
-
 	query := url.Values{}
 	query.Set("chatid", chatId)
 
 	return req, ding.Request(http.MethodGet, constant.GetChatInfoKey, query, nil, &req)
 }
 
-//UpdateChat 修改群会话
+// UpdateChat 修改群会话
 func (ding *dingTalk) UpdateChat(res *request.UpdateChat) (req response.Response, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.UpdateChatKey, nil, res, &req)
 }
 
-//ChatSetSubAdmin 设置群管理员
+// ChatSetSubAdmin 设置群管理员
 func (ding *dingTalk) ChatSetSubAdmin(chatId, userId string, role int) (req response.Response, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.ChatSetSubAdminKey, nil,
 		request.NewChatSetSubAdmin(chatId, userId, role), &req)
 }
 
-//ChatSetUserNick 设置群成员昵称
+// ChatSetUserNick 设置群成员昵称
 func (ding *dingTalk) ChatSetUserNick(chatId, userId, nick string) (req response.Response, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.ChatSetUserNickKey, nil,
 		request.NewChatSetUserNick(chatId, userId, nick), &req)
 }
 
-//ChatFriendSwitch 设置禁止群成员私聊
+// ChatFriendSwitch 设置禁止群成员私聊
 func (ding *dingTalk) ChatFriendSwitch(chatId string, prohibit bool) (req response.Response, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.ChatFriendSwitchKey, nil,
 		request.NewChatFriendSwitch(chatId, prohibit), &req)
 }
 
-//GetChatQRCode 获取入群二维码链接
+// GetChatQRCode 获取入群二维码链接
 func (ding *dingTalk) GetChatQRCode(chatId, userId string) (req response.ChatQRCode, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetChatQRCodeKey, nil,
 		request.NewChatQRCode(chatId, userId), &req)
 }
 
-//SendChatMessage 发送消息到群
+// SendChatMessage 发送消息到群
 func (ding *dingTalk) SendChatMessage(chatId string, msg message.Message) (req response.SendChatMessage, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.SendChatMessageKey, nil,
 		request.NewSendChatMessage(chatId, msg), &req)
 }
 
-//GetChatMsgReadUser 查询群消息已读人员列表
+// GetChatMsgReadUser 查询群消息已读人员列表
 func (ding *dingTalk) GetChatMsgReadUser(messageId string, cursor, size int) (req response.ChatMsgReadUser, err error) {
 	if size > 100 || size < 0 {
 		size = 100

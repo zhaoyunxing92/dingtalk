@@ -22,10 +22,10 @@ import (
 )
 
 type CreateDept struct {
-	//部门名称。长度限制为1~64个字符，不允许包含字符"-"","以及","
+	// 部门名称。长度限制为1~64个字符，不允许包含字符"-"","以及","
 	Name string `json:"name" validate:"required,min=1,max=64"`
 
-	//父部门ID，根部门ID为1。
+	// 父部门ID，根部门ID为1。
 	ParentId uint `json:"parent_id" validate:"required,min=1"`
 
 	//是否隐藏本部门：
@@ -79,7 +79,7 @@ type CreateDept struct {
 
 	UserPermitsDeptIds []int `json:"-" validate:"max=200"`
 
-	//是否创建一个关联此部门的企业群，默认为false即不创建
+	// 是否创建一个关联此部门的企业群，默认为false即不创建
 	CreateDeptGroup *bool `json:"create_dept_group,omitempty"`
 
 	//是否默认同意加入该部门的申请：
@@ -89,10 +89,10 @@ type CreateDept struct {
 	//false：表示加入该部门的申请需要有权限的管理员同意
 	AutoApproveApply *bool `json:"auto_approve_apply,omitempty"`
 
-	//在父部门中的排序值，order值小的排序靠前
+	// 在父部门中的排序值，order值小的排序靠前
 	Order uint `json:"order,omitempty"`
 
-	//部门标识字段，开发者可用该字段来唯一标识一个部门，并与钉钉外部通讯录里的部门做映射
+	// 部门标识字段，开发者可用该字段来唯一标识一个部门，并与钉钉外部通讯录里的部门做映射
 	SourceIdentifier string `json:"source_identifier,omitempty"`
 }
 

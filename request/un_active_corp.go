@@ -17,7 +17,7 @@
 package request
 
 type UnactiveCorp struct {
-	//微应用ID
+	// 微应用ID
 	AppId int `json:"app_id"`
 }
 

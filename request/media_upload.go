@@ -20,17 +20,12 @@ import (
 	"io"
 	"os"
 	"path"
-)
 
-import (
 	"github.com/pkg/errors"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
 )
 
-//UploadFile 上传文件
+// UploadFile 上传文件
 type UploadFile struct {
 	//媒体文件类型：
 	//
@@ -46,7 +41,7 @@ type UploadFile struct {
 	// 文件名称
 	FileName string `validate:"required"`
 
-	//字段名称
+	// 字段名称
 	FieldName string `validate:"required"`
 
 	Reader io.Reader `validate:"required"`

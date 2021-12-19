@@ -14,7 +14,7 @@ jobs:
       # If you want to matrix build , you can append the following list.
       matrix:
         go_version:
-          - 1.15
+          - 1.16
         os:
           - ubuntu-latest
 
@@ -31,7 +31,7 @@ jobs:
         run: |
           export GO111MODULE=on
           cd ~
-          go get -u github.com/dubbogo/tools/cmd/imports-formatter@v1.0.7
+          go get -u mvdan.cc/gofumpt@latest
           go get -u github.com/lsm-dev/license-header-checker/cmd/license-header-checker@v1.2.0
 
       - name: Check License Header
@@ -41,7 +41,7 @@ jobs:
 
       - name: Check improts
         run: |
-          imports-formatter -path . -module github.com/zhaoyunxing92/dingtalk/v2 -bl false
+          gofumpt -l -w .
           git status && [[ -z `git status -s` ]]
 
       - name: gofmt

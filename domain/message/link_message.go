@@ -20,19 +20,19 @@ import (
 	"encoding/json"
 )
 
-//链接消息
+// 链接消息
 type link struct {
 
-	//消息标题，建议100字符以内。
+	// 消息标题，建议100字符以内。
 	Title string `json:"title,omitempty" validate:"required,max=100,min=1"`
 
-	//消息描述，建议500字符以内。
+	// 消息描述，建议500字符以内。
 	Describe string `json:"text,omitempty" validate:"required,max=500,min=1"`
 
-	//图片地址，可以通过上传媒体文件接口获取。
+	// 图片地址，可以通过上传媒体文件接口获取。
 	MediaId string `json:"picUrl,omitempty" validate:"required,max=500,min=1"`
 
-	//消息点击链接地址，当发送消息为小程序时支持小程序跳转链接
+	// 消息点击链接地址，当发送消息为小程序时支持小程序跳转链接
 	Url string `json:"messageUrl,omitempty" validate:"required"`
 }
 

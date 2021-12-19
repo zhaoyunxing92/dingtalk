@@ -18,18 +18,12 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
 )
 
 func TestNewUploadFile(t *testing.T) {
-
 	f := NewUploadFile("../image/dingtalk.png", file.Image)
 
 	assert.NotNil(t, f)

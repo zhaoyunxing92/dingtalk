@@ -25,7 +25,7 @@ type text struct {
 	Content string `json:"content" validate:"required"`
 }
 
-//文本消息
+// 文本消息
 type textMessage struct {
 	message
 	text `json:"text" validate:"required"`
@@ -40,7 +40,7 @@ func (t *textMessage) MessageType() string {
 	return "text"
 }
 
-//NewTextMessage 文本对象
+// NewTextMessage 文本对象
 func NewTextMessage(context string) *textMessage {
 	msg := &textMessage{}
 	msg.MsgType = msg.MessageType()

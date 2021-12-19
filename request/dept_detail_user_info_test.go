@@ -18,19 +18,13 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/order"
 )
 
 func TestNewDeptDetailUserInfo(t *testing.T) {
-
 	dept := NewDeptDetailUserInfo(1234, 0, 10).
 		SetLanguage(language.ZH_CN).
 		SetContainAccessLimit(true).

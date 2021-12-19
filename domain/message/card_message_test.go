@@ -40,5 +40,4 @@ func TestNewCardMessage(t *testing.T) {
 	}
 
 	t.Log(msg.String())
-
 }

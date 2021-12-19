@@ -16,12 +16,12 @@
 
 package request
 
-//CreateDriveSpaces  新建空间
+// CreateDriveSpaces  新建空间
 type CreateDriveSpaces struct {
-	//空间名称（不能为空）
+	// 空间名称（不能为空）
 	Name string `json:"name,omitempty" validate:"required"`
 
-	//用户unionId
+	// 用户unionId
 	UnionId string `json:"unionId,omitempty" validate:"required"`
 }
 

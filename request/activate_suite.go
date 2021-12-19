@@ -17,13 +17,13 @@
 package request
 
 type ActivateSuite struct {
-	//第三方应用的SuiteKey
+	// 第三方应用的SuiteKey
 	SuiteKey string `json:"suite_key,omitempty" validate:"required"`
 
-	//授权企业的CorpId。
+	// 授权企业的CorpId。
 	CorpId string `json:"auth_corpid,omitempty" validate:"required"`
 
-	//授权企业的永久授权码
+	// 授权企业的永久授权码
 	PermanentCode string `json:"permanent_code,omitempty" validate:"required"`
 }
 

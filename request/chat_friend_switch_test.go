@@ -18,14 +18,11 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewChatFriendSwitch(t *testing.T) {
-
 	chat := NewChatFriendSwitch("chat", false)
 
 	assert.NotNil(t, chat)

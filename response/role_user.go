@@ -21,6 +21,7 @@ type RoleUser struct {
 
 	roleUserResult `json:"result"`
 }
+
 type roleUserResult struct {
 	HasMore    bool `json:"hasMore"`
 	NextCursor int  `json:"nextCursor"`
@@ -36,10 +37,10 @@ type roleUser struct {
 	ManageScopes []manageScope `json:"manageScopes"`
 }
 
-//管理范围。
+// 管理范围。
 type manageScope struct {
-	//部门Id
+	// 部门Id
 	DeptId int `json:"dept_id"`
-	//部门名称
+	// 部门名称
 	DeptName string `json:"name"`
 }

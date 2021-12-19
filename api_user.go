@@ -21,70 +21,56 @@ import (
 	"net/url"
 	"strconv"
 	"time"
-)
 
-import (
 	"github.com/pkg/errors"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 
-//CreateUser 创建用户
+// CreateUser 创建用户
 func (ding *dingTalk) CreateUser(user *request.CreateUser) (req response.CreateUser, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.CreateUserKey, nil, user, &req)
 }
 
-//UpdateUser 更新用户信息
+// UpdateUser 更新用户信息
 func (ding *dingTalk) UpdateUser(user *request.UpdateUser) (req response.Response, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.UpdateUserKey, nil, user, &req)
 }
 
-//DeleteUser 删除用户
+// DeleteUser 删除用户
 func (ding *dingTalk) DeleteUser(userId string) (req response.Response, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.DeleteUserKey, nil, request.NewDeleteUser(userId), &req)
 }
 
-//GetUserDetail 根据userid获取用户详情
+// GetUserDetail 根据userid获取用户详情
 func (ding *dingTalk) GetUserDetail(user *request.UserDetail) (req response.UserDetail, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetUserDetailKey, nil, user, &req)
 }
 
-//GetUserIdByUnionId 根据unionid获取用户userid
+// GetUserIdByUnionId 根据unionid获取用户userid
 func (ding *dingTalk) GetUserIdByUnionId(res *request.UnionIdGetUserId) (req response.UnionIdGetUserId, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetUserIdByUnionIdKey, nil, res, &req)
 }
 
-//GetUserIdByMobile 根据手机号获取userid
+// GetUserIdByMobile 根据手机号获取userid
 func (ding *dingTalk) GetUserIdByMobile(res *request.MobileGetUserId) (req response.MobileGetUserId, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetUserIdByMobileKey, nil, res, &req)
 }
 
-//GetOrgAdminUser 获取管理员列表
+// GetOrgAdminUser 获取管理员列表
 func (ding *dingTalk) GetOrgAdminUser() (req response.OrgAdminUser, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetOrgAdminUserKey, nil, nil, &req)
 }
 
-//GetOrgAdminScope 获取管理员通讯录权限范围
+// GetOrgAdminScope 获取管理员通讯录权限范围
 func (ding *dingTalk) GetOrgAdminScope(res *request.AdminUserScope) (req response.AdminUserScope, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetOrgAdminScopeKey, nil, res, &req)
 }
 
-//GetUserCanAccessApplet 获取管理员的应用管理权限
+// GetUserCanAccessApplet 获取管理员的应用管理权限
 func (ding *dingTalk) GetUserCanAccessApplet(appId int, userId string) (req response.UserCanAccessApplet, err error) {
-
 	if !ding.isv() {
 		return response.UserCanAccessApplet{}, errors.New("应用必须是产品方案商所开发")
 	}
@@ -96,26 +82,23 @@ func (ding *dingTalk) GetUserCanAccessApplet(appId int, userId string) (req resp
 	return req, ding.Request(http.MethodGet, constant.GetUserCanAccessAppletKey, query, nil, &req)
 }
 
-//GetUserCount 获取员工人数
+// GetUserCount 获取员工人数
 func (ding *dingTalk) GetUserCount(res *request.UserCount) (req response.UserCont, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetUserCountKey, nil, res, &req)
 }
 
-//GetInactiveUser 获取未登录钉钉的员工列表
+// GetInactiveUser 获取未登录钉钉的员工列表
 func (ding *dingTalk) GetInactiveUser(res *request.InactiveUser) (req response.InactiveUser, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetInactiveUserKey, nil, res, &req)
 }
 
-//GetUserInfoByCode 通过免登码获取用户信息
+// GetUserInfoByCode 通过免登码获取用户信息
 func (ding *dingTalk) GetUserInfoByCode(code string) (req response.CodeGetUserInfo, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetUserInfoByCodeKey, nil,
 		request.NewCodeGetUserInfo(code), &req)
 }
 
-//GetSSOUserInfo 获取应用管理员的身份信息
+// GetSSOUserInfo 获取应用管理员的身份信息
 func (ding *dingTalk) GetSSOUserInfo(code string) (req response.SSOUserInfo, err error) {
 	var (
 		corpId = ding.corpId
@@ -138,8 +121,8 @@ func (ding *dingTalk) GetSSOUserInfo(code string) (req response.SSOUserInfo, err
 	return req, ding.Request(http.MethodGet, constant.GetSSOUserInfoKey, query, nil, &req)
 }
 
-//GetSnsUserInfo 根据sns临时授权码获取用户信息
-//该接口获取的用户信息仅用于扫码登录第三方网站、钉钉内免登第三方网站和使用钉钉账号登录第三方网站的场景。
+// GetSnsUserInfo 根据sns临时授权码获取用户信息
+// 该接口获取的用户信息仅用于扫码登录第三方网站、钉钉内免登第三方网站和使用钉钉账号登录第三方网站的场景。
 func (ding *dingTalk) GetSnsUserInfo(code string) (req response.SnsUserInfo, err error) {
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 	sign := crypto.GetAvoidLoginSignature(timestamp, ding.Secret)

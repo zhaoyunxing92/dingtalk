@@ -18,14 +18,11 @@ package dingtalk
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 
 func TestDingTalk_GetIndustryDeptDetail(t *testing.T) {
-
 	res, err := client.GetIndustryDeptDetail(561570467)
 
 	assert.Nil(t, err)
@@ -33,7 +30,6 @@ func TestDingTalk_GetIndustryDeptDetail(t *testing.T) {
 }
 
 func TestDingTalk_GetIndustryDept(t *testing.T) {
-
 	res, err := client.GetIndustryDept(1, 0, 50)
 
 	assert.Nil(t, err)

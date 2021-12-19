@@ -5,8 +5,8 @@
 [![codecov](https://codecov.io/gh/zhaoyunxing92/dingtalk/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhaoyunxing92/dingtalk)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/zhaoyunxing92/dingtalk/main?logo=CodeIgniter)
 [![issues](https://img.shields.io/github/issues/zhaoyunxing92/dingtalk?color=ff69b4)](https://github.com/zhaoyunxing92/dingtalk/issues)
-[![GitHub milestone](https://img.shields.io/github/milestones/progress/zhaoyunxing92/dingtalk/1)](https://github.com/zhaoyunxing92/dingtalk/milestone/1?closed=1)
-[![tag](https://img.shields.io/github/v/tag/zhaoyunxing92/dingtalk?color=green&logo=AzurePipelines)](https://github.com/zhaoyunxing92/dingtalk/releases/tag/v2.0.2)
+[![GitHub milestone](https://img.shields.io/github/milestones/progress/zhaoyunxing92/dingtalk/2)](https://github.com/zhaoyunxing92/dingtalk/milestone/2?closed=1)
+[![tag](https://img.shields.io/github/v/tag/zhaoyunxing92/dingtalk?color=green&logo=AzurePipelines)](https://github.com/zhaoyunxing92/dingtalk/releases/tag/v2.0.3)
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
 
@@ -224,7 +224,10 @@ imports-formatter
         - [ ] [还原回收站文件（夹）](https://open.dingtalk.com/document/orgapp-server/restore-recycle-bin-files-folder)
         - [ ] [删除回收站文件（夹）](https://open.dingtalk.com/document/orgapp-server/delete-recycle-bin-files-folders)
         - [ ] [清空回收站](https://open.dingtalk.com/document/orgapp-server/empty-recycle-bin-files-folders)
-    
+
+* 智能人事
+   - [x] [获取在职员工列表](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-query-the-list-of-on-the-job-employees-of-the) `client.GetHrmEmployee`
+
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
     - [x] [获取员工可见的应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-list-of-applications-visible-to-an-employee)

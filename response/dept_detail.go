@@ -23,14 +23,14 @@ type DeptDetail struct {
 }
 
 type deptDetail struct {
-	//部门id
+	// 部门id
 	Id int `json:"dept_id"`
 
 	Name string `json:"name"`
 
 	ParentId int `json:"parent_id"`
 
-	//部门标识字段
+	// 部门标识字段
 	SourceIdentifier string `json:"source_identifier"`
 
 	//是否同步创建一个关联此部门的企业群：
@@ -72,10 +72,10 @@ type deptDetail struct {
 	//class：班级
 	Tags string `json:"tags"`
 
-	//在父部门中的排序值，order值小的排序靠前
+	// 在父部门中的排序值，order值小的排序靠前
 	Order int `json:"order"`
 
-	//部门群ID
+	// 部门群ID
 	DeptGroupChatId bool `json:"dept_group_chat_id"`
 
 	//
@@ -86,10 +86,10 @@ type deptDetail struct {
 	//不传值，则保持不变
 	GroupContainSubDept bool `json:"group_contain_sub_dept"`
 
-	//企业群群主的userid
+	// 企业群群主的userid
 	OrgDeptOwner string `json:"org_dept_owner"`
 
-	//部门的主管userid列表，多个userid之间使用英文逗号分隔
+	// 部门的主管userid列表，多个userid之间使用英文逗号分隔
 	DeptManagerUseridList []string `json:"dept_manager_userid_list"`
 
 	//是否限制本部门成员查看通讯录：

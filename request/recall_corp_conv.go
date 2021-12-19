@@ -17,10 +17,10 @@
 package request
 
 type RecallCorpConvMessage struct {
-	//发送消息时使用的微应用的ID
+	// 发送消息时使用的微应用的ID
 	AgentId int `json:"agent_id" validate:"required"`
 
-	//发送消息时钉钉返回的任务ID。
+	// 发送消息时钉钉返回的任务ID。
 	TaskId int `json:"msg_task_id" validate:"required"`
 }
 

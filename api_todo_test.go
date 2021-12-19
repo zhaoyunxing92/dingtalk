@@ -19,18 +19,12 @@ package dingtalk
 import (
 	"testing"
 	"time"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
 
 func TestDingTalk_CreateTodo(t *testing.T) {
-
 	todo := request.NewCreateTodo("ABNiSWeAolg5OETyYT60wdQiEiE", "使用api接口创建代办").
 		SetDesc("使用api接口创建代办").
 		SetSourceId("todo123456").
@@ -40,7 +34,7 @@ func TestDingTalk_CreateTodo(t *testing.T) {
 		SetPriority(40).
 		SetExecutors("ABNiSWeAolg5OETyYT60wdQiEiE").
 		SetParticipants("ABNiSWeAolg5OETyYT60wdQiEiE").
-		//SetDingNotify().
+		// SetDingNotify().
 		Build()
 
 	res, err := client.CreateTodo(todo)
@@ -51,7 +45,6 @@ func TestDingTalk_CreateTodo(t *testing.T) {
 }
 
 func TestDingTalk_GetTodoDetail(t *testing.T) {
-
 	res, err := client.GetTodoDetail("ABNiSWeAolg5OETyYT60wdQiEiE", "task5c7c849d9127b64f360870d5ae086a7c")
 
 	assert.Nil(t, err)
@@ -76,7 +69,6 @@ func TestDingTalk_UpdateTodo(t *testing.T) {
 }
 
 func TestDingTalk_UpdateTodoDone(t *testing.T) {
-
 	todo := request.NewUpdateTodoDone("ABNiSWeAolg5OETyYT60wdQiEiE", "taskc782d9b8cee1127884f04f21ae63e243").
 		SetTodoDone("ABNiSWeAolg5OETyYT60wdQiEiE", true).
 		SetTodoDone("ABNiSWeAolg5OETyYT60wdQiEiE", false).
@@ -89,7 +81,6 @@ func TestDingTalk_UpdateTodoDone(t *testing.T) {
 }
 
 func TestDingTalk_GetTodoListBySourceId(t *testing.T) {
-
 	res, err := client.GetTodoListBySourceId("ABNiSWeAolg5OETyYT60wdQiEiE", "todo123456")
 
 	assert.Nil(t, err)
@@ -97,7 +88,6 @@ func TestDingTalk_GetTodoListBySourceId(t *testing.T) {
 }
 
 func TestDingTalk_GetTodoList(t *testing.T) {
-
 	res, err := client.GetTodoList("ABNiSWeAolg5OETyYT60wdQiEiE", "", false)
 
 	assert.Nil(t, err)

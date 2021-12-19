@@ -22,10 +22,10 @@ import (
 )
 
 type SetUserRoleManageScope struct {
-	//员工在企业中的userid
+	// 员工在企业中的userid
 	UserId string `json:"userid" validate:"required"`
 
-	//角色Id
+	// 角色Id
 	RoleId int `json:"role_id"`
 
 	DeptIds string `json:"dept_ids,omitempty"`
@@ -43,7 +43,6 @@ type setUserRoleManageScopeBuilder struct {
 }
 
 func NewSetUserRoleManageScope(userId string, roleId int) *setUserRoleManageScopeBuilder {
-
 	return &setUserRoleManageScopeBuilder{rs: &SetUserRoleManageScope{UserId: userId, RoleId: roleId}}
 }
 

@@ -26,12 +26,12 @@ type JsApiTicket struct {
 	Ticket string `json:"ticket"`
 }
 
-//CreatedAt is when the access token is generated
+// CreatedAt is when the access token is generated
 func (token *JsApiTicket) CreatedAt() int64 {
 	return token.Create
 }
 
-//ExpiresIn is how soon the access token is expired
+// ExpiresIn is how soon the access token is expired
 func (token *JsApiTicket) ExpiresIn() int16 {
 	return token.Expires
 }

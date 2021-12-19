@@ -18,14 +18,11 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewUserDetail(t *testing.T) {
-
 	build := NewUserDetail("").SetLanguage("ch").Build()
 
 	assert.NotNil(t, build)

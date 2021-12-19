@@ -19,9 +19,9 @@ package language
 type Language string
 
 const (
-	//ZH_CN 中文
+	// ZH_CN 中文
 	ZH_CN = Language("zh_CN")
 
-	//EN_US 英文
+	// EN_US 英文
 	EN_US = Language("en_US")
 )

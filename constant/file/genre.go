@@ -19,18 +19,18 @@ package file
 type Genre string
 
 const (
-	//Image 图片，图片最大1MB。支持上传jpg、gif、png、bmp格式
+	// Image 图片，图片最大1MB。支持上传jpg、gif、png、bmp格式
 	Image = Genre("image")
 
-	//Voice 语音，语音文件最大2MB。支持上传amr、mp3、wav格式
+	// Voice 语音，语音文件最大2MB。支持上传amr、mp3、wav格式
 	Voice = Genre("voice")
 
-	//Video 视频，视频最大10MB。支持上传mp4格式
+	// Video 视频，视频最大10MB。支持上传mp4格式
 	Video = Genre("video")
 
-	//File 普通文件，最大10MB。支持上传doc、docx、xls、xlsx、ppt、pptx、zip、pdf、rar格式
+	// File 普通文件，最大10MB。支持上传doc、docx、xls、xlsx、ppt、pptx、zip、pdf、rar格式
 	File = Genre("file")
 
-	//Folder 文件夹
+	// Folder 文件夹
 	Folder = Genre("folder")
 )

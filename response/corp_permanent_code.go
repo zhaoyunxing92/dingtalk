@@ -23,9 +23,9 @@ type CorpPermanentCode struct {
 }
 
 type corpAuthInfo struct {
-	//授权方企业CorpId
+	// 授权方企业CorpId
 	CorpId string `json:"corpid"`
 
-	//授权方企业名称。
+	// 授权方企业名称。
 	CorpName string `json:"corp_name"`
 }

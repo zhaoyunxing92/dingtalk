@@ -17,10 +17,10 @@
 package request
 
 type GetTodoList struct {
-	//分页游标
+	// 分页游标
 	Token string `json:"nextToken,omitempty"`
 
-	//待办完成状态
+	// 待办完成状态
 	Done bool `json:"isDone,omitempty"`
 }
 

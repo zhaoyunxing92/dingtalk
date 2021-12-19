@@ -28,6 +28,7 @@ func (a *AdminUserScope) String() string {
 	str, _ := json.Marshal(a)
 	return string(str)
 }
+
 func NewAdminUserScope(userId string) *AdminUserScope {
 	return &AdminUserScope{userId}
 }

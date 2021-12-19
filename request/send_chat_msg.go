@@ -21,10 +21,10 @@ import (
 )
 
 type SendChatMessage struct {
-	//群会话的ID
+	// 群会话的ID
 	ChatId string `json:"chatid" validate:"required"`
 
-	//消息内容，最长不超过2048个字节。
+	// 消息内容，最长不超过2048个字节。
 	Msg message.Message `json:"msg" validate:"required"`
 }
 

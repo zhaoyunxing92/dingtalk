@@ -16,7 +16,7 @@
 
 package request
 
-//AgentInfo 获取授权应用的基本信息
+// AgentInfo 获取授权应用的基本信息
 type AgentInfo struct {
 	AgentId  int    `json:"agentid" validate:"required"`
 	SuiteKey string `json:"suite_key" validate:"required"`

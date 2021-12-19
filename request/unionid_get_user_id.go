@@ -21,6 +21,5 @@ type UnionIdGetUserId struct {
 }
 
 func NewUnionIdGetUserId(unionId string) *UnionIdGetUserId {
-
 	return &UnionIdGetUserId{unionId}
 }

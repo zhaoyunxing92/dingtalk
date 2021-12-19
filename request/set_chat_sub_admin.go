@@ -17,18 +17,17 @@
 package request
 
 type ChatSetSubAdmin struct {
-	//群会话ID，可通过创建群会话接口获取
+	// 群会话ID，可通过创建群会话接口获取
 	ChatId string `json:"chatid" validate:"required"`
 
-	//群成员userid，可通过根据手机号获取userid接口获取userid。
+	// 群成员userid，可通过根据手机号获取userid接口获取userid。
 	UserId string `json:"userids" validate:"required"`
 
-	//2：添加为管理员
-	//3：删除该管理员
+	// 2：添加为管理员
+	// 3：删除该管理员
 	Role int `json:"role" validate:"required,min=2,max=3"`
 }
 
 func NewChatSetSubAdmin(chatId, userId string, role int) *ChatSetSubAdmin {
-
 	return &ChatSetSubAdmin{chatId, userId, role}
 }

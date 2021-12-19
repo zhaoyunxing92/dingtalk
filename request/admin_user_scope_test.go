@@ -18,14 +18,11 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewAdminUserScope(t *testing.T) {
-
 	scope := NewAdminUserScope("123456")
 
 	assert.NotNil(t, scope)

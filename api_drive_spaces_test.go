@@ -18,13 +18,8 @@ package dingtalk
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/policy"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/spaces"
@@ -73,7 +68,6 @@ func TestDingTalk_GetDriveSpacesFiles(t *testing.T) {
 }
 
 func TestDingTalk_GetDriveSpacesFileInfo(t *testing.T) {
-
 	res, err := client.GetDriveSpacesFileInfo("3452011774", "47453824236",
 		"ABNiSWeAolg5OETyYT60wdQiEiE")
 
@@ -83,7 +77,6 @@ func TestDingTalk_GetDriveSpacesFileInfo(t *testing.T) {
 }
 
 func TestDingTalk_CreateDriveSpacesFiles_Folder(t *testing.T) {
-
 	f := request.NewCreateDriveSpacesFiles("ABNiSWeAolg5OETyYT60wdQiEiE", "3452011774",
 		"dingtalk", file.Folder).
 		SetConflictPolicy(policy.Overwrite).
@@ -96,7 +89,6 @@ func TestDingTalk_CreateDriveSpacesFiles_Folder(t *testing.T) {
 }
 
 func TestDingTalk_CreateDriveSpacesFiles_File(t *testing.T) {
-
 	f := request.NewCreateDriveSpacesFiles("ABNiSWeAolg5OETyYT60wdQiEiE", "3452011774",
 		"dingtalk.png", file.File).
 		SetMediaId("@lALPDeREWzc3zXBgzQJA").
@@ -110,7 +102,6 @@ func TestDingTalk_CreateDriveSpacesFiles_File(t *testing.T) {
 }
 
 func TestDingTalk_DeleteDriveSpacesFiles(t *testing.T) {
-
 	res, err := client.DeleteDriveSpacesFiles("3452011774", "47459660818",
 		"ABNiSWeAolg5OETyYT60wdQiEiE", policy.Completely)
 	assert.Nil(t, err)
@@ -130,7 +121,6 @@ func TestDingTalk_MoveDriveSpacesFiles(t *testing.T) {
 }
 
 func TestDingTalk_RenameDriveSpacesFiles(t *testing.T) {
-
 	res, err := client.RenameDriveSpacesFiles("3452011774", "47494266429",
 		"newName", "ABNiSWeAolg5OETyYT60wdQiEiE")
 	assert.Nil(t, err)
@@ -139,7 +129,6 @@ func TestDingTalk_RenameDriveSpacesFiles(t *testing.T) {
 }
 
 func TestDingTalk_GetDriveSpacesFilesDownloadInfo(t *testing.T) {
-
 	res, err := client.GetDriveSpacesFilesDownloadInfo("3452011774", "47494266429",
 		"ABNiSWeAolg5OETyYT60wdQiEiE")
 	assert.Nil(t, err)
@@ -147,7 +136,6 @@ func TestDingTalk_GetDriveSpacesFilesDownloadInfo(t *testing.T) {
 }
 
 func TestDingTalk_GetDriveSpacesFilesPermissions(t *testing.T) {
-
 	res, err := client.GetDriveSpacesFilesPermissions("3452011774", "47494266429",
 		"ABNiSWeAolg5OETyYT60wdQiEiE")
 	assert.Nil(t, err)

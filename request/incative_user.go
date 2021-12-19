@@ -20,7 +20,7 @@ import (
 	"sort"
 )
 
-//InactiveUser 获取未登录钉钉的员工列表
+// InactiveUser 获取未登录钉钉的员工列表
 type InactiveUser struct {
 	//是否活跃：
 	//
@@ -29,16 +29,16 @@ type InactiveUser struct {
 	//true：登录
 	Active bool `json:"is_active" validate:"required"`
 
-	//过滤部门ID列表，不传表示查询整个企业
+	// 过滤部门ID列表，不传表示查询整个企业
 	DeptIds []int `json:"dept_ids,omitempty"`
 
-	//支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始
+	// 支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始
 	Offset *int `json:"offset" validate:"required,min=0"`
 
-	//支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，最大100
+	// 支持分页查询，与offset参数同时设置时才生效，此参数代表分页大小，最大100
 	Size int `json:"size" validate:"required,max=100"`
 
-	//查询日期，日期格式为：yyyyMMdd
+	// 查询日期，日期格式为：yyyyMMdd
 	Date string `json:"query_date" validate:"required,max=100"`
 }
 

@@ -16,10 +16,10 @@
 
 package order
 
-//FileOrder 文件排序
+// FileOrder 文件排序
 type FileOrder string
 
-//DeptOrder 部门排序
+// DeptOrder 部门排序
 type DeptOrder string
 
 const (
@@ -29,38 +29,38 @@ const (
 	// CreateTimeDesc 按创建时间降序
 	CreateTimeDesc = FileOrder("createTimeDesc")
 
-	//ModifyTimeAsc 按修改时间升序
+	// ModifyTimeAsc 按修改时间升序
 	ModifyTimeAsc = FileOrder("modifyTimeAsc")
 
-	//ModifyTimeDesc 按修改时间降序
+	// ModifyTimeDesc 按修改时间降序
 	ModifyTimeDesc = FileOrder("modifyTimeDesc")
 
-	//NameAsc 按名称升序
+	// NameAsc 按名称升序
 	NameAsc = FileOrder("nameAsc")
 
-	//NameDesc 按名称降序
+	// NameDesc 按名称降序
 	NameDesc = FileOrder("nameDesc")
 
-	//SizeAsc 按大小升序
+	// SizeAsc 按大小升序
 	SizeAsc = FileOrder("sizeAsc")
 
-	//SizeDesc 按大小降序
+	// SizeDesc 按大小降序
 	SizeDesc = FileOrder("sizeDesc")
 )
 
 const (
-	//EntryAsc 代表按照进入部门的时间升序
+	// EntryAsc 代表按照进入部门的时间升序
 	EntryAsc = DeptOrder("entry_asc")
 
-	//EntryDesc 代表按照进入部门的时间降序
+	// EntryDesc 代表按照进入部门的时间降序
 	EntryDesc = DeptOrder("entry_desc")
 
-	//ModifyAsc 代表按照部门信息修改时间升序
+	// ModifyAsc 代表按照部门信息修改时间升序
 	ModifyAsc = DeptOrder("modify_asc")
 
-	//ModifyDesc 代表按照部门信息修改时间降序
+	// ModifyDesc 代表按照部门信息修改时间降序
 	ModifyDesc = DeptOrder("modify_desc")
 
-	//Custom 代表用户定义(未定义时按照拼音)排序
+	// Custom 代表用户定义(未定义时按照拼音)排序
 	Custom = DeptOrder("custom")
 )

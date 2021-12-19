@@ -17,9 +17,9 @@
 package request
 
 type UpdateRole struct {
-	//角色id
+	// 角色id
 	Id int `json:"roleId" validate:"required"`
-	//角色名称
+	// 角色名称
 	Name string `json:"roleName" validate:"required"`
 }
 

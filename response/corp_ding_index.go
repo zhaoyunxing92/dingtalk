@@ -16,21 +16,21 @@
 
 package response
 
-//CorpDingIndex 获取企业最新钉钉指数信息
+// CorpDingIndex 获取企业最新钉钉指数信息
 type CorpDingIndex struct {
 	Response
-	//日期
+	// 日期
 	Date string `json:"statDate"`
 
-	//钉钉指数
+	// 钉钉指数
 	Total float32 `json:"idxTotal"`
 
-	//效率指数
+	// 效率指数
 	Efficiency float32 `json:"idxEfficiency"`
 
-	//绿色指数
+	// 绿色指数
 	Carbon float32 `json:"idxCarbon"`
 
-	//钉钉指数月均分
+	// 钉钉指数月均分
 	MonthlyAvg float32 `json:"idxMonthlyAvg"`
 }

@@ -18,15 +18,12 @@ package dingtalk
 
 import (
 	"net/http"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 
-//GetCorpDingIndex 获取企业最新钉钉指数信息
+// GetCorpDingIndex 获取企业最新钉钉指数信息
 func (ding *dingTalk) GetCorpDingIndex() (req response.CorpDingIndex, err error) {
-
 	return req, ding.Request(http.MethodGet, constant.GetDingIndexKey, nil, nil, &req)
 }

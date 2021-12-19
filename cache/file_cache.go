@@ -22,26 +22,24 @@ import (
 	"os"
 	"strings"
 	"time"
-)
 
-import (
 	"github.com/pkg/errors"
 )
 
 type FileCache struct {
-	path string //文件路径
-	file string //文件
+	path string // 文件路径
+	file string // 文件
 }
 
-//NewFileCache 文件缓存
-//path 缓存文件路径
-//file 文件名称
+// NewFileCache 文件缓存
+// path 缓存文件路径
+// file 文件名称
 func NewFileCache(path, file string) *FileCache {
 	file = strings.Join([]string{path, file}, "/")
 	return &FileCache{path, file}
 }
 
-//Set 缓存
+// Set 缓存
 func (cache *FileCache) Set(data Expired) (err error) {
 	path := cache.path
 	if _, err := os.Stat(path); os.IsNotExist(err) {
@@ -51,13 +49,13 @@ func (cache *FileCache) Set(data Expired) (err error) {
 	if bytes, err = json.Marshal(data); err != nil {
 		return err
 	}
-	if err = ioutil.WriteFile(cache.file, bytes, 0644); err != nil {
+	if err = ioutil.WriteFile(cache.file, bytes, 0o644); err != nil {
 		return err
 	}
 	return err
 }
 
-//Get 获取
+// Get 获取
 func (cache *FileCache) Get(data Expired) error {
 	bytes, err := ioutil.ReadFile(cache.file)
 	if err == nil {

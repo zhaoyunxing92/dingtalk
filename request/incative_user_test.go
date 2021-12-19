@@ -19,9 +19,7 @@ package request
 import (
 	"encoding/json"
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 
@@ -34,5 +32,4 @@ func TestNewInactiveUser(t *testing.T) {
 	js, err := json.Marshal(iu)
 	assert.Nil(t, err)
 	t.Log(string(js))
-
 }

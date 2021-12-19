@@ -18,9 +18,7 @@ package dingtalk
 
 import (
 	"net/http"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
@@ -28,7 +26,7 @@ import (
 
 // CreateCooperateCorp 创建合作空间
 func (ding *dingTalk) CreateCooperateCorp(req *request.CreateCooperateCorp) (rsp response.CreateCooperateCorp,
-	err error) {
-
+	err error,
+) {
 	return rsp, ding.Request(http.MethodPost, constant.CreateCooperateCorpKey, nil, req, &rsp)
 }

@@ -18,80 +18,69 @@ package dingtalk
 
 import (
 	"net/http"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 
-//CreateDept 创建部门
+// CreateDept 创建部门
 func (ding *dingTalk) CreateDept(res *request.CreateDept) (rsp response.CreateDept, err error) {
-
 	return rsp, ding.Request(http.MethodPost, constant.CreateDeptKey, nil, res, &rsp)
 }
 
-//DeleteDept 删除部门
+// DeleteDept 删除部门
 func (ding *dingTalk) DeleteDept(deptId int) (rsp response.Response, err error) {
-
 	return rsp, ding.Request(http.MethodPost, constant.DeleteDeptKey, nil, request.NewDeleteDept(deptId), &rsp)
 }
 
-//UpdateDept 更新部门
+// UpdateDept 更新部门
 func (ding *dingTalk) UpdateDept(res *request.UpdateDept) (rsp response.Response, err error) {
-
 	return rsp, ding.Request(http.MethodPost, constant.UpdateDeptKey, nil, res, &rsp)
 }
 
-//GetDeptDetail 获取部门详情
+// GetDeptDetail 获取部门详情
 func (ding *dingTalk) GetDeptDetail(res *request.DeptDetail) (rsp response.DeptDetail, err error) {
-
 	return rsp, ding.Request(http.MethodPost, constant.GetDeptDetailKey, nil, res, &rsp)
 }
 
-//GetDeptList 获取部门列表
+// GetDeptList 获取部门列表
 func (ding *dingTalk) GetDeptList(res *request.DeptList) (rsp response.DeptList, err error) {
-
 	return rsp, ding.Request(http.MethodPost, constant.GetDeptListKey, nil, res, &rsp)
 }
 
-//GetSubDeptList 获取子部门列表
+// GetSubDeptList 获取子部门列表
 func (ding *dingTalk) GetSubDeptList(deptId int) (rsp response.SubDeptList, err error) {
-
 	return rsp, ding.Request(http.MethodPost, constant.GetSubDeptListKey, nil, request.NewSubDept(deptId), &rsp)
 }
 
-//GetDeptUserIds 获取部门用户userid列表
+// GetDeptUserIds 获取部门用户userid列表
 func (ding *dingTalk) GetDeptUserIds(du *request.DeptUserId) (req response.DeptUserId, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetDeptUserIdKey, nil, du, &req)
 }
 
-//GetDeptSimpleUserInfo 获取部门用户基础信息
+// GetDeptSimpleUserInfo 获取部门用户基础信息
 func (ding *dingTalk) GetDeptSimpleUserInfo(res *request.DeptSimpleUserInfo) (req response.DeptSimpleUserInfo,
-	err error) {
-
+	err error,
+) {
 	return req, ding.Request(http.MethodPost, constant.GetDeptSimpleUserKey, nil, res, &req)
 }
 
-//GetDeptDetailUserInfo 获取部门用户详情
+// GetDeptDetailUserInfo 获取部门用户详情
 func (ding *dingTalk) GetDeptDetailUserInfo(res *request.DeptDetailUserInfo) (req response.DeptDetailUserInfo,
-	err error) {
-
+	err error,
+) {
 	return req, ding.Request(http.MethodPost, constant.GetDeptDetailUserKey, nil, res, &req)
 }
 
-//GetParentIdsByUserId 获取指定用户的所有父部门列表
+// GetParentIdsByUserId 获取指定用户的所有父部门列表
 func (ding *dingTalk) GetParentIdsByUserId(userId string) (req response.GetParentIdsByUserId, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetParentDeptsByUserKey, nil,
 		request.NewGetParentIdsByUserId(userId), &req)
 }
 
-//GetParentIdsByDeptId 获取指定部门的所有父部门列表
+// GetParentIdsByDeptId 获取指定部门的所有父部门列表
 func (ding *dingTalk) GetParentIdsByDeptId(deptId int) (req response.GetParentIdsByDeptId, err error) {
-
 	return req, ding.Request(http.MethodPost, constant.GetParentDeptsByDeptKey, nil,
 		request.NewGetParentIdsByDeptId(deptId), &req)
 }

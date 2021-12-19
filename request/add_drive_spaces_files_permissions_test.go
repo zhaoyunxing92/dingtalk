@@ -18,19 +18,13 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/member"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/role"
 )
 
 func TestNewAddDriveSpacesFilesPermissions(t *testing.T) {
-
 	permissions := NewAddDriveSpacesFilesPermissions().
 		SetSpaceId("spaceId").
 		SetFileId("fileId").
@@ -43,7 +37,7 @@ func TestNewAddDriveSpacesFilesPermissions(t *testing.T) {
 	assert.NotNil(t, permissions)
 }
 
-//newDriveSpacesFileMember
+// newDriveSpacesFileMember
 func TestNewDriveSpacesFileMember(t *testing.T) {
 	fm := newDriveSpacesFileMember("corpId", "memberId", member.Conversation)
 

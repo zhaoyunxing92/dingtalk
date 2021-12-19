@@ -22,13 +22,13 @@ import (
 )
 
 type UpdateDept struct {
-	//部门id
+	// 部门id
 	Id uint `json:"dept_id" validate:"required"`
 
-	//部门名称。长度限制为1~64个字符，不允许包含字符"-"","以及","
+	// 部门名称。长度限制为1~64个字符，不允许包含字符"-"","以及","
 	Name string `json:"name,omitempty" validate:"omitempty,min=1,max=64"`
 
-	//父部门ID，根部门ID为1。
+	// 父部门ID，根部门ID为1。
 	ParentId *uint `json:"parent_id,omitempty" validate:"omitempty,min=1"`
 
 	//是否隐藏本部门：
@@ -82,7 +82,7 @@ type UpdateDept struct {
 
 	UserPermitsDeptIds []int `json:"-" validate:"max=200"`
 
-	//是否创建一个关联此部门的企业群，默认为false即不创建
+	// 是否创建一个关联此部门的企业群，默认为false即不创建
 	CreateDeptGroup *bool `json:"create_dept_group,omitempty"`
 
 	//是否默认同意加入该部门的申请：
@@ -92,10 +92,10 @@ type UpdateDept struct {
 	//false：表示加入该部门的申请需要有权限的管理员同意
 	AutoApproveApply *bool `json:"auto_approve_apply,omitempty"`
 
-	//在父部门中的排序值，order值小的排序靠前
+	// 在父部门中的排序值，order值小的排序靠前
 	Order uint `json:"order,omitempty"`
 
-	//部门标识字段，开发者可用该字段来唯一标识一个部门，并与钉钉外部通讯录里的部门做映射
+	// 部门标识字段，开发者可用该字段来唯一标识一个部门，并与钉钉外部通讯录里的部门做映射
 	SourceIdentifier string `json:"source_identifier,omitempty"`
 
 	//当部门群已经创建后，有新人加入部门时是否会自动加入该群：
@@ -107,7 +107,7 @@ type UpdateDept struct {
 	//不传值，则保持不变
 	AutoAddUser *bool `json:"auto_add_user,omitempty"`
 
-	//部门的主管userid列表，多个userid之间使用英文逗号分隔
+	// 部门的主管userid列表，多个userid之间使用英文逗号分隔
 	DeptManagerUseridList string `json:"dept_manager_userid_list,omitempty"`
 
 	deptManagerUseridList []string
@@ -139,10 +139,10 @@ type UpdateDept struct {
 	//不传值，则保持不变
 	GroupContainHiddenDept *bool `json:"group_contain_hidden_dept,omitempty"`
 
-	//企业群群主的userid
+	// 企业群群主的userid
 	OrgDeptOwner string `json:"org_dept_owner,omitempty"`
 
-	//强制更新的字段，支持清空指定的字段，多个字段之间使用英文逗号分隔。目前支持字段: dept_manager_userid_list
+	// 强制更新的字段，支持清空指定的字段，多个字段之间使用英文逗号分隔。目前支持字段: dept_manager_userid_list
 	ForceUpdateFields string `json:"force_update_fields,omitempty"`
 
 	forceUpdateFields []string
@@ -176,17 +176,17 @@ func (cdb *updateDeptBuilder) SetHideDept(hide bool) *updateDeptBuilder {
 	return cdb
 }
 
-//SetDeptPermits 指定可以查看本部门的其他部门列表，总数不能超过200,当hide_dept为true时，则此值生效
+// SetDeptPermits 指定可以查看本部门的其他部门列表，总数不能超过200,当hide_dept为true时，则此值生效
 func (cdb *updateDeptBuilder) SetDeptPermits(deptId int, deptIds ...int) *updateDeptBuilder {
-	//if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
+	// if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
 	cdb.cd.DeptPermit = append(deptIds, deptId)
 	//}
 	return cdb
 }
 
-//SetUserPermits 指定可以查看本部门的人员userid列表，总数不能超过200,当hide_dept为true时，则此值生效
+// SetUserPermits 指定可以查看本部门的人员userid列表，总数不能超过200,当hide_dept为true时，则此值生效
 func (cdb *updateDeptBuilder) SetUserPermits(userId string, userIds ...string) *updateDeptBuilder {
-	//if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
+	// if cdb.cd.HideDept != nil && *cdb.cd.HideDept == true {
 	cdb.cd.UserPermit = append(userIds, userId)
 	//}
 	return cdb
@@ -205,14 +205,14 @@ func (cdb *updateDeptBuilder) SetOuterDeptOnlySelf(self bool) *updateDeptBuilder
 }
 
 func (cdb *updateDeptBuilder) SetUserPermitsUserIds(userId string, userIds ...string) *updateDeptBuilder {
-	//if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
+	// if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
 	cdb.cd.UserPermitsUserIds = append(userIds, userId)
 	//}
 	return cdb
 }
 
 func (cdb *updateDeptBuilder) SetUserPermitsDeptIds(deptId int, deptIds ...int) *updateDeptBuilder {
-	//if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
+	// if cdb.cd.OuterDept != nil && *cdb.cd.OuterDept == true {
 	cdb.cd.UserPermitsDeptIds = append(deptIds, deptId)
 	//}
 	return cdb
@@ -222,6 +222,7 @@ func (cdb *updateDeptBuilder) SetCreateDeptGroup(group bool) *updateDeptBuilder 
 	cdb.cd.CreateDeptGroup = &group
 	return cdb
 }
+
 func (cdb *updateDeptBuilder) SetAutoApproveApply(approve bool) *updateDeptBuilder {
 	cdb.cd.AutoApproveApply = &approve
 	return cdb

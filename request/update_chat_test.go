@@ -18,14 +18,11 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewUpdateChat(t *testing.T) {
-
 	chat := NewUpdateChat("123ewer").
 		SetName("name").
 		SetOwner("name").

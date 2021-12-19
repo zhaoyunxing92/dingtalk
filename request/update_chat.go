@@ -23,10 +23,10 @@ import (
 type UpdateChat struct {
 	ChatId string `json:"chatid" validate:"required"`
 
-	//群名称，长度限制为1~20个字符
+	// 群名称，长度限制为1~20个字符
 	Name string `json:"name,omitempty" validate:"omitempty,min=1,max=20"`
 
-	//群主的userid,该员工必须为会话useridlist的成员之一。
+	// 群主的userid,该员工必须为会话useridlist的成员之一。
 	Owner string `json:"owner,omitempty"`
 
 	//群主类型：
@@ -36,19 +36,19 @@ type UpdateChat struct {
 	//ext：外部联系人
 	OwnerType string `json:"ownerType,omitempty" validate:"omitempty,oneof=emp ext"`
 
-	//群成员列表，每次最多支持40人，群人数上限为1000
+	// 群成员列表，每次最多支持40人，群人数上限为1000
 	AddUsers []string `json:"add_useridlist,omitempty" validate:"omitempty,max=40"`
 
-	//删除的成员列表
+	// 删除的成员列表
 	DelUsers []string `json:"del_useridlist,omitempty"`
 
-	//添加的外部联系人成员列表。
+	// 添加的外部联系人成员列表。
 	ExtUsers []string `json:"add_extidlist,omitempty"`
 
-	//删除的外部联系人成员列表。
+	// 删除的外部联系人成员列表。
 	DelExtUsers []string `json:"del_extidlist,omitempty"`
 
-	//群头像的mediaId
+	// 群头像的mediaId
 	Icon string `json:"icon,omitempty"`
 
 	//新成员是否可查看100条历史消息：
@@ -87,9 +87,9 @@ type UpdateChat struct {
 	//1：仅群主可管理
 	ManagementType *int `json:"managementType,omitempty" validate:"omitempty,max=1,min=0"`
 
-	//是否开启群禁言：
-	//0（默认）：不禁言
-	//1：全员禁言
+	// 是否开启群禁言：
+	// 0（默认）：不禁言
+	// 1：全员禁言
 	ChatBannedType *int `json:"chatBannedType,omitempty" validate:"omitempty,max=1,min=0"`
 }
 
@@ -103,7 +103,6 @@ type updateChatBuilder struct {
 }
 
 func NewUpdateChat(chatId string) *updateChatBuilder {
-
 	return &updateChatBuilder{uc: &UpdateChat{ChatId: chatId}}
 }
 
@@ -191,9 +190,9 @@ func (cb *updateChatBuilder) SetManagementType(managementType int) *updateChatBu
 	return cb
 }
 
-//SetChatBannedType 是否开启群禁言：
-//0（默认）：不禁言
-//1：全员禁言
+// SetChatBannedType 是否开启群禁言：
+// 0（默认）：不禁言
+// 1：全员禁言
 func (cb *updateChatBuilder) SetChatBannedType(chatBannedType int) *updateChatBuilder {
 	cb.uc.ChatBannedType = &chatBannedType
 	return cb

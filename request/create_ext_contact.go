@@ -17,46 +17,46 @@
 package request
 
 import (
-	json "encoding/json"
+	"encoding/json"
 )
 
-//CreateExtContact 添加外部联系人
+// CreateExtContact 添加外部联系人
 type CreateExtContact struct {
 	Contact *createExtContact `json:"contact" validate:"required"`
 }
 
 type createExtContact struct {
-	//职位
+	// 职位
 	Title string `json:"title,omitempty"`
 
-	//标签列表
+	// 标签列表
 	Labels []int `json:"label_ids" validate:"required"`
 
-	//共享给的部门ID
+	// 共享给的部门ID
 	ShareDept []int `json:"share_dept_ids,omitempty"`
 
-	//地址
+	// 地址
 	Address string `json:"address,omitempty"`
 
-	//备注
+	// 备注
 	Remark string `json:"remark,omitempty"`
 
-	//负责人的userId
+	// 负责人的userId
 	FollowerUser string `json:"follower_user_id,omitempty" validate:"required"`
 
-	//外部联系人的姓名
+	// 外部联系人的姓名
 	Name string `json:"name,omitempty" validate:"required"`
 
-	//手机号国家码
+	// 手机号国家码
 	StateCode string `json:"state_code,omitempty" validate:"required"`
 
-	//外部联系人的企业名称
+	// 外部联系人的企业名称
 	CompanyName string `json:"company_name,omitempty"`
 
-	//共享给的员工userid列表
+	// 共享给的员工userid列表
 	ShareUser []string `json:"share_user_ids,omitempty"`
 
-	//外部联系人的手机号
+	// 外部联系人的手机号
 	Mobile string `json:"mobile,omitempty" validate:"required"`
 }
 
@@ -70,9 +70,10 @@ type createExtContactBuilder struct {
 }
 
 func NewCreateExtContact(name, mobile, stateCode, follower string, labels ...int) *createExtContactBuilder {
-
-	return &createExtContactBuilder{c: &createExtContact{Mobile: mobile, Name: name, StateCode: stateCode,
-		FollowerUser: follower, Labels: labels}}
+	return &createExtContactBuilder{c: &createExtContact{
+		Mobile: mobile, Name: name, StateCode: stateCode,
+		FollowerUser: follower, Labels: labels,
+	}}
 }
 
 func (ec *createExtContactBuilder) SetTitle(title string) *createExtContactBuilder {
@@ -97,13 +98,13 @@ func (ec *createExtContactBuilder) SetRemark(remark string) *createExtContactBui
 	return ec
 }
 
-//SetCompanyName 外部联系人的企业名称
+// SetCompanyName 外部联系人的企业名称
 func (ec *createExtContactBuilder) SetCompanyName(name string) *createExtContactBuilder {
 	ec.c.CompanyName = name
 	return ec
 }
 
-//SetShareUser 共享给的员工userid列表
+// SetShareUser 共享给的员工userid列表
 func (ec *createExtContactBuilder) SetShareUser(id string, ids ...string) *createExtContactBuilder {
 	us := ec.c.ShareUser
 	us = append(us, id)

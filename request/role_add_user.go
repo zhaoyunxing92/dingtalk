@@ -24,12 +24,12 @@ import (
 type RoleAddUser struct {
 	Rs []string `validate:"required,max=20" json:"-"`
 
-	//角色roleId列表 多个roleId用英文逗号（,）分隔，最多可传20个
+	// 角色roleId列表 多个roleId用英文逗号（,）分隔，最多可传20个
 	RoleIds string `validate:"required" json:"roleIds"`
 
 	Us []string `validate:"required,max=20" json:"-"`
 
-	//员工的userId 多个userId用英文逗号（,）分隔，最多可传20个
+	// 员工的userId 多个userId用英文逗号（,）分隔，最多可传20个
 	UserIds string `validate:"required" json:"userIds"`
 }
 

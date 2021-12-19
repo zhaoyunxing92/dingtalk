@@ -18,14 +18,11 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
 )
 
 func TestNewUpdateUser(t *testing.T) {
-
 	str := NewUpdateUser("134567").
 		SetForceUpdateFields("").
 		SetHideMobile(false).

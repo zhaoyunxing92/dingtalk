@@ -16,13 +16,13 @@
 
 package request
 
-//ChatFriendSwitch 设置禁止群成员私聊
+// ChatFriendSwitch 设置禁止群成员私聊
 type ChatFriendSwitch struct {
-	//群会话ID，可通过创建群会话接口获取
+	// 群会话ID，可通过创建群会话接口获取
 	ChatId string `json:"chatid" validate:"required"`
 
-	//true：开启禁止开关
-	//false：关闭禁止开关
+	// true：开启禁止开关
+	// false：关闭禁止开关
 	Prohibit bool `json:"is_prohibit" validate:"required"`
 }
 

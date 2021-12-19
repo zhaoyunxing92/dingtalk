@@ -16,7 +16,7 @@
 
 package request
 
-//GetExtContactDetail 获取外部联系人详情
+// GetExtContactDetail 获取外部联系人详情
 type GetExtContactDetail struct {
 	UserId string `json:"user_id" validate:"required"`
 }

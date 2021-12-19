@@ -18,18 +18,12 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/priority"
 )
 
 func TestCreateTodoBuilder_Build(t *testing.T) {
-
 	todo := NewCreateTodo("ABNiSWeAolg5OETyYT60wdQiEiE", "测试代办").
 		SetDesc("使用api接口创建代办").
 		SetAppUrl("https://developers.dingtalk.com").

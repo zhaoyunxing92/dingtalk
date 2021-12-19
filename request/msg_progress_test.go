@@ -18,14 +18,11 @@ package request
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewMessageProgress(t *testing.T) {
-
 	progress := NewMessageProgress(1234, 4567)
 
 	assert.NotNil(t, progress)

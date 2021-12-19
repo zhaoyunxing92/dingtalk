@@ -18,14 +18,11 @@ package dingtalk
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
 )
 
 func TestDingTalk_GetCorpDingIndex(t *testing.T) {
-
 	res, err := client.GetCorpDingIndex()
 
 	assert.Nil(t, err)

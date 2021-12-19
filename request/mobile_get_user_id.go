@@ -21,6 +21,5 @@ type MobileGetUserId struct {
 }
 
 func NewMobileGetUserId(mobile string) *MobileGetUserId {
-
 	return &MobileGetUserId{mobile}
 }

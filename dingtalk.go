@@ -27,23 +27,16 @@ import (
 	"net/url"
 	"strings"
 	"time"
-)
 
-import (
 	"github.com/go-playground/validator/v10"
-
 	"github.com/pkg/errors"
-
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/cache"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/logger"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 type dingTalk struct {
@@ -53,16 +46,16 @@ type dingTalk struct {
 	// 企业内部应用对应:AppKey，套件对应:SuiteKey
 	Key string `json:"key,omitempty" validate:"required"`
 
-	//企业内部对应:AppSecret，套件对应:SuiteSecret
+	// 企业内部对应:AppSecret，套件对应:SuiteSecret
 	Secret string `json:"Secret,omitempty" validate:"required"`
 
 	// isv 钉钉开放平台会向应用的回调URL推送的suite_ticket（约5个小时推送一次）
 	ticket string
 
-	//授权企业的id
+	// 授权企业的id
 	corpId string
 
-	//在开发者后台的基本信息 > 开发信息（旧版）页面获取微应用管理后台SSOSecret
+	// 在开发者后台的基本信息 > 开发信息（旧版）页面获取微应用管理后台SSOSecret
 	SSOSecret string
 
 	// 日志级别
@@ -101,7 +94,7 @@ func WithLevel(level zapcore.Level) OptionFunc {
 	}
 }
 
-//isv 是否isv
+// isv 是否isv
 func (ding *dingTalk) isv() bool {
 	return len(ding.ticket) > 0 && len(ding.corpId) > 0
 }
@@ -130,10 +123,10 @@ func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) 
 	return
 }
 
-//Request 统一请求
+// Request 统一请求
 func (ding *dingTalk) Request(method, path string, query url.Values, body interface{},
-	data response.Unmarshalled) (err error) {
-
+	data response.Unmarshalled) (err error,
+) {
 	if body != nil {
 		if err = validate(body); err != nil {
 			return err
@@ -160,7 +153,7 @@ func (ding *dingTalk) Request(method, path string, query url.Values, body interf
 				return err
 			}
 		}
-		//set token
+		// set token
 		query.Set("access_token", token)
 	}
 	return ding.httpRequest(method, path, query, body, data)
@@ -174,8 +167,8 @@ func (robot *Robot) send(form interface{}, data response.Unmarshalled) (err erro
 }
 
 func (robot *Robot) httpRequest(method, path string, query url.Values, body interface{},
-	data response.Unmarshalled) error {
-
+	data response.Unmarshalled,
+) error {
 	client := robot.client
 
 	uri, _ := url.Parse(constant.Api + path)
@@ -188,7 +181,7 @@ func (robot *Robot) httpRequest(method, path string, query url.Values, body inte
 		content []byte
 	)
 
-	//表单不为空
+	// 表单不为空
 	d, _ := json.Marshal(body)
 	fmt.Println(string(d))
 
@@ -216,14 +209,14 @@ func (robot *Robot) httpRequest(method, path string, query url.Values, body inte
 }
 
 func (ding *dingTalk) httpRequest(method, path string, query url.Values, body interface{},
-	response response.Unmarshalled) error {
-
+	response response.Unmarshalled,
+) error {
 	var (
 		req    *http.Request
 		res    *http.Response
 		err    error
-		form   []byte //body 数据
-		data   []byte //返回数据
+		form   []byte // body 数据
+		data   []byte // 返回数据
 		client = ding.client
 		uri    *url.URL
 		token  string
@@ -240,7 +233,7 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 	uri.RawQuery = query.Encode()
 
 	if body != nil {
-		//检查提交表单类型
+		// 检查提交表单类型
 		switch body.(type) {
 		case request.UploadFile:
 			var b bytes.Buffer
@@ -261,7 +254,7 @@ func (ding *dingTalk) httpRequest(method, path string, query url.Values, body in
 			req, _ = http.NewRequest(method, uri.String(), &b)
 			req.Header.Set("Content-Type", w.FormDataContentType())
 		default:
-			//表单不为空
+			// 表单不为空
 			form, _ = json.Marshal(body)
 			req, _ = http.NewRequest(method, uri.String(), bytes.NewReader(form))
 			req.Header.Set("Content-Type", "application/json; charset=utf-8")

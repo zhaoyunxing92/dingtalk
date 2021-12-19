@@ -22,13 +22,13 @@ import (
 )
 
 type AddDriveSpacesFilesPermissions struct {
-	//钉盘空间ID
+	// 钉盘空间ID
 	SpaceId string `json:"-" validate:"required"`
 
-	//文件ID
+	// 文件ID
 	FileId string `json:"-" validate:"required"`
 
-	//用户unionId
+	// 用户unionId
 	UnionId string `json:"unionId" validate:"required"`
 
 	//权限角色。
@@ -40,12 +40,12 @@ type AddDriveSpacesFilesPermissions struct {
 	//only_viewer：只读
 	Role string `json:"role"`
 
-	//成员权限列表
+	// 成员权限列表
 	Members []driveSpacesFileMember `json:"members"`
 }
 
 type driveSpacesFileMember struct {
-	//企业的CorpId
+	// 企业的CorpId
 	CorpId string `json:"corpId"`
 
 	//成员ID。

@@ -18,19 +18,13 @@ package dingtalk
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
 
 func TestDingTalk_MediaUpload(t *testing.T) {
-
 	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
 
 	assert.Nil(t, err)
