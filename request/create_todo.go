@@ -18,9 +18,7 @@ package request
 
 import (
 	"encoding/json"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/priority"
 )
 

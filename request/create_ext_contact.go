@@ -17,7 +17,7 @@
 package request
 
 import (
-	json "encoding/json"
+	"encoding/json"
 )
 
 // CreateExtContact 添加外部联系人
