@@ -31,7 +31,7 @@ jobs:
         run: |
           export GO111MODULE=on
           cd ~
-          go install mvdan.cc/gofumpt@latest
+          go get -u mvdan.cc/gofumpt@latest
           go get -u github.com/lsm-dev/license-header-checker/cmd/license-header-checker@v1.2.0
 
       - name: Check License Header
