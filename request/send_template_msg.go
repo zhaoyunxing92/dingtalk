@@ -18,9 +18,7 @@ package request
 
 import (
 	"strings"
-)
 
-import (
 	"github.com/pkg/errors"
 )
 

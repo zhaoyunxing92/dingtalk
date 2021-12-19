@@ -20,9 +20,7 @@ import (
 	"errors"
 	"strings"
 	"testing"
-)
 
-import (
 	"github.com/go-playground/validator/v10"
 )
 
