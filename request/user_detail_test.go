@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewUserDetail(t *testing.T) {
-
 	build := NewUserDetail("").SetLanguage("ch").Build()
 
 	assert.NotNil(t, build)

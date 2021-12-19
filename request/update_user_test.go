@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewUpdateUser(t *testing.T) {
-
 	str := NewUpdateUser("134567").
 		SetForceUpdateFields("").
 		SetHideMobile(false).

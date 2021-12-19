@@ -225,6 +225,9 @@ imports-formatter
         - [ ] [删除回收站文件（夹）](https://open.dingtalk.com/document/orgapp-server/delete-recycle-bin-files-folders)
         - [ ] [清空回收站](https://open.dingtalk.com/document/orgapp-server/empty-recycle-bin-files-folders)
     
+* 智能人事
+   - [] [获取在职员工列表](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-query-the-list-of-on-the-job-employees-of-the)
+   - []
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
     - [x] [获取员工可见的应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-list-of-applications-visible-to-an-employee)

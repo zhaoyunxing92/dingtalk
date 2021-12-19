@@ -23,16 +23,16 @@ type GroupRole struct {
 }
 
 type groupRole struct {
-	//角色组名
+	// 角色组名
 	GroupName string `json:"group_name"`
 
 	Roles []gr `json:"roles"`
 }
 
 type gr struct {
-	//角色Id
+	// 角色Id
 	Id int `json:"role_id"`
 
-	//角色名
+	// 角色名
 	Name string `json:"role_name"`
 }

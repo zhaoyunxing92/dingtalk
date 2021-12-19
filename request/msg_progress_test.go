@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewMessageProgress(t *testing.T) {
-
 	progress := NewMessageProgress(1234, 4567)
 
 	assert.NotNil(t, progress)

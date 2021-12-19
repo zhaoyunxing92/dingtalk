@@ -16,7 +16,7 @@
 
 package response
 
-//AccessToken 获取企业内部应用的access_token
+// AccessToken 获取企业内部应用的access_token
 // https://developers.dingtalk.com/document/app/obtain-orgapp-token
 type AccessToken struct {
 	Response
@@ -28,12 +28,12 @@ type AccessToken struct {
 	Token string `json:"access_token"`
 }
 
-//CreatedAt is when the access token is generated
+// CreatedAt is when the access token is generated
 func (token *AccessToken) CreatedAt() int64 {
 	return token.Create
 }
 
-//ExpiresIn is how soon the access token is expired
+// ExpiresIn is how soon the access token is expired
 func (token *AccessToken) ExpiresIn() int16 {
 	return token.Expires
 }

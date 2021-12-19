@@ -17,17 +17,16 @@
 package request
 
 type ChatSetUserNick struct {
-	//群会话ID，可通过创建群会话接口获取
+	// 群会话ID，可通过创建群会话接口获取
 	ChatId string `json:"chatid" validate:"required"`
 
-	//要更改群昵称的群成员userid
+	// 要更改群昵称的群成员userid
 	UserId string `json:"userid" validate:"required"`
 
-	//该成员在群中的昵称
+	// 该成员在群中的昵称
 	Nick string `json:"group_nick" validate:"required"`
 }
 
 func NewChatSetUserNick(chatId, userId, nick string) *ChatSetUserNick {
-
 	return &ChatSetUserNick{chatId, userId, nick}
 }

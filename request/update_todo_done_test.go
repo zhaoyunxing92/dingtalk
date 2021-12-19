@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewUpdateTodoDone(t *testing.T) {
-
 	todo := NewUpdateTodoDone("ABNiSWeAolg5OETyYT60wdQiEiE", "taskc782d9b8cee1127884f04f21ae63e243").
 		SetTodoDone("ABNiSWeAolg5OETyYT60wdQiEiE", true).
 		SetTodoDone("ABNiSWeAolg5OETyYT60wdQiEiE", false).

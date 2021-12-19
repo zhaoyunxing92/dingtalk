@@ -30,7 +30,6 @@ import (
 )
 
 func TestNewCreateDriveSpacesFiles(t *testing.T) {
-
 	f := NewCreateDriveSpacesFiles("unionId", "spaceId", "golang", file.Folder).
 		SetParentId("parentId").
 		SetConflictPolicy(policy.Overwrite).

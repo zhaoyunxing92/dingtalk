@@ -29,7 +29,6 @@ import (
 )
 
 func TestDingTalk_CreateExtContact(t *testing.T) {
-
 	res, err := client.CreateExtContact(
 		request.NewCreateExtContact("张三", "18058762219", "86", "manager164",
 			1587784123, 1587784123, 1587784124, 456).
@@ -46,7 +45,6 @@ func TestDingTalk_CreateExtContact(t *testing.T) {
 }
 
 func TestDingTalk_DeleteExtContact(t *testing.T) {
-
 	res, err := client.DeleteExtContact("01131104492477488")
 
 	assert.NotNil(t, err)
@@ -54,7 +52,6 @@ func TestDingTalk_DeleteExtContact(t *testing.T) {
 }
 
 func TestDingTalk_UpdateExtContact(t *testing.T) {
-
 	res, err := client.UpdateExtContact(
 		request.NewUpdateExtContact("01491341662086", "李四", "manager164",
 			1587784123, 1587784123, 1587784124, 1587784125).
@@ -71,7 +68,6 @@ func TestDingTalk_UpdateExtContact(t *testing.T) {
 }
 
 func TestDingTalk_GetExtContact(t *testing.T) {
-
 	res, err := client.GetExtContact(0, 10)
 
 	assert.Nil(t, err)
@@ -79,7 +75,6 @@ func TestDingTalk_GetExtContact(t *testing.T) {
 }
 
 func TestDingTalk_GetExtContactLabel(t *testing.T) {
-
 	res, err := client.GetExtContactLabel(0, 10)
 
 	assert.Nil(t, err)
@@ -88,7 +83,6 @@ func TestDingTalk_GetExtContactLabel(t *testing.T) {
 }
 
 func TestDingTalk_GetExtContactDetail(t *testing.T) {
-
 	res, err := client.GetExtContactDetail("01491341662086")
 
 	assert.Nil(t, err)

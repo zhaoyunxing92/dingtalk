@@ -21,19 +21,19 @@ import (
 )
 
 type GetDriveSpacesFiles struct {
-	//钉盘空间ID
+	// 钉盘空间ID
 	SpaceId string `json:"spaceId" validate:"required"`
 
-	//用户unionId
+	// 用户unionId
 	UnionId string `json:"unionId" validate:"required"`
 
-	//父目录ID
+	// 父目录ID
 	ParentId string `json:"parentId,omitempty"`
 
-	//分页游标
+	// 分页游标
 	Token string `json:"nextToken,omitempty"`
 
-	//分页大小
+	// 分页大小
 	Size int `json:"maxResults"`
 
 	//排序类型，取值：

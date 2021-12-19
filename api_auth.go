@@ -21,13 +21,8 @@ import (
 	"net/url"
 	"strconv"
 	"time"
-)
 
-import (
 	"github.com/pkg/errors"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
@@ -54,7 +49,6 @@ func (ding *dingTalk) GetAuthInfo(corpId string) (rsp response.CorpAuthInfo, err
 
 // ActivateSuite 激活应用
 func (ding *dingTalk) ActivateSuite(corpId, code string) (rsp response.CorpAuthInfo, err error) {
-
 	token, err := ding.GetSuiteAccessToken()
 	if err != nil {
 		return response.CorpAuthInfo{}, err
@@ -69,7 +63,6 @@ func (ding *dingTalk) ActivateSuite(corpId, code string) (rsp response.CorpAuthI
 
 // GetAgentInfo 获取授权应用的基本信息
 func (ding *dingTalk) GetAgentInfo(agentId int, corpId string) (rsp response.AgentInfo, err error) {
-
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 	sign := crypto.GetSignature(timestamp, ding.Secret, ding.ticket)
 

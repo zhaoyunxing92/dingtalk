@@ -25,7 +25,6 @@ import (
 )
 
 func TestDingTalk_GetCorpDingIndex(t *testing.T) {
-
 	res, err := client.GetCorpDingIndex()
 
 	assert.Nil(t, err)

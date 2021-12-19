@@ -22,16 +22,16 @@ type CodeGetUserInfo struct {
 }
 
 type codeGetUserInfo struct {
-	//用户名字
+	// 用户名字
 	Name string `json:"name"`
 
-	//用户unionId
+	// 用户unionId
 	UnionId string `json:"unionid"`
 
-	//用户的userid
+	// 用户的userid
 	UserId string `json:"userid"`
 
-	//用户关联的unionId
+	// 用户关联的unionId
 	AssociatedUnionId string `json:"associated_unionid"`
 
 	//级别。
@@ -52,6 +52,6 @@ type codeGetUserInfo struct {
 	//false：不是
 	Admin bool `json:"sys"`
 
-	//设备ID
+	// 设备ID
 	DeviceId string `json:"device_id"`
 }

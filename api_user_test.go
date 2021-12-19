@@ -29,7 +29,6 @@ import (
 )
 
 func TestDingTalk_CreateUser(t *testing.T) {
-
 	user, err := client.CreateUser(request.NewCreateUser("张三", "15669019211", 554656655).Build())
 	assert.Nil(t, err)
 	assert.NotNil(t, user.UserId)
@@ -37,16 +36,15 @@ func TestDingTalk_CreateUser(t *testing.T) {
 }
 
 func TestDingTalk_UpdateUser(t *testing.T) {
-
 	res, err := client.UpdateUser(
 		request.NewUpdateUser("1948546245774889").
 			SetName("李四").
-			//SetDept(1, 560935057).
-			//SetTelephone("").
-			//SetForceUpdateFields("title,userid,title,userid").
-			//SetDeptTitle(1, "普通员工").
-			//SetDeptTitle(554656655, "设计人员").
-			//SetJobNumber("").
+			// SetDept(1, 560935057).
+			// SetTelephone("").
+			// SetForceUpdateFields("title,userid,title,userid").
+			// SetDeptTitle(1, "普通员工").
+			// SetDeptTitle(554656655, "设计人员").
+			// SetJobNumber("").
 			Build())
 
 	assert.Nil(t, err)
@@ -54,7 +52,6 @@ func TestDingTalk_UpdateUser(t *testing.T) {
 }
 
 func TestDingTalk_DeleteUser(t *testing.T) {
-
 	res, err := client.DeleteUser("1948546245774889")
 
 	assert.Nil(t, err)
@@ -63,7 +60,6 @@ func TestDingTalk_DeleteUser(t *testing.T) {
 }
 
 func TestDingTalk_GetUserDetail(t *testing.T) {
-
 	detail, err := client.GetUserDetail(request.NewUserDetail("manager164").Build())
 
 	assert.Nil(t, err)
@@ -75,7 +71,6 @@ func TestDingTalk_GetUserDetail(t *testing.T) {
 }
 
 func TestDingTalk_GetUserCount(t *testing.T) {
-
 	req, err := client.GetUserCount(request.NewUserCount(true))
 
 	assert.Nil(t, err)
@@ -83,7 +78,6 @@ func TestDingTalk_GetUserCount(t *testing.T) {
 }
 
 func TestDingTalk_GetInactiveUser(t *testing.T) {
-
 	req, err := client.GetInactiveUser(
 		request.NewInactiveUser(true, 0, 10, "20211103").
 			Build())
@@ -93,7 +87,6 @@ func TestDingTalk_GetInactiveUser(t *testing.T) {
 }
 
 func TestDingTalk_GetUserIdByMobile(t *testing.T) {
-
 	req, err := client.GetUserIdByMobile(request.NewMobileGetUserId("18357154439"))
 
 	assert.Nil(t, err)
@@ -101,7 +94,6 @@ func TestDingTalk_GetUserIdByMobile(t *testing.T) {
 }
 
 func TestDingTalk_GetUserIdByUnionId(t *testing.T) {
-
 	req, err := client.GetUserIdByUnionId(request.NewUnionIdGetUserId("DmJWoRm5zkjT9kWWgVpm0giEiE"))
 
 	assert.Nil(t, err)
@@ -109,7 +101,6 @@ func TestDingTalk_GetUserIdByUnionId(t *testing.T) {
 }
 
 func TestDingTalk_GetOrgAdminUser(t *testing.T) {
-
 	req, err := client.GetOrgAdminUser()
 
 	assert.Nil(t, err)
@@ -117,7 +108,6 @@ func TestDingTalk_GetOrgAdminUser(t *testing.T) {
 }
 
 func TestDingTalk_GetOrgAdminScope(t *testing.T) {
-
 	req, err := client.GetOrgAdminScope(request.NewAdminUserScope("manager164"))
 
 	assert.Nil(t, err)
@@ -125,7 +115,6 @@ func TestDingTalk_GetOrgAdminScope(t *testing.T) {
 }
 
 func TestDingTalk_GetUserCanAccessApplet(t *testing.T) {
-
 	req, err := client.GetUserCanAccessApplet(1244553273, "manager164")
 
 	assert.Nil(t, err)
@@ -133,7 +122,6 @@ func TestDingTalk_GetUserCanAccessApplet(t *testing.T) {
 }
 
 func TestDingTalk_GetUserInfoByCode(t *testing.T) {
-
 	req, err := client.GetUserInfoByCode("19f4d6df07b63bcf910f91cbe26b4c66")
 
 	assert.Nil(t, err)
@@ -141,7 +129,6 @@ func TestDingTalk_GetUserInfoByCode(t *testing.T) {
 }
 
 func TestDingTalk_GetSSOUserInfo(t *testing.T) {
-
 	req, err := client.GetSSOUserInfo("4d878735fab43af2bfabe6af990856b3")
 
 	assert.Nil(t, err)

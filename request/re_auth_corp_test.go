@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewReauthCorp(t *testing.T) {
-
 	corp := NewReauthCorp(123, []string{"1234", "1234", "456"})
 
 	assert.NotNil(t, corp)

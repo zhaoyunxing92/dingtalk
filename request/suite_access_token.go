@@ -16,7 +16,7 @@
 
 package request
 
-//SuiteAccessToken 获取suite套件token
+// SuiteAccessToken 获取suite套件token
 type SuiteAccessToken struct {
 	Key string `json:"suite_key" validate:"required"`
 

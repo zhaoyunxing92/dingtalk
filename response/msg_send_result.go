@@ -22,7 +22,7 @@ type MessageSendResult struct {
 }
 
 type sendResult struct {
-	//无效的userid。
+	// 无效的userid。
 	InvalidUserIds []string `json:"invalid_user_id_list"`
 
 	//因发送消息过于频繁或超量而被流控过滤后实际未发送的userid。
@@ -40,19 +40,19 @@ type sendResult struct {
 	//如果是企业接入方式，此上限为500
 	ForbiddenUserIds []string `json:"forbidden_user_id_list"`
 
-	//发送失败的userid。
+	// 发送失败的userid。
 	FailedUserIds []string `json:"failed_user_id_list"`
 
-	//已读消息的userid
+	// 已读消息的userid
 	ReadUserIds []string `json:"read_user_id_list"`
 
-	//未读消息的userid
+	// 未读消息的userid
 	UnReadUserIds []string `json:"unread_user_id_list"`
 
-	//无效的部门ID
+	// 无效的部门ID
 	InvalidDeptIds []string `json:"invalid_dept_id_list"`
 
-	//推送被禁止的具体原因。
+	// 推送被禁止的具体原因。
 	Forbiddings []forbidden `json:"forbidden_list"`
 }
 
@@ -65,9 +65,9 @@ type forbidden struct {
 	//143106表示企业自建应用推送给用户的消息重复
 	Code string `json:"code"`
 
-	//流控阀值
+	// 流控阀值
 	Count int `json:"count"`
 
-	//被流控员工的userid
+	// 被流控员工的userid
 	UserId string `json:"userid"`
 }

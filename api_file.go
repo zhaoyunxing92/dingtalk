@@ -27,9 +27,8 @@ import (
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 
-//MediaUpload 上传媒体文件
+// MediaUpload 上传媒体文件
 func (ding *dingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
-
 	query := url.Values{}
 	query.Add("type", req.Genre)
 

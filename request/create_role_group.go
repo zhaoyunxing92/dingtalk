@@ -17,7 +17,7 @@
 package request
 
 type CreateRoleGroup struct {
-	//角色名称
+	// 角色名称
 	Name string `json:"name" validate:"required"`
 }
 

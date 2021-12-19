@@ -29,13 +29,13 @@ import (
 //Response 响应
 //{"errcode":40035,"errmsg":"缺少参数 corpid or appkey"}
 type Response struct {
-	Code      int    `json:"errcode"`          //code
-	Msg       string `json:"errmsg,omitempty"` //msg
+	Code      int    `json:"errcode"`          // code
+	Msg       string `json:"errmsg,omitempty"` // msg
 	Success   bool   `json:"success,omitempty"`
 	RequestId string `json:"request_id,omitempty"`
 }
 
-//Request 请求
+// Request 请求
 type Request interface {
 	Validate(valid *validator.Validate, trans translator.Translator) error
 }

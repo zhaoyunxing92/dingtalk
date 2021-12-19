@@ -17,15 +17,15 @@
 package request
 
 type UpdateCorpConvMsgStatus struct {
-	//发送消息时使用的微应用的ID。
+	// 发送消息时使用的微应用的ID。
 	AgentId int `json:"agent_id" validate:"required"`
 
 	TaskId int `json:"task_id" validate:"required"`
 
-	//状态栏值
+	// 状态栏值
 	StatusValue string `json:"status_value,omitempty" validate:"required"`
 
-	//状态栏背景色，推荐0xFF加六位颜色值
+	// 状态栏背景色，推荐0xFF加六位颜色值
 	StatusBgColor string `json:"status_bg,omitempty"`
 }
 

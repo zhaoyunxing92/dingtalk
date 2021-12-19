@@ -21,7 +21,6 @@ import (
 )
 
 func TestNewOaMessage(t *testing.T) {
-
 	msg := NewOaMessage("消息的头部标题", "FFBBBBBB", "http://dingtalk.com",
 		"http://dingtalk.com")
 

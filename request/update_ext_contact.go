@@ -20,40 +20,40 @@ import (
 	"encoding/json"
 )
 
-//UpdateExtContact 更新外部联系人
+// UpdateExtContact 更新外部联系人
 type UpdateExtContact struct {
 	Contact *updateExtContact `json:"contact" validate:"required"`
 }
 
 type updateExtContact struct {
-	//职位
+	// 职位
 	Title string `json:"title,omitempty"`
 
-	//标签列表
+	// 标签列表
 	Labels []int `json:"label_ids" validate:"required"`
 
-	//共享给的部门ID
+	// 共享给的部门ID
 	ShareDept []int `json:"share_dept_ids,omitempty"`
 
-	//地址
+	// 地址
 	Address string `json:"address,omitempty"`
 
-	//备注
+	// 备注
 	Remark string `json:"remark,omitempty"`
 
-	//负责人的userId
+	// 负责人的userId
 	FollowerUser string `json:"follower_user_id,omitempty" validate:"required"`
 
-	//外部联系人的姓名
+	// 外部联系人的姓名
 	Name string `json:"name,omitempty" validate:"required"`
 
-	//该外部联系人的userid
+	// 该外部联系人的userid
 	UserId string `json:"user_id,omitempty" validate:"required"`
 
-	//外部联系人的企业名称
+	// 外部联系人的企业名称
 	CompanyName string `json:"company_name,omitempty"`
 
-	//共享给的员工userid列表
+	// 共享给的员工userid列表
 	ShareUser []string `json:"share_user_ids,omitempty"`
 }
 
@@ -67,8 +67,10 @@ type updateExtContactBuilder struct {
 }
 
 func NewUpdateExtContact(userId, name, follower string, labels ...int) *updateExtContactBuilder {
-	return &updateExtContactBuilder{c: &updateExtContact{UserId: userId, Name: name, FollowerUser: follower,
-		Labels: labels}}
+	return &updateExtContactBuilder{c: &updateExtContact{
+		UserId: userId, Name: name, FollowerUser: follower,
+		Labels: labels,
+	}}
 }
 
 func (ec *updateExtContactBuilder) SetTitle(title string) *updateExtContactBuilder {
@@ -91,13 +93,13 @@ func (ec *updateExtContactBuilder) SetRemark(remark string) *updateExtContactBui
 	return ec
 }
 
-//SetCompanyName 外部联系人的企业名称
+// SetCompanyName 外部联系人的企业名称
 func (ec *updateExtContactBuilder) SetCompanyName(name string) *updateExtContactBuilder {
 	ec.c.CompanyName = name
 	return ec
 }
 
-//SetShareUser 共享给的员工userid列表
+// SetShareUser 共享给的员工userid列表
 func (ec *updateExtContactBuilder) SetShareUser(id string, ids ...string) *updateExtContactBuilder {
 	ec.c.ShareUser = append(ids, id)
 	return ec

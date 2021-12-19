@@ -17,7 +17,7 @@
 package request
 
 type GroupRole struct {
-	//员工在企业中的userid
+	// 员工在企业中的userid
 	GroupId int `json:"group_id"`
 }
 

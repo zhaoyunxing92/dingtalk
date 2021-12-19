@@ -22,14 +22,14 @@ import (
 
 // 钉钉消息结构体
 type voice struct {
-	//媒体文件ID
+	// 媒体文件ID
 	MediaId string `json:"media_id" validate:"required"`
 
-	//正整数，小于60，表示音频时长。
+	// 正整数，小于60，表示音频时长。
 	Duration int `json:"duration,string" validate:"required,max=60"`
 }
 
-//文本消息
+// 文本消息
 type voiceMessage struct {
 	message
 	voice `json:"voice" validate:"required"`
@@ -44,7 +44,7 @@ func (v *voiceMessage) MessageType() string {
 	return "voice"
 }
 
-//NewVoiceMessage 语音消息
+// NewVoiceMessage 语音消息
 func NewVoiceMessage(mediaId string, duration int) *voiceMessage {
 	msg := &voiceMessage{}
 	msg.MsgType = msg.MessageType()

@@ -19,9 +19,9 @@ package spaces
 type SpaceType string
 
 const (
-	//Personal 私人空间
+	// Personal 私人空间
 	Personal = SpaceType("personal")
 
-	//Org 企业空间
+	// Org 企业空间
 	Org = SpaceType("org")
 )

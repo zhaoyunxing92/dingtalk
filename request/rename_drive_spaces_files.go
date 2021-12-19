@@ -17,10 +17,10 @@
 package request
 
 type RenameDriveSpacesFiles struct {
-	//用户unionId，可以调用通过免登码获取用户信息(v2)接口获取
+	// 用户unionId，可以调用通过免登码获取用户信息(v2)接口获取
 	UnionId string `json:"unionId,omitempty" validate:"required"`
 
-	//新的文件（夹）名称
+	// 新的文件（夹）名称
 	NewFileName string `json:"newFileName" validate:"required"`
 }
 

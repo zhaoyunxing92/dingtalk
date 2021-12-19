@@ -50,7 +50,6 @@ func TestDingTalk_GetChatInfo(t *testing.T) {
 }
 
 func TestDingTalk_UpdateChat(t *testing.T) {
-
 	res, err := client.UpdateChat(
 		request.NewUpdateChat("chat8ff884ef696f5717678c6280edfdbbf1").
 			SetName("ci测试群").
@@ -63,7 +62,6 @@ func TestDingTalk_UpdateChat(t *testing.T) {
 }
 
 func TestDingTalk_GetChatQRCode(t *testing.T) {
-
 	res, err := client.GetChatQRCode("chat8ff884ef696f5717678c6280edfdbbf1", "manager164")
 
 	assert.Nil(t, err)
@@ -72,7 +70,6 @@ func TestDingTalk_GetChatQRCode(t *testing.T) {
 }
 
 func TestDingTalk_ChatFriendSwitch(t *testing.T) {
-
 	res, err := client.ChatFriendSwitch("chat8ff884ef696f5717678c6280edfdbbf1", true)
 
 	assert.Nil(t, err)
@@ -80,7 +77,6 @@ func TestDingTalk_ChatFriendSwitch(t *testing.T) {
 }
 
 func TestDingTalk_ChatSetUserNick(t *testing.T) {
-
 	res, err := client.ChatSetUserNick("chat8ff884ef696f5717678c6280edfdbbf1", "manager164", "小二")
 
 	assert.Nil(t, err)

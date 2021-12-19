@@ -34,5 +34,4 @@ func TestNewInactiveUser(t *testing.T) {
 	js, err := json.Marshal(iu)
 	assert.Nil(t, err)
 	t.Log(string(js))
-
 }

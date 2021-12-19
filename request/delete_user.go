@@ -28,6 +28,7 @@ func (d *DeleteUser) String() string {
 	str, _ := json.Marshal(d)
 	return string(str)
 }
+
 func NewDeleteUser(userId string) *DeleteUser {
 	return &DeleteUser{userId}
 }

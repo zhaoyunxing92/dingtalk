@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewExtContact(t *testing.T) {
-
 	ec := NewCreateExtContact("张三", "12345678941", "86", "abcde",
 		123, 123, 456).
 		SetTitle("资深开发").

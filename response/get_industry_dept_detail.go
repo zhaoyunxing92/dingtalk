@@ -23,9 +23,9 @@ type GetIndustryDeptDetail struct {
 }
 
 type industryDeptDetail struct {
-	//部门名称
+	// 部门名称
 	Name string `json:"name"`
-	//父部门ID
+	// 父部门ID
 	SuperId int `json:"super_id"`
 
 	//部门类型。行业相关。例如：

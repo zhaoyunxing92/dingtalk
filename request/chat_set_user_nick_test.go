@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewChatSetUserNick(t *testing.T) {
-
 	chat := NewChatSetUserNick("chat", "user", "nick")
 	assert.NotNil(t, chat)
 	assert.Equal(t, chat.ChatId, "chat")

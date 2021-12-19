@@ -78,14 +78,14 @@ func (cu *CreateUser) String() string {
 	return string(str)
 }
 
-//DeptOrder 员工在对应的部门中的排序
+// DeptOrder 员工在对应的部门中的排序
 type DeptOrder struct {
 	DeptId int `json:"dept_id"`
 
 	Order int `json:"order"`
 }
 
-//deptTitle 员工在对应的部门中的职位
+// deptTitle 员工在对应的部门中的职位
 type deptTitle struct {
 	DeptId int `json:"dept_id"`
 
@@ -177,7 +177,7 @@ func (ub *createUserBuilder) SetRemark(remark string) *createUserBuilder {
 	return ub
 }
 
-//SetWorkPlace 办公地点，长度最大100个字符。
+// SetWorkPlace 办公地点，长度最大100个字符。
 func (ub *createUserBuilder) SetWorkPlace(workPlace string) *createUserBuilder {
 	ub.user.WorkPlace = workPlace
 	return ub
@@ -195,33 +195,33 @@ func (ub *createUserBuilder) SetDeptTitle(dept int, title string) *createUserBui
 	return ub
 }
 
-//SetExtension 扩展属性，可以设置多种属性，最大长度2000个字符。
+// SetExtension 扩展属性，可以设置多种属性，最大长度2000个字符。
 func (ub *createUserBuilder) SetExtension(ext string) *createUserBuilder {
 	ub.user.Extension = ext
 	return ub
 }
 
-//SetSeniorMode 是否开启高管模式：
-//true：开启。 开启后，手机号码对所有员工隐藏。普通员工无法对其发DING、发起钉钉免费商务电话。高管之间不受影响。
-//false：不开启。
+// SetSeniorMode 是否开启高管模式：
+// true：开启。 开启后，手机号码对所有员工隐藏。普通员工无法对其发DING、发起钉钉免费商务电话。高管之间不受影响。
+// false：不开启。
 func (ub *createUserBuilder) SetSeniorMode(senior bool) *createUserBuilder {
 	ub.user.SeniorMode = &senior
 	return ub
 }
 
-//SetHiredDate 入职时间，Unix时间戳，单位毫秒
+// SetHiredDate 入职时间，Unix时间戳，单位毫秒
 func (ub *createUserBuilder) SetHiredDate(hireDate int) *createUserBuilder {
 	ub.user.HiredDate = &hireDate
 	return ub
 }
 
-//SetLoginEmail 登录邮箱
+// SetLoginEmail 登录邮箱
 func (ub *createUserBuilder) SetLoginEmail(loginEmail string) *createUserBuilder {
 	ub.user.LoginEmail = loginEmail
 	return ub
 }
 
-//SetExclusiveAccount 是否专属帐号。 为true时，不能指定loginEmail或mobile）
+// SetExclusiveAccount 是否专属帐号。 为true时，不能指定loginEmail或mobile）
 func (ub *createUserBuilder) SetExclusiveAccount(exclusive bool) *createUserBuilder {
 	ub.user.ExclusiveAccount = &exclusive
 	return ub

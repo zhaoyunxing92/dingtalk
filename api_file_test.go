@@ -30,7 +30,6 @@ import (
 )
 
 func TestDingTalk_MediaUpload(t *testing.T) {
-
 	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
 
 	assert.Nil(t, err)

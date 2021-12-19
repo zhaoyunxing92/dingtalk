@@ -29,28 +29,24 @@ import (
 )
 
 func TestDingTalk_CreateRoleGroup(t *testing.T) {
-
 	res, err := client.CreateRoleGroup("dubbo")
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
 
 func TestDingTalk_CreateRole(t *testing.T) {
-
 	res, err := client.CreateRole("java", 2308825440)
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
 
 func TestDingTalk_UpdateRole(t *testing.T) {
-
 	res, err := client.UpdateRole(2309075248, "go")
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
 
 func TestDingTalk_GetRoleList(t *testing.T) {
-
 	res, err := client.GetRoleList(0, 200)
 
 	assert.Nil(t, err)
@@ -59,7 +55,6 @@ func TestDingTalk_GetRoleList(t *testing.T) {
 }
 
 func TestDingTalk_SetUserRoleManageScope(t *testing.T) {
-
 	res, err := client.SetUserRoleManageScope(
 		request.NewSetUserRoleManageScope("manager164", 2309075248).
 			SetDeptIds(560900478).
@@ -71,7 +66,6 @@ func TestDingTalk_SetUserRoleManageScope(t *testing.T) {
 }
 
 func TestDingTalk_GetGroupRoles(t *testing.T) {
-
 	res, err := client.GetGroupRoles(1299380989)
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
@@ -80,7 +74,6 @@ func TestDingTalk_GetGroupRoles(t *testing.T) {
 }
 
 func TestDingTalk_GetRoleDetail(t *testing.T) {
-
 	res, err := client.GetRoleDetail(1299380990)
 
 	assert.Nil(t, err)
@@ -90,7 +83,6 @@ func TestDingTalk_GetRoleDetail(t *testing.T) {
 }
 
 func TestDingTalk_GetRoleUserList(t *testing.T) {
-
 	res, err := client.GetRoleUserList(1299380990, 0, 10)
 
 	assert.Nil(t, err)

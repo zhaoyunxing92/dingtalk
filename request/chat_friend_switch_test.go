@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewChatFriendSwitch(t *testing.T) {
-
 	chat := NewChatFriendSwitch("chat", false)
 
 	assert.NotNil(t, chat)

@@ -17,21 +17,21 @@
 package request
 
 type GetDriveSpacesFilesUploadInfo struct {
-	//钉盘空间ID
+	// 钉盘空间ID
 	SpaceId string `json:"-" validate:"required"`
 
-	//ParentId 父目录ID。
+	// ParentId 父目录ID。
 	ParentId string `json:"-" validate:"required"`
 
 	UnionId string `json:"unionId,omitempty" validate:"required"`
 
-	//文件名，带文件扩展名
+	// 文件名，带文件扩展名
 	FileName string `json:"fileName,omitempty" validate:"required"`
 
-	//文件大小
+	// 文件大小
 	FileSize int `json:"fileSize,omitempty" validate:"required"`
 
-	//文件md5
+	// 文件md5
 	Md5 string `json:"md5,omitempty" validate:"required"`
 
 	//文件名称冲突策略，取值：
@@ -54,8 +54,10 @@ type driveSpacesFilesUploadInfoBuilder struct {
 }
 
 func NewGetDriveSpacesFilesUploadInfo(spaceId, parenId, fileName string, fileSize int, md5,
-	unionId string) *driveSpacesFilesUploadInfoBuilder {
-
-	return &driveSpacesFilesUploadInfoBuilder{info: &GetDriveSpacesFilesUploadInfo{SpaceId: spaceId, ParentId: parenId,
-		FileName: fileName, FileSize: fileSize, Md5: md5, UnionId: unionId}}
+	unionId string,
+) *driveSpacesFilesUploadInfoBuilder {
+	return &driveSpacesFilesUploadInfoBuilder{info: &GetDriveSpacesFilesUploadInfo{
+		SpaceId: spaceId, ParentId: parenId,
+		FileName: fileName, FileSize: fileSize, Md5: md5, UnionId: unionId,
+	}}
 }

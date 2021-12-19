@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewAdminUserScope(t *testing.T) {
-
 	scope := NewAdminUserScope("123456")
 
 	assert.NotNil(t, scope)

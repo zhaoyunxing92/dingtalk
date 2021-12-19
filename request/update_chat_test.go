@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewUpdateChat(t *testing.T) {
-
 	chat := NewUpdateChat("123ewer").
 		SetName("name").
 		SetOwner("name").

@@ -26,20 +26,20 @@ import (
 
 // CorpConvMessage 工作通知
 type CorpConvMessage struct {
-	//发送消息时使用的微应用的ID。
+	// 发送消息时使用的微应用的ID。
 	AgentId int `json:"agent_id" validate:"required"`
 
-	//接收者的企业内部用户的userId列表，最大用户列表长度100。
+	// 接收者的企业内部用户的userId列表，最大用户列表长度100。
 	UserIds []string `json:"-" validate:"lte=100"`
 
 	UserIdList string `json:"userid_list,omitempty"`
 
-	//接收者的部门id列表，最大列表长度20。接收者是部门Id下包括子部门下的所有用户。
+	// 接收者的部门id列表，最大列表长度20。接收者是部门Id下包括子部门下的所有用户。
 	DeptIdList string `json:"dept_id_list,omitempty"`
 
 	DeptIds []int `json:"-" validate:"lte=20"`
 
-	//是否发送给企业全部用户。当设置为false时必须指定userid_list或dept_id_list其中一个参数的值。
+	// 是否发送给企业全部用户。当设置为false时必须指定userid_list或dept_id_list其中一个参数的值。
 	All *bool `json:"to_all_user,omitempty"`
 
 	Msg message.Message `json:"msg,omitempty" validate:"required"`

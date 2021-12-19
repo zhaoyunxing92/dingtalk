@@ -17,13 +17,13 @@
 package request
 
 type UpdateTodoDone struct {
-	//当前访问资源所归属用户的unionId
+	// 当前访问资源所归属用户的unionId
 	UnionId string `json:"unionId,omitempty" validate:"required"`
 
-	//待办ID
+	// 待办ID
 	TaskId string `json:"taskId,omitempty" validate:"required"`
 
-	//执行者状态列表，id需传用户的unionId
+	// 执行者状态列表，id需传用户的unionId
 	TodoDone []*todoDone `json:"executorStatusList,omitempty"`
 }
 

@@ -27,7 +27,6 @@ import (
 )
 
 func TestNewRoleAddUser(t *testing.T) {
-
 	str := NewRoleAddUser([]int{1222, 1111, 1111, 1111}, []string{"123456"})
 	err := validate(str)
 	if err != nil {

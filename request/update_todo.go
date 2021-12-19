@@ -17,28 +17,28 @@
 package request
 
 type UpdateTodo struct {
-	//当前访问资源所归属用户的unionId
+	// 当前访问资源所归属用户的unionId
 	UnionId string `json:"unionId,omitempty" validate:"required"`
 
-	//待办ID
+	// 待办ID
 	TaskId string `json:"taskId,omitempty" validate:"required"`
 
-	//待办标题
+	// 待办标题
 	Subject string `json:"subject,omitempty"`
 
-	//待办描述
+	// 待办描述
 	Desc string `json:"description,omitempty"`
 
-	//截止时间，Unix时间戳，单位毫秒。
+	// 截止时间，Unix时间戳，单位毫秒。
 	DueTime *int `json:"dueTime,omitempty"`
 
-	//完成状态
+	// 完成状态
 	Done *bool `json:"done,omitempty"`
 
-	//执行者的unionId
+	// 执行者的unionId
 	Executors []string `json:"executorIds,omitempty"`
 
-	//参与者的unionId
+	// 参与者的unionId
 	Participants []string `json:"participantIds,omitempty"`
 }
 

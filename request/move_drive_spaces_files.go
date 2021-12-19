@@ -21,19 +21,19 @@ import (
 )
 
 type MoveDriveSpacesFiles struct {
-	//空间ID。可调用获取空间列表接口获取
+	// 空间ID。可调用获取空间列表接口获取
 	SpaceId string `json:"-" validate:"required"`
 
-	//文件ID。可以调用查询文件列表接口获取
+	// 文件ID。可以调用查询文件列表接口获取
 	FileId string `json:"-" validate:"required"`
 
-	//用户unionId，可以调用通过免登码获取用户信息(v2)接口获取
+	// 用户unionId，可以调用通过免登码获取用户信息(v2)接口获取
 	UnionId string `json:"unionId,omitempty" validate:"required"`
 
-	//目标空间ID
+	// 目标空间ID
 	TargetSpaceId string `json:"targetSpaceId,omitempty" validate:"required"`
 
-	//目标父目录ID
+	// 目标父目录ID
 	TargetParentId string `json:"targetParentId,omitempty"`
 
 	//文件名称冲突策略，取值：
@@ -50,8 +50,10 @@ type moveDriveSpacesFilesBuilder struct {
 }
 
 func NewMoveDriveSpacesFiles(spaceId, fileId, targetSpaceId, unionId string) *moveDriveSpacesFilesBuilder {
-	return &moveDriveSpacesFilesBuilder{file: &MoveDriveSpacesFiles{SpaceId: spaceId, TargetSpaceId: targetSpaceId,
-		FileId: fileId, UnionId: unionId}}
+	return &moveDriveSpacesFilesBuilder{file: &MoveDriveSpacesFiles{
+		SpaceId: spaceId, TargetSpaceId: targetSpaceId,
+		FileId: fileId, UnionId: unionId,
+	}}
 }
 
 //SetConflictPolicy 文件名称冲突策略，取值：

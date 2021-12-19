@@ -19,6 +19,6 @@ package response
 type UpdateTodo struct {
 	Response
 
-	//更新结果
+	// 更新结果
 	Result bool `json:"result"`
 }

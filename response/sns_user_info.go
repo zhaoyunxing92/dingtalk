@@ -20,5 +20,5 @@ type SnsUserInfo struct {
 	Response
 	snsUserInfo `json:"user_info"`
 }
-type snsUserInfo struct {
-}
+
+type snsUserInfo struct{}

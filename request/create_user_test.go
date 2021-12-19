@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewCreateUser(t *testing.T) {
-
 	user := NewCreateUser("zhangsan", "18357154439", 123, 123, 7890, 123456, 123456).
 		SetDeptOrder(123, 1).
 		SetDeptOrder(456, 2).

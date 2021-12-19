@@ -19,14 +19,16 @@ package request
 import (
 	"sort"
 	"strconv"
+
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/employee"
 )
 
 type Request interface {
-	//String struct to json string
+	// String struct to json string
 	String() string
 }
 
-//removeStringDuplicates 去除重复的item
+// removeStringDuplicates 去除重复的item
 func removeStringDuplicates(item []string) (ids []string) {
 	if len(item) <= 0 {
 		return ids
@@ -41,7 +43,7 @@ func removeStringDuplicates(item []string) (ids []string) {
 	return ids
 }
 
-//removeIntDuplicatesToString 去除重复的item
+// removeIntDuplicatesToString 去除重复的item
 func removeIntDuplicatesToString(item []int) (ids []string) {
 	if len(item) <= 0 {
 		return ids
@@ -56,7 +58,7 @@ func removeIntDuplicatesToString(item []int) (ids []string) {
 	return ids
 }
 
-//removeIntDuplicates 去除重复的item
+// removeIntDuplicates 去除重复的item
 func removeIntDuplicates(item []int) (ids []int) {
 	if len(item) <= 0 {
 		return ids
@@ -69,4 +71,16 @@ func removeIntDuplicates(item []int) (ids []int) {
 		ids = append(ids, id)
 	}
 	return ids
+}
+
+// removeStatusDuplicates 去除重复的人员状态
+func removeStatusDuplicates(status []employee.Status) (state []string) {
+	temp := map[string]struct{}{}
+	for _, s := range status {
+		if _, ok := temp[string(s)]; !ok {
+			temp[string(s)] = struct{}{}
+			state = append(state, string(s))
+		}
+	}
+	return state
 }

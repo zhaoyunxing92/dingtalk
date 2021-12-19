@@ -30,7 +30,6 @@ import (
 )
 
 func TestNewDeptDetailUserInfo(t *testing.T) {
-
 	dept := NewDeptDetailUserInfo(1234, 0, 10).
 		SetLanguage(language.ZH_CN).
 		SetContainAccessLimit(true).

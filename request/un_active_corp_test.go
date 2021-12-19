@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewUnactiveCorp(t *testing.T) {
-
 	corp := NewUnactiveCorp(123456)
 	assert.NotNil(t, corp)
 }

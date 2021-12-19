@@ -16,10 +16,10 @@
 
 package response
 
-//CreateCooperateCorp 创建合作空间
+// CreateCooperateCorp 创建合作空间
 type CreateCooperateCorp struct {
 	Response
 
-	//合作空间的CorpId
+	// 合作空间的CorpId
 	CooperateCorpId string `json:"cooperateCorpId"`
 }

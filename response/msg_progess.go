@@ -22,12 +22,12 @@ type MessageProgress struct {
 }
 
 type progress struct {
-	//取值0~100，表示处理的百分比
+	// 取值0~100，表示处理的百分比
 	Percent int `json:"progress_in_percent"`
 
-	//任务执行状态：
-	//0：未开始
-	//1：处理中
-	//2：处理完毕
+	// 任务执行状态：
+	// 0：未开始
+	// 1：处理中
+	// 2：处理完毕
 	Status int `json:"status"`
 }

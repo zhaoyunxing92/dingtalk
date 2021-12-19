@@ -22,13 +22,13 @@ import (
 )
 
 type DeptDetailUserInfo struct {
-	//部门ID，根部门ID为1
+	// 部门ID，根部门ID为1
 	DeptId int `json:"dept_id" validate:"required,min=1"`
 
-	//分页查询的游标，最开始传0，后续传返回参数中的next_cursor值
+	// 分页查询的游标，最开始传0，后续传返回参数中的next_cursor值
 	Cursor int `json:"cursor" validate:"omitempty,min=0"`
 
-	//分页长度，最大值100。
+	// 分页长度，最大值100。
 	Size int `json:"size" validate:"required,max=100"`
 
 	//部门成员的排序规则：
@@ -46,10 +46,10 @@ type DeptDetailUserInfo struct {
 	//默认值：custom。
 	OrderField string `json:"order_field,omitempty" validate:"omitempty,oneof=entry_asc entry_desc modify_asc modify_desc"`
 
-	//是否返回访问受限的员工
+	// 是否返回访问受限的员工
 	ContainAccessLimit bool `json:"contain_access_limit,omitempty"`
 
-	//通讯录语言，默认zh_CN。如果是英文，请传入en_US。
+	// 通讯录语言，默认zh_CN。如果是英文，请传入en_US。
 	Language string `json:"language,omitempty" validate:"omitempty,oneof=zh_CN en_US"`
 }
 
@@ -79,13 +79,13 @@ func (dub *deptDetailUserInfoBuilder) SetOrderField(order order.DeptOrder) *dept
 	return dub
 }
 
-//SetContainAccessLimit 是否返回访问受限的员工
+// SetContainAccessLimit 是否返回访问受限的员工
 func (dub *deptDetailUserInfoBuilder) SetContainAccessLimit(containAccessLimit bool) *deptDetailUserInfoBuilder {
 	dub.du.ContainAccessLimit = containAccessLimit
 	return dub
 }
 
-//SetLanguage 通讯录语言，默认zh_CN。如果是英文，请传入en_US。
+// SetLanguage 通讯录语言，默认zh_CN。如果是英文，请传入en_US。
 func (dub *deptDetailUserInfoBuilder) SetLanguage(language language.Language) *deptDetailUserInfoBuilder {
 	dub.du.Language = string(language)
 	return dub

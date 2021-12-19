@@ -18,10 +18,10 @@ package response
 
 type DriveSpacesFilesPermissions struct {
 	Response
-	//企业内成员权限列表
+	// 企业内成员权限列表
 	Members []driveSpacesFilesPermissions `json:"members"`
 
-	//企业外成员权限列表
+	// 企业外成员权限列表
 	OutMembers []driveSpacesFilesPermissions `json:"outMembers"`
 }
 
@@ -35,15 +35,15 @@ type driveSpacesFilesPermissions struct {
 	//only_viewer：只读
 	Role string `json:"role"`
 
-	//是否是继承的权限
+	// 是否是继承的权限
 	Extend bool `json:"extend"`
 
 	permissionMember `json:"member"`
 }
 
-//成员信息
+// 成员信息
 type permissionMember struct {
-	//企业的CorpId
+	// 企业的CorpId
 	CorpId string `json:"corpId"`
 
 	//成员ID。
@@ -62,6 +62,6 @@ type permissionMember struct {
 	//user：用户
 	MemberType string `json:"memberType"`
 
-	//成员名称
+	// 成员名称
 	MemberName string `json:"memberName"`
 }

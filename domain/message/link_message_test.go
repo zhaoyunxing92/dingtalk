@@ -21,7 +21,6 @@ import (
 )
 
 func TestNewLinkMessage(t *testing.T) {
-
 	l := NewLinkMessage("消息标题，建议100字符以内",
 		"消息描述，建议500字符以内", "@lADOADmaWMzazQKA", "http://dingtalk.com")
 

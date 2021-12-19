@@ -16,19 +16,19 @@
 
 package member
 
-//Type 成员类型
+// Type 成员类型
 type Type string
 
 const (
-	//Org 企业
+	// Org 企业
 	Org = Type("org")
 
-	//Department 部门
+	// Department 部门
 	Department = Type("department")
 
-	//Conversation 群
+	// Conversation 群
 	Conversation = Type("conversation")
 
-	//User 用户
+	// User 用户
 	User = Type("user")
 )

@@ -23,9 +23,9 @@ type RoleDetail struct {
 }
 
 type roleDetail struct {
-	//角色名称
+	// 角色名称
 	RoleName string `json:"name"`
 
-	//所属的角色组Id
+	// 所属的角色组Id
 	GroupId int `json:"groupId"`
 }

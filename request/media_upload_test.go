@@ -29,7 +29,6 @@ import (
 )
 
 func TestNewUploadFile(t *testing.T) {
-
 	f := NewUploadFile("../image/dingtalk.png", file.Image)
 
 	assert.NotNil(t, f)

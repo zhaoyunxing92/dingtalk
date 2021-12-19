@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewUpdateExtContact(t *testing.T) {
-
 	uc := NewUpdateExtContact("123", "李四", "", 123, 456, 789, 123).
 		SetTitle("资深开发").
 		SetAddress("杭州").

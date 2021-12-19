@@ -19,6 +19,6 @@ package response
 type DeleteTodo struct {
 	Response
 
-	//删除结果
+	// 删除结果
 	Result bool `json:"result"`
 }

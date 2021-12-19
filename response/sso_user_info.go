@@ -19,35 +19,35 @@ package response
 type SSOUserInfo struct {
 	Response
 
-	//是否是管理员
+	// 是否是管理员
 	Admin bool `json:"is_sys"`
 
-	//企业信息
+	// 企业信息
 	corpInfo `json:"corp_info"`
 
-	//用户信息
+	// 用户信息
 	userInfo `json:"user_info"`
 }
 
 type corpInfo struct {
-	//授权方企业CorpId
+	// 授权方企业CorpId
 	CorpId string `json:"corpid"`
 
-	//授权方企业名称。
+	// 授权方企业名称。
 	CorpName string `json:"corp_name"`
 }
 
 type userInfo struct {
 
-	//用户名字
+	// 用户名字
 	Name string `json:"name"`
 
-	//用户的userid
+	// 用户的userid
 	UserId string `json:"userid"`
 
-	//email地址
+	// email地址
 	Email string `json:"email"`
 
-	//头像地址
+	// 头像地址
 	Avatar string `json:"avatar"`
 }

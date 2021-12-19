@@ -25,7 +25,6 @@ import (
 )
 
 func TestDingTalk_GetAuthInfo(t *testing.T) {
-
 	res, err := isv.GetAuthInfo("ding3b1e912394011559bc961a6cb783455b")
 
 	assert.Nil(t, err)
@@ -34,25 +33,20 @@ func TestDingTalk_GetAuthInfo(t *testing.T) {
 }
 
 func TestDingTalk_GetAgentInfo(t *testing.T) {
-
 	res, err := isv.GetAgentInfo(1332307896, "ding3b1e912394011559bc961a6cb783455b")
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-
 }
 
 func TestDingTalk_GetUnactiveCorp(t *testing.T) {
-
 	res, err := isv.GetUnactiveCorp(45829)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-
 }
 
 func TestDingTalk_ReauthCorp(t *testing.T) {
-
 	res, err := isv.ReauthCorp(45829, "ding3b1e912394011559bc961a6cb783455b")
 
 	assert.Nil(t, err)

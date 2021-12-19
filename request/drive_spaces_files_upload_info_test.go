@@ -25,7 +25,6 @@ import (
 )
 
 func TestNewGetDriveSpacesFilesUploadInfo(t *testing.T) {
-
 	info := NewGetDriveSpacesFilesUploadInfo("spaceId", "parenId", "fileName", 10,
 		"m5d", "unionId")
 

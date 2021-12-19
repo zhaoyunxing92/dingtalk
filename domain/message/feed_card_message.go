@@ -32,9 +32,9 @@ import (
 //"picURL": "https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png"
 //
 type FeedCardLink struct {
-	Title  string `json:"title" validate:"required"`      //单条信息文本。
-	Url    string `json:"messageURL" validate:"required"` //点击单条信息到跳转链接。
-	BkgUrl string `json:"picURL"  validate:"required"`    //单条信息后面图片的URL。
+	Title  string `json:"title" validate:"required"`      // 单条信息文本。
+	Url    string `json:"messageURL" validate:"required"` // 点击单条信息到跳转链接。
+	BkgUrl string `json:"picURL"  validate:"required"`    // 单条信息后面图片的URL。
 }
 
 type feedCard struct {
@@ -50,7 +50,7 @@ func NewFeedCardMessage(links []FeedCardLink) feedCardMessage {
 	return feedCardMessage{message{MsgType: "feedCard"}, feedCard{Links: links}}
 }
 
-//请求参数验证
+// 请求参数验证
 func (req feedCardMessage) Validate(valid *validator.Validate, trans translator.Translator) error {
 	if err := valid.Struct(req); err != nil {
 		errs := err.(validator.ValidationErrors)

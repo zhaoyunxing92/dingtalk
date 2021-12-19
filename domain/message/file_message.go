@@ -16,9 +16,9 @@
 
 package message
 
-//文件消息
+// 文件消息
 type file struct {
-	//媒体文件ID。引用的媒体文件最大10MB。可以通过上传媒体文件接口获取。
+	// 媒体文件ID。引用的媒体文件最大10MB。可以通过上传媒体文件接口获取。
 	MediaId string `json:"media_id" validate:"required"`
 }
 

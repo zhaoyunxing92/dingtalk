@@ -30,7 +30,6 @@ import (
 )
 
 func TestNewAddDriveSpacesFilesPermissions(t *testing.T) {
-
 	permissions := NewAddDriveSpacesFilesPermissions().
 		SetSpaceId("spaceId").
 		SetFileId("fileId").
@@ -43,7 +42,7 @@ func TestNewAddDriveSpacesFilesPermissions(t *testing.T) {
 	assert.NotNil(t, permissions)
 }
 
-//newDriveSpacesFileMember
+// newDriveSpacesFileMember
 func TestNewDriveSpacesFileMember(t *testing.T) {
 	fm := newDriveSpacesFileMember("corpId", "memberId", member.Conversation)
 

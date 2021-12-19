@@ -19,19 +19,19 @@ package response
 type CreateDriveSpaces struct {
 	Response
 
-	//空间ID
+	// 空间ID
 	SpaceId string `json:"spaceId"`
 
-	//空间名称
+	// 空间名称
 	Name string `json:"spaceName"`
 
-	//空间类型
+	// 空间类型
 	Type string `json:"spaceType"`
 
-	//空间总额度
+	// 空间总额度
 	Quota int `json:"quota"`
 
-	//空间已使用额度
+	// 空间已使用额度
 	UsedQuota int `json:"usedQuota"`
 
 	//授权模式，取值：
@@ -40,9 +40,9 @@ type CreateDriveSpaces struct {
 	//custom：自定义授权
 	PermissionMode string `json:"permissionMode"`
 
-	//创建时间
+	// 创建时间
 	CreateTime string `json:"createTime"`
 
-	//修改时间
+	// 修改时间
 	ModifyTime string `json:"modifyTime"`
 }

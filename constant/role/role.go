@@ -19,18 +19,18 @@ package role
 type SpacesRole string
 
 const (
-	//Owner 所有者
+	// Owner 所有者
 	Owner = SpacesRole("owner")
 
-	//Admin 管理员
+	// Admin 管理员
 	Admin = SpacesRole("admin")
 
-	//Editor 可编辑
+	// Editor 可编辑
 	Editor = SpacesRole("editor")
 
-	//Viewer 可查看/下载
+	// Viewer 可查看/下载
 	Viewer = SpacesRole("viewer")
 
-	//OnlyViewer 只读
+	// OnlyViewer 只读
 	OnlyViewer = SpacesRole("only_viewer")
 )

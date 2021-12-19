@@ -25,23 +25,23 @@ import (
 )
 
 type SendTemplateMessage struct {
-	//应用的agentId
+	// 应用的agentId
 	AgentId int `json:"agent_id" validate:"required"`
 
-	//消息模板ID
+	// 消息模板ID
 	TemplateId string `json:"template_id" validate:"required"`
 
 	UserIdList string `json:"userid_list,omitempty"`
 
-	//接收者的用户userid列表。最大列表长度为5000
+	// 接收者的用户userid列表。最大列表长度为5000
 	UserIds []string `json:"-" validate:"omitempty,max=5000"`
 
 	DeptIdList string `json:"dept_id_list,omitempty"`
 
-	//接收者的部门id列表。最大列表长度为500
+	// 接收者的部门id列表。最大列表长度为500
 	DeptIds []int `json:"-" validate:"omitempty,max=500"`
 
-	//消息模板动态参数赋值数据
+	// 消息模板动态参数赋值数据
 	Data map[string]string `json:"data"`
 }
 

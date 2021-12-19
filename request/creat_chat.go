@@ -17,13 +17,13 @@
 package request
 
 type CreatChat struct {
-	//群名称，长度限制为1~20个字符
+	// 群名称，长度限制为1~20个字符
 	Name string `json:"name" validate:"required,min=1,max=20"`
 
-	//群主的userid,该员工必须为会话useridlist的成员之一。
+	// 群主的userid,该员工必须为会话useridlist的成员之一。
 	Owner string `json:"owner" validate:"required"`
 
-	//群成员列表，每次最多支持40人，群人数上限为1000
+	// 群成员列表，每次最多支持40人，群人数上限为1000
 	Users []string `json:"useridlist" validate:"required,max=40"`
 
 	//新成员是否可查看100条历史消息：
@@ -62,9 +62,9 @@ type CreatChat struct {
 	//1：仅群主可管理
 	ManagementType *int `json:"managementType,omitempty" validate:"omitempty,max=1,min=0"`
 
-	//是否开启群禁言：
-	//0（默认）：不禁言
-	//1：全员禁言
+	// 是否开启群禁言：
+	// 0（默认）：不禁言
+	// 1：全员禁言
 	ChatBannedType *int `json:"chatBannedType,omitempty" validate:"omitempty,max=1,min=0"`
 }
 
@@ -126,9 +126,9 @@ func (cb *creatChatBuilder) SetManagementType(managementType int) *creatChatBuil
 	return cb
 }
 
-//SetChatBannedType 是否开启群禁言：
-//0（默认）：不禁言
-//1：全员禁言
+// SetChatBannedType 是否开启群禁言：
+// 0（默认）：不禁言
+// 1：全员禁言
 func (cb *creatChatBuilder) SetChatBannedType(chatBannedType int) *creatChatBuilder {
 	cb.c.ChatBannedType = &chatBannedType
 	return cb

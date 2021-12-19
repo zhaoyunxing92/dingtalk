@@ -19,6 +19,6 @@ package response
 type SendTemplateMessage struct {
 	Response
 
-	//创建的异步发送任务ID
+	// 创建的异步发送任务ID
 	TaskId int `json:"task_id"`
 }
