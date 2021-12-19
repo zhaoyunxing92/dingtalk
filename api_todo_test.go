@@ -19,13 +19,8 @@ package dingtalk
 import (
 	"testing"
 	"time"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
 

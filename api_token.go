@@ -22,13 +22,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
-)
 
-import (
 	"github.com/pkg/errors"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/cache"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/crypto"

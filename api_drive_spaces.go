@@ -21,9 +21,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/policy"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/spaces"
