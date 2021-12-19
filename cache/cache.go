@@ -16,7 +16,7 @@
 
 package cache
 
-// 过期的
+// Expired 过期的
 type Expired interface {
 	CreatedAt() int64
 	ExpiresIn() int16

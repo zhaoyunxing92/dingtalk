@@ -22,9 +22,7 @@ import (
 	"os"
 	"strings"
 	"time"
-)
 
-import (
 	"github.com/pkg/errors"
 )
 
