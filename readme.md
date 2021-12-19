@@ -215,6 +215,15 @@ imports-formatter
     - 权限管理
         - [x] [获取权限列表](https://developers.dingtalk.com/document/app/obtain-a-permission-list) `client.GetDriveSpacesFilesPermissions`
         - [x] [添加权限](https://developers.dingtalk.com/document/app/add-permissions) `client.AddDriveSpacesFilesPermissions`
+        - [ ] [删除权限](https://open.dingtalk.com/document/orgapp-server/delete-permissions)
+        - [ ] [修改权限](https://open.dingtalk.com/document/orgapp-server/modify-permissions)
+        - [ ] [修改权限](https://open.dingtalk.com/document/orgapp-server/modify-permissions)
+        - [ ] [添加自定义空间权限](https://open.dingtalk.com/document/orgapp-server/add-custom-workspace-permissions)
+    - 回收站
+        - [ ] [查询回收站文件（夹）列表](https://open.dingtalk.com/document/orgapp-server/obtain-the-recycle-bin-folder-list)
+        - [ ] [还原回收站文件（夹）](https://open.dingtalk.com/document/orgapp-server/restore-recycle-bin-files-folder)
+        - [ ] [删除回收站文件（夹）](https://open.dingtalk.com/document/orgapp-server/delete-recycle-bin-files-folders)
+        - [ ] [清空回收站](https://open.dingtalk.com/document/orgapp-server/empty-recycle-bin-files-folders)
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
