@@ -18,9 +18,7 @@ package logger
 
 import (
 	"os"
-)
 
-import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
