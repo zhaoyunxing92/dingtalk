@@ -112,6 +112,7 @@ func (ding *dingTalk) CreateDriveSpacesFiles(res *request.CreateDriveSpacesFiles
 // DeleteDriveSpacesFiles 删除文件（夹）
 func (ding *dingTalk) DeleteDriveSpacesFiles(spaceId, fileId, unionId string,
 	policy policy.DeletePolicy) (rsp response.Response, err error) {
+
 	query := url.Values{}
 	query.Set("unionId", unionId)
 	query.Set("deletePolicy", string(policy))
@@ -123,6 +124,7 @@ func (ding *dingTalk) DeleteDriveSpacesFiles(spaceId, fileId, unionId string,
 // MoveDriveSpacesFiles 移动文件（夹）
 func (ding *dingTalk) MoveDriveSpacesFiles(res *request.MoveDriveSpacesFiles) (rsp response.GetDriveSpacesFileInfo,
 	err error) {
+
 	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.MoveDriveSpacesFilesKey, res.SpaceId, res.FileId),
 		nil, res, &rsp)
 }
@@ -130,6 +132,7 @@ func (ding *dingTalk) MoveDriveSpacesFiles(res *request.MoveDriveSpacesFiles) (r
 // RenameDriveSpacesFiles 修改文件（夹）名
 func (ding *dingTalk) RenameDriveSpacesFiles(spaceId, fileId, newFileName,
 	unionId string) (rsp response.GetDriveSpacesFileInfo, err error) {
+
 	return rsp, ding.Request(http.MethodPost, fmt.Sprintf(constant.RenameDriveSpacesFilesKey, spaceId, fileId),
 		nil, request.NewRenameDriveSpacesFiles(newFileName, unionId), &rsp)
 }
@@ -137,6 +140,7 @@ func (ding *dingTalk) RenameDriveSpacesFiles(spaceId, fileId, newFileName,
 // GetDriveSpacesFilesDownloadInfo 获取文件下载信息
 func (ding *dingTalk) GetDriveSpacesFilesDownloadInfo(spaceId, fileId,
 	unionId string) (rsp response.GetDriveSpacesFileInfo, err error) {
+
 	query := url.Values{}
 	query.Set("unionId", unionId)
 	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetDriveSpacesFilesDownloadInfoKey, spaceId, fileId),
