@@ -39,7 +39,7 @@ type GetHrmEmployee struct {
 	Offset int `json:"offset"`
 
 	// 分页大小，最大50。
-	Size int `json:"size"`
+	Size int `json:"size" validate:"max=50"`
 }
 
 func NewGetHrmEmployee(offset, size int, status []employee.Status) *GetHrmEmployee {

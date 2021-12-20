@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package response
+package request
 
-type GetHrmEmployee struct {
-	Response
+type GetHrmToBeHiredEmployee struct {
+	// 分页游标，从0开始。根据返回结果里的next_cursor是否为空来判断是否还有下一页，且再次调用时offset设置成next_cursor的值。
+	Offset int `json:"offset"`
 
-	getHrmEmployee `json:"result"`
+	// 分页大小，最大50。
+	Size int `json:"size" validate:"max=50"`
 }
 
-type getHrmEmployee struct {
-
-	// 查询到的员工userid
-	UserIds []string `json:"data_list"`
-
-	// 下一次分页调用的offset值，当返回结果里没有next_cursor时，表示分页结束
-	NextCursor int `json:"next_cursor"`
+func NewGetHrmToBeHiredEmployee(offset, size int) *GetHrmToBeHiredEmployee {
+	return &GetHrmToBeHiredEmployee{offset, size}
 }

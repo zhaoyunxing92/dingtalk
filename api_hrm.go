@@ -27,8 +27,14 @@ import (
 
 // GetHrmEmployee 获取在职员工列表
 func (ding dingTalk) GetHrmEmployee(offset, size int, state employee.Status, status ...employee.Status) (res response.GetHrmEmployee,
-	err error,
-) {
+	err error) {
 	req := request.NewGetHrmEmployee(offset, size, append(status, state))
 	return res, ding.Request(http.MethodPost, constant.GetHrmEmployeeKey, nil, req, &res)
+}
+
+// GetHrmToBeHiredEmployee 获取待入职员工列表
+func (ding dingTalk) GetHrmToBeHiredEmployee(offset, size int) (res response.GetHrmEmployee,
+	err error) {
+	req := request.NewGetHrmToBeHiredEmployee(offset, size)
+	return res, ding.Request(http.MethodPost, constant.GetHrmToBeHiredEmployeeKey, nil, req, &res)
 }

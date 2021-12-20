@@ -125,8 +125,7 @@ func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) 
 
 // Request 统一请求
 func (ding *dingTalk) Request(method, path string, query url.Values, body interface{},
-	data response.Unmarshalled) (err error,
-) {
+	data response.Unmarshalled) (err error) {
 	if body != nil {
 		if err = validate(body); err != nil {
 			return err
@@ -167,8 +166,7 @@ func (robot *Robot) send(form interface{}, data response.Unmarshalled) (err erro
 }
 
 func (robot *Robot) httpRequest(method, path string, query url.Values, body interface{},
-	data response.Unmarshalled,
-) error {
+	data response.Unmarshalled) error {
 	client := robot.client
 
 	uri, _ := url.Parse(constant.Api + path)
@@ -209,8 +207,7 @@ func (robot *Robot) httpRequest(method, path string, query url.Values, body inte
 }
 
 func (ding *dingTalk) httpRequest(method, path string, query url.Values, body interface{},
-	response response.Unmarshalled,
-) error {
+	response response.Unmarshalled) error {
 	var (
 		req    *http.Request
 		res    *http.Response
