@@ -151,7 +151,7 @@ const (
 	UpdateTodoDoneKey        = "/v1.0/todo/users/%s/tasks/%s/executorStatus" // 更新钉钉待办执行者状态
 	GetTodoListBySourceIdKey = "/v1.0/todo/users/%s/tasks/sources/%s"        // 根据sourceId获取钉钉待办任务详情
 	GetTodoListKey           = "/v1.0/todo/users/%s/org/tasks/query"         // 查询企业下用户待办列表
-	
+
 	GetHrmEmployeeKey          = "/topapi/smartwork/hrm/employee/queryonjob"    // 获取在职员工列表
 	GetHrmToBeHiredEmployeeKey = "/topapi/smartwork/hrm/employee/querypreentry" // 获取待入职员工列表
 )
