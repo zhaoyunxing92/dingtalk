@@ -39,18 +39,13 @@ jobs:
           license-header-checker -v -a -r -i vendor,license-header-checker,tools ./header/license_header.txt . go
           git status && [[ -z `git status -s` ]]
 
-      - name: Check improts
-        run: |
-          gofumpt -l -w .
-          git status && [[ -z `git status -s` ]]
-
       - name: gofmt
         run: |
-          go fmt ./... &&  git status && [[ -z `git status -s` ]]
-          # diff -u <(echo -n) <(gofmt -d -s .)
+          gofumpt -l -w . && git status && [[ -z `git status -s` ]]
+           # diff -u <(echo -n) <(gofmt -d -s .)
 
       - name: Test Request Struct
-        #        run: go test -v request/...
+        # run: go test -v request/...
         run: go test -v ./request -race -coverprofile=coverage.txt -covermode=atomic -v
 
       - name: Post Coverage
