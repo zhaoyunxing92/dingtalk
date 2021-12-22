@@ -36,3 +36,11 @@ func TestDingTalk_GetHrmToBeHiredEmployee(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, user)
 }
+
+func TestDingTalk_GetHrmDimissionEmployee(t *testing.T) {
+	user, err := client.GetHrmDimissionEmployee(0, 50)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, user)
+	assert.Equal(t, len(user.UserIds), 32)
+}

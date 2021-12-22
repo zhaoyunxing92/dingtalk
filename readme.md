@@ -184,6 +184,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
 * 智能人事
     - [x] [获取在职员工列表](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-query-the-list-of-on-the-job-employees-of-the) `client.GetHrmEmployee`
     - [x] [获取待入职员工列表](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-query-the-list-of-employees-to-be-hired) `client.GetHrmToBeHiredEmployee`
+    - [x] [获取离职员工列表](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-query-company-turnover-list) `client.GetHrmToBeHiredEmployee`
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
