@@ -38,3 +38,9 @@ func (ding dingTalk) GetHrmToBeHiredEmployee(offset, size int) (res response.Get
 	req := request.NewGetHrmToBeHiredEmployee(offset, size)
 	return res, ding.Request(http.MethodPost, constant.GetHrmToBeHiredEmployeeKey, nil, req, &res)
 }
+
+// GetHrmDimissionEmployee 获取待入职员工列表 dimission
+func (ding dingTalk) GetHrmDimissionEmployee(offset, size int) (res response.GetHrmEmployee, err error) {
+	req := request.NewGetHrmToBeHiredEmployee(offset, size)
+	return res, ding.Request(http.MethodPost, constant.GetHrmDimissionEmployeeKey, nil, req, &res)
+}
