@@ -10,8 +10,7 @@
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
 
-[dingtalk](https://github.com/zhaoyunxing92/dingtalk/v2)
-是基于新版的 [钉钉开发平台api文档](https://developers.dingtalk.com/document/app)
+[dingtalk](https://github.com/zhaoyunxing92/dingtalk) 是基于新版的 [钉钉开发平台api文档](https://developers.dingtalk.com/document/app)
 开发，也就是说在你使用之前是需要在[钉钉开发者后台](https://open-dev.dingtalk.com/#/index) 创建一个小程序或应用
 
 ## 为什么有它
@@ -183,8 +182,8 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [ ] [清空回收站](https://open.dingtalk.com/document/orgapp-server/empty-recycle-bin-files-folders)
 
 * 智能人事
-   - [x] [获取在职员工列表](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-query-the-list-of-on-the-job-employees-of-the) `client.GetHrmEmployee`
-   - [x] [获取待入职员工列表](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-query-the-list-of-employees-to-be-hired) `client.GetHrmToBeHiredEmployee`
+    - [x] [获取在职员工列表](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-query-the-list-of-on-the-job-employees-of-the) `client.GetHrmEmployee`
+    - [x] [获取待入职员工列表](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-query-the-list-of-employees-to-be-hired) `client.GetHrmToBeHiredEmployee`
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
