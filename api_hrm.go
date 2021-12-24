@@ -26,9 +26,9 @@ import (
 )
 
 // GetHrmEmployee 获取在职员工列表
-func (ding dingTalk) GetHrmEmployee(offset, size int, state employee.Status, status ...employee.Status) (res response.GetHrmEmployee,
+func (ding dingTalk) GetHrmEmployee(offset, size int, status []employee.Status) (res response.GetHrmEmployee,
 	err error) {
-	req := request.NewGetHrmEmployee(offset, size, append(status, state))
+	req := request.NewGetHrmEmployee(offset, size, status)
 	return res, ding.Request(http.MethodPost, constant.GetHrmEmployeeKey, nil, req, &res)
 }
 
@@ -39,8 +39,14 @@ func (ding dingTalk) GetHrmToBeHiredEmployee(offset, size int) (res response.Get
 	return res, ding.Request(http.MethodPost, constant.GetHrmToBeHiredEmployeeKey, nil, req, &res)
 }
 
-// GetHrmDimissionEmployee 获取待入职员工列表 dimission
-func (ding dingTalk) GetHrmDimissionEmployee(offset, size int) (res response.GetHrmEmployee, err error) {
+// GetHrmResignEmployeeIds 获取待入职员工列表
+func (ding dingTalk) GetHrmResignEmployeeIds(offset, size int) (res response.GetHrmEmployee, err error) {
 	req := request.NewGetHrmToBeHiredEmployee(offset, size)
-	return res, ding.Request(http.MethodPost, constant.GetHrmDimissionEmployeeKey, nil, req, &res)
+	return res, ding.Request(http.MethodPost, constant.GetHrmResignEmployeeKey, nil, req, &res)
+}
+
+// GetHrmResignEmployee 获取员工离职信息
+func (ding dingTalk) GetHrmResignEmployee(userIds []string) (res response.HrmResignEmployee, err error) {
+	req := request.NewGetHrmResignEmployee(userIds)
+	return res, ding.Request(http.MethodPost, constant.GetHrmResignEmployeeInfoKey, nil, req, &res)
 }

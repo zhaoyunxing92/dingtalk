@@ -24,7 +24,7 @@ import (
 )
 
 func TestDingTalk_GetHrmEmployee(t *testing.T) {
-	user, err := client.GetHrmEmployee(1, 10, employee.Formal, employee.Unknown, employee.ProbationPeriod)
+	user, err := client.GetHrmEmployee(1, 10, []employee.Status{employee.Formal, employee.Unknown, employee.ProbationPeriod})
 
 	assert.Nil(t, err)
 	assert.NotNil(t, user)
@@ -37,10 +37,17 @@ func TestDingTalk_GetHrmToBeHiredEmployee(t *testing.T) {
 	assert.NotNil(t, user)
 }
 
-func TestDingTalk_GetHrmDimissionEmployee(t *testing.T) {
-	user, err := client.GetHrmDimissionEmployee(0, 50)
+func TestDingTalk_GetHrmResignEmployeeIds(t *testing.T) {
+	user, err := client.GetHrmResignEmployeeIds(0, 50)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, user)
 	assert.Equal(t, len(user.UserIds), 32)
+}
+
+func TestDingTalk_GetHrmResignEmployee(t *testing.T) {
+	user, err := client.GetHrmResignEmployee([]string{"223528591438654612", "055354431324052749"})
+
+	assert.Nil(t, err)
+	assert.NotNil(t, user)
 }
