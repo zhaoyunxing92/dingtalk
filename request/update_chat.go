@@ -31,10 +31,10 @@ type UpdateChat struct {
 
 	//群主类型：
 	//
-	//emp：企业员工
+	//Param：企业员工
 	//
 	//ext：外部联系人
-	OwnerType string `json:"ownerType,omitempty" validate:"omitempty,oneof=emp ext"`
+	OwnerType string `json:"ownerType,omitempty" validate:"omitempty,oneof=Param ext"`
 
 	// 群成员列表，每次最多支持40人，群人数上限为1000
 	AddUsers []string `json:"add_useridlist,omitempty" validate:"omitempty,max=40"`
