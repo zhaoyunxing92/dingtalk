@@ -50,3 +50,8 @@ func (ding dingTalk) GetHrmResignEmployee(userIds []string) (res response.HrmRes
 	req := request.NewGetHrmResignEmployee(userIds)
 	return res, ding.Request(http.MethodPost, constant.GetHrmResignEmployeeInfoKey, nil, req, &res)
 }
+
+// HrmCreateEmployee 添加企业待入职员工
+func (ding dingTalk) HrmCreateEmployee(req *request.HrmCreateEmployee) (res response.HrmCreateEmployee, err error) {
+	return res, ding.Request(http.MethodPost, constant.HrmCreateEmployeeKey, nil, req, &res)
+}

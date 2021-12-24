@@ -40,3 +40,44 @@ const (
 	// Unknown 无状态
 	Unknown = Status("-1")
 )
+
+//Mold 员工类型枚举值：
+//
+//0：无类型
+//
+//1：全职
+//
+//2：兼职
+//
+//3：实习
+//
+//4：劳务派遣
+//
+//5：退休返聘
+//
+//6：劳务外包
+type Mold string
+
+const (
+
+	// UnknownMold 无类型
+	UnknownMold = Mold("0")
+
+	// FullTimeMold 全职
+	FullTimeMold = Mold("1")
+
+	// PartTimeMold 兼职
+	PartTimeMold = Mold("2")
+
+	// InternshipMold 实习
+	InternshipMold = Mold("3")
+
+	// LaborDispatchMold 劳务派遣
+	LaborDispatchMold = Mold("4")
+
+	// RescindedMold 退休返聘
+	RescindedMold = Mold("5")
+
+	// OutsourcingMold 劳务外包
+	OutsourcingMold = Mold("6")
+)

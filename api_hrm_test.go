@@ -19,6 +19,8 @@ package dingtalk
 import (
 	"testing"
 
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/employee"
 )
@@ -47,6 +49,15 @@ func TestDingTalk_GetHrmResignEmployeeIds(t *testing.T) {
 
 func TestDingTalk_GetHrmResignEmployee(t *testing.T) {
 	user, err := client.GetHrmResignEmployee([]string{"223528591438654612", "055354431324052749"})
+
+	assert.Nil(t, err)
+	assert.NotNil(t, user)
+}
+
+func TestDingTalk_HrmCreateEmployee(t *testing.T) {
+	emp := request.NewHrmCreateEmployee("老刘", "18867870721").Build()
+
+	user, err := client.HrmCreateEmployee(emp)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, user)

@@ -156,4 +156,5 @@ const (
 	GetHrmToBeHiredEmployeeKey  = "/topapi/smartwork/hrm/employee/querypreentry"  // 获取待入职员工列表
 	GetHrmResignEmployeeKey     = "/topapi/smartwork/hrm/employee/querydimission" // 获取离职员工列表
 	GetHrmResignEmployeeInfoKey = "/topapi/smartwork/hrm/employee/listdimission"  // 获取员工离职信息
+	HrmCreateEmployeeKey        = "/topapi/smartwork/hrm/employee/addpreentry"    // 添加企业待入职员工
 )
