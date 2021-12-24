@@ -19,16 +19,16 @@ package response
 type GetHrmField struct {
 	Response
 
-	//应用AgentID，可在钉钉开发者后台的应用详情页获取。
+	// 应用AgentID，可在钉钉开发者后台的应用详情页获取。
 	FieldGroups []fieldGroupMeta `json:"result"`
 }
 
 type fieldGroupMeta struct {
 
-	//字段组ID
+	// 字段组ID
 	GroupId string `json:"group_id"`
 
-	//是否支持明细
+	// 是否支持明细
 	HasDetail bool `json:"has_detail"`
 
 	Fields []employeeField `json:"field_list"`
@@ -49,9 +49,9 @@ type employeeField struct {
 	//DDPhotoField
 	FieldType string `json:"field_type"`
 
-	//字段描述
+	// 字段描述
 	FieldName string `json:"field_name"`
 
-	//字段code
+	// 字段code
 	FieldCode string `json:"field_code"`
 }

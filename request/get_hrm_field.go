@@ -18,11 +18,10 @@ package request
 
 type GetHrmField struct {
 
-	//应用AgentID，可在钉钉开发者后台的应用详情页获取。
+	// 应用AgentID，可在钉钉开发者后台的应用详情页获取。
 	AgentId int `json:"agentid"`
 }
 
 func NewGetHrmField(agentId int) *GetHrmField {
-
 	return &GetHrmField{agentId}
 }

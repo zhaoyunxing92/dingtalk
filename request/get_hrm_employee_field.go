@@ -37,6 +37,8 @@ type GetHrmEmployeeField struct {
 func NewGetHrmEmployeeField(agentId int, userIds []string, fields []string) *GetHrmEmployeeField {
 	us := removeStringDuplicates(userIds)
 	fs := removeStringDuplicates(fields)
-	return &GetHrmEmployeeField{AgentId: agentId, UserIdList: us, UserIds: strings.Join(us, ","),
-		FieldList: fs, Fields: strings.Join(fs, ",")}
+	return &GetHrmEmployeeField{
+		AgentId: agentId, UserIdList: us, UserIds: strings.Join(us, ","),
+		FieldList: fs, Fields: strings.Join(fs, ","),
+	}
 }

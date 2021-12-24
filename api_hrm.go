@@ -58,7 +58,6 @@ func (ding dingTalk) HrmCreateEmployee(req *request.HrmCreateEmployee) (res resp
 
 // GetHrmField 获取花名册字段组详情
 func (ding dingTalk) GetHrmField(agentId int) (res response.GetHrmField, err error) {
-
 	if !ding.isv() {
 		agentId = ding.Id
 	}
@@ -67,7 +66,6 @@ func (ding dingTalk) GetHrmField(agentId int) (res response.GetHrmField, err err
 
 // GetHrmEmployeeField 获取员工花名册字段信息
 func (ding dingTalk) GetHrmEmployeeField(agentId int, userIds []string, fields []string) (res response.GetHrmEmployeeField, err error) {
-
 	if !ding.isv() {
 		agentId = ding.Id
 	}

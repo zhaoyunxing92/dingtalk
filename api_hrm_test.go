@@ -63,7 +63,6 @@ func TestDingTalk_HrmCreateEmployee(t *testing.T) {
 }
 
 func TestDingTalk_GetHrmEmployeeField(t *testing.T) {
-
 	res, err := client.GetHrmEmployeeField(1244553273, []string{"manager164"}, []string{})
 
 	assert.Nil(t, err)
