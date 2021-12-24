@@ -55,3 +55,20 @@ func (ding dingTalk) GetHrmResignEmployee(userIds []string) (res response.HrmRes
 func (ding dingTalk) HrmCreateEmployee(req *request.HrmCreateEmployee) (res response.HrmCreateEmployee, err error) {
 	return res, ding.Request(http.MethodPost, constant.HrmCreateEmployeeKey, nil, req, &res)
 }
+
+// GetHrmField 获取花名册字段组详情
+func (ding dingTalk) GetHrmField(agentId int) (res response.GetHrmField, err error) {
+	if !ding.isv() {
+		agentId = ding.Id
+	}
+	return res, ding.Request(http.MethodPost, constant.GetHrmFieldKey, nil, request.NewGetHrmField(agentId), &res)
+}
+
+// GetHrmEmployeeField 获取员工花名册字段信息
+func (ding dingTalk) GetHrmEmployeeField(agentId int, userIds []string, fields []string) (res response.GetHrmEmployeeField, err error) {
+	if !ding.isv() {
+		agentId = ding.Id
+	}
+	return res, ding.Request(http.MethodPost, constant.GetHrmEmployeeFieldKey, nil,
+		request.NewGetHrmEmployeeField(agentId, userIds, fields), &res)
+}
