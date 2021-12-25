@@ -158,6 +158,7 @@ const (
 	GetHrmResignEmployeeInfoKey = "/topapi/smartwork/hrm/employee/listdimission"  // 获取员工离职信息
 	HrmCreateEmployeeKey        = "/topapi/smartwork/hrm/employee/addpreentry"    // 添加企业待入职员工
 
-	GetHrmFieldKey         = "/topapi/smartwork/hrm/employee/field/grouplist" // 获取花名册字段组详情
-	GetHrmEmployeeFieldKey = "/topapi/smartwork/hrm/employee/v2/list"         // 获取员工花名册字段信息
+	GetHrmFieldKey            = "/topapi/smartwork/hrm/employee/field/grouplist" // 获取花名册字段组详情
+	GetHrmEmployeeFieldKey    = "/topapi/smartwork/hrm/employee/v2/list"         // 获取员工花名册字段信息
+	UpdateHrmEmployeeFieldKey = "/topapi/smartwork/hrm/employee/v2/update"       // 更新员工花名册信息
 )
