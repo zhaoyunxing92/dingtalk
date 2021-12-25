@@ -87,3 +87,10 @@ func TestDingTalk_UpdateHrmEmployeeField(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
+
+func TestDingTalk_GetHrmMeta(t *testing.T) {
+	res, err := client.GetHrmMeta(1244553273)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}

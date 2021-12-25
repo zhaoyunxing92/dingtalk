@@ -77,3 +77,12 @@ func (ding dingTalk) GetHrmEmployeeField(agentId int, userIds []string, fields [
 func (ding dingTalk) UpdateHrmEmployeeField(req *request.UpdateHrmEmpField) (res response.Response, err error) {
 	return res, ding.Request(http.MethodPost, constant.UpdateHrmEmployeeFieldKey, nil, req, &res)
 }
+
+// GetHrmMeta 获取花名册元数据
+func (ding dingTalk) GetHrmMeta(agentId int) (res response.GetHrmMeta, err error) {
+	if !ding.isv() {
+		agentId = ding.Id
+	}
+	return res, ding.Request(http.MethodPost, constant.GetHrmMetaKey, nil,
+		request.NewGetHrmField(agentId), &res)
+}
