@@ -72,3 +72,8 @@ func (ding dingTalk) GetHrmEmployeeField(agentId int, userIds []string, fields [
 	return res, ding.Request(http.MethodPost, constant.GetHrmEmployeeFieldKey, nil,
 		request.NewGetHrmEmployeeField(agentId, userIds, fields), &res)
 }
+
+// UpdateHrmEmployeeField 更新员工花名册信息
+func (ding dingTalk) UpdateHrmEmployeeField(req *request.UpdateHrmEmpField) (res response.Response, err error) {
+	return res, ding.Request(http.MethodPost, constant.UpdateHrmEmployeeFieldKey, nil, req, &res)
+}

@@ -29,6 +29,9 @@ type Response struct {
 	RequestId string `json:"request_id,omitempty"`
 	// todo:新版的api使用TraceId
 	TraceId string `json:"requestId,omitempty"`
+
+	// 调用结果
+	Result bool `json:"result,omitempty"`
 }
 
 // Unmarshalled 统一检查返回异常异常

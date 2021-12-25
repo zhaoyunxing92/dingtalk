@@ -68,3 +68,17 @@ func TestDingTalk_GetHrmEmployeeField(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
+
+func TestDingTalk_UpdateHrmEmployeeField(t *testing.T) {
+	req := &request.UpdateHrmEmpField{
+		AgentId: 1244553273,
+		Param: request.UpdateHrmEmpFieldParam{
+			UserId: "manager164",
+		},
+	}
+
+	res, err := client.UpdateHrmEmployeeField(req)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+}
