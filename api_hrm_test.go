@@ -70,10 +70,15 @@ func TestDingTalk_GetHrmEmployeeField(t *testing.T) {
 }
 
 func TestDingTalk_UpdateHrmEmployeeField(t *testing.T) {
+	value := request.EmpFieldValue{FieldCode: "sys00-remark", Value: "备注"}
+	field := request.EmpField{Values: []request.EmpFieldValue{value}}
+	group := request.UpdateHrmEmpFieldGroup{GroupId: "sys00", Fields: []request.EmpField{field}}
+
 	req := &request.UpdateHrmEmpField{
 		AgentId: 1244553273,
 		Param: request.UpdateHrmEmpFieldParam{
-			UserId: "manager164",
+			UserId:        "manager164",
+			EmpFieldGroup: []request.UpdateHrmEmpFieldGroup{group},
 		},
 	}
 
