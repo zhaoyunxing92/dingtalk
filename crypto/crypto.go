@@ -20,16 +20,19 @@ import (
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
+	"strconv"
+
 	//"crypto/rand"
 	"crypto/sha1"
 	"encoding/base64"
 	"encoding/binary"
 	"fmt"
-	"github.com/pkg/errors"
 	"math/rand"
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/pkg/errors"
 )
 
 const (
@@ -37,63 +40,68 @@ const (
 	alphabets          = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 )
 
-type Encrypt struct {
-	Text string `json:"encrypt"`
-}
-
 type DingTalkCrypto struct {
-	Token          string
-	EncodingAESKey string
-	SuiteKey       string
-	BKey           []byte
-	Block          cipher.Block
+
+	// 签名 token
+	Token string
+
+	// 小程序的key
+	SuiteKey string
+
+	// 加密 aes_key
+	AESKey []byte
+
+	Block cipher.Block
 }
 
-func (c *DingTalkCrypto) GetDecryptMsg(signature, timestamp, nonce, secretMsg string) (string, error) {
-	if !c.VerificationSignature(c.Token, timestamp, nonce, secretMsg, signature) {
-		return "", errors.New("ERROR: 签名不匹配")
+// Decrypt 解密
+func (c *DingTalkCrypto) Decrypt(encrypt, sign, timestamp, nonce string) (string, error) {
+	if !c.VerificationSignature(encrypt, sign, timestamp, nonce) {
+		return "", errors.New("签名不匹配")
 	}
-	decode, err := base64.StdEncoding.DecodeString(secretMsg)
+	decode, err := base64.StdEncoding.DecodeString(encrypt)
 	if err != nil {
 		return "", err
 	}
 	if len(decode) < aes.BlockSize {
-		return "", errors.New("ERROR: 密文太短")
+		return "", errors.New("密文太短")
 	}
-	blockMode := cipher.NewCBCDecrypter(c.Block, c.BKey[:c.Block.BlockSize()])
+	blockMode := cipher.NewCBCDecrypter(c.Block, c.AESKey[:c.Block.BlockSize()])
 	plantText := make([]byte, len(decode))
 	blockMode.CryptBlocks(plantText, decode)
 	plantText = pkCS7UnPadding(plantText)
 	size := binary.BigEndian.Uint32(plantText[16:20])
 	plantText = plantText[20:]
-	corpID := plantText[size:]
-	if string(corpID) != c.SuiteKey {
-		return "", errors.New("ERROR: CorpID匹配不正确")
+	corpId := plantText[size:]
+	if string(corpId) != c.SuiteKey {
+		return "", errors.New("SuiteKey匹配不正确")
 	}
 	return string(plantText[:size]), nil
 }
 
-func (c *DingTalkCrypto) GetEncryptMsg(msg string) (map[string]string, error) {
-	var timestamp = time.Now().Second()
-	var nonce = c.RandomString(12)
-	str, sign, err := c.GetEncryptMsgDetail(msg, fmt.Sprint(timestamp), nonce)
+// Encrypt 加密
+func (c *DingTalkCrypto) Encrypt(msg string) (*DingTalkEncrypt, error) {
+	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
+	nonce := c.RandomString(12)
 
-	return map[string]string{"nonce": nonce, "timeStamp": fmt.Sprint(timestamp), "encrypt": str, "msg_signature": sign}, err
+	encrypt, sign, err := c.GetEncryptMsgDetail(msg, timestamp, nonce)
+	return NewDingTalkEncrypt(encrypt, sign, timestamp, nonce), err
 }
+
 func (c *DingTalkCrypto) GetEncryptMsgDetail(msg, timestamp, nonce string) (string, string, error) {
 	size := make([]byte, 4)
 	binary.BigEndian.PutUint32(size, uint32(len(msg)))
 	msg = c.RandomString(16) + string(size) + msg + c.SuiteKey
 	plantText := pkCS7Padding([]byte(msg), c.Block.BlockSize())
 	if len(plantText)%aes.BlockSize != 0 {
-		return "", "", errors.New("ERROR: 消息体size不为16的倍数")
+		return "", "", errors.New("消息体size不为16的倍数")
 	}
-	blockMode := cipher.NewCBCEncrypter(c.Block, c.BKey[:c.Block.BlockSize()])
+	blockMode := cipher.NewCBCEncrypter(c.Block, c.AESKey[:c.Block.BlockSize()])
 	chipherText := make([]byte, len(plantText))
 	blockMode.CryptBlocks(chipherText, plantText)
-	outMsg := base64.StdEncoding.EncodeToString(chipherText)
-	signature := c.CreateSignature(c.Token, timestamp, nonce, string(outMsg))
-	return string(outMsg), signature, nil
+	encrypt := base64.StdEncoding.EncodeToString(chipherText)
+	signature := c.CreateSignature(c.Token, timestamp, nonce, encrypt)
+	return encrypt, signature, nil
 }
 
 func sha1Sign(s string) string {
@@ -118,19 +126,19 @@ func sha1Sign(s string) string {
 }
 
 // CreateSignature 数据签名
-func (c *DingTalkCrypto) CreateSignature(token, timestamp, nonce, msg string) string {
+func (c *DingTalkCrypto) CreateSignature(token, encrypt, timestamp, nonce string) string {
 	params := make([]string, 0)
 	params = append(params, token)
 	params = append(params, timestamp)
 	params = append(params, nonce)
-	params = append(params, msg)
+	params = append(params, encrypt)
 	sort.Strings(params)
 	return sha1Sign(strings.Join(params, ""))
 }
 
 // VerificationSignature 验证数据签名
-func (c *DingTalkCrypto) VerificationSignature(token, timestamp, nonce, msg, sigture string) bool {
-	return c.CreateSignature(token, timestamp, nonce, msg) == sigture
+func (c *DingTalkCrypto) VerificationSignature(encrypt, sign, timestamp, nonce string) bool {
+	return c.CreateSignature(c.Token, encrypt, timestamp, nonce) == sign
 }
 
 // pkCS7UnPadding 解密补位
@@ -143,8 +151,8 @@ func pkCS7UnPadding(plantText []byte) []byte {
 // pkCS7Padding 加密补位
 func pkCS7Padding(ciphertext []byte, blockSize int) []byte {
 	padding := blockSize - len(ciphertext)%blockSize
-	padtext := bytes.Repeat([]byte{byte(padding)}, padding)
-	return append(ciphertext, padtext...)
+	text := bytes.Repeat([]byte{byte(padding)}, padding)
+	return append(ciphertext, text...)
 }
 
 // RandomString 随机字符串

@@ -19,10 +19,10 @@ package dingtalk
 import (
 	"bytes"
 	"crypto/aes"
+	"crypto/cipher"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -30,6 +30,8 @@ import (
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/pkg/errors"
@@ -321,26 +323,30 @@ func isNewApi(path string) bool {
 	return strings.HasPrefix(path, "/v1.0/")
 }
 
-//GetDingTalkCrypto 钉钉解密类
-func (ding *dingTalk) GetDingTalkCrypto(token, encodingAESKey, suiteKey string) *crypto.DingTalkCrypto {
+// GetDingTalkCrypto 钉钉事件解密类
+func (ding *dingTalk) GetDingTalkCrypto(token, aesKey string) *crypto.DingTalkCrypto {
+	var (
+		block cipher.Block
+		err   error
+		key   []byte
+	)
 
-	if len(encodingAESKey) != crypto.AesEncodeKeyLength {
-		panic("不合法的EncodingAESKey")
+	if len(aesKey) != crypto.AesEncodeKeyLength {
+		panic("不合法的aes key")
 	}
-	bkey, err := base64.StdEncoding.DecodeString(encodingAESKey + "=")
-	if err != nil {
+
+	if key, err = base64.StdEncoding.DecodeString(aesKey + "="); err != nil {
 		panic(err.Error())
 	}
-	block, err := aes.NewCipher(bkey)
-	if err != nil {
+
+	if block, err = aes.NewCipher(key); err != nil {
 		panic(err.Error())
 	}
 
 	return &crypto.DingTalkCrypto{
-		Token:          token,
-		EncodingAESKey: encodingAESKey,
-		SuiteKey:       suiteKey,
-		BKey:           bkey,
-		Block:          block,
+		Token:    token,
+		SuiteKey: ding.Key,
+		AESKey:   key,
+		Block:    block,
 	}
 }
