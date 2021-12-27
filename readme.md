@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/zhaoyunxing92/dingtalk/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhaoyunxing92/dingtalk)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/zhaoyunxing92/dingtalk/main?logo=CodeIgniter)
 [![issues](https://img.shields.io/github/issues/zhaoyunxing92/dingtalk?color=ff69b4)](https://github.com/zhaoyunxing92/dingtalk/issues)
-[![GitHub milestone](https://img.shields.io/github/milestones/progress/zhaoyunxing92/dingtalk/2)](https://github.com/zhaoyunxing92/dingtalk/milestone/2?closed=1)
+[![GitHub milestone](https://img.shields.io/github/milestones/progress/zhaoyunxing92/dingtalk/3)](https://github.com/zhaoyunxing92/dingtalk/milestone/2?closed=1)
 [![tag](https://img.shields.io/github/v/tag/zhaoyunxing92/dingtalk?color=green&logo=AzurePipelines)](https://github.com/zhaoyunxing92/dingtalk/releases/tag/v2.0.3)
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
