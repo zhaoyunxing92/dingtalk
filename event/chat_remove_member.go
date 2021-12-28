@@ -43,14 +43,11 @@ type ChatRemoveMember struct {
 
 	OperatorUnionId string `json:"OperatorUnionId"`
 
-	// 企业id
-	CorpId string `json:"CorpId"`
-
 	UserIds []string `json:"UserId"`
 
 	UnionIds []string `json:"UnionId"`
 
 	TimeStamp int `json:"TimeStamp"`
 
-	ChatId int `json:"ChatId"`
+	ChatId string `json:"ChatId"`
 }

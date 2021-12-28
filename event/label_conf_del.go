@@ -16,9 +16,16 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
-
-	// 企业id
-	CorpId string `json:"CorpId"`
+// LabelConfDel 删除角色或者角色组
+//{
+//    "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+//    "EventType": "label_conf_del",
+//    "LabelIdList": [
+//        2393849326
+//    ],
+//    "scope": "1",
+//    "TimeStamp": "1640673879734"
+//}
+type LabelConfDel struct {
+	LabelConfAdd
 }

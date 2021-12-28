@@ -16,9 +16,31 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
+// LabelUserChange 员工角色信息发生变更
+//{
+//    "UserIdList": [
+//        "011505184066774889"
+//    ],
+//    "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+//    "EventType": "label_user_change",
+//    "LabelIdList": [
+//        1299380990
+//    ],
+//    "action": "add",
+//    "TimeStamp": "1640670965490"
+//}
+type LabelUserChange struct {
+	Event
 
-	// 企业id
-	CorpId string `json:"CorpId"`
+	// 动作
+	Action string `json:"action"`
+
+	// 时间戳
+	TimeStamp int `json:"TimeStamp,string"`
+
+	// 角色组id
+	LabelIds []int `json:"LabelIdList"`
+
+	// 用户id
+	UserIds []string `json:"UserIdList"`
 }

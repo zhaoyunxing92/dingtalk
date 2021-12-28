@@ -16,9 +16,16 @@
 
 package event
 
-type Event struct {
+// HrmUserRecordChange 人事档案变动等
+//{
+//    "actionType": "userInfoChange",
+//    "EventType": "hrm_user_record_change",
+//    "staffId": "manager164"
+//}
+type HrmUserRecordChange struct {
 	EventType string `json:"EventType"`
 
-	// 企业id
-	CorpId string `json:"CorpId"`
+	StaffId string `json:"staffId"`
+
+	ActionType string `json:"actionType"`
 }

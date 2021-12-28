@@ -16,9 +16,25 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
+import (
+	"encoding/json"
+	"testing"
 
-	// 企业id
-	CorpId string `json:"CorpId"`
+	"github.com/stretchr/testify/assert"
+)
+
+func TestHrmUserRecordChange(t *testing.T) {
+	str := `{
+   "actionType": "userInfoChange",
+   "EventType": "hrm_user_record_change",
+   "staffId": "manager164"
+}`
+	hrm := &HrmUserRecordChange{}
+
+	err := json.Unmarshal([]byte(str), hrm)
+
+	assert.Nil(t, err)
+	assert.Equal(t, hrm.ActionType, "userInfoChange")
+	assert.Equal(t, hrm.EventType, "hrm_user_record_change")
+	assert.Equal(t, hrm.StaffId, "manager164")
 }

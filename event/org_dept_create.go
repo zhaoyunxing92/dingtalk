@@ -16,9 +16,21 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
+// OrgDeptCreate 通讯录企业部门创建
+//{
+//    "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+//    "EventType": "org_dept_create",
+//    "DeptId": [
+//        581208264
+//    ],
+//    "TimeStamp": "1640669222083"
+//}
+type OrgDeptCreate struct {
+	Event
 
-	// 企业id
-	CorpId string `json:"CorpId"`
+	// 部门id
+	DeptIds []int `json:"DeptId"`
+
+	// 时间戳
+	TimeStamp int `json:"TimeStamp,string"`
 }

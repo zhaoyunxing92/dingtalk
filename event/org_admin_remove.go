@@ -16,9 +16,16 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
-
-	// 企业id
-	CorpId string `json:"CorpId"`
+// OrgAdminRemove 通讯录用户被取消设置管理员
+// 会一起触发label_user_change事件
+//{
+//    "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+//    "EventType": "org_admin_remove",
+//    "UserId": [
+//        "011505184066774889"
+//    ],
+//    "TimeStamp": "1640671615174"
+//}
+type OrgAdminRemove struct {
+	OrgAdminAdd
 }

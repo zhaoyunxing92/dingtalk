@@ -16,9 +16,15 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
-
-	// 企业id
-	CorpId string `json:"CorpId"`
+// OrgDeptRemove 通讯录企业部门删除
+//{
+//    "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+//    "EventType": "org_dept_remove",
+//    "DeptId": [
+//        581208264
+//    ],
+//    "TimeStamp": "1640670016319"
+//}
+type OrgDeptRemove struct {
+	OrgDeptCreate
 }

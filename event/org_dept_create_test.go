@@ -16,9 +16,29 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
+import (
+	"encoding/json"
+	"testing"
 
-	// 企业id
-	CorpId string `json:"CorpId"`
+	"github.com/stretchr/testify/assert"
+)
+
+func TestOrgDeptCreate(t *testing.T) {
+	str := `{
+   "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+   "EventType": "org_dept_create",
+   "DeptId": [
+       581208264
+   ],
+   "TimeStamp": "1640669222083"
+}`
+	dept := &OrgDeptCreate{}
+
+	err := json.Unmarshal([]byte(str), dept)
+
+	assert.Nil(t, err)
+	assert.Equal(t, dept.CorpId, "dingc7c5220402493357f2c783f7214b6d69")
+	assert.Equal(t, dept.EventType, "org_dept_create")
+	assert.Equal(t, dept.TimeStamp, 1640669222083)
+	assert.Equal(t, len(dept.DeptIds), 1)
 }

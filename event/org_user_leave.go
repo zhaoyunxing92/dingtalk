@@ -16,9 +16,16 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
-
-	// 企业id
-	CorpId string `json:"CorpId"`
+// OrgUserLeave 通讯录用户离职
+//{
+//    "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+//    "EventType": "user_leave_org",
+//    "UserId": [
+//        "16399780922588973"
+//    ],
+//    "OptStaffId": "manager164",
+//    "TimeStamp": "1640658366191"
+//}
+type OrgUserLeave struct {
+	OrgUserModify
 }

@@ -16,9 +16,16 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
+// OrgChange 企业信息发生变更
+// 会一起触发 org_dept_modify 事件
+//{
+//    "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+//    "EventType": "org_change",
+//    "TimeStamp": "1640672244103"
+//}
+type OrgChange struct {
+	Event
 
-	// 企业id
-	CorpId string `json:"CorpId"`
+	// 时间
+	TimeStamp int `json:"TimeStamp,string"`
 }

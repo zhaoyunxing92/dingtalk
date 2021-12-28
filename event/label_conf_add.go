@@ -16,9 +16,25 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
+// LabelConfAdd 增加角色或者角色组
+// 好像无法区分是角色还是角色组
+//{
+//    "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+//    "EventType": "label_conf_add",
+//    "LabelIdList": [
+//        2393600321
+//    ],
+//    "scope": "1",
+//    "TimeStamp": "1640672959393"
+//}
+type LabelConfAdd struct {
+	Event
 
-	// 企业id
-	CorpId string `json:"CorpId"`
+	// 时间
+	TimeStamp int `json:"TimeStamp,string"`
+
+	Scope string `json:"scope"`
+
+	// 角色id或者角色组id
+	LabelIds []int `json:"LabelIdList"`
 }

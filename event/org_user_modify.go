@@ -16,9 +16,24 @@
 
 package event
 
-type Event struct {
-	EventType string `json:"EventType"`
+// OrgUserModify 通讯录用户更改
+//{
+//    "CorpId": "dingc7c5220402493357f2c783f7214b6d69",
+//    "EventType": "user_modify_org",
+//    "UserId": [
+//        "manager164"
+//    ],
+//    "OptStaffId": "manager164",
+//    "TimeStamp": "1640657432022"
+//}
+type OrgUserModify struct {
+	Event
 
-	// 企业id
-	CorpId string `json:"CorpId"`
+	// 时间戳
+	TimeStamp int `json:"TimeStamp,string"`
+
+	// 操作人，不一定会有，智能人事入职的人员没有该字段
+	OptStaffId string `json:"OptStaffId"`
+
+	UserIds []string `json:"UserId"`
 }
