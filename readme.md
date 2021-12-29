@@ -192,6 +192,9 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [x] [获取员工花名册字段信息](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-obtain-employee-roster-information) `client.GetHrmEmployeeField`
         - [x] [更新员工花名册信息](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-update-employee-file-information) `client.UpdateHrmEmployeeField`
         - [x] [获取花名册元数据](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-roster-metadata-query) `client.GetHrmMeta`
+* 考勤
+   - 考勤组管理
+        - [x] [批量获取考勤组详情](https://open.dingtalk.com/document/orgapp-server/queries-attendance-group-list-details) `client.GetAttendanceGroups`
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
