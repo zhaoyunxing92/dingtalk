@@ -30,6 +30,9 @@ type deptDetail struct {
 
 	ParentId int `json:"parent_id"`
 
+	// 备注
+	Brief string `json:"brief"`
+
 	// 部门标识字段
 	SourceIdentifier string `json:"source_identifier"`
 
