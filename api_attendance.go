@@ -55,3 +55,8 @@ func (ding *dingTalk) SearchAttendanceGroup(userId, groupName string) (rsp respo
 	return rsp, ding.Request(http.MethodPost, constant.SearchAttendanceGroupKey, nil,
 		request.NewSearchAttendanceGroup(userId, groupName), &rsp)
 }
+
+// CreateAttendanceGroup 创建考勤组
+func (ding *dingTalk) CreateAttendanceGroup(res *request.CreateAttendanceGroup) (rsp response.CreateAttendanceGroup, err error) {
+	return rsp, ding.Request(http.MethodPost, constant.CreateAttendanceGroupKey, nil, res, &rsp)
+}
