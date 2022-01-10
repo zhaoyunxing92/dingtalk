@@ -18,6 +18,7 @@ package dingtalk
 
 import (
 	"encoding/json"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -170,4 +171,11 @@ func TestGetAttendanceUserGroup(t *testing.T) {
 	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[1].EndMin, 1)
 	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[1].CheckType, "OffDuty")
 	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[1].CheckTime, "1970-01-01 18:30:00")
+}
+
+func TestDingTalk_GetAttendanceGroupMinimalism(t *testing.T) {
+	minimalism, err := client.GetAttendanceGroupMinimalism("manager164", 0)
+
+	assert.Nil(t, err)
+	fmt.Println(minimalism)
 }
