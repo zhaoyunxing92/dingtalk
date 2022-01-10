@@ -166,4 +166,5 @@ const (
 	GetAttendanceGroupsKey          = "/topapi/attendance/getsimplegroups"       // 批量获取考勤组详情
 	GetAttendanceUserGroupKey       = "/topapi/attendance/getusergroup"          // 获取用户考勤组
 	GetAttendanceGroupMinimalismKey = "/topapi/attendance/group/minimalism/list" // 批量获取考勤组摘要
+	GetAttendanceGroupDetailKey     = "/topapi/attendance/group/query"           // 获取考勤组详情
 )

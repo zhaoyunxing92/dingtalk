@@ -18,7 +18,6 @@ package dingtalk
 
 import (
 	"encoding/json"
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -177,5 +176,21 @@ func TestDingTalk_GetAttendanceGroupMinimalism(t *testing.T) {
 	minimalism, err := client.GetAttendanceGroupMinimalism("manager164", 0)
 
 	assert.Nil(t, err)
-	fmt.Println(minimalism)
+	assert.Equal(t, minimalism.MinimalismGroup.Attendance[0].Id, 792440025)
+	assert.Equal(t, minimalism.MinimalismGroup.Attendance[0].Name, "技术考勤")
+}
+
+func TestDingTalk_GetAttendanceGroupDetail(t *testing.T) {
+	detail, err := client.GetAttendanceGroupDetail("manager164", 792440025)
+
+	assert.Nil(t, err)
+	assert.Equal(t, detail.AttendanceGroup.Id, 792440025)
+	assert.Equal(t, detail.AttendanceGroup.Name, "技术考勤")
+	assert.Equal(t, detail.AttendanceGroup.AddressList[0], "绿城未来park")
+	assert.Equal(t, detail.AttendanceGroup.MemberCount, 3)
+	assert.Equal(t, detail.AttendanceGroup.OwnerUserId, "manager164")
+	assert.Equal(t, detail.AttendanceGroup.ShiftIds[0], 686275261)
+	assert.Equal(t, detail.AttendanceGroup.Type, "FIXED")
+	assert.Equal(t, detail.AttendanceGroup.Wifis[0], "wifi")
+	assert.Equal(t, len(detail.AttendanceGroup.WorkDayList), 7)
 }
