@@ -163,6 +163,7 @@ const (
 	UpdateHrmEmployeeFieldKey = "/topapi/smartwork/hrm/employee/v2/update"       // 更新员工花名册信息
 	GetHrmMetaKey             = "/topapi/smartwork/hrm/roster/meta/get"          // 获取花名册元数据
 
-	GetAttendanceGroupsKey    = "/topapi/attendance/getsimplegroups" // 批量获取考勤组详情
-	GetAttendanceUserGroupKey = "/topapi/attendance/getusergroup"    // 获取用户考勤组
+	GetAttendanceGroupsKey          = "/topapi/attendance/getsimplegroups"       // 批量获取考勤组详情
+	GetAttendanceUserGroupKey       = "/topapi/attendance/getusergroup"          // 获取用户考勤组
+	GetAttendanceGroupMinimalismKey = "/topapi/attendance/group/minimalism/list" // 批量获取考勤组摘要
 )

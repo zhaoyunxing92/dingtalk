@@ -196,6 +196,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
    - 考勤组管理
         - [x] [批量获取考勤组详情](https://open.dingtalk.com/document/orgapp-server/queries-attendance-group-list-details) `client.GetAttendanceGroups`
         - [x] [获取用户考勤组](https://open.dingtalk.com/document/orgapp-server/queries-a-user-attendance-group) `client.GetAttendanceUserGroup`
+        - [x] [批量获取考勤组摘要](https://open.dingtalk.com/document/orgapp-server/batch-query-of-simple-information-of-the-attendance-group) `client.GetAttendanceGroupMinimalism`
 
 * 应用管理 (**3**/4)
     - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
