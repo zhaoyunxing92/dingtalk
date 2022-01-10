@@ -23,7 +23,6 @@ import (
 )
 
 func TestNewGetAttendanceUserGroup(t *testing.T) {
-
 	group := NewGetAttendanceUserGroup("userid")
 
 	assert.Equal(t, group.UserId, "userid")
