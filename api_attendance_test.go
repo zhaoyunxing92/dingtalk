@@ -194,3 +194,10 @@ func TestDingTalk_GetAttendanceGroupDetail(t *testing.T) {
 	assert.Equal(t, detail.AttendanceGroup.Wifis[0], "wifi")
 	assert.Equal(t, len(detail.AttendanceGroup.WorkDayList), 7)
 }
+
+func TestDingTalk_SearchAttendanceGroup(t *testing.T) {
+	group, err := client.SearchAttendanceGroup("manager164", "技术")
+
+	assert.Nil(t, err)
+	assert.Equal(t, len(group.AttendanceGroups), 1)
+}
