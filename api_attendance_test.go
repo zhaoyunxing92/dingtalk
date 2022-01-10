@@ -139,3 +139,9 @@ func TestGetAttendanceGroups_Json(t *testing.T) {
 	assert.Equal(t, group.Groups[0].SelectedClass[0].Sections[0].Times[1].CheckType, "OffDuty")
 	assert.Equal(t, group.Groups[0].SelectedClass[0].Sections[0].Times[1].Across, 0)
 }
+
+func TestGetAttendanceUserGroup(t *testing.T) {
+	group, err := client.GetAttendanceUserGroup("184919295227658120")
+	assert.Nil(t, err)
+	assert.NotNil(t, group)
+}

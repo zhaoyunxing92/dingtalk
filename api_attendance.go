@@ -29,3 +29,9 @@ func (ding *dingTalk) GetAttendanceGroups(offset, size int) (rsp response.GetAtt
 	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceGroupsKey, nil,
 		request.NewGetAttendanceGroup(offset, size), &rsp)
 }
+
+// GetAttendanceUserGroup 获取用户考勤组
+func (ding *dingTalk) GetAttendanceUserGroup(userId string) (rsp response.GetAttendanceUserGroup, err error) {
+	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceUserGroupKey, nil,
+		request.NewGetAttendanceUserGroup(userId), &rsp)
+}
