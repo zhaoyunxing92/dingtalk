@@ -139,3 +139,35 @@ func TestGetAttendanceGroups_Json(t *testing.T) {
 	assert.Equal(t, group.Groups[0].SelectedClass[0].Sections[0].Times[1].CheckType, "OffDuty")
 	assert.Equal(t, group.Groups[0].SelectedClass[0].Sections[0].Times[1].Across, 0)
 }
+
+func TestGetAttendanceUserGroup(t *testing.T) {
+	group, err := client.GetAttendanceUserGroup("manager164")
+
+	assert.Nil(t, err)
+	assert.NotNil(t, group)
+	assert.Equal(t, group.AttendanceUserGroup.Type, "FIXED")
+	assert.Equal(t, group.AttendanceUserGroup.Name, "技术考勤")
+	assert.Equal(t, group.AttendanceUserGroup.GroupId, 792440025)
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Name, "考勤班次")
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].ClassId, 686275261)
+
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Setting.RestEndTime.Across, 0)
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Setting.RestEndTime.CheckType, "OffDuty")
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Setting.RestEndTime.CheckTime, "1970-01-01 13:00:00")
+
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Setting.RestBeginTime.Across, 0)
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Setting.RestBeginTime.CheckType, "OnDuty")
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Setting.RestBeginTime.CheckTime, "1970-01-01 12:00:00")
+
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[0].Across, 0)
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[0].BeginMin, 1)
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[0].EndMin, 1)
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[0].CheckType, "OnDuty")
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[0].CheckTime, "1970-01-01 09:30:00")
+
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[1].Across, 0)
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[1].BeginMin, 1)
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[1].EndMin, 1)
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[1].CheckType, "OffDuty")
+	assert.Equal(t, group.AttendanceUserGroup.Classes[0].Sections[0].Times[1].CheckTime, "1970-01-01 18:30:00")
+}
