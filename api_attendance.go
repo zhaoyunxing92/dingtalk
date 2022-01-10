@@ -42,3 +42,10 @@ func (ding *dingTalk) GetAttendanceGroupMinimalism(userId string, cursor int) (r
 	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceGroupMinimalismKey, nil,
 		request.NewGetAttendanceGroupMinimalism(userId, cursor), &rsp)
 }
+
+// GetAttendanceGroupDetail 获取考勤组详情
+func (ding *dingTalk) GetAttendanceGroupDetail(userId string, groupId int) (rsp response.GetAttendanceGroupDetail,
+	err error) {
+	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceGroupDetailKey, nil,
+		request.NewGetAttendanceGroupDetail(userId, groupId), &rsp)
+}
