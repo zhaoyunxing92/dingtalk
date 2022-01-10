@@ -49,3 +49,9 @@ func (ding *dingTalk) GetAttendanceGroupDetail(userId string, groupId int) (rsp 
 	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceGroupDetailKey, nil,
 		request.NewGetAttendanceGroupDetail(userId, groupId), &rsp)
 }
+
+// SearchAttendanceGroup 搜索考勤组摘要
+func (ding *dingTalk) SearchAttendanceGroup(userId, groupName string) (rsp response.SearchAttendanceGroup, err error) {
+	return rsp, ding.Request(http.MethodPost, constant.SearchAttendanceGroupKey, nil,
+		request.NewSearchAttendanceGroup(userId, groupName), &rsp)
+}
