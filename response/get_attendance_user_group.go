@@ -20,7 +20,7 @@ type GetAttendanceUserGroup struct {
 	Response
 
 	// 查询结果
-	Result struct {
+	AttendanceUserGroup struct {
 
 		// 考勤组ID
 		GroupId int `json:"group_id"`
