@@ -18,6 +18,10 @@ package dingtalk
 
 import (
 	"net/http"
+	"net/url"
+	"strconv"
+
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
 
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
@@ -83,4 +87,13 @@ func (ding *dingTalk) GetParentIdsByUserId(userId string) (req response.GetParen
 func (ding *dingTalk) GetParentIdsByDeptId(deptId int) (req response.GetParentIdsByDeptId, err error) {
 	return req, ding.Request(http.MethodPost, constant.GetParentDeptsByDeptKey, nil,
 		request.NewGetParentIdsByDeptId(deptId), &req)
+}
+
+// FetchDeptList 支持递归获取部门列表 https://open.dingtalk.com/document/orgapp-server/obtain-the-department-list
+func (ding *dingTalk) FetchDeptList(deptId int, fetch bool, lang language.Language) (rsp response.FetchDeptList, err error) {
+	query := url.Values{}
+	query.Set("lang", string(lang))
+	query.Set("fetch_child", strconv.FormatBool(fetch))
+	query.Set("id", strconv.Itoa(deptId))
+	return rsp, ding.Request(http.MethodGet, constant.FetchDeptListKey, query, nil, &rsp)
 }

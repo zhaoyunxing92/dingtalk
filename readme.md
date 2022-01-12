@@ -51,7 +51,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
 
 ## 开发进度
 
-* 获取凭证 (**2**/5)
+* 获取凭证
     - [x] [获取企业内部应用的access_token](https://developers.dingtalk.com/document/app/obtain-orgapp-token) `client.GetAccessToken`
     - [x] [服务商获取第三方应用授权企业的access_token](https://developers.dingtalk.com/document/app/obtains-the-enterprise-authorized-credential) `client.GetCorpAccessToken`
     - [x] [获取第三方企业应用的suite_access_token](https://developers.dingtalk.com/document/app/obtain-application-suite-ticket) `client.GetSuiteAccessToken`
@@ -59,7 +59,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
     - [x] [获取微应用后台免登的SsoToken](https://developers.dingtalk.com/document/app/obtain-the-ssotoken-for-micro-application-background-logon-free) `client.GetSSOToken`
 
 * 通讯录管理
-    - 用户管理(**14**/14)
+    - 用户管理
         - [x] [创建用户](https://developers.dingtalk.com/document/app/user-information-creation) `client.CreateUser`
         - [x] [删除用户](https://developers.dingtalk.com/document/app/delete-a-user) `client.DeleteUser`
         - [x] [更新用户详情](https://developers.dingtalk.com/document/app/user-information-update) `client.UpdateUser`
@@ -75,7 +75,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [x] [获取管理员通讯录权限范围](https://developers.dingtalk.com/document/app/query-permissions-of-the-administrator-address-book) `client.GetOrgAdminScope`
         - [x] [获取管理员的应用管理权限](https://developers.dingtalk.com/document/app/obtains-the-administrator-s-microapplication-management-permission) `client.GetUserCanAccessApplet`
 
-    - 部门管理(**8**/8)
+    - 部门管理
         - [x] [创建部门](https://developers.dingtalk.com/document/app/create-a-department-v2) `client.CreateDept`
         - [x] [更新部门](https://developers.dingtalk.com/document/app/update-a-department-v2) `client.UpdateDept`
         - [x] [删除部门](https://developers.dingtalk.com/document/app/delete-a-department-v2) `client.DeleteDept`
@@ -84,8 +84,9 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [x] [获取子部门Id列表](https://developers.dingtalk.com/document/app/obtain-a-sub-department-id-list-v2)  `client.GetSubDeptList`
         - [x] [获取指定部门的所有父部门列表](https://developers.dingtalk.com/document/app/query-the-list-of-all-parent-departments-of-a-department) `client.GetParentIdsByDeptId`
         - [x] [获取指定用户的所有父部门列表](https://developers.dingtalk.com/document/app/queries-the-list-of-all-parent-departments-of-a-user)  `client.GetParentIdsByUserId`
+        - [x] [支持递归获取部门列表](https://open.dingtalk.com/document/orgapp-server/obtain-the-department-list)  `client.FetchDeptList`
 
-    - 角色管理(**11**/11)
+    - 角色管理
         - [x] [创建角色](https://developers.dingtalk.com/document/app/add-role) `client.CreateRole`
         - [x] [创建角色组](https://developers.dingtalk.com/document/app/add-a-role-group) `client.CreateRoleGroup`
         - [x] [更新角色](https://developers.dingtalk.com/document/app/update-role) `client.UpdateRole`
@@ -100,7 +101,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [x] [获取角色详情](https://developers.dingtalk.com/document/app/queries-role-details) `client.GetRoleDetail`
         - [x] [获取指定角色的员工列表](https://developers.dingtalk.com/document/app/obtain-the-list-of-employees-of-a-role) `client.GetRoleUserList`
 
-    - 外部联系人(**6**/6)
+    - 外部联系人
         - [x] [添加外部联系人](https://developers.dingtalk.com/document/app/add-enterprise-external-contacts) `client.CreateExtContact`
         - [x] [删除外部联系人](https://developers.dingtalk.com/document/app/delete-external-contact) `client.DeleteExtContact`
         - [x] [更新外部联系人](https://developers.dingtalk.com/document/app/update-enterprise-external-contacts) `client.UpdateExtContact`
@@ -108,7 +109,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [x] [获取外部联系人标签列表](https://developers.dingtalk.com/document/app/obtains-a-list-of-external-contact-tags) `client.GetExtContactLabel`
         - [x] [获取外部联系人详情](https://developers.dingtalk.com/document/app/obtains-the-external-contact-details-of-an-enterprise) `client.GetExtContactDetail`
 
-* 群会话管理(**7**/7)
+* 群会话管理
     - [x] [创建群会话](https://developers.dingtalk.com/document/app/create-group-session) `client.CreateChat`
     - [x] [获取群会话信息](https://developers.dingtalk.com/document/app/obtain-a-group-session) `client.GetChatInfo`
     - [x] [修改群会话](https://developers.dingtalk.com/document/app/modify-a-group-session)  `client.UpdateChat`
@@ -117,7 +118,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
     - [x] [设置群管理员](https://developers.dingtalk.com/document/app/set-chat-admin)  `client.ChatSetSubAdmin`
     - [x] [设置群成员昵称](https://developers.dingtalk.com/document/app/set-a-group-nickname)  `client.ChatSetUserNick`
 
-* 消息通知(4/6)
+* 消息通知
     - 工作通知
         - [x] [使用模板发送工作通知消息](https://developers.dingtalk.com/document/app/work-notification-templating-send-notification-interface) `client.SendTemplateMessage`
         - [x] [发送工作通知](https://developers.dingtalk.com/document/app/asynchronous-sending-of-enterprise-session-messages) `client.SendCorpConvMessage`
@@ -138,7 +139,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
     - [x] [获取应用管理员的身份信息](https://developers.dingtalk.com/document/app/exchange-code-for-the-identity-information-of-a-microapplication-administrator) `client.GetSSOUserInfo`
     - [x] [根据sns临时授权码获取用户信息](https://developers.dingtalk.com/document/app/obtain-the-user-information-based-on-the-sns-temporary-authorization)
 
-* 应用授权(**6**/6)
+* 应用授权
     - [x] [激活应用](https://developers.dingtalk.com/document/app/activate-suite) `client.ActivateSuite`
     - [x] [获取授权应用的基本信息](https://developers.dingtalk.com/document/app/obtains-application-information-of-an-enterprise)  `client.GetAgentInfo`
     - [x] [获取企业授权信息](https://developers.dingtalk.com/document/app/obtains-the-basic-information-of-an-enterprise) `client.GetAuthInfo`
@@ -193,7 +194,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [x] [更新员工花名册信息](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-update-employee-file-information) `client.UpdateHrmEmployeeField`
         - [x] [获取花名册元数据](https://open.dingtalk.com/document/orgapp-server/intelligent-personnel-roster-metadata-query) `client.GetHrmMeta`
 * 考勤
-   - 考勤组管理
+    - 考勤组管理
         - [x] [批量获取考勤组详情](https://open.dingtalk.com/document/orgapp-server/queries-attendance-group-list-details) `client.GetAttendanceGroups`
         - [x] [获取用户考勤组](https://open.dingtalk.com/document/orgapp-server/queries-a-user-attendance-group) `client.GetAttendanceUserGroup`
         - [x] [批量获取考勤组摘要](https://open.dingtalk.com/document/orgapp-server/batch-query-of-simple-information-of-the-attendance-group) `client.GetAttendanceGroupMinimalism`
