@@ -19,6 +19,8 @@ package dingtalk
 import (
 	"testing"
 
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
@@ -120,4 +122,11 @@ func TestDingTalk_GetParentIdsByUserId(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 	assert.NotNil(t, res.Parent)
+}
+
+func TestDingTalk_FetchDeptList(t *testing.T) {
+	res, err := client.FetchDeptList(1, true, language.ZH_CN)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 }

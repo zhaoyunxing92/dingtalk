@@ -62,7 +62,8 @@ const (
 	GetParentDeptsByUserKey  = "/topapi/v2/department/listparentbyuser" // 查询指定用户的所有上级父部门路径
 	GetParentDeptsByDeptKey  = "/topapi/v2/department/listparentbydept" // 查询部门的所有上级父部门路径
 	GetIndustryDeptDetailKey = "/topapi/industry/department/get"        // 获取外部联系人详情
-	GetIndustryDeptKey       = "/topapi/industry/department/list"       // 获取部门列表
+	GetIndustryDeptKey       = "/topapi/industry/department/list"       // 行业获取部门列表
+	FetchDeptListKey         = "/department/list"                       // 支持递归获取部门列表
 
 	CreateExtContactKey    = "/topapi/extcontact/create"          // 添加外部联系人
 	DeleteExtContactKey    = "/topapi/extcontact/delete"          // 删除外部联系人
