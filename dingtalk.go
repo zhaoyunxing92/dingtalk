@@ -136,7 +136,7 @@ func (ding *dingTalk) Request(method, path string, query url.Values, body interf
 		query = url.Values{}
 	}
 
-	if !query.Has("access_token") && path != constant.GetTokenKey && path != constant.CorpAccessToken &&
+	if query.Get("access_token") == "" && path != constant.GetTokenKey && path != constant.CorpAccessToken &&
 		path != constant.SuiteAccessToken && path != constant.GetAuthInfo && path != constant.GetAgentKey &&
 		path != constant.ActivateSuiteKey && path != constant.GetSSOTokenKey && path != constant.GetUnactiveCorpKey &&
 		path != constant.ReauthCorpKey && path != constant.GetCorpPermanentCodeKey {
