@@ -23,6 +23,7 @@ import (
 )
 
 func TestDingTalk_GetIndustryDeptDetail(t *testing.T) {
+	t.Skip()
 	res, err := client.GetIndustryDeptDetail(561570467)
 
 	assert.Nil(t, err)

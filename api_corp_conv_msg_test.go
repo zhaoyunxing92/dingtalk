@@ -59,12 +59,13 @@ func TestDingTalk_SendCorpConvMessage_Text(t *testing.T) {
 }
 
 func TestDingTalk_SendCorpConvMessage_Link(t *testing.T) {
+
 	msg := message.NewLinkMessage("消息标题，建议100字符以内",
 		"消息描述，建议500字符以内", "@lADOADmaWMzazQKA", "https://github.com/zhaoyunxing92/dingtalk")
 
-	res, err := isv.SendCorpConvMessage(
+	res, err := client.SendCorpConvMessage(
 		request.NewCorpConvMessage(msg).
-			SetUserIds("manager7556").
+			SetUserIds("manager164").
 			Build())
 
 	assert.Nil(t, err)
@@ -74,9 +75,9 @@ func TestDingTalk_SendCorpConvMessage_Link(t *testing.T) {
 func TestDingTalk_SendCorpConvMessage_Image(t *testing.T) {
 	msg := message.NewImageMessages("@lADOADmaWMzazQKA")
 
-	res, err := isv.SendCorpConvMessage(
+	res, err := client.SendCorpConvMessage(
 		request.NewCorpConvMessage(msg).
-			SetUserIds("manager7556").
+			SetUserIds("manager164").
 			Build())
 
 	assert.Nil(t, err)
@@ -86,9 +87,9 @@ func TestDingTalk_SendCorpConvMessage_Image(t *testing.T) {
 func TestDingTalk_SendCorpConvMessage_File(t *testing.T) {
 	msg := message.NewFileMessage("@lADOADmaWMzazQKA")
 
-	res, err := isv.SendCorpConvMessage(
+	res, err := client.SendCorpConvMessage(
 		request.NewCorpConvMessage(msg).
-			SetUserIds("manager7556").
+			SetUserIds("manager164").
 			Build())
 
 	assert.Nil(t, err)
@@ -130,10 +131,10 @@ func TestDingTalk_SendCorpConvMessage_OA(t *testing.T) {
 	msg.StatusBar.Value = "进行中"
 	msg.StatusBar.BackColor = "0xFFF65E5E"
 
-	res, err := isv.SendCorpConvMessage(
+	res, err := client.SendCorpConvMessage(
 		request.NewCorpConvMessage(msg).
 			SetAgentId(1332307896).
-			SetUserIds("manager7556").
+			SetUserIds("manager164").
 			Build())
 
 	assert.Nil(t, err)
@@ -206,6 +207,7 @@ func TestDingTalk_SendCorpConvMessage_CardButtons(t *testing.T) {
 }
 
 func TestDingTalk_UpdateCorpConvMessageStatus(t *testing.T) {
+	t.Skip()
 	res, err := isv.UpdateCorpConvMessageStatus(
 		request.NewUpdateCorpConvMsgStatus(472420145901, "完成").
 			SetAgentId(1332307896).
@@ -217,6 +219,7 @@ func TestDingTalk_UpdateCorpConvMessageStatus(t *testing.T) {
 }
 
 func TestDingTalk_GetMessageSendResult(t *testing.T) {
+	t.Skip()
 	res, err := isv.GetMessageSendResult(1332307896, 474307154979)
 
 	assert.Nil(t, err)
@@ -224,6 +227,7 @@ func TestDingTalk_GetMessageSendResult(t *testing.T) {
 }
 
 func TestDingTalk_RecallCorpConvMessage(t *testing.T) {
+	t.Skip()
 	res, err := isv.RecallCorpConvMessage(472428178475, 1332307896)
 
 	assert.Nil(t, err)

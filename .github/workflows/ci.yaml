@@ -15,6 +15,9 @@ jobs:
       matrix:
         go_version:
           - 1.16
+          - 1.15
+          - 1.14
+          - 1.13
         os:
           - ubuntu-latest
 
@@ -31,8 +34,8 @@ jobs:
         run: |
           export GO111MODULE=on
           cd ~
-          go get -u mvdan.cc/gofumpt@latest
           go get -u github.com/lsm-dev/license-header-checker/cmd/license-header-checker@v1.2.0
+          # go get -u mvdan.cc/gofumpt@latest
 
       - name: Check License Header
         run: |
@@ -41,7 +44,8 @@ jobs:
 
       - name: gofmt
         run: |
-          gofumpt -l -w . && git status && [[ -z `git status -s` ]]
+          go fmt ./... && git status && [[ -z `git status -s` ]]
+          # gofumpt -l -w . && git status && [[ -z `git status -s` ]]
            # diff -u <(echo -n) <(gofmt -d -s .)
 
       - name: Test Request Struct

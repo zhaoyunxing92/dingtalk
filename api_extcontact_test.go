@@ -24,6 +24,7 @@ import (
 )
 
 func TestDingTalk_CreateExtContact(t *testing.T) {
+	t.Skip()
 	res, err := client.CreateExtContact(
 		request.NewCreateExtContact("张三", "18058762219", "86", "manager164",
 			1587784123, 1587784123, 1587784124, 456).
@@ -40,6 +41,7 @@ func TestDingTalk_CreateExtContact(t *testing.T) {
 }
 
 func TestDingTalk_DeleteExtContact(t *testing.T) {
+	t.Skip()
 	res, err := client.DeleteExtContact("01131104492477488")
 
 	assert.NotNil(t, err)

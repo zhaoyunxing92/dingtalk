@@ -39,6 +39,7 @@ func TestDingTalk_GetAccessToken(t *testing.T) {
 }
 
 func TestDingTalk_GetSuiteAccessToken(t *testing.T) {
+	t.Skip()
 	token, err := client.GetSuiteAccessToken()
 	assert.Nil(t, err)
 	assert.NotNil(t, token)
@@ -46,6 +47,7 @@ func TestDingTalk_GetSuiteAccessToken(t *testing.T) {
 }
 
 func TestDingTalk_GetCorpAccessToken(t *testing.T) {
+	t.Log()
 	token, err := isv.GetCorpAccessToken()
 	assert.Nil(t, err)
 	assert.NotNil(t, token)
@@ -53,6 +55,7 @@ func TestDingTalk_GetCorpAccessToken(t *testing.T) {
 }
 
 func TestDingTalk_GetSSOToken(t *testing.T) {
+	t.Skip()
 	token, err := client.GetSSOToken("dingc7c5220402493357f2c783f7214b6d69", "")
 
 	assert.NotNil(t, err)

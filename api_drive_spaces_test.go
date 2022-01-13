@@ -47,7 +47,7 @@ func TestDingTalk_GetDriveSpaces(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.Equal(t, len(res.Spaces), 5)
+	assert.Equal(t, len(res.Spaces), 1)
 }
 
 func TestDingTalk_GetDriveSpacesInfo(t *testing.T) {
@@ -56,6 +56,8 @@ func TestDingTalk_GetDriveSpacesInfo(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 	assert.Equal(t, res.Name, "全员文件夹")
+	assert.Equal(t, res.PermissionMode, "acl")
+	assert.Equal(t, res.Type, string(spaces.Org))
 }
 
 func TestDingTalk_GetDriveSpacesFiles(t *testing.T) {
@@ -85,10 +87,11 @@ func TestDingTalk_CreateDriveSpacesFiles_Folder(t *testing.T) {
 	res, err := client.CreateDriveSpacesFiles(f)
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.Equal(t, res.FileName, "golang")
+	assert.Equal(t, res.FileName, "dingtalk")
 }
 
 func TestDingTalk_CreateDriveSpacesFiles_File(t *testing.T) {
+	t.Skip()
 	f := request.NewCreateDriveSpacesFiles("ABNiSWeAolg5OETyYT60wdQiEiE", "3452011774",
 		"dingtalk.png", file.File).
 		SetMediaId("@lALPDeREWzc3zXBgzQJA").
@@ -102,6 +105,7 @@ func TestDingTalk_CreateDriveSpacesFiles_File(t *testing.T) {
 }
 
 func TestDingTalk_DeleteDriveSpacesFiles(t *testing.T) {
+	t.Skip()
 	res, err := client.DeleteDriveSpacesFiles("3452011774", "47459660818",
 		"ABNiSWeAolg5OETyYT60wdQiEiE", policy.Completely)
 	assert.Nil(t, err)
@@ -109,6 +113,7 @@ func TestDingTalk_DeleteDriveSpacesFiles(t *testing.T) {
 }
 
 func TestDingTalk_MoveDriveSpacesFiles(t *testing.T) {
+	t.Skip()
 	files := request.NewMoveDriveSpacesFiles("3452011774", "47494266429",
 		"47494327156", "ABNiSWeAolg5OETyYT60wdQiEiE").
 		SetTargetParentId("3452011774").
@@ -121,6 +126,7 @@ func TestDingTalk_MoveDriveSpacesFiles(t *testing.T) {
 }
 
 func TestDingTalk_RenameDriveSpacesFiles(t *testing.T) {
+	t.Skip()
 	res, err := client.RenameDriveSpacesFiles("3452011774", "47494266429",
 		"newName", "ABNiSWeAolg5OETyYT60wdQiEiE")
 	assert.Nil(t, err)
@@ -129,6 +135,7 @@ func TestDingTalk_RenameDriveSpacesFiles(t *testing.T) {
 }
 
 func TestDingTalk_GetDriveSpacesFilesDownloadInfo(t *testing.T) {
+	t.Skip()
 	res, err := client.GetDriveSpacesFilesDownloadInfo("3452011774", "47494266429",
 		"ABNiSWeAolg5OETyYT60wdQiEiE")
 	assert.Nil(t, err)
