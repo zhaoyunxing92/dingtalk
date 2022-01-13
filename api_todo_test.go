@@ -18,7 +18,6 @@ package dingtalk
 
 import (
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
@@ -31,7 +30,7 @@ func TestDingTalk_CreateTodo(t *testing.T) {
 		//SetSourceId("todo123456").
 		SetAppUrl("https://developers.dingtalk.com").
 		SetPcUrl("https://developers.dingtalk.com").
-		SetDueTime(int(time.Now().UnixMilli())).
+		//SetDueTime(int(time.Now().UnixMilli())).
 		SetPriority(40).
 		SetExecutors("ABNiSWeAolg5OETyYT60wdQiEiE").
 		SetParticipants("ABNiSWeAolg5OETyYT60wdQiEiE").
