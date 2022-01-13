@@ -31,6 +31,7 @@ func TestDingTalk_CreateUser(t *testing.T) {
 }
 
 func TestDingTalk_UpdateUser(t *testing.T) {
+	t.Skip()
 	res, err := client.UpdateUser(
 		request.NewUpdateUser("1948546245774889").
 			SetName("李四").
@@ -47,6 +48,7 @@ func TestDingTalk_UpdateUser(t *testing.T) {
 }
 
 func TestDingTalk_DeleteUser(t *testing.T) {
+	t.Skip()
 	res, err := client.DeleteUser("1948546245774889")
 
 	assert.Nil(t, err)
