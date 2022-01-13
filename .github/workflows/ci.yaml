@@ -30,11 +30,11 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
-      - name: Install imports-formatter license-header-checker
+      - name: Install gofumpt license-header-checker
         run: |
           export GO111MODULE=on
           cd ~
-          go get -u mvdan.cc/gofumpt@latest
+#          go get -u mvdan.cc/gofumpt@latest
           go get -u github.com/lsm-dev/license-header-checker/cmd/license-header-checker@v1.2.0
 
       - name: Check License Header
@@ -44,7 +44,8 @@ jobs:
 
       - name: gofmt
         run: |
-          gofumpt -l -w . && git status && [[ -z `git status -s` ]]
+           go fmt ./... && git status && [[ -z `git status -s` ]]
+           # gofumpt -l -w . && git status && [[ -z `git status -s` ]]
            # diff -u <(echo -n) <(gofmt -d -s .)
 
       - name: Test Request Struct
