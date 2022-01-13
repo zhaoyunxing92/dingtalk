@@ -206,6 +206,7 @@ func TestDingTalk_SearchAttendanceGroup(t *testing.T) {
 }
 
 func TestDingTalk_CreateAttendanceGroup_TURN(t *testing.T) {
+	t.Skip()
 	group := request.NewCreateAttendanceGroup("manager164",
 		"创建排班制考勤组",
 		attendance.TURN,

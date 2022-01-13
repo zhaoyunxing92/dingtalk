@@ -18,18 +18,14 @@ package dingtalk
 
 import (
 	"testing"
-)
 
-import (
 	"github.com/stretchr/testify/assert"
-)
-
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
 
 func TestDingTalk_SendTemplateMessage(t *testing.T) {
+	t.Skip()
 	res, err := isv.SendTemplateMessage(
 		request.NewSendTemplateMessage(1332307896, "80424a44cb444c53a071aae34c0fd140").
 			SetUserIds("manager7556", "manager7556").
@@ -41,6 +37,7 @@ func TestDingTalk_SendTemplateMessage(t *testing.T) {
 }
 
 func TestDingTalk_GetMessageProgress(t *testing.T) {
+	t.Skip()
 	res, err := client.GetMessageSendResult(1332307896, 474307154979)
 
 	assert.Nil(t, err)
@@ -50,14 +47,15 @@ func TestDingTalk_GetMessageProgress(t *testing.T) {
 func TestDingTalk_SendCorpConvMessage_Text(t *testing.T) {
 	msg := message.NewTextMessage("可以撤回的消息")
 
-	res, err := isv.SendCorpConvMessage(
+	res, err := client.SendCorpConvMessage(
 		request.NewCorpConvMessage(msg).
 			SetAgentId(1332307896).
-			SetUserIds("manager7556").
+			SetUserIds("manager164").
 			Build())
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
+	assert.Equal(t, res.TaskId > 0, true)
 }
 
 func TestDingTalk_SendCorpConvMessage_Link(t *testing.T) {
