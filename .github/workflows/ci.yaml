@@ -14,10 +14,9 @@ jobs:
       # If you want to matrix build , you can append the following list.
       matrix:
         go_version:
+          - 1.17
           - 1.16
           - 1.15
-          - 1.14
-          - 1.13
         os:
           - ubuntu-latest
 
@@ -48,7 +47,7 @@ jobs:
           # gofumpt -l -w . && git status && [[ -z `git status -s` ]]
            # diff -u <(echo -n) <(gofmt -d -s .)
 
-      - name: Test Request Struct
+      - name: Test
         # run: go test -v request/...
         run: go test . -race -coverprofile=coverage.txt -covermode=atomic -v
 

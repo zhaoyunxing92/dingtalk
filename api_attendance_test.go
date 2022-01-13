@@ -144,6 +144,7 @@ func TestGetAttendanceGroups_Json(t *testing.T) {
 }
 
 func TestGetAttendanceUserGroup(t *testing.T) {
+	t.Skip()
 	group, err := client.GetAttendanceUserGroup("manager164")
 
 	assert.Nil(t, err)
