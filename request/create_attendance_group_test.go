@@ -28,6 +28,37 @@ func TestNewCreateAttendanceGroup(t *testing.T) {
 		attendance.FIXED,
 		[]AttendanceMember{NewAttendanceMember("manager164", "")}).
 		SetWorkdayClassList([]string{"0", "12", "12", "12", "12", "12", "0"}).
+		SetOpUserId("userId").
+		SetCorpId("corpId").
+		SetEnableEmpSelectClass(true).
+		SetEnableNextDay(true).
+		SetEnableOutsideCheck(true).
+		SetDefaultClassId(1234).
+		SetModifyMember(true).
+		SetCheckNeedHealthyCode(true).
+		SetEnableFaceCheck(true).
+		SetDisableCheckWithoutSchedule(true).
+		SetDisableCheckWhenRest(true).
+		SetAttendanceType(attendance.FIXED).
+		SetEnableCameraCheck(true).
+		SetEnablePositionBle(true).
+		SetEnableOutsideCameraCheck(true).
+		SetName("name").
+		SetBleDevices(12345).
+		SetWorkdayClassList([]string{"0", "12", "12", "12", "12", "12", "0"}).
+		SetResourcePermissions("schedule", "outSideCheck", "groupType",
+			"groupMember", "checkPositionType", "cameraCheck",
+			"checkTime", "overTimeRule").
+		SetPositions("address", "latitude", "longitude", "accuracy", "title", "corpId").
+		SetOffset(12).
+		SetFreeCheckDayStartMinOffset(12).
+		SetSkipHolidays(true).
+		SetOwner("owner").
+		SetAttendanceShifts(123).
+		SetManagers("1234").
+		SetSpecialDays("SetSpecialDays").
+		SetMembers("userId", "corpId").
+		SetAttendanceWifi("addr", "ssId", "corpId").
 		Build()
 
 	t.Log(group.String())
