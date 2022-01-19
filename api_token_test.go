@@ -26,9 +26,6 @@ import (
 var client = NewClient(1244553273, "dingkjy4w80esdwgjuyo",
 	"bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW", WithLevel(zap.DebugLevel))
 
-// var client = NewClient(1279842668, "dingsoxqy0cobtzqmxud",
-//	"rqKkOr54z2iwVnV8Y0tT1TYua0hPEX78PdytG-cP6JKj7m-V3A3zKt8xQZt3B5Oy")
-
 var isv = NewClient(10435002, "suitegqebx814dt8immqw",
 	"AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m",
 	WithTicket("60LVmSzP5zuDorEjISt2hc1imVeyKHcnTCUGUgslOBGpJXxyyQsbuBpyVhw6eunNAt3WXO0u9yfnXmcsskHNdN"),
@@ -42,6 +39,7 @@ func TestDingTalk_GetAccessToken(t *testing.T) {
 }
 
 func TestDingTalk_GetSuiteAccessToken(t *testing.T) {
+	t.Skip()
 	token, err := client.GetSuiteAccessToken()
 	assert.Nil(t, err)
 	assert.NotNil(t, token)
@@ -49,6 +47,7 @@ func TestDingTalk_GetSuiteAccessToken(t *testing.T) {
 }
 
 func TestDingTalk_GetCorpAccessToken(t *testing.T) {
+	t.Log()
 	token, err := isv.GetCorpAccessToken()
 	assert.Nil(t, err)
 	assert.NotNil(t, token)
@@ -56,6 +55,7 @@ func TestDingTalk_GetCorpAccessToken(t *testing.T) {
 }
 
 func TestDingTalk_GetSSOToken(t *testing.T) {
+	t.Skip()
 	token, err := client.GetSSOToken("dingc7c5220402493357f2c783f7214b6d69", "")
 
 	assert.NotNil(t, err)

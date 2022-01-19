@@ -20,6 +20,9 @@ import (
 	"encoding/json"
 	"testing"
 
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/attendance"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
@@ -141,6 +144,7 @@ func TestGetAttendanceGroups_Json(t *testing.T) {
 }
 
 func TestGetAttendanceUserGroup(t *testing.T) {
+	t.Skip()
 	group, err := client.GetAttendanceUserGroup("manager164")
 
 	assert.Nil(t, err)
@@ -200,4 +204,19 @@ func TestDingTalk_SearchAttendanceGroup(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.Equal(t, len(group.AttendanceGroups), 1)
+}
+
+func TestDingTalk_CreateAttendanceGroup_TURN(t *testing.T) {
+	t.Skip()
+	group := request.NewCreateAttendanceGroup("manager164",
+		"创建排班制考勤组",
+		attendance.TURN,
+		[]request.AttendanceMember{request.NewAttendanceMember("manager164", "")}).
+		Build()
+
+	res, err := client.CreateAttendanceGroup(group)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
+	assert.NotNil(t, res.AttendanceGroup.Name, "创建排班制考勤组")
 }

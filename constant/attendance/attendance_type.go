@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package dingtalk
+package attendance
 
-import (
-	"testing"
+type Type string
 
-	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
+const (
+	// FIXED 固定班制考勤组
+	FIXED = Type("FIXED")
+
+	// TURN 排班制考勤组
+	TURN = Type("TURN")
+
+	// NONE 自由工时考勤组
+	NONE = Type("NONE")
 )
-
-func TestDingTalk_MediaUpload(t *testing.T) {
-	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
-	assert.Nil(t, err)
-	assert.NotNil(t, res.MediaId)
-}
