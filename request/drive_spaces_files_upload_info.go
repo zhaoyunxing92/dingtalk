@@ -42,7 +42,7 @@ type GetDriveSpacesFilesUploadInfo struct {
 	//returnError：报错
 	ConflictPolicy string `json:"addConflictPolicy,omitempty" validate:"omitempty,oneof=autoRename overwrite returnExisting returnError"`
 
-	//对应OSS Object Key。
+	//对应OSS Object key。
 	//
 	//如果首次调用本接口，为了获取文件的上传信息，无需填写mediaId。
 	//如果非首次调用本接口，为了刷新上次调用时返回值中的accessToken，需要传入上次调用返回值的mediaId。

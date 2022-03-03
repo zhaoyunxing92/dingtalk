@@ -32,7 +32,7 @@ import (
 )
 
 // GetAccessToken 获取token
-func (ding *dingTalk) GetAccessToken() (token string, err error) {
+func (ding *DingTalk) GetAccessToken() (token string, err error) {
 	var (
 		ch  = ding.cache
 		res = &response.AccessToken{}
@@ -43,8 +43,8 @@ func (ding *dingTalk) GetAccessToken() (token string, err error) {
 	}
 	// 读取本地文件
 	args := url.Values{}
-	args.Set("appkey", ding.Key)
-	args.Set("appsecret", ding.Secret)
+	args.Set("appkey", ding.key)
+	args.Set("appsecret", ding.secret)
 
 	if err = ding.Request(http.MethodGet, constant.GetTokenKey, args, nil, res); err != nil {
 		return "", err
@@ -57,19 +57,19 @@ func (ding *dingTalk) GetAccessToken() (token string, err error) {
 }
 
 // GetSuiteAccessToken 获取第三方企业应用的suite_access_token
-func (ding *dingTalk) GetSuiteAccessToken() (token string, err error) {
+func (ding *DingTalk) GetSuiteAccessToken() (token string, err error) {
 	if !ding.isv() {
 		return "", errors.New("ticket or corpId is null")
 	}
 	var (
-		ch  = cache.NewFileCache(strings.Join([]string{".token", "suite"}, "/"), ding.Key)
+		ch  = cache.NewFileCache(strings.Join([]string{".token", "suite"}, "/"), ding.key)
 		res = &response.SuiteAccessToken{}
 	)
 
 	if err = ch.Get(res); err == nil {
 		return res.Token, nil
 	}
-	req := request.NewSuiteAccessToken(ding.Key, ding.Secret, ding.ticket)
+	req := request.NewSuiteAccessToken(ding.key, ding.secret, ding.ticket)
 
 	if err = ding.Request(http.MethodPost, constant.SuiteAccessToken, nil, req, res); err != nil {
 		return "", err
@@ -82,7 +82,7 @@ func (ding *dingTalk) GetSuiteAccessToken() (token string, err error) {
 }
 
 // GetCorpAccessToken 服务商获取第三方应用授权企业的access_token
-func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
+func (ding *DingTalk) GetCorpAccessToken() (token string, err error) {
 	var (
 		ch  = ding.cache
 		res = &response.AccessToken{}
@@ -95,10 +95,10 @@ func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
 		return res.Token, nil
 	}
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
-	sign := crypto.GetSignature(timestamp, ding.Secret, ding.ticket)
+	sign := crypto.GetSignature(timestamp, ding.secret, ding.ticket)
 
 	query := url.Values{}
-	query.Set("accessKey", ding.Key)
+	query.Set("accessKey", ding.key)
 	query.Set("timestamp", timestamp)
 	query.Set("suiteTicket", ding.ticket)
 	query.Set("signature", sign)
@@ -115,9 +115,9 @@ func (ding *dingTalk) GetCorpAccessToken() (token string, err error) {
 }
 
 // GetSSOToken 获取微应用后台免登的access_token
-func (ding *dingTalk) GetSSOToken(corpId, secret string) (token string, err error) {
+func (ding *DingTalk) GetSSOToken(corpId, secret string) (token string, err error) {
 	var (
-		ch  = cache.NewFileCache(strings.Join([]string{".token", "sso"}, "/"), ding.Key)
+		ch  = cache.NewFileCache(strings.Join([]string{".token", "sso"}, "/"), ding.key)
 		res = &response.AccessToken{}
 	)
 	if err = ch.Get(res); err == nil {
@@ -138,9 +138,9 @@ func (ding *dingTalk) GetSSOToken(corpId, secret string) (token string, err erro
 }
 
 // GetJsApiTicket 获取jsapi_ticket
-func (ding *dingTalk) GetJsApiTicket() (ticket string, err error) {
+func (ding *DingTalk) GetJsApiTicket() (ticket string, err error) {
 	var (
-		ch  = cache.NewFileCache(strings.Join([]string{".token", "ticket"}, "/"), ding.Key)
+		ch  = cache.NewFileCache(strings.Join([]string{".token", "ticket"}, "/"), ding.key)
 		res = &response.JsApiTicket{}
 	)
 	if err = ch.Get(res); err == nil {

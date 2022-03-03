@@ -27,14 +27,14 @@ import (
 
 // 获取应用列表
 // https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications
-func (ding *dingTalk) GetMicroAppList() (apps domain.MicroAppList, err error) {
+func (ding *DingTalk) GetMicroAppList() (apps domain.MicroAppList, err error) {
 	err = ding.Request(http.MethodPost, constant.MicroAppListKey, nil, nil, &apps)
 
 	return apps, err
 }
 
 // 根据id获取应用
-func (ding *dingTalk) GetMicroAppByAgentId(agentId uint64) (app domain.MicroApp, err error) {
+func (ding *DingTalk) GetMicroAppByAgentId(agentId uint64) (app domain.MicroApp, err error) {
 	var apps domain.MicroAppList
 	if apps, err = ding.GetMicroAppList(); err != nil {
 		return domain.MicroApp{}, err
@@ -51,7 +51,7 @@ func (ding *dingTalk) GetMicroAppByAgentId(agentId uint64) (app domain.MicroApp,
 
 // 获取应用可见范围
 // https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range
-func (ding *dingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes domain.MicroAppVisibleScopes, err error) {
+func (ding *DingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes domain.MicroAppVisibleScopes, err error) {
 	form := map[string]interface{}{
 		"agentId": agentId,
 	}

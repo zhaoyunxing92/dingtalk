@@ -25,7 +25,7 @@ import (
 )
 
 // CreateCooperateCorp 创建合作空间
-func (ding *dingTalk) CreateCooperateCorp(req *request.CreateCooperateCorp) (rsp response.CreateCooperateCorp,
+func (ding *DingTalk) CreateCooperateCorp(req *request.CreateCooperateCorp) (rsp response.CreateCooperateCorp,
 	err error,
 ) {
 	return rsp, ding.Request(http.MethodPost, constant.CreateCooperateCorpKey, nil, req, &rsp)

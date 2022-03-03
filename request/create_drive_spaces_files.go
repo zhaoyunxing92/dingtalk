@@ -40,7 +40,7 @@ type CreateDriveSpacesFiles struct {
 	// 文件名
 	FileName string `json:"fileName,omitempty" validate:"required"`
 
-	// 对应OSS Object Key。可以通过调用获取文件上传信息接口获取。
+	// 对应OSS Object key。可以通过调用获取文件上传信息接口获取。
 	// 当fileType值为file文件时，此参数必填。
 	// 当fileType值为folder文件夹时，此参数可不填。
 	MediaId string `json:"mediaId,omitempty"`
@@ -65,7 +65,7 @@ func NewCreateDriveSpacesFiles(unionId, spaceId, fileName string, fileType file.
 	}}
 }
 
-// SetMediaId 对应OSS Object Key。可以通过调用获取文件上传信息接口获取。
+// SetMediaId 对应OSS Object key。可以通过调用获取文件上传信息接口获取。
 // 当fileType值为file文件时，此参数必填。
 // 当fileType值为folder文件夹时，此参数可不填。
 func (b *createDriveSpacesFilesBuilder) SetMediaId(mediaId string) *createDriveSpacesFilesBuilder {
