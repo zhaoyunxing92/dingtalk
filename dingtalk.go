@@ -337,7 +337,7 @@ func isNewApi(path string) bool {
 }
 
 // GetDingTalkCrypto 钉钉事件解密类
-func (ding *dingTalk) GetDingTalkCrypto(token, aesKey string) *crypto.DingTalkCrypto {
+func (ding *DingTalk) GetDingTalkCrypto(token, aesKey string) *crypto.DingTalkCrypto {
 	var (
 		block cipher.Block
 		err   error
@@ -358,7 +358,7 @@ func (ding *dingTalk) GetDingTalkCrypto(token, aesKey string) *crypto.DingTalkCr
 
 	return &crypto.DingTalkCrypto{
 		Token:    token,
-		SuiteKey: ding.Key,
+		SuiteKey: ding.key,
 		AESKey:   key,
 		Block:    block,
 	}
