@@ -18,6 +18,9 @@ package dingtalk
 
 import (
 	"bytes"
+	"crypto/aes"
+	"crypto/cipher"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -27,6 +30,8 @@ import (
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/pkg/errors"
@@ -329,4 +334,32 @@ func validate(s interface{}) error {
 
 func isNewApi(path string) bool {
 	return strings.HasPrefix(path, "/v1.0/")
+}
+
+// GetDingTalkCrypto 钉钉事件解密类
+func (ding *DingTalk) GetDingTalkCrypto(token, aesKey string) *crypto.DingTalkCrypto {
+	var (
+		block cipher.Block
+		err   error
+		key   []byte
+	)
+
+	if len(aesKey) != crypto.AesEncodeKeyLength {
+		panic("不合法的aes key")
+	}
+
+	if key, err = base64.StdEncoding.DecodeString(aesKey + "="); err != nil {
+		panic(err.Error())
+	}
+
+	if block, err = aes.NewCipher(key); err != nil {
+		panic(err.Error())
+	}
+
+	return &crypto.DingTalkCrypto{
+		Token:    token,
+		SuiteKey: ding.key,
+		AESKey:   key,
+		Block:    block,
+	}
 }

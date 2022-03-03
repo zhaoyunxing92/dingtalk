@@ -30,6 +30,9 @@ type deptDetail struct {
 
 	ParentId int `json:"parent_id"`
 
+	// 备注
+	Brief string `json:"brief"`
+
 	// 部门标识字段
 	SourceIdentifier string `json:"source_identifier"`
 
@@ -76,7 +79,7 @@ type deptDetail struct {
 	Order int `json:"order"`
 
 	// 部门群ID
-	DeptGroupChatId bool `json:"dept_group_chat_id"`
+	DeptGroupChatId string `json:"dept_group_chat_id"`
 
 	//
 	//true：包含
@@ -114,7 +117,7 @@ type deptDetail struct {
 	//true：隐藏部门，隐藏后本部门将不会显示在公司通讯录中
 	//
 	//false（默认值）：显示部门
-	HideDept *bool `json:"hide_dept"`
+	HideDept bool `json:"hide_dept"`
 
 	//指定可以查看本部门的人员userid列表，总数不能超过200
 	//
