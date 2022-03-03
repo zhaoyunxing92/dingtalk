@@ -24,6 +24,7 @@ import (
 )
 
 func TestDingTalk_CreateCooperateCorp(t *testing.T) {
+	t.Skip()
 	res, err := client.CreateCooperateCorp(
 		request.NewCreateCooperateCorp("合作空间").
 			Build())

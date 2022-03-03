@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package dingtalk
+package request
 
-import (
-	"testing"
+// GetAttendanceUserGroup 获取用户考勤组
+type GetAttendanceUserGroup struct {
 
-	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-)
+	// 员工在企业内的userid
+	UserId string `json:"userid"`
+}
 
-func TestDingTalk_MediaUpload(t *testing.T) {
-	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
-	assert.Nil(t, err)
-	assert.NotNil(t, res.MediaId)
+func NewGetAttendanceUserGroup(userId string) *GetAttendanceUserGroup {
+	return &GetAttendanceUserGroup{userId}
 }

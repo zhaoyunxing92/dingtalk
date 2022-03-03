@@ -14,18 +14,35 @@
  * limitations under the License.
  */
 
-package dingtalk
+package response
 
-import (
-	"testing"
+type FetchDeptList struct {
+	Response
 
-	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-)
+	// 部门
+	Dept []struct {
 
-func TestDingTalk_MediaUpload(t *testing.T) {
-	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
-	assert.Nil(t, err)
-	assert.NotNil(t, res.MediaId)
+		//当部门群已经创建后，是否有新人加入部门会自动加入该群：
+		//
+		//true：自动加入群
+		//
+		//false：不会自动加入群
+		AutoAddUser bool `json:"autoAddUser"`
+
+		//是否同步创建一个关联此部门的企业群：
+		//
+		//true：创建
+		//
+		//false：不创建
+		CreateDeptGroup bool `json:"createDeptGroup"`
+
+		// 部门id
+		Id int `json:"id"`
+
+		// 部门名称
+		Name string `json:"name"`
+
+		// 父部门id
+		ParentId int `json:"parentid"`
+	} `json:"department"`
 }

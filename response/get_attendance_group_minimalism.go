@@ -14,18 +14,27 @@
  * limitations under the License.
  */
 
-package dingtalk
+package response
 
-import (
-	"testing"
+type GetAttendanceGroupMinimalism struct {
+	Response
 
-	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-)
+	MinimalismGroup struct {
 
-func TestDingTalk_MediaUpload(t *testing.T) {
-	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
-	assert.Nil(t, err)
-	assert.NotNil(t, res.MediaId)
+		// 游标位置
+		Cursor int `json:"cursor"`
+
+		// 是否有更多数据
+		HasMore bool `json:"has_more"`
+
+		// 考勤信息
+		Attendance []struct {
+
+			// 考勤组ID
+			Id int `json:"id"`
+
+			// 考勤组名称
+			Name string `json:"name"`
+		} `json:"result"`
+	} `json:"result"`
 }

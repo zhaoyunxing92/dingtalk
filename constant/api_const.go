@@ -62,7 +62,8 @@ const (
 	GetParentDeptsByUserKey  = "/topapi/v2/department/listparentbyuser" // 查询指定用户的所有上级父部门路径
 	GetParentDeptsByDeptKey  = "/topapi/v2/department/listparentbydept" // 查询部门的所有上级父部门路径
 	GetIndustryDeptDetailKey = "/topapi/industry/department/get"        // 获取外部联系人详情
-	GetIndustryDeptKey       = "/topapi/industry/department/list"       // 获取部门列表
+	GetIndustryDeptKey       = "/topapi/industry/department/list"       // 行业获取部门列表
+	FetchDeptListKey         = "/department/list"                       // 支持递归获取部门列表
 
 	CreateExtContactKey    = "/topapi/extcontact/create"          // 添加外部联系人
 	DeleteExtContactKey    = "/topapi/extcontact/delete"          // 删除外部联系人
@@ -162,4 +163,11 @@ const (
 	GetHrmEmployeeFieldKey    = "/topapi/smartwork/hrm/employee/v2/list"         // 获取员工花名册字段信息
 	UpdateHrmEmployeeFieldKey = "/topapi/smartwork/hrm/employee/v2/update"       // 更新员工花名册信息
 	GetHrmMetaKey             = "/topapi/smartwork/hrm/roster/meta/get"          // 获取花名册元数据
+
+	GetAttendanceGroupsKey          = "/topapi/attendance/getsimplegroups"       // 批量获取考勤组详情
+	GetAttendanceUserGroupKey       = "/topapi/attendance/getusergroup"          // 获取用户考勤组
+	GetAttendanceGroupMinimalismKey = "/topapi/attendance/group/minimalism/list" // 批量获取考勤组摘要
+	GetAttendanceGroupDetailKey     = "/topapi/attendance/group/query"           // 获取考勤组详情
+	SearchAttendanceGroupKey        = "/topapi/attendance/group/search"          // 搜索考勤组摘要
+	CreateAttendanceGroupKey        = "/topapi/attendance/group/add"             // 创建考勤组
 )

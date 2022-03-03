@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package dingtalk
+package request
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
 
-func TestDingTalk_MediaUpload(t *testing.T) {
-	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
-	assert.Nil(t, err)
-	assert.NotNil(t, res.MediaId)
+func TestNewGetAttendanceGroupMinimalism(t *testing.T) {
+	minimalism := NewGetAttendanceGroupMinimalism("userid", 1)
+
+	assert.NotNil(t, minimalism)
+	assert.Equal(t, minimalism.UserId, "userid")
+	assert.Equal(t, minimalism.Cursor, 1)
 }

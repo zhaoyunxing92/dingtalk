@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package dingtalk
+package request
 
-import (
-	"testing"
+type GetAttendanceGroupDetail struct {
 
-	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-)
+	// 操作人userid
+	UserId string `json:"op_user_id"`
 
-func TestDingTalk_MediaUpload(t *testing.T) {
-	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
-	assert.Nil(t, err)
-	assert.NotNil(t, res.MediaId)
+	//考勤组ID。
+	//
+	//说明 如果你使用的是旧考勤组标识即group_key，
+	//企业内部应用可以调用groupKey转换为groupId接口将group_key转换为group_id。
+	//钉钉三方企业应用可以调用groupKey转换为groupId接口将group_key转换为group_id
+	GroupId int `json:"group_id"`
+}
+
+func NewGetAttendanceGroupDetail(userId string, groupId int) *GetAttendanceGroupDetail {
+	return &GetAttendanceGroupDetail{userId, groupId}
 }

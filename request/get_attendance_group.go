@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package dingtalk
+package request
 
-import (
-	"testing"
+type GetAttendanceGroup struct {
+	// 支持分页查询，与size参数同时设置时才生效，此参数代表偏移量，偏移量从0开始，下次调用传上次调用时的size与offset之和
+	Offset int `json:"offset"`
 
-	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-)
+	// 分页大小，最大10。
+	Size int `json:"size" validate:"max=10"`
+}
 
-func TestDingTalk_MediaUpload(t *testing.T) {
-	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
-	assert.Nil(t, err)
-	assert.NotNil(t, res.MediaId)
+func NewGetAttendanceGroup(offset, size int) *GetAttendanceGroup {
+	return &GetAttendanceGroup{offset, size}
 }

@@ -70,11 +70,11 @@ package dingtalk
 ////发送普通文本工作通知
 ////部门id或用户id重复会剔除
 ////发送工作通知
-//func (ding *dingTalk) SendWorkNotify(res domain.WorkNotifyRes) (resp WorkNotifyRep, err error) {
+//func (ding *DingTalk) SendWorkNotify(res domain.WorkNotifyRes) (resp WorkNotifyRep, err error) {
 //	//组装部门、用户
 //	res.AssembleDept()
 //	res.AssembleUser()
-//	res.SetAgentId(ding.Id)
+//	res.SetAgentId(ding.id)
 //
 //	err = ding.Request(http.MethodPost, constant.SendCorpConversationKey, nil, res, &resp)
 //
@@ -83,9 +83,9 @@ package dingtalk
 //
 ////获取工作通知消息的发送进度，仅支持查询24小时内的任务。
 ////taskId:工作通知id
-//func (ding *dingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressRsp, err error) {
+//func (ding *DingTalk) GetWorkNotifyProgress(taskId int) (rsp WorkNotifyProgressRsp, err error) {
 //	form := map[string]interface{}{
-//		"agent_id": ding.Id,
+//		"agent_id": ding.id,
 //		"task_id":  taskId,
 //	}
 //	err = ding.Request(http.MethodPost, constant.GetSendProgressKey, nil, form, &rsp)
@@ -95,9 +95,9 @@ package dingtalk
 //
 ////获取工作通知消息的发送结果
 ////taskId:工作通知id
-//func (ding *dingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultRsp, err error) {
+//func (ding *DingTalk) GetWorkNotifySendResult(taskId int) (rsp WorkNotifyResultRsp, err error) {
 //	form := map[string]interface{}{
-//		"agent_id": ding.Id,
+//		"agent_id": ding.id,
 //		"task_id":  taskId,
 //	}
 //	err = ding.Request(http.MethodPost, constant.GetSendResultKey, nil, form, &rsp)
@@ -107,9 +107,9 @@ package dingtalk
 //
 ////撤回工作通知消息
 ////taskId:工作通知id
-//func (ding *dingTalk) RecallWorkNotifySendResult(taskId int) (rsp domain.Response, err error) {
+//func (ding *DingTalk) RecallWorkNotifySendResult(taskId int) (rsp domain.Response, err error) {
 //	form := map[string]interface{}{
-//		"agent_id":    ding.Id,
+//		"agent_id":    ding.id,
 //		"msg_task_id": taskId,
 //	}
 //	err = ding.Request(http.MethodPost, constant.RecallCorpConversationKey, nil, form, &rsp)

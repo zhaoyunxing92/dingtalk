@@ -25,9 +25,10 @@ import (
 )
 
 func TestDingTalk_CreateTodo(t *testing.T) {
+	t.Skip()
 	todo := request.NewCreateTodo("ABNiSWeAolg5OETyYT60wdQiEiE", "使用api接口创建代办").
 		SetDesc("使用api接口创建代办").
-		SetSourceId("todo123456").
+		//SetSourceId("todo123456").
 		SetAppUrl("https://developers.dingtalk.com").
 		SetPcUrl("https://developers.dingtalk.com").
 		SetDueTime(int(time.Now().UnixMilli())).
@@ -45,6 +46,7 @@ func TestDingTalk_CreateTodo(t *testing.T) {
 }
 
 func TestDingTalk_GetTodoDetail(t *testing.T) {
+	t.Skip()
 	res, err := client.GetTodoDetail("ABNiSWeAolg5OETyYT60wdQiEiE", "task5c7c849d9127b64f360870d5ae086a7c")
 
 	assert.Nil(t, err)

@@ -24,7 +24,7 @@ import (
 )
 
 // Translate：文本翻译
-func (ding *dingTalk) Translate(query, sourceLanguage, targetLanguage string) (rsp domain.AiResponse, err error) {
+func (ding *DingTalk) Translate(query, sourceLanguage, targetLanguage string) (rsp domain.AiResponse, err error) {
 	form := make(map[string]string, 3)
 	form["query"] = query
 	form["source_language"] = sourceLanguage
@@ -38,7 +38,7 @@ func (ding *dingTalk) Translate(query, sourceLanguage, targetLanguage string) (r
 // OcrRecognize：OCR文字识别
 // ocrType:识别类型
 // imageUrl:图片url
-func (ding *dingTalk) OcrRecognize(ocrType, imageUrl string) (rsp domain.OcrStructuredResponse, err error) {
+func (ding *DingTalk) OcrRecognize(ocrType, imageUrl string) (rsp domain.OcrStructuredResponse, err error) {
 	//if ocrType != "idcard" || ocrType != "invoice" || ocrType != "blicense" || ocrType != "bank_card" ||
 	//	ocrType != "car_no" || ocrType != "car_invoice" || ocrType != "driving_license" || ocrType != "vehicle_license" ||
 	//	ocrType != "train_ticket" || ocrType != "quota_invoice" || ocrType != "taxi_ticket" || ocrType != "air_itinerary" ||
@@ -56,7 +56,7 @@ func (ding *dingTalk) OcrRecognize(ocrType, imageUrl string) (rsp domain.OcrStru
 
 // VoiceTranslate：ASR 一句话语音识别
 // mediaId:音频id
-func (ding *dingTalk) VoiceTranslate(mediaId string) (rsp domain.AiResponse, err error) {
+func (ding *DingTalk) VoiceTranslate(mediaId string) (rsp domain.AiResponse, err error) {
 	form := make(map[string]string, 1)
 	form["media_id"] = mediaId
 

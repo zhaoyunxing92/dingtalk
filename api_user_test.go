@@ -24,6 +24,7 @@ import (
 )
 
 func TestDingTalk_CreateUser(t *testing.T) {
+	t.Skip()
 	user, err := client.CreateUser(request.NewCreateUser("张三", "15669019211", 554656655).Build())
 	assert.Nil(t, err)
 	assert.NotNil(t, user.UserId)
@@ -31,6 +32,7 @@ func TestDingTalk_CreateUser(t *testing.T) {
 }
 
 func TestDingTalk_UpdateUser(t *testing.T) {
+	t.Skip()
 	res, err := client.UpdateUser(
 		request.NewUpdateUser("1948546245774889").
 			SetName("李四").
@@ -47,6 +49,7 @@ func TestDingTalk_UpdateUser(t *testing.T) {
 }
 
 func TestDingTalk_DeleteUser(t *testing.T) {
+	t.Skip()
 	res, err := client.DeleteUser("1948546245774889")
 
 	assert.Nil(t, err)
@@ -89,6 +92,7 @@ func TestDingTalk_GetUserIdByMobile(t *testing.T) {
 }
 
 func TestDingTalk_GetUserIdByUnionId(t *testing.T) {
+	t.Skip()
 	req, err := client.GetUserIdByUnionId(request.NewUnionIdGetUserId("DmJWoRm5zkjT9kWWgVpm0giEiE"))
 
 	assert.Nil(t, err)
@@ -110,6 +114,7 @@ func TestDingTalk_GetOrgAdminScope(t *testing.T) {
 }
 
 func TestDingTalk_GetUserCanAccessApplet(t *testing.T) {
+	t.Skip()
 	req, err := client.GetUserCanAccessApplet(1244553273, "manager164")
 
 	assert.Nil(t, err)
@@ -117,6 +122,7 @@ func TestDingTalk_GetUserCanAccessApplet(t *testing.T) {
 }
 
 func TestDingTalk_GetUserInfoByCode(t *testing.T) {
+	t.Skip()
 	req, err := client.GetUserInfoByCode("19f4d6df07b63bcf910f91cbe26b4c66")
 
 	assert.Nil(t, err)
@@ -124,6 +130,7 @@ func TestDingTalk_GetUserInfoByCode(t *testing.T) {
 }
 
 func TestDingTalk_GetSSOUserInfo(t *testing.T) {
+	t.Skip()
 	req, err := client.GetSSOUserInfo("4d878735fab43af2bfabe6af990856b3")
 
 	assert.Nil(t, err)

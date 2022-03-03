@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package dingtalk
+package request
 
-import (
-	"testing"
+type GetAttendanceGroupMinimalism struct {
 
-	"github.com/stretchr/testify/assert"
-	"github.com/zhaoyunxing92/dingtalk/v2/constant/file"
-	"github.com/zhaoyunxing92/dingtalk/v2/request"
-)
+	// 操作人userid
+	UserId string `json:"op_user_id"`
 
-func TestDingTalk_MediaUpload(t *testing.T) {
-	res, err := client.MediaUpload(request.NewUploadFile("./image/dingtalk.png", file.Image))
-	assert.Nil(t, err)
-	assert.NotNil(t, res.MediaId)
+	// 游标值，表示从第几个开始，不传默认从第一个开始
+	Cursor int `json:"cursor"`
+}
+
+func NewGetAttendanceGroupMinimalism(userId string, cursor int) *GetAttendanceGroupMinimalism {
+	return &GetAttendanceGroupMinimalism{userId, cursor}
 }

@@ -26,7 +26,7 @@ import (
 )
 
 // MediaUpload 上传媒体文件
-func (ding *dingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
+func (ding *DingTalk) MediaUpload(req request.UploadFile) (media response.MediaUpload, err error) {
 	query := url.Values{}
 	query.Add("type", req.Genre)
 

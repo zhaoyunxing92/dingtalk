@@ -19,6 +19,8 @@ package dingtalk
 import (
 	"testing"
 
+	"github.com/zhaoyunxing92/dingtalk/v2/constant/language"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
@@ -50,6 +52,7 @@ func TestDingTalk_GetDeptDetailUserInfo(t *testing.T) {
 }
 
 func TestDingTalk_CreateDept(t *testing.T) {
+	t.Skip()
 	res, err := client.CreateDept(
 		request.NewCreateDept("test", 1).
 			SetHideDept(false).
@@ -62,6 +65,7 @@ func TestDingTalk_CreateDept(t *testing.T) {
 }
 
 func TestDingTalk_DeleteDept(t *testing.T) {
+	t.Skip()
 	res, err := client.DeleteDept(560900478)
 
 	assert.Nil(t, err)
@@ -69,10 +73,11 @@ func TestDingTalk_DeleteDept(t *testing.T) {
 }
 
 func TestDingTalk_GetDeptDetail(t *testing.T) {
-	res, err := client.GetDeptDetail(request.NewDeptDetail(560935057).Build())
+	res, err := client.GetDeptDetail(request.NewDeptDetail(1).Build())
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
+	assert.Equal(t, res.Name, "钉钉小程序开发团队")
 }
 
 func TestDingTalk_UpdateDept(t *testing.T) {
@@ -120,4 +125,11 @@ func TestDingTalk_GetParentIdsByUserId(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 	assert.NotNil(t, res.Parent)
+}
+
+func TestDingTalk_FetchDeptList(t *testing.T) {
+	res, err := client.FetchDeptList(1, true, language.ZH_CN)
+
+	assert.Nil(t, err)
+	assert.NotNil(t, res)
 }

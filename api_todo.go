@@ -27,20 +27,20 @@ import (
 )
 
 // CreateTodo 新增钉钉待办任务
-func (ding *dingTalk) CreateTodo(res *request.CreateTodo) (req response.CreateTodo, err error) {
+func (ding *DingTalk) CreateTodo(res *request.CreateTodo) (req response.CreateTodo, err error) {
 	query := url.Values{}
 	query.Set("operatorId", res.CreatorId)
 	return req, ding.Request(http.MethodPost, fmt.Sprintf(constant.CreateTodoKey, res.CreatorId), nil, res, &req)
 }
 
 // GetTodoDetail 获取钉钉待办任务详情
-func (ding *dingTalk) GetTodoDetail(unionId, taskId string) (req response.GetTodoDetail, err error) {
+func (ding *DingTalk) GetTodoDetail(unionId, taskId string) (req response.GetTodoDetail, err error) {
 	return req, ding.Request(http.MethodPost, fmt.Sprintf(constant.GetTodoDetailKey, unionId, taskId), nil,
 		nil, &req)
 }
 
 // DeleteTodo 删除钉钉待办任务
-func (ding *dingTalk) DeleteTodo(unionId, taskId string) (req response.DeleteTodo, err error) {
+func (ding *DingTalk) DeleteTodo(unionId, taskId string) (req response.DeleteTodo, err error) {
 	query := url.Values{}
 	query.Set("operatorId", unionId)
 
@@ -49,25 +49,25 @@ func (ding *dingTalk) DeleteTodo(unionId, taskId string) (req response.DeleteTod
 }
 
 // UpdateTodo 更新钉钉待办任务
-func (ding *dingTalk) UpdateTodo(res *request.UpdateTodo) (req response.UpdateTodo, err error) {
+func (ding *DingTalk) UpdateTodo(res *request.UpdateTodo) (req response.UpdateTodo, err error) {
 	return req, ding.Request(http.MethodPut, fmt.Sprintf(constant.UpdateTodoKey, res.UnionId, res.TaskId),
 		nil, res, &req)
 }
 
 // UpdateTodoDone 更新钉钉待办执行者状态
-func (ding *dingTalk) UpdateTodoDone(res *request.UpdateTodoDone) (req response.UpdateTodo, err error) {
+func (ding *DingTalk) UpdateTodoDone(res *request.UpdateTodoDone) (req response.UpdateTodo, err error) {
 	return req, ding.Request(http.MethodPut, fmt.Sprintf(constant.UpdateTodoDoneKey, res.UnionId, res.TaskId),
 		nil, res, &req)
 }
 
 // GetTodoListBySourceId 根据sourceId获取钉钉待办任务详情
-func (ding *dingTalk) GetTodoListBySourceId(unionId, sourceId string) (req response.GetTodoDetail, err error) {
+func (ding *DingTalk) GetTodoListBySourceId(unionId, sourceId string) (req response.GetTodoDetail, err error) {
 	return req, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetTodoListBySourceIdKey, unionId, sourceId),
 		nil, nil, &req)
 }
 
 // GetTodoList 查询企业下用户待办列表
-func (ding *dingTalk) GetTodoList(unionId, token string, done bool) (req response.GetTodoList, err error) {
+func (ding *DingTalk) GetTodoList(unionId, token string, done bool) (req response.GetTodoList, err error) {
 	return req, ding.Request(http.MethodPost, fmt.Sprintf(constant.GetTodoListKey, unionId), nil,
 		request.NewGetTodoList(token, done), &req)
 }
