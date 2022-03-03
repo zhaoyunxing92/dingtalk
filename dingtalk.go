@@ -39,15 +39,15 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-type dingTalk struct {
+type DingTalk struct {
 	// 企业内部应用对应:AgentId，如果是应套件:SuiteId
-	Id int `json:"id,omitempty" validate:"required"`
+	id int
 
 	// 企业内部应用对应:AppKey，套件对应:SuiteKey
-	Key string `json:"key,omitempty" validate:"required"`
+	key string
 
 	// 企业内部对应:AppSecret，套件对应:SuiteSecret
-	Secret string `json:"Secret,omitempty" validate:"required"`
+	secret string
 
 	// isv 钉钉开放平台会向应用的回调URL推送的suite_ticket（约5个小时推送一次）
 	ticket string
@@ -56,7 +56,7 @@ type dingTalk struct {
 	corpId string
 
 	// 在开发者后台的基本信息 > 开发信息（旧版）页面获取微应用管理后台SSOSecret
-	SSOSecret string
+	ssoSecret string
 
 	// 日志级别
 	Level zapcore.Level
@@ -68,40 +68,53 @@ type dingTalk struct {
 	cache cache.Cache
 }
 
-type OptionFunc func(*dingTalk)
+type OptionFunc func(*DingTalk)
 
 func WithTicket(ticket string) OptionFunc {
-	return func(dt *dingTalk) {
+	return func(dt *DingTalk) {
 		dt.ticket = ticket
 	}
 }
 
 func WithCorpId(corpId string) OptionFunc {
-	return func(dt *dingTalk) {
+	return func(dt *DingTalk) {
 		dt.corpId = corpId
 	}
 }
 
 func WithSSOSecret(secret string) OptionFunc {
-	return func(dt *dingTalk) {
-		dt.SSOSecret = secret
+	return func(dt *DingTalk) {
+		dt.ssoSecret = secret
 	}
 }
 
 func WithLevel(level zapcore.Level) OptionFunc {
-	return func(dt *dingTalk) {
+	return func(dt *DingTalk) {
 		dt.Level = level
 	}
 }
 
 // isv 是否isv
-func (ding *dingTalk) isv() bool {
+func (ding *DingTalk) isv() bool {
 	return len(ding.ticket) > 0 && len(ding.corpId) > 0
 }
 
+func (ding *DingTalk) validate() error {
+	if ding.id == 0 {
+		return errors.New("id is empty")
+	}
+	if ding.key == "" {
+		return errors.New("key is empty")
+	}
+	if ding.secret == "" {
+		return errors.New("secret is empty")
+	}
+	return nil
+}
+
 // NewClient new DingTalkBuilder
-func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) {
-	ding = &dingTalk{Id: id, Key: key, Secret: secret, Level: zapcore.InfoLevel}
+func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *DingTalk) {
+	ding = &DingTalk{id: id, key: key, secret: secret, Level: zapcore.InfoLevel}
 
 	for _, opt := range opts {
 		opt(ding)
@@ -116,7 +129,7 @@ func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) 
 
 	ding.log = logger.GetLogger(ding.Level).Sugar()
 
-	if err := validate(ding); err != nil {
+	if err := ding.validate(); err != nil {
 		panic(err)
 		return nil
 	}
@@ -124,7 +137,7 @@ func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *dingTalk) 
 }
 
 // Request 统一请求
-func (ding *dingTalk) Request(method, path string, query url.Values, body interface{},
+func (ding *DingTalk) Request(method, path string, query url.Values, body interface{},
 	data response.Unmarshalled) (err error) {
 	if body != nil {
 		if err = validate(body); err != nil {
@@ -206,7 +219,7 @@ func (robot *Robot) httpRequest(method, path string, query url.Values, body inte
 	return data.CheckError()
 }
 
-func (ding *dingTalk) httpRequest(method, path string, query url.Values, body interface{},
+func (ding *DingTalk) httpRequest(method, path string, query url.Values, body interface{},
 	response response.Unmarshalled) error {
 	var (
 		req    *http.Request

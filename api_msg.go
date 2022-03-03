@@ -26,7 +26,7 @@ import (
 )
 
 // SendMessage 发送普通消息
-func (ding *dingTalk) SendMessage(senderId, chatId string, msg message.Message) (req response.SendMessage, err error) {
+func (ding *DingTalk) SendMessage(senderId, chatId string, msg message.Message) (req response.SendMessage, err error) {
 	return req, ding.Request(http.MethodPost, constant.SendToConversationKey, nil,
 		request.NewSendMessage(senderId, chatId, msg), &req)
 }

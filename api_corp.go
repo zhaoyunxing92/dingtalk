@@ -24,6 +24,6 @@ import (
 )
 
 // GetCorpDingIndex 获取企业最新钉钉指数信息
-func (ding *dingTalk) GetCorpDingIndex() (req response.CorpDingIndex, err error) {
+func (ding *DingTalk) GetCorpDingIndex() (req response.CorpDingIndex, err error) {
 	return req, ding.Request(http.MethodGet, constant.GetDingIndexKey, nil, nil, &req)
 }

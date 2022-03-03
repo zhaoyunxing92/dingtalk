@@ -26,7 +26,7 @@ import (
 )
 
 // SendTemplateMessage 使用模板发送工作通知消息
-func (ding *dingTalk) SendTemplateMessage(req *request.SendTemplateMessage) (rsp response.SendTemplateMessage,
+func (ding *DingTalk) SendTemplateMessage(req *request.SendTemplateMessage) (rsp response.SendTemplateMessage,
 	err error) {
 	if !ding.isv() {
 		return response.SendTemplateMessage{}, errors.New("只支持isv调用")
@@ -36,45 +36,45 @@ func (ding *dingTalk) SendTemplateMessage(req *request.SendTemplateMessage) (rsp
 }
 
 // SendCorpConvMessage 发送工作通知
-func (ding *dingTalk) SendCorpConvMessage(req *request.CorpConvMessage) (rsp response.CorpConvMessage,
+func (ding *DingTalk) SendCorpConvMessage(req *request.CorpConvMessage) (rsp response.CorpConvMessage,
 	err error) {
 	if !ding.isv() {
-		req.AgentId = ding.Id
+		req.AgentId = ding.id
 	}
 	return rsp, ding.Request(http.MethodPost, constant.SendCorpConversationMessageKey, nil, req, &rsp)
 }
 
 // UpdateCorpConvMessageStatus 更新工作通知状态栏
-func (ding *dingTalk) UpdateCorpConvMessageStatus(req *request.UpdateCorpConvMsgStatus) (rsp response.Response,
+func (ding *DingTalk) UpdateCorpConvMessageStatus(req *request.UpdateCorpConvMsgStatus) (rsp response.Response,
 	err error) {
 	if !ding.isv() {
-		req.AgentId = ding.Id
+		req.AgentId = ding.id
 	}
 	return rsp, ding.Request(http.MethodPost, constant.UpdateCorpConvMessageStatusKey, nil, req, &rsp)
 }
 
 // GetCorpConvMsgProgress 获取工作通知消息的发送进度
-func (ding *dingTalk) GetCorpConvMsgProgress(agentId, taskId int) (rsp response.MessageProgress, err error) {
+func (ding *DingTalk) GetCorpConvMsgProgress(agentId, taskId int) (rsp response.MessageProgress, err error) {
 	if !ding.isv() {
-		agentId = ding.Id
+		agentId = ding.id
 	}
 	return rsp, ding.Request(http.MethodPost, constant.MessageProgressKey, nil,
 		request.NewMessageProgress(agentId, taskId), &rsp)
 }
 
 // GetMessageSendResult 获取工作通知消息的发送结果
-func (ding *dingTalk) GetMessageSendResult(agentId, taskId int) (rsp response.MessageSendResult, err error) {
+func (ding *DingTalk) GetMessageSendResult(agentId, taskId int) (rsp response.MessageSendResult, err error) {
 	if !ding.isv() {
-		agentId = ding.Id
+		agentId = ding.id
 	}
 	return rsp, ding.Request(http.MethodPost, constant.GetMessageSendResultKey, nil,
 		request.NewMessageProgress(agentId, taskId), &rsp)
 }
 
 // RecallCorpConvMessage 撤回工作通知消息
-func (ding *dingTalk) RecallCorpConvMessage(agentId, taskId int) (rsp response.Response, err error) {
+func (ding *DingTalk) RecallCorpConvMessage(agentId, taskId int) (rsp response.Response, err error) {
 	if !ding.isv() {
-		agentId = ding.Id
+		agentId = ding.id
 	}
 	return rsp, ding.Request(http.MethodPost, constant.RecallCorpConvMessageKey, nil,
 		request.NewRecallCorpConvMessage(agentId, taskId), &rsp)

@@ -26,62 +26,62 @@ import (
 )
 
 // GetHrmEmployee 获取在职员工列表
-func (ding dingTalk) GetHrmEmployee(offset, size int, status []employee.Status) (res response.GetHrmEmployee,
+func (ding DingTalk) GetHrmEmployee(offset, size int, status []employee.Status) (res response.GetHrmEmployee,
 	err error) {
 	req := request.NewGetHrmEmployee(offset, size, status)
 	return res, ding.Request(http.MethodPost, constant.GetHrmEmployeeKey, nil, req, &res)
 }
 
 // GetHrmToBeHiredEmployee 获取待入职员工列表
-func (ding dingTalk) GetHrmToBeHiredEmployee(offset, size int) (res response.GetHrmEmployee,
+func (ding DingTalk) GetHrmToBeHiredEmployee(offset, size int) (res response.GetHrmEmployee,
 	err error) {
 	req := request.NewGetHrmToBeHiredEmployee(offset, size)
 	return res, ding.Request(http.MethodPost, constant.GetHrmToBeHiredEmployeeKey, nil, req, &res)
 }
 
 // GetHrmResignEmployeeIds 获取待入职员工列表
-func (ding dingTalk) GetHrmResignEmployeeIds(offset, size int) (res response.GetHrmEmployee, err error) {
+func (ding DingTalk) GetHrmResignEmployeeIds(offset, size int) (res response.GetHrmEmployee, err error) {
 	req := request.NewGetHrmToBeHiredEmployee(offset, size)
 	return res, ding.Request(http.MethodPost, constant.GetHrmResignEmployeeKey, nil, req, &res)
 }
 
 // GetHrmResignEmployee 获取员工离职信息
-func (ding dingTalk) GetHrmResignEmployee(userIds []string) (res response.HrmResignEmployee, err error) {
+func (ding DingTalk) GetHrmResignEmployee(userIds []string) (res response.HrmResignEmployee, err error) {
 	req := request.NewGetHrmResignEmployee(userIds)
 	return res, ding.Request(http.MethodPost, constant.GetHrmResignEmployeeInfoKey, nil, req, &res)
 }
 
 // HrmCreateEmployee 添加企业待入职员工
-func (ding dingTalk) HrmCreateEmployee(req *request.HrmCreateEmployee) (res response.HrmCreateEmployee, err error) {
+func (ding DingTalk) HrmCreateEmployee(req *request.HrmCreateEmployee) (res response.HrmCreateEmployee, err error) {
 	return res, ding.Request(http.MethodPost, constant.HrmCreateEmployeeKey, nil, req, &res)
 }
 
 // GetHrmField 获取花名册字段组详情
-func (ding dingTalk) GetHrmField(agentId int) (res response.GetHrmField, err error) {
+func (ding DingTalk) GetHrmField(agentId int) (res response.GetHrmField, err error) {
 	if !ding.isv() {
-		agentId = ding.Id
+		agentId = ding.id
 	}
 	return res, ding.Request(http.MethodPost, constant.GetHrmFieldKey, nil, request.NewGetHrmField(agentId), &res)
 }
 
 // GetHrmEmployeeField 获取员工花名册字段信息
-func (ding dingTalk) GetHrmEmployeeField(agentId int, userIds []string, fields []string) (res response.GetHrmEmployeeField, err error) {
+func (ding DingTalk) GetHrmEmployeeField(agentId int, userIds []string, fields []string) (res response.GetHrmEmployeeField, err error) {
 	if !ding.isv() {
-		agentId = ding.Id
+		agentId = ding.id
 	}
 	return res, ding.Request(http.MethodPost, constant.GetHrmEmployeeFieldKey, nil,
 		request.NewGetHrmEmployeeField(agentId, userIds, fields), &res)
 }
 
 // UpdateHrmEmployeeField 更新员工花名册信息
-func (ding dingTalk) UpdateHrmEmployeeField(req *request.UpdateHrmEmpField) (res response.Response, err error) {
+func (ding DingTalk) UpdateHrmEmployeeField(req *request.UpdateHrmEmpField) (res response.Response, err error) {
 	return res, ding.Request(http.MethodPost, constant.UpdateHrmEmployeeFieldKey, nil, req, &res)
 }
 
 // GetHrmMeta 获取花名册元数据
-func (ding dingTalk) GetHrmMeta(agentId int) (res response.GetHrmMeta, err error) {
+func (ding DingTalk) GetHrmMeta(agentId int) (res response.GetHrmMeta, err error) {
 	if !ding.isv() {
-		agentId = ding.Id
+		agentId = ding.id
 	}
 	return res, ding.Request(http.MethodPost, constant.GetHrmMetaKey, nil,
 		request.NewGetHrmField(agentId), &res)

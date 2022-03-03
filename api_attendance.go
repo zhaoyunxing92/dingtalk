@@ -25,38 +25,38 @@ import (
 )
 
 // GetAttendanceGroups 批量获取考勤组详情
-func (ding *dingTalk) GetAttendanceGroups(offset, size int) (rsp response.GetAttendanceGroup, err error) {
+func (ding *DingTalk) GetAttendanceGroups(offset, size int) (rsp response.GetAttendanceGroup, err error) {
 	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceGroupsKey, nil,
 		request.NewGetAttendanceGroup(offset, size), &rsp)
 }
 
 // GetAttendanceUserGroup 获取用户考勤组
-func (ding *dingTalk) GetAttendanceUserGroup(userId string) (rsp response.GetAttendanceUserGroup, err error) {
+func (ding *DingTalk) GetAttendanceUserGroup(userId string) (rsp response.GetAttendanceUserGroup, err error) {
 	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceUserGroupKey, nil,
 		request.NewGetAttendanceUserGroup(userId), &rsp)
 }
 
 // GetAttendanceGroupMinimalism 批量获取考勤组摘要
-func (ding *dingTalk) GetAttendanceGroupMinimalism(userId string, cursor int) (rsp response.GetAttendanceGroupMinimalism,
+func (ding *DingTalk) GetAttendanceGroupMinimalism(userId string, cursor int) (rsp response.GetAttendanceGroupMinimalism,
 	err error) {
 	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceGroupMinimalismKey, nil,
 		request.NewGetAttendanceGroupMinimalism(userId, cursor), &rsp)
 }
 
 // GetAttendanceGroupDetail 获取考勤组详情
-func (ding *dingTalk) GetAttendanceGroupDetail(userId string, groupId int) (rsp response.GetAttendanceGroupDetail,
+func (ding *DingTalk) GetAttendanceGroupDetail(userId string, groupId int) (rsp response.GetAttendanceGroupDetail,
 	err error) {
 	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceGroupDetailKey, nil,
 		request.NewGetAttendanceGroupDetail(userId, groupId), &rsp)
 }
 
 // SearchAttendanceGroup 搜索考勤组摘要
-func (ding *dingTalk) SearchAttendanceGroup(userId, groupName string) (rsp response.SearchAttendanceGroup, err error) {
+func (ding *DingTalk) SearchAttendanceGroup(userId, groupName string) (rsp response.SearchAttendanceGroup, err error) {
 	return rsp, ding.Request(http.MethodPost, constant.SearchAttendanceGroupKey, nil,
 		request.NewSearchAttendanceGroup(userId, groupName), &rsp)
 }
 
 // CreateAttendanceGroup 创建考勤组
-func (ding *dingTalk) CreateAttendanceGroup(res *request.CreateAttendanceGroup) (rsp response.CreateAttendanceGroup, err error) {
+func (ding *DingTalk) CreateAttendanceGroup(res *request.CreateAttendanceGroup) (rsp response.CreateAttendanceGroup, err error) {
 	return rsp, ding.Request(http.MethodPost, constant.CreateAttendanceGroupKey, nil, res, &rsp)
 }
