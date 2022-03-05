@@ -23,7 +23,7 @@ type ChatFriendSwitch struct {
 
 	// true：开启禁止开关
 	// false：关闭禁止开关
-	Prohibit bool `json:"is_prohibit" validate:"required"`
+	Prohibit bool `json:"is_prohibit"`
 }
 
 func NewChatFriendSwitch(chatId string, prohibit bool) *ChatFriendSwitch {
