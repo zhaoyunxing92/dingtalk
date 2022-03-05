@@ -27,7 +27,7 @@ type InactiveUser struct {
 	//false：未登录
 	//
 	//true：登录
-	Active bool `json:"is_active" validate:"required"`
+	Active bool `json:"is_active"`
 
 	// 过滤部门ID列表，不传表示查询整个企业
 	DeptIds []int `json:"dept_ids,omitempty"`
