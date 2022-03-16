@@ -23,38 +23,35 @@ import (
 
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/domain"
+	"github.com/zhaoyunxing92/dingtalk/v2/request"
+	"github.com/zhaoyunxing92/dingtalk/v2/response"
 )
 
-// 获取应用列表
-// https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications
-func (ding *DingTalk) GetMicroAppList() (apps domain.MicroAppList, err error) {
-	err = ding.Request(http.MethodPost, constant.MicroAppListKey, nil, nil, &apps)
-
-	return apps, err
+// GetMicroAppList 获取应用列表
+func (ding *DingTalk) GetMicroAppList() (rsp response.MicroAppList, err error) {
+	return rsp, ding.Request(http.MethodPost, constant.MicroAppListKey, nil, nil, &rsp)
 }
 
-// 根据id获取应用
-func (ding *DingTalk) GetMicroAppByAgentId(agentId uint64) (app domain.MicroApp, err error) {
-	var apps domain.MicroAppList
+// GetMicroAppByAgentId 根据id获取应用
+func (ding *DingTalk) GetMicroAppByAgentId(agentId int) (domain.MicroApp, error) {
+	var (
+		app  domain.MicroApp
+		apps response.MicroAppList
+		err  error
+	)
 	if apps, err = ding.GetMicroAppList(); err != nil {
 		return domain.MicroApp{}, err
 	}
-
-	for _, item := range apps.AppList {
-		if item.AgentId == agentId {
-			return item, nil
+	for _, app = range apps.Apps {
+		if app.AgentId == agentId {
+			return app, nil
 		}
 	}
-
 	return domain.MicroApp{}, errors.New(fmt.Sprintf("agentId:%d is not exist", agentId))
 }
 
-// 获取应用可见范围
-// https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range
-func (ding *DingTalk) GetMicroAppVisibleScopes(agentId uint64) (scopes domain.MicroAppVisibleScopes, err error) {
-	form := map[string]interface{}{
-		"agentId": agentId,
-	}
-	err = ding.Request(http.MethodPost, constant.MicroAppVisibleScopesKey, nil, form, &scopes)
-	return scopes, err
+// GetMicroAppVisibleScopes 获取应用可见范围
+func (ding *DingTalk) GetMicroAppVisibleScopes(agentId int) (scopes response.MicroAppVisibleScopes, err error) {
+	return scopes, ding.Request(http.MethodPost, constant.MicroAppVisibleScopesKey, nil,
+		request.NewMicroAppVisibleScopes(agentId), &scopes)
 }

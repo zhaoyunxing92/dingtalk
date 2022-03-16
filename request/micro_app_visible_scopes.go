@@ -14,34 +14,13 @@
  * limitations under the License.
  */
 
-package domain
+package request
 
-// MicroApp 钉钉应用
-type MicroApp struct {
-	// 应用名称
-	Name string `json:"name"`
+// MicroAppVisibleScopes 应用可见范围
+type MicroAppVisibleScopes struct {
+	AgentId int `json:"agentId" validate:"required"`
+}
 
-	// 应用id
-	AgentId int `json:"agentId"`
-
-	// 应用图标
-	Icon string `json:"appIcon"`
-
-	// 应用描述
-	Desc string `json:"appDesc"`
-
-	// 是否自建 false:不是
-	Self bool `json:"isSelf"`
-
-	// 应用状态 1：启用，0：停用
-	Status int `json:"appStatus"`
-
-	// 应用应用的OA后台管理主页
-	OmpLink string `json:"ompLink"`
-
-	// 应用的移动端主页
-	HomepageLink string `json:"homepageLink"`
-
-	// 应用的PC端主页
-	PcHomepageLink string `json:"pcHomepageLink"`
+func NewMicroAppVisibleScopes(agentId int) MicroAppVisibleScopes {
+	return MicroAppVisibleScopes{agentId}
 }

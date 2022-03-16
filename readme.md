@@ -201,11 +201,12 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [x] [获取考勤组详情](https://open.dingtalk.com/document/orgapp-server/query-a-single-attendance-group) `client.GetAttendanceGroupDetail`
         - [x] [搜索考勤组摘要](https://open.dingtalk.com/document/orgapp-server/attendance-group-search) `client.SearchAttendanceGroup`
 
-* 应用管理 (**3**/4)
-    - [x] [获取应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/queries-applications)
-    - [x] [获取员工可见的应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-list-of-applications-visible-to-an-employee)
+* 应用管理
+    - [x] [获取应用列表](https://open.dingtalk.com/document/orgapp-server/manager-microapplications-api-permission) `client.GetMicroAppList`
+    - [x] [根据应用id获取小程序](https://open.dingtalk.com/document/orgapp-server/manager-microapplications-api-permission) `client.GetMicroAppByAgentId`
+    - [ ] [获取员工可见的应用列表](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-list-of-applications-visible-to-an-employee)
     - [ ] [设置应用的可见范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/set-the-visible-range-of-the-application)
-    - [x] [获取应用可见范围](https://ding-doc.dingtalk.com/document#/org-dev-guide/obtains-the-application-visible-range)
+    - [x] [获取应用可见范围](https://open.dingtalk.com/document/orgapp-server/gets-the-microapplication-visible-range-set-by-the-enterprise) `client.GetMicroAppVisibleScopes`
 
 * 群机器人
     - [x] [自定义机器人接入](https://ding-doc.dingtalk.com/document#/org-dev-guide/custom-robot) 基本的消息类型都已经支持并完成测试
