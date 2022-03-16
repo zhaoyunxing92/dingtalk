@@ -58,17 +58,11 @@ func (ding DingTalk) HrmCreateEmployee(req *request.HrmCreateEmployee) (res resp
 
 // GetHrmField 获取花名册字段组详情
 func (ding DingTalk) GetHrmField(agentId int) (res response.GetHrmField, err error) {
-	if !ding.isv() {
-		agentId = ding.id
-	}
 	return res, ding.Request(http.MethodPost, constant.GetHrmFieldKey, nil, request.NewGetHrmField(agentId), &res)
 }
 
 // GetHrmEmployeeField 获取员工花名册字段信息
 func (ding DingTalk) GetHrmEmployeeField(agentId int, userIds []string, fields []string) (res response.GetHrmEmployeeField, err error) {
-	if !ding.isv() {
-		agentId = ding.id
-	}
 	return res, ding.Request(http.MethodPost, constant.GetHrmEmployeeFieldKey, nil,
 		request.NewGetHrmEmployeeField(agentId, userIds, fields), &res)
 }
@@ -80,9 +74,6 @@ func (ding DingTalk) UpdateHrmEmployeeField(req *request.UpdateHrmEmpField) (res
 
 // GetHrmMeta 获取花名册元数据
 func (ding DingTalk) GetHrmMeta(agentId int) (res response.GetHrmMeta, err error) {
-	if !ding.isv() {
-		agentId = ding.id
-	}
 	return res, ding.Request(http.MethodPost, constant.GetHrmMetaKey, nil,
 		request.NewGetHrmField(agentId), &res)
 }

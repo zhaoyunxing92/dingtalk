@@ -35,18 +35,19 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/pkg/errors"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
+
 	"github.com/zhaoyunxing92/dingtalk/v2/cache"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/logger"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 )
 
 type DingTalk struct {
 	// 企业内部应用对应:AgentId，如果是应套件:SuiteId
-	id int
+	//id int
 
 	// 企业内部应用对应:AppKey，套件对应:SuiteKey
 	key string
@@ -105,9 +106,6 @@ func (ding *DingTalk) isv() bool {
 }
 
 func (ding *DingTalk) validate() error {
-	if ding.id == 0 {
-		return errors.New("id is empty")
-	}
 	if ding.key == "" {
 		return errors.New("key is empty")
 	}
@@ -118,8 +116,8 @@ func (ding *DingTalk) validate() error {
 }
 
 // NewClient new DingTalkBuilder
-func NewClient(id int, key, secret string, opts ...OptionFunc) (ding *DingTalk) {
-	ding = &DingTalk{id: id, key: key, secret: secret, Level: zapcore.InfoLevel}
+func NewClient(key, secret string, opts ...OptionFunc) (ding *DingTalk) {
+	ding = &DingTalk{key: key, secret: secret, Level: zapcore.InfoLevel}
 
 	for _, opt := range opts {
 		opt(ding)

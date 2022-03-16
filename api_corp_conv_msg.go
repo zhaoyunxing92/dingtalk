@@ -20,6 +20,7 @@ import (
 	"net/http"
 
 	"github.com/pkg/errors"
+
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 	"github.com/zhaoyunxing92/dingtalk/v2/response"
@@ -31,51 +32,35 @@ func (ding *DingTalk) SendTemplateMessage(req *request.SendTemplateMessage) (rsp
 	if !ding.isv() {
 		return response.SendTemplateMessage{}, errors.New("只支持isv调用")
 	}
-
 	return rsp, ding.Request(http.MethodPost, constant.SendTemplateMessageKey, nil, req, &rsp)
 }
 
 // SendCorpConvMessage 发送工作通知
 func (ding *DingTalk) SendCorpConvMessage(req *request.CorpConvMessage) (rsp response.CorpConvMessage,
 	err error) {
-	if !ding.isv() {
-		req.AgentId = ding.id
-	}
 	return rsp, ding.Request(http.MethodPost, constant.SendCorpConversationMessageKey, nil, req, &rsp)
 }
 
 // UpdateCorpConvMessageStatus 更新工作通知状态栏
 func (ding *DingTalk) UpdateCorpConvMessageStatus(req *request.UpdateCorpConvMsgStatus) (rsp response.Response,
 	err error) {
-	if !ding.isv() {
-		req.AgentId = ding.id
-	}
 	return rsp, ding.Request(http.MethodPost, constant.UpdateCorpConvMessageStatusKey, nil, req, &rsp)
 }
 
 // GetCorpConvMsgProgress 获取工作通知消息的发送进度
 func (ding *DingTalk) GetCorpConvMsgProgress(agentId, taskId int) (rsp response.MessageProgress, err error) {
-	if !ding.isv() {
-		agentId = ding.id
-	}
 	return rsp, ding.Request(http.MethodPost, constant.MessageProgressKey, nil,
 		request.NewMessageProgress(agentId, taskId), &rsp)
 }
 
 // GetMessageSendResult 获取工作通知消息的发送结果
 func (ding *DingTalk) GetMessageSendResult(agentId, taskId int) (rsp response.MessageSendResult, err error) {
-	if !ding.isv() {
-		agentId = ding.id
-	}
 	return rsp, ding.Request(http.MethodPost, constant.GetMessageSendResultKey, nil,
 		request.NewMessageProgress(agentId, taskId), &rsp)
 }
 
 // RecallCorpConvMessage 撤回工作通知消息
 func (ding *DingTalk) RecallCorpConvMessage(agentId, taskId int) (rsp response.Response, err error) {
-	if !ding.isv() {
-		agentId = ding.id
-	}
 	return rsp, ding.Request(http.MethodPost, constant.RecallCorpConvMessageKey, nil,
 		request.NewRecallCorpConvMessage(agentId, taskId), &rsp)
 }
