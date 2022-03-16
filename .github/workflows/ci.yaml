@@ -14,8 +14,6 @@ jobs:
       # If you want to matrix build , you can append the following list.
       matrix:
         go_version:
-          - 1.17
-          - 1.16
           - 1.15
         os:
           - ubuntu-latest
@@ -29,7 +27,7 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
-      - name: Install imports-formatter license-header-checker
+      - name: Install license-header-checker
         run: |
           export GO111MODULE=on
           cd ~
@@ -44,7 +42,7 @@ jobs:
       - name: gofmt
         run: |
           go fmt ./... && git status && [[ -z `git status -s` ]]
-          # gofumpt -l -w . && git status && [[ -z `git status -s` ]]
+           # gofumpt -l -w . && git status && [[ -z `git status -s` ]]
            # diff -u <(echo -n) <(gofmt -d -s .)
 
       - name: Test
