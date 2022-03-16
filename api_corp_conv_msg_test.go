@@ -20,6 +20,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
 	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
 	"github.com/zhaoyunxing92/dingtalk/v2/request"
 )
@@ -49,7 +50,7 @@ func TestDingTalk_SendCorpConvMessage_Text(t *testing.T) {
 
 	res, err := client.SendCorpConvMessage(
 		request.NewCorpConvMessage(msg).
-			SetAgentId(1332307896).
+			SetAgentId(1244553273).
 			SetUserIds("manager164").
 			Build())
 

@@ -23,10 +23,10 @@ import (
 	"go.uber.org/zap"
 )
 
-var client = NewClient(1244553273, "dingkjy4w80esdwgjuyo",
+var client = NewClient("dingkjy4w80esdwgjuyo",
 	"bDKa_nfJg3zYRsFrj-wTohTuoJCtxTEHaGmybYF9vgaVAZJOz-mICsLGStB288nW", WithLevel(zap.DebugLevel))
 
-var isv = NewClient(10435002, "suitegqebx814dt8immqw",
+var isv = NewClient("suitegqebx814dt8immqw",
 	"AXjjwYhZ7Bwh1e8vlkg7pPQHUACwl8rSJWFma1taYMDLUjmIAtl9d9yAdTBg4K3m",
 	WithTicket("60LVmSzP5zuDorEjISt2hc1imVeyKHcnTCUGUgslOBGpJXxyyQsbuBpyVhw6eunNAt3WXO0u9yfnXmcsskHNdN"),
 	WithCorpId("ding3b1e912394011559bc961a6cb783455b"))
