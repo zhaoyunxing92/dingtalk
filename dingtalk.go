@@ -115,8 +115,8 @@ func (ding *DingTalk) validate() error {
 	return nil
 }
 
-// NewClient new DingTalkBuilder
-func NewClient(key, secret string, opts ...OptionFunc) (ding *DingTalk) {
+// NewClient new client
+func NewClient(key, secret string, opts ...OptionFunc) (ding *DingTalk, err error) {
 	ding = &DingTalk{key: key, secret: secret, Level: zapcore.InfoLevel}
 
 	for _, opt := range opts {
@@ -128,13 +128,12 @@ func NewClient(key, secret string, opts ...OptionFunc) (ding *DingTalk) {
 	} else {
 		ding.cache = cache.NewFileCache(strings.Join([]string{".token", "corp"}, "/"), key)
 	}
-	ding.client = &http.Client{Timeout: 10 * time.Second}
 
+	ding.client = &http.Client{Timeout: 10 * time.Second}
 	ding.log = logger.GetLogger(ding.Level).Sugar()
 
-	if err := ding.validate(); err != nil {
-		panic(err)
-		return nil
+	if err = ding.validate(); err != nil {
+		return nil, err
 	}
 	return
 }

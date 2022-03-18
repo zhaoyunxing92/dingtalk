@@ -48,6 +48,7 @@ func (ding *DingTalk) GetMicroAppByAgentId(agentId int) (domain.MicroApp, error)
 			return app, nil
 		}
 	}
+
 	return domain.MicroApp{}, errors.New(fmt.Sprintf("agentId:%d is not exist", agentId))
 }
 
