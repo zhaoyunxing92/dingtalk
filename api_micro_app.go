@@ -20,6 +20,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/domain"
@@ -47,6 +48,7 @@ func (ding *DingTalk) GetMicroAppByAgentId(agentId int) (domain.MicroApp, error)
 			return app, nil
 		}
 	}
+
 	return domain.MicroApp{}, errors.New(fmt.Sprintf("agentId:%d is not exist", agentId))
 }
 
@@ -54,4 +56,11 @@ func (ding *DingTalk) GetMicroAppByAgentId(agentId int) (domain.MicroApp, error)
 func (ding *DingTalk) GetMicroAppVisibleScopes(agentId int) (scopes response.MicroAppVisibleScopes, err error) {
 	return scopes, ding.Request(http.MethodPost, constant.MicroAppVisibleScopesKey, nil,
 		request.NewMicroAppVisibleScopes(agentId), &scopes)
+}
+
+//GetUserMicroAppVisibleScopes 获取员工可见的应用列表
+func (ding *DingTalk) GetUserMicroAppVisibleScopes(userId string) (scopes response.MicroAppList, err error) {
+	query := url.Values{}
+	query.Set("userid", userId)
+	return scopes, ding.Request(http.MethodGet, constant.UserMicroAppVisibleScopesKey, query, nil, &scopes)
 }

@@ -20,11 +20,13 @@ const (
 	Api    = "https://oapi.dingtalk.com" // 钉钉ap域名
 	NewApi = "https://api.dingtalk.com"  // 全新一代的钉钉API域名
 
-	GetTokenKey              = "/gettoken"                // 获取access_token
-	MicroAppListKey          = "/microapp/list"           // 获取应用列表
-	MicroAppVisibleScopesKey = "/microapp/visible_scopes" // 获取应用可见范围
-	GetSSOTokenKey           = "/sso/gettoken"            // 获取微应用后台免登的access_token
-	GetJsApiTicketKey        = "/get_jsapi_ticket"        // 获取jsapi_ticket
+	GetTokenKey       = "/gettoken"         // 获取access_token
+	GetSSOTokenKey    = "/sso/gettoken"     // 获取微应用后台免登的access_token
+	GetJsApiTicketKey = "/get_jsapi_ticket" // 获取jsapi_ticket
+
+	MicroAppListKey              = "/microapp/list"           // 获取应用列表
+	MicroAppVisibleScopesKey     = "/microapp/visible_scopes" // 获取应用可见范围
+	UserMicroAppVisibleScopesKey = "/microapp/list_by_userid" // 获取员工可见的应用列表
 
 	SuiteAccessToken        = "/service/get_suite_token"    // 获取第三方企业应用的
 	CorpAccessToken         = "/service/get_corp_token"     // 服务商获取第三方应用授权企业的access_token

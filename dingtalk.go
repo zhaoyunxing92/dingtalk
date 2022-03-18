@@ -334,7 +334,7 @@ func isNewApi(path string) bool {
 }
 
 // GetDingTalkCrypto 钉钉事件解密类
-func (ding *DingTalk) GetDingTalkCrypto(token, aesKey string) *crypto.DingTalkCrypto {
+func (ding *DingTalk) GetDingTalkCrypto(token, aesKey string) (*crypto.DingTalkCrypto, error) {
 	var (
 		block cipher.Block
 		err   error
@@ -342,21 +342,20 @@ func (ding *DingTalk) GetDingTalkCrypto(token, aesKey string) *crypto.DingTalkCr
 	)
 
 	if len(aesKey) != crypto.AesEncodeKeyLength {
-		panic("不合法的aes key")
+		return nil, errors.New("不合法的aes key")
 	}
 
 	if key, err = base64.StdEncoding.DecodeString(aesKey + "="); err != nil {
-		panic(err.Error())
+		return nil, err
 	}
 
 	if block, err = aes.NewCipher(key); err != nil {
-		panic(err.Error())
+		return nil, err
 	}
-
 	return &crypto.DingTalkCrypto{
 		Token:    token,
 		SuiteKey: ding.key,
 		AESKey:   key,
 		Block:    block,
-	}
+	}, nil
 }

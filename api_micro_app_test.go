@@ -33,3 +33,9 @@ func TestDingTalk_GetMicroAppVisibleScopes(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, res.Success, true)
 }
+
+func TestDingTalk_GetUserMicroAppVisibleScopes(t *testing.T) {
+	res, err := client.GetUserMicroAppVisibleScopes("manager164")
+	assert.Nil(t, err)
+	assert.Equal(t, res.Success, true)
+}
