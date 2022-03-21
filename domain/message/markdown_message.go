@@ -16,6 +16,8 @@
 
 package message
 
+import "encoding/json"
+
 type markdown struct {
 	// 首屏会话透出的展示内容
 	Title string `json:"title" validate:"required"`
@@ -32,6 +34,11 @@ type markdownMessage struct {
 
 func (v *markdownMessage) MessageType() string {
 	return "markdown"
+}
+
+func (v *markdownMessage) String() string {
+	str, _ := json.Marshal(v)
+	return string(str)
 }
 
 func NewMarkDownMessage(title, content string) *markdownMessage {

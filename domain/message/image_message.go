@@ -16,6 +16,8 @@
 
 package message
 
+import "encoding/json"
+
 // 图片消息
 type image struct {
 	MediaId string `json:"media_id" validate:"required"`
@@ -29,6 +31,11 @@ type imageMessage struct {
 
 func (im *imageMessage) MessageType() string {
 	return "image"
+}
+
+func (im *imageMessage) String() string {
+	str, _ := json.Marshal(im)
+	return string(str)
 }
 
 // NewImageMessages 文本对象

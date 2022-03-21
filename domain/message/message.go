@@ -29,6 +29,8 @@ type message struct {
 type Message interface {
 	// MessageType 消息类型
 	MessageType() string
+
+	String() string
 }
 
 // Response 发送消息返回
