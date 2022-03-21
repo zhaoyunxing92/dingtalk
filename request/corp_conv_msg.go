@@ -61,6 +61,11 @@ func (sb *corpConvMessageBuilder) SetUserIds(userId string, userIds ...string) *
 	return sb
 }
 
+func (sb *corpConvMessageBuilder) SetUsers(userIds []string) *corpConvMessageBuilder {
+	sb.cm.UserIds = userIds
+	return sb
+}
+
 func (sb *corpConvMessageBuilder) SetDeptIds(deptId int, deptIds ...int) *corpConvMessageBuilder {
 	sb.cm.DeptIds = append(deptIds, deptId)
 	return sb
