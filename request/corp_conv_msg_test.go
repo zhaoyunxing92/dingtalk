@@ -20,15 +20,14 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-)
 
-import (
 	"github.com/zhaoyunxing92/dingtalk/v2/domain/message"
 )
 
 func TestNewCorpConvMessage(t *testing.T) {
 	conv := NewCorpConvMessage(message.NewTextMessage("hello dubbo-go")).
 		SetUserIds("1123", "12358", "788444").
+		SetUsers([]string{"1123"}).
 		SetAgentId(12345678).
 		SetAllUser(false).
 		SetDeptIds(123, 123, 456).
