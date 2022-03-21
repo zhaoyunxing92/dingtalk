@@ -36,6 +36,6 @@ func TestNewCorpConvMessage(t *testing.T) {
 	err := validate(conv)
 
 	assert.Nil(t, err)
-	assert.Equal(t, len(conv.UserIds), 3)
+	assert.Equal(t, len(conv.UserIds), 1)
 	assert.Equal(t, len(conv.DeptIds), 2)
 }
