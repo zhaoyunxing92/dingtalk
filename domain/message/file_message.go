@@ -16,6 +16,8 @@
 
 package message
 
+import "encoding/json"
+
 // 文件消息
 type file struct {
 	// 媒体文件ID。引用的媒体文件最大10MB。可以通过上传媒体文件接口获取。
@@ -29,6 +31,11 @@ type fileMessage struct {
 
 func (f *fileMessage) MessageType() string {
 	return "file"
+}
+
+func (f *fileMessage) String() string {
+	str, _ := json.Marshal(f)
+	return string(str)
 }
 
 func NewFileMessage(mediaId string) *fileMessage {

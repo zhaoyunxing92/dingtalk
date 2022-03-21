@@ -234,3 +234,8 @@ func TestDingTalk_RecallCorpConvMessage(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 }
+
+func TestNewTextMessage_Json(t *testing.T) {
+	msg := message.NewTextMessage("可以撤回的消息")
+	println(msg.String())
+}
