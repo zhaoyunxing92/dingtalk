@@ -23,11 +23,6 @@ import (
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/employee"
 )
 
-type Request interface {
-	// String struct to json string
-	String() string
-}
-
 // removeStringDuplicates 去除重复的item
 func removeStringDuplicates(item []string) (ids []string) {
 	if len(item) <= 0 {
