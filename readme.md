@@ -5,8 +5,8 @@
 [![codecov](https://codecov.io/gh/zhaoyunxing92/dingtalk/branch/develop/graph/badge.svg)](https://codecov.io/gh/zhaoyunxing92/dingtalk)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/zhaoyunxing92/dingtalk/main?logo=CodeIgniter)
 [![issues](https://img.shields.io/github/issues/zhaoyunxing92/dingtalk?color=ff69b4)](https://github.com/zhaoyunxing92/dingtalk/issues)
-[![GitHub milestone](https://img.shields.io/github/milestones/progress/zhaoyunxing92/dingtalk/3)](https://github.com/zhaoyunxing92/dingtalk/milestone/2?closed=1)
-[![tag](https://img.shields.io/github/v/tag/zhaoyunxing92/dingtalk?color=green&logo=AzurePipelines)](https://github.com/zhaoyunxing92/dingtalk/releases/tag/v2.0.3)
+[![GitHub milestone](https://img.shields.io/github/milestones/progress/zhaoyunxing92/dingtalk/5)](https://github.com/zhaoyunxing92/dingtalk/milestone/5?closed=1)
+[![tag](https://img.shields.io/github/v/tag/zhaoyunxing92/dingtalk?color=green&logo=AzurePipelines)](https://github.com/zhaoyunxing92/dingtalk/releases/tag/v2.0.6)
 
 > [创建和配置应用](https://ding-doc.dingtalk.com/document#/org-dev-guide/applicaiton-manangment) 先有应用我们才能一起玩
 
@@ -227,3 +227,10 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
     - [ ] [开启分块上传事务](https://ding-doc.dingtalk.com/document#/org-dev-guide/enable-multipart-upload-transaction)
     - [ ] [提交文件上传事务](https://ding-doc.dingtalk.com/document#/org-dev-guide/submit-a-file-upload-transaction)
     - [ ] [上传文件块](https://ding-doc.dingtalk.com/document#/org-dev-guide/upload-file-blocks)
+  
+* 回调接口
+    - [x] [注册回调事件](https://open.dingtalk.com/document/orgapp-server/registers-event-callback-interfaces) `client.RegisterEvent`
+    - [x] [获取推送失败的事件列表](https://open.dingtalk.com/document/orgapp-server/get-the-callback-failure-result) `client.GetRegisterFailedEvent`
+    - [x] [更新事件接口](https://open.dingtalk.com/document/orgapp-server/updates-the-event-callback-interface) `client.UpdateRegisterEvent`
+    - [x] [查询订阅事件](https://open.dingtalk.com/document/orgapp-server/the-query-event-callback-interface) `client.UpdateRegisterEvent`
+    - [x] [删除事件回调接口](https://open.dingtalk.com/document/orgapp-server/delete-an-event-callback-interface) `client.DeleteRegisterEvent`
