@@ -25,5 +25,5 @@ type snsUserInfo struct {
 	Nick                 string `json:"nick"`
 	UnionId              string `json:"unionid"`
 	OpenId               string `json:"openid"`
-	MainOrgAuthHighLevel string `json:"main_org_auth_high_level"`
+	MainOrgAuthHighLevel bool   `json:"main_org_auth_high_level"`
 }
