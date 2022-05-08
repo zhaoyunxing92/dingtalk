@@ -18,10 +18,10 @@ package response
 
 type SnsUserInfo struct {
 	Response
-	snsUserInfo `json:"user_info"`
+	UserInfo `json:"user_info"`
 }
 
-type snsUserInfo struct {
+type UserInfo struct {
 	Nick                 string `json:"nick"`
 	UnionId              string `json:"unionid"`
 	OpenId               string `json:"openid"`

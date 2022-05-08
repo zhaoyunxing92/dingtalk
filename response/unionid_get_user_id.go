@@ -19,10 +19,10 @@ package response
 type UnionIdGetUserId struct {
 	Response
 
-	unionIdGetUserId `json:"result"`
+	UserId `json:"result"`
 }
 
-type unionIdGetUserId struct {
+type UserId struct {
 	UserId string `json:"userid"`
 
 	//联系类型：
