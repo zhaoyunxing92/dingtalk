@@ -22,10 +22,10 @@ import (
 
 type UserDetail struct {
 	Response
-	userDetail `json:"result"`
+	UserInfoDetail `json:"result"`
 }
 
-type userDetail struct {
+type UserInfoDetail struct {
 	UserId string `json:"userid"`
 
 	// 员工在当前开发者企业账号范围内的唯一标识
