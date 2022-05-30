@@ -64,7 +64,7 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [x] [删除用户](https://developers.dingtalk.com/document/app/delete-a-user) `client.DeleteUser`
         - [x] [更新用户详情](https://developers.dingtalk.com/document/app/user-information-update) `client.UpdateUser`
         - [x] [根据userid获取用户详情](https://developers.dingtalk.com/document/app/query-user-details) `client.GetUserDetail`
-        - [x] [获取部门用户基础信息](https://developers.dingtalk.com/document/app/queries-the-simple-information-of-a-department-user) `client.GetDeptUserIds`
+        - [x] [获取部门用户基础信息](https://developers.dingtalk.com/document/app/queries-the-simple-information-of-a-department-user) `client.GetDeptSimpleUserInfo`
         - [x] [获取部门用户userid列表](https://developers.dingtalk.com/document/app/query-the-list-of-department-userids) `client.GetDeptUserIds`
         - [x] [获取部门用户详情](https://developers.dingtalk.com/document/app/queries-the-complete-information-of-a-department-user) `client.GetDeptDetailUserInfo`
         - [x] [获取员工人数](https://developers.dingtalk.com/document/app/obtain-the-number-of-employees-v2)  `client.GetUserCount`
