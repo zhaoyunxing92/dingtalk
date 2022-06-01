@@ -115,7 +115,7 @@ type deptDetailUserInfo struct {
 	//员工的企业邮箱
 	//
 	//如果员工的企业邮箱没有开通，返回信息中不包含该数据
-	OrgEmail string `json:"org_email,omitempty" validate:"omitempty,max=100"`
+	OrgEmail string `json:"org_email"`
 
 	//员工邮箱
 	//
