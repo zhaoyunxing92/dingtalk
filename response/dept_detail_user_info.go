@@ -111,9 +111,18 @@ type deptDetailUserInfo struct {
 	//
 	//dingtalk：钉钉自建专属帐号
 	ExclusiveAccountType string `json:"exclusive_account_type"`
-	
+
 	//员工的企业邮箱
 	//
 	//如果员工的企业邮箱没有开通，返回信息中不包含该数据
 	OrgEmail string `json:"org_email,omitempty" validate:"omitempty,max=100"`
+
+	//员工邮箱
+	//
+	//企业内部应用如果没有返回该字段，需要检查当前应用通讯录权限中邮箱等个人信息权限是否开启
+	//
+	//员工信息面板中有邮箱字段值才返回该字段
+	//
+	//第三方企业应用不返回该参数
+	Email string `json:"email"`
 }
