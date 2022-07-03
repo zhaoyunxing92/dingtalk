@@ -58,7 +58,7 @@ type Body struct {
 	MediaId string `json:"image,omitempty" validate:"omitempty,startswith=@"`
 
 	// 单行富文本信息
-	Rich `json:"rich,omitempty"`
+	Rich *Rich `json:"rich,omitempty"`
 
 	// 自定义的作者名字。
 	Author string `json:"author,omitempty"`
@@ -104,10 +104,6 @@ func (oa *oaMessage) MessageType() string {
 func (oa *oaMessage) String() string {
 	str, _ := json.Marshal(oa)
 	return string(str)
-}
-
-type oaMessageBuilder struct {
-	msg *oaMessage
 }
 
 // NewOaMessage 构建oa消息
