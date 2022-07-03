@@ -19,36 +19,34 @@ package response
 type GetDriveSpaces struct {
 	Response
 
-	Spaces []spaces `json:"spaces"`
+	Spaces []struct {
+		// 空间ID
+		SpaceId string `json:"spaceId"`
+
+		// 空间名称
+		Name string `json:"spaceName"`
+
+		// 空间类型
+		Type string `json:"spaceType"`
+
+		// 空间总额度
+		Quota int `json:"quota"`
+
+		// 空间已使用额度
+		UsedQuota int `json:"usedQuota"`
+
+		//授权模式，取值：
+		//
+		//acl：acl授权
+		//custom：自定义授权
+		PermissionMode string `json:"permissionMode"`
+
+		// 创建时间
+		CreateTime string `json:"createTime"`
+
+		// 修改时间
+		ModifyTime string `json:"modifyTime"`
+	} `json:"spaces"`
 
 	Token string `json:"nextToken"`
-}
-
-type spaces struct {
-	// 空间ID
-	SpaceId string `json:"spaceId"`
-
-	// 空间名称
-	Name string `json:"spaceName"`
-
-	// 空间类型
-	Type string `json:"spaceType"`
-
-	// 空间总额度
-	Quota int `json:"quota"`
-
-	// 空间已使用额度
-	UsedQuota int `json:"usedQuota"`
-
-	//授权模式，取值：
-	//
-	//acl：acl授权
-	//custom：自定义授权
-	PermissionMode string `json:"permissionMode"`
-
-	// 创建时间
-	CreateTime string `json:"createTime"`
-
-	// 修改时间
-	ModifyTime string `json:"modifyTime"`
 }

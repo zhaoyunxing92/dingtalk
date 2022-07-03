@@ -19,10 +19,10 @@ package response
 type GetHrmMeta struct {
 	Response
 
-	GroupMeta []hrmGroupMeta `json:"result"`
+	GroupMeta []HrmGroupMeta `json:"result"`
 }
 
-type hrmGroupMeta struct {
+type HrmGroupMeta struct {
 
 	// 分组名称。
 	GroupName string `json:"group_name"`
@@ -33,10 +33,10 @@ type hrmGroupMeta struct {
 	// 分组是否支持明细。
 	Detail bool `json:"detail"`
 
-	FieldMeta []fieldMeta `json:"field_meta_info_list"`
+	FieldMeta []FieldMeta `json:"field_meta_info_list"`
 }
 
-type fieldMeta struct {
+type FieldMeta struct {
 	// 字段名称
 	FieldName string `json:"field_name"`
 

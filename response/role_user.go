@@ -19,28 +19,21 @@ package response
 type RoleUser struct {
 	Response
 
-	roleUserResult `json:"result"`
-}
+	Result struct {
+		HasMore    bool `json:"hasMore"`
+		NextCursor int  `json:"nextCursor"`
 
-type roleUserResult struct {
-	HasMore    bool `json:"hasMore"`
-	NextCursor int  `json:"nextCursor"`
+		Users []struct {
+			UserId string `json:"userid"`
 
-	Users []roleUser `json:"list"`
-}
+			Name string `json:"name"`
 
-type roleUser struct {
-	UserId string `json:"userid"`
-
-	Name string `json:"name"`
-
-	ManageScopes []manageScope `json:"manageScopes"`
-}
-
-// 管理范围。
-type manageScope struct {
-	// 部门Id
-	DeptId int `json:"dept_id"`
-	// 部门名称
-	DeptName string `json:"name"`
+			ManageScopes []struct {
+				// 部门Id
+				DeptId int `json:"dept_id"`
+				// 部门名称
+				DeptName string `json:"name"`
+			} `json:"manageScopes"`
+		} `json:"list"`
+	} `json:"result"`
 }

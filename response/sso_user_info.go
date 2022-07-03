@@ -23,31 +23,27 @@ type SSOUserInfo struct {
 	Admin bool `json:"is_sys"`
 
 	// 企业信息
-	corpInfo `json:"corp_info"`
+	CorpInfo struct {
+		// 授权方企业CorpId
+		CorpId string `json:"corpid"`
+
+		// 授权方企业名称。
+		CorpName string `json:"corp_name"`
+	} `json:"corp_info"`
 
 	// 用户信息
-	userInfo `json:"user_info"`
-}
+	UserInfo struct {
 
-type corpInfo struct {
-	// 授权方企业CorpId
-	CorpId string `json:"corpid"`
+		// 用户名字
+		Name string `json:"name"`
 
-	// 授权方企业名称。
-	CorpName string `json:"corp_name"`
-}
+		// 用户的userid
+		UserId string `json:"userid"`
 
-type userInfo struct {
+		// email地址
+		Email string `json:"email"`
 
-	// 用户名字
-	Name string `json:"name"`
-
-	// 用户的userid
-	UserId string `json:"userid"`
-
-	// email地址
-	Email string `json:"email"`
-
-	// 头像地址
-	Avatar string `json:"avatar"`
+		// 头像地址
+		Avatar string `json:"avatar"`
+	} `json:"user_info"`
 }

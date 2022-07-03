@@ -20,10 +20,10 @@ type HrmResignEmployee struct {
 	Response
 
 	// 离职人员
-	ResignEmployee []resignEmployee `json:"result"`
+	ResignEmployee []ResignEmployee `json:"result"`
 }
 
-type resignEmployee struct {
+type ResignEmployee struct {
 
 	// 离职员工的userid。
 	UserId string `json:"userid"`

@@ -59,7 +59,13 @@ type todo struct {
 	Done bool `json:"isDone"`
 
 	// 详情页url跳转地址。
-	Urls *detailUrl `json:"detailUrl"`
+	Urls struct {
+		// APP端详情页url跳转地址
+		App string `json:"appUrl"`
+
+		// PC端详情页url跳转地址
+		Pc string `json:"pcUrl"`
+	} `json:"detailUrl"`
 
 	// 业务系统侧的唯一标识ID，即业务ID。
 	SourceId string `json:"sourceId"`

@@ -19,5 +19,5 @@ package response
 type GetDriveSpacesFileInfo struct {
 	Response
 
-	spacesFile
+	SpacesFile
 }

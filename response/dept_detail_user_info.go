@@ -18,21 +18,19 @@ package response
 
 type DeptDetailUserInfo struct {
 	Response
-	deptDetailUserInfoPage `json:"result"`
+	Page struct {
+		// 是否还有更多的数据
+		HasMore bool `json:"has_more"`
+
+		// 下一次分页的游标，如果has_more为false，表示没有更多的分页数据。
+		NextCursor int `json:"next_cursor"`
+
+		List []DeptUser `json:"list"`
+	} `json:"result"`
 }
 
-type deptDetailUserInfoPage struct {
-	// 是否还有更多的数据
-	HasMore bool `json:"has_more"`
-
-	// 下一次分页的游标，如果has_more为false，表示没有更多的分页数据。
-	NextCursor int `json:"next_cursor"`
-
-	DeptDetailUsers []deptDetailUserInfo `json:"list"`
-}
-
-// deptDetailUserInfo 部门用户详情
-type deptDetailUserInfo struct {
+// DeptUser 部门用户详情
+type DeptUser struct {
 	UserId string `json:"userid"`
 
 	// 员工在当前开发者企业账号范围内的唯一标识

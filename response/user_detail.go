@@ -120,7 +120,16 @@ type UserInfoDetail struct {
 	LeaderInDept []LeaderInDept `json:"leader_in_dept"`
 
 	// 角色列表
-	UserRoles []userRole `json:"role_list"`
+	UserRoles []struct {
+		// 角色id
+		Id int `json:"id"`
+
+		// 角色名称
+		Name string `json:"name"`
+
+		// 角色组名称
+		GroupName string `json:"group_name"`
+	} `json:"role_list"`
 
 	// 当用户来自于关联组织时的关联信息
 	UnionOrg `json:"union_emp_ext"`
@@ -130,17 +139,6 @@ type LeaderInDept struct {
 	DeptId int `json:"dept_id"`
 
 	Leader bool `json:"leader"`
-}
-
-type userRole struct {
-	// 角色id
-	Id int `json:"id"`
-
-	// 角色名称
-	Name string `json:"name"`
-
-	// 角色组名称
-	GroupName string `json:"group_name"`
 }
 
 type UnionOrg struct {

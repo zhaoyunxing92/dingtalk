@@ -16,11 +16,31 @@
 
 package response
 
-type GetParentIdsByUserId struct {
-	Response
-	Result struct {
-		Parents []struct {
-			ParentIds []int `json:"parent_dept_id_list"`
-		} `json:"parent_list"`
-	} `json:"result"`
+import (
+	"encoding/json"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
+
+func TestCreateDept(t *testing.T) {
+
+	str := `{
+    "errcode": 0,
+    "errmsg":"ok",
+    "result": {
+        "dept_id": 4176
+    },
+    "request_id": "6iq4zcul5zjp"
+}`
+
+	res := &CreateDept{}
+	err := json.Unmarshal([]byte(str), res)
+
+	assert.Nil(t, err)
+	assert.Equal(t, res.Code, 0)
+	assert.Equal(t, res.Msg, "ok")
+	assert.Equal(t, res.RequestId, "6iq4zcul5zjp")
+	assert.Equal(t, res.Dept.DeptId, 4176)
+
 }
