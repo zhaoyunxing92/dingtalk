@@ -19,14 +19,12 @@ package response
 type GetHrmEmployee struct {
 	Response
 
-	getHrmEmployee `json:"result"`
-}
+	Result struct {
 
-type getHrmEmployee struct {
+		// 查询到的员工userid
+		UserIds []string `json:"data_list"`
 
-	// 查询到的员工userid
-	UserIds []string `json:"data_list"`
-
-	// 下一次分页调用的offset值，当返回结果里没有next_cursor时，表示分页结束
-	NextCursor int `json:"next_cursor"`
+		// 下一次分页调用的offset值，当返回结果里没有next_cursor时，表示分页结束
+		NextCursor int `json:"next_cursor"`
+	} `json:"result"`
 }

@@ -18,10 +18,10 @@ package response
 
 type MessageSendResult struct {
 	Response
-	sendResult `json:"send_result"`
+	SendResult `json:"send_result"`
 }
 
-type sendResult struct {
+type SendResult struct {
 	// 无效的userid。
 	InvalidUserIds []string `json:"invalid_user_id_list"`
 
@@ -53,10 +53,10 @@ type sendResult struct {
 	InvalidDeptIds []string `json:"invalid_dept_id_list"`
 
 	// 推送被禁止的具体原因。
-	Forbiddings []forbidden `json:"forbidden_list"`
+	Forbiddings []Forbidden `json:"forbidden_list"`
 }
 
-type forbidden struct {
+type Forbidden struct {
 
 	//流控code：
 	//

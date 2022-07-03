@@ -47,7 +47,13 @@ type GetTodoDetail struct {
 	Participants []string `json:"participantIds"`
 
 	// 详情页url跳转地址。
-	Urls *detailUrl `json:"detailUrl"`
+	Urls struct {
+		// APP端详情页url跳转地址
+		App string `json:"appUrl"`
+
+		// PC端详情页url跳转地址
+		Pc string `json:"pcUrl"`
+	} `json:"detailUrl"`
 
 	// 业务来源
 	Source string `json:"source"`

@@ -20,10 +20,10 @@ type GetHrmEmployeeField struct {
 	Response
 
 	// 应用AgentID，可在钉钉开发者后台的应用详情页获取。
-	EmpFields []empRosterField `json:"result"`
+	EmpFields []RosterField `json:"result"`
 }
 
-type empRosterField struct {
+type RosterField struct {
 
 	// 企业的corpid
 	CorpId string `json:"corp_id"`
@@ -32,10 +32,10 @@ type empRosterField struct {
 	UserId string `json:"userid"`
 
 	// 返回的字段信息列表
-	Fields []empField `json:"field_data_list"`
+	Fields []Field `json:"field_data_list"`
 }
 
-type empField struct {
+type Field struct {
 
 	// 字段描述
 	FieldName string `json:"field_name"`
@@ -51,17 +51,15 @@ type empField struct {
 	//明细分组字段包含多条。
 	//
 	//非明细分组仅一条记录。
-	Values []fieldValue `json:"field_value_list"`
-}
+	Values []struct {
 
-type fieldValue struct {
+		// 第几条的明细标识，下标从0开始。
+		Index int `json:"item_index"`
 
-	// 第几条的明细标识，下标从0开始。
-	Index int `json:"item_index"`
+		// 字段展示值，选项类型字段对应选项的value
+		Label string `json:"label"`
 
-	// 字段展示值，选项类型字段对应选项的value
-	Label string `json:"label"`
-
-	// 字段取值，选项类型字段对应选项的key。
-	Value string `json:"value"`
+		// 字段取值，选项类型字段对应选项的key。
+		Value string `json:"value"`
+	} `json:"field_value_list"`
 }

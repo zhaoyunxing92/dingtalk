@@ -18,40 +18,39 @@ package response
 
 type CodeGetUserInfo struct {
 	Response
-	codeGetUserInfo `json:"result"`
-}
 
-type codeGetUserInfo struct {
-	// 用户名字
-	Name string `json:"name"`
+	UserInfo struct {
+		// 用户名字
+		Name string `json:"name"`
 
-	// 用户unionId
-	UnionId string `json:"unionid"`
+		// 用户unionId
+		UnionId string `json:"unionid"`
 
-	// 用户的userid
-	UserId string `json:"userid"`
+		// 用户的userid
+		UserId string `json:"userid"`
 
-	// 用户关联的unionId
-	AssociatedUnionId string `json:"associated_unionid"`
+		// 用户关联的unionId
+		AssociatedUnionId string `json:"associated_unionid"`
 
-	//级别。
-	//
-	//1：主管理员
-	//
-	//2：子管理员
-	//
-	//100：老板
-	//
-	//0：其他（如普通员工）
-	Level int `json:"sys_level"`
+		//级别。
+		//
+		//1：主管理员
+		//
+		//2：子管理员
+		//
+		//100：老板
+		//
+		//0：其他（如普通员工）
+		Level int `json:"sys_level"`
 
-	//是否是管理员。
-	//
-	//true：是
-	//
-	//false：不是
-	Admin bool `json:"sys"`
+		//是否是管理员。
+		//
+		//true：是
+		//
+		//false：不是
+		Admin bool `json:"sys"`
 
-	// 设备ID
-	DeviceId string `json:"device_id"`
+		// 设备ID
+		DeviceId string `json:"device_id"`
+	} `json:"result"`
 }

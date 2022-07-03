@@ -20,10 +20,10 @@ type GetHrmField struct {
 	Response
 
 	// 应用AgentID，可在钉钉开发者后台的应用详情页获取。
-	FieldGroups []fieldGroupMeta `json:"result"`
+	FieldGroups []FieldGroupMeta `json:"result"`
 }
 
-type fieldGroupMeta struct {
+type FieldGroupMeta struct {
 
 	// 字段组ID
 	GroupId string `json:"group_id"`
@@ -31,10 +31,10 @@ type fieldGroupMeta struct {
 	// 是否支持明细
 	HasDetail bool `json:"has_detail"`
 
-	Fields []employeeField `json:"field_list"`
+	Fields []EmployeeField `json:"field_list"`
 }
 
-type employeeField struct {
+type EmployeeField struct {
 
 	//字段类型：
 	//

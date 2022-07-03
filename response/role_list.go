@@ -19,30 +19,24 @@ package response
 type RoleList struct {
 	Response
 
-	rs `json:"result"`
-}
+	Result struct {
+		// 是否还有更多数据。
+		HasMore bool `json:"hasMore"`
 
-type rs struct {
-	// 是否还有更多数据。
-	HasMore bool `json:"hasMore"`
+		RoleGroups []struct {
+			// 角色组Id
+			GroupId int `json:"groupId"`
 
-	RoleGroups []roleGroup `json:"list"`
-}
+			// 角色组名称
+			Name string `json:"name"`
 
-type roleGroup struct {
-	// 角色组Id
-	GroupId int `json:"groupId"`
+			Roles []struct {
+				// 角色Id
+				Id int `json:"id"`
 
-	// 角色组名称
-	Name string `json:"name"`
-
-	Roles []role `json:"roles"`
-}
-
-type role struct {
-	// 角色Id
-	Id int `json:"id"`
-
-	// 角色名称
-	Name string `json:"name"`
+				// 角色名称
+				Name string `json:"name"`
+			} `json:"roles"`
+		} `json:"list"`
+	} `json:"result"`
 }

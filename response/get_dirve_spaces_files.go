@@ -23,10 +23,10 @@ type GetDriveSpacesFiles struct {
 	Token string `json:"nextToken"`
 
 	// 文件列表
-	SpacesFiles []spacesFile `json:"files"`
+	SpacesFiles []SpacesFile `json:"files"`
 }
 
-type spacesFile struct {
+type SpacesFile struct {
 	// 钉盘空间ID
 	SpaceId string `json:"spaceId"`
 

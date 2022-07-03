@@ -16,11 +16,31 @@
 
 package response
 
-type GetParentIdsByUserId struct {
-	Response
-	Result struct {
-		Parents []struct {
-			ParentIds []int `json:"parent_dept_id_list"`
-		} `json:"parent_list"`
-	} `json:"result"`
+import (
+	"encoding/json"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
+
+func TestCorpPermanentCode(t *testing.T) {
+	str := `{
+        "errcode":0,
+        "auth_corp_info":{
+                "corpid":"xxxxx",
+                "corp_name":"name"
+        },
+        "errmsg":"ok",
+        "permanent_code":"xxxx"
+}`
+	res := &CorpPermanentCode{}
+
+	err := json.Unmarshal([]byte(str), res)
+
+	assert.Nil(t, err)
+	assert.Equal(t, res.Code, 0)
+	assert.Equal(t, res.Msg, "ok")
+	assert.Equal(t, res.PermanentCode, "xxxx")
+	assert.Equal(t, res.CorpInfo.CorpId, "xxxxx")
+	assert.Equal(t, res.CorpInfo.CorpName, "name")
 }

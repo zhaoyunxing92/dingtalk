@@ -19,13 +19,13 @@ package response
 type DriveSpacesFilesPermissions struct {
 	Response
 	// 企业内成员权限列表
-	Members []driveSpacesFilesPermissions `json:"members"`
+	Members []SpacesFilesPermissions `json:"members"`
 
 	// 企业外成员权限列表
-	OutMembers []driveSpacesFilesPermissions `json:"outMembers"`
+	OutMembers []SpacesFilesPermissions `json:"outMembers"`
 }
 
-type driveSpacesFilesPermissions struct {
+type SpacesFilesPermissions struct {
 	//权限角色。
 	//
 	//owner：所有者
@@ -38,11 +38,11 @@ type driveSpacesFilesPermissions struct {
 	// 是否是继承的权限
 	Extend bool `json:"extend"`
 
-	permissionMember `json:"member"`
+	PermissionMember `json:"member"`
 }
 
-// 成员信息
-type permissionMember struct {
+// PermissionMember 成员信息
+type PermissionMember struct {
 	// 企业的CorpId
 	CorpId string `json:"corpId"`
 

@@ -18,9 +18,7 @@ package response
 
 type CreateUser struct {
 	Response
-	createUserResponse `json:"result"`
-}
-
-type createUserResponse struct {
-	UserId string `json:"userid"`
+	User struct {
+		UserId string `json:"userid"`
+	} `json:"result"`
 }
