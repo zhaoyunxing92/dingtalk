@@ -31,14 +31,14 @@ func TestDingTalk_GetDeptSimpleUserInfo(t *testing.T) {
 			Build())
 
 	assert.Nil(t, err)
-	assert.NotNil(t, info.DeptUsers)
+	assert.NotNil(t, info.Result.DeptUsers)
 }
 
 func TestDingTalk_GetDeptUserIds(t *testing.T) {
 	userId, err := client.GetDeptUserIds(request.NewDeptUserId(1))
 
 	assert.Nil(t, err)
-	assert.NotNil(t, userId.UserIds)
+	assert.NotNil(t, userId.Result.UserIds)
 }
 
 func TestDingTalk_GetDeptDetailUserInfo(t *testing.T) {
@@ -48,7 +48,7 @@ func TestDingTalk_GetDeptDetailUserInfo(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.NotNil(t, res.DeptDetailUsers)
+	assert.NotNil(t, res.Page.List)
 }
 
 func TestDingTalk_CreateDept(t *testing.T) {
@@ -77,7 +77,7 @@ func TestDingTalk_GetDeptDetail(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.Equal(t, res.Name, "钉钉小程序开发团队")
+	assert.Equal(t, res.Detail.Name, "钉钉小程序开发团队")
 }
 
 func TestDingTalk_UpdateDept(t *testing.T) {
@@ -116,7 +116,7 @@ func TestDingTalk_GetParentIdsByDeptId(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.NotNil(t, res.ParentIds)
+	assert.NotNil(t, res.Result.ParentIds)
 }
 
 func TestDingTalk_GetParentIdsByUserId(t *testing.T) {
@@ -124,7 +124,7 @@ func TestDingTalk_GetParentIdsByUserId(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.NotNil(t, res.Parent)
+	assert.NotNil(t, res.Result.Parents)
 }
 
 func TestDingTalk_FetchDeptList(t *testing.T) {

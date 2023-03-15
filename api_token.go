@@ -156,3 +156,14 @@ func (ding *DingTalk) GetJsApiTicket() (ticket string, err error) {
 	}
 	return res.Ticket, nil
 }
+
+// GetUserAccessToken 通过oauth2临时授权码获取用户Token
+// https://open.dingtalk.com/document/orgapp/obtain-user-token
+func (ding *DingTalk) GetUserAccessToken(authCode string) (res response.UserAccessToken, err error) {
+	req := request.NewUserAuthToken(authCode)
+	req.ClientId = ding.key
+	req.ClientSecret = ding.secret
+
+	err = ding.Request(http.MethodPost, constant.GetUserAccessToken, nil, req, &res)
+	return
+}

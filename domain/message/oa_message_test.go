@@ -35,8 +35,10 @@ func TestNewOaMessage(t *testing.T) {
 		{Key: "学历", Value: "本科"},
 		{Key: "爱好", Value: "打球、听歌"},
 	}
-	msg.Rich.Num = "15.6"
-	msg.Rich.Unit = "元"
+	msg.Rich = &Rich{
+		Num:  "15.6",
+		Unit: "元",
+	}
 
 	msg.Author = "李四"
 

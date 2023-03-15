@@ -17,6 +17,7 @@
 package dingtalk
 
 import (
+	"fmt"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -133,4 +134,18 @@ func (ding *DingTalk) GetSnsUserInfo(code string) (req response.SnsUserInfo, err
 	query.Set("signature", sign)
 
 	return req, ding.Request(http.MethodPost, constant.GetSNSUserInfoKey, query, request.NewSnsUserInfo(code), &req)
+}
+
+// GetContactUser 获取用户通讯录个人信息
+// 调用本接口获取企业用户通讯录中的个人信息。
+// @see https://open.dingtalk.com/document/orgapp/dingtalk-retrieve-user-information?spm=ding_open_doc.document.0.0.58b9492dZxH66f
+func (ding *DingTalk) GetContactUser(unionId string) (rsp response.ContactUser, err error) {
+	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetContactUser, unionId), nil, nil, &rsp)
+}
+
+// GetCurrentUserByAccessToken 通UserAccessToken获取当前授权人的信息
+func (ding *DingTalk) GetCurrentUserByAccessToken(userAccessToken string) (rsp response.ContactUser, err error) {
+	query := url.Values{}
+	query.Set("access_token", userAccessToken)
+	return rsp, ding.Request(http.MethodGet, fmt.Sprintf(constant.GetContactUser, "me"), query, nil, &rsp)
 }

@@ -42,7 +42,7 @@ func TestDingTalk_GetChatInfo(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.Equal(t, res.Name, "ci测试群")
+	assert.Equal(t, res.ChatInfo.Name, "ci测试群")
 }
 
 func TestDingTalk_UpdateChat(t *testing.T) {

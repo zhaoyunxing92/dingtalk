@@ -125,6 +125,8 @@ const (
 	GetCallBackFailedDetailKey = callback + "/get_call_back_failed_result" // 获取回调失败的结果
 	DeleteCallBackKey          = callback + "/delete_call_back"            // 删除事件回调接口
 
+	GetUserAccessToken     = "/v1.0/oauth2/userAccessToken" // 通过oauth2临时授权码获取用户Token
+	GetContactUser         = "/v1.0/contact/users/%s"       // 获取用户通讯录个人信息
 	CreateCooperateCorpKey = "/v1.0/contact/cooperateCorps" // 创建合作空间
 
 	CreateDriveSpacesKey  = "/v1.0/drive/spaces"    // 新建空间
