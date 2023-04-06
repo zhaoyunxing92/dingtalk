@@ -27,8 +27,8 @@ func TestDingTalk_CreateUser(t *testing.T) {
 	t.Skip()
 	user, err := client.CreateUser(request.NewCreateUser("张三", "15669019211", 554656655).Build())
 	assert.Nil(t, err)
-	assert.NotNil(t, user.UserId)
-	t.Log(user.UserId)
+	assert.NotNil(t, user.User.UserId)
+	t.Log(user.User.UserId)
 }
 
 func TestDingTalk_UpdateUser(t *testing.T) {
@@ -72,7 +72,7 @@ func TestDingTalk_GetUserCount(t *testing.T) {
 	req, err := client.GetUserCount(request.NewUserCount(true))
 
 	assert.Nil(t, err)
-	assert.NotNil(t, req.Count)
+	assert.NotNil(t, req.Result.Count)
 }
 
 func TestDingTalk_GetInactiveUser(t *testing.T) {
@@ -88,7 +88,7 @@ func TestDingTalk_GetUserIdByMobile(t *testing.T) {
 	req, err := client.GetUserIdByMobile(request.NewMobileGetUserId("18357154439"))
 
 	assert.Nil(t, err)
-	assert.NotNil(t, req.UserId)
+	assert.NotNil(t, req.Result.UserId)
 }
 
 func TestDingTalk_GetUserIdByUnionId(t *testing.T) {
@@ -96,7 +96,7 @@ func TestDingTalk_GetUserIdByUnionId(t *testing.T) {
 	req, err := client.GetUserIdByUnionId(request.NewUnionIdGetUserId("DmJWoRm5zkjT9kWWgVpm0giEiE"))
 
 	assert.Nil(t, err)
-	assert.NotNil(t, req.UserId)
+	assert.NotNil(t, req.Result.UserId)
 }
 
 func TestDingTalk_GetOrgAdminUser(t *testing.T) {

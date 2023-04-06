@@ -44,7 +44,7 @@ func TestDingTalk_GetHrmResignEmployeeIds(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, user)
-	assert.Equal(t, len(user.UserIds), 33)
+	assert.Equal(t, len(user.Result.UserIds), 33)
 }
 
 func TestDingTalk_GetHrmResignEmployee(t *testing.T) {

@@ -58,6 +58,9 @@ type UserInfoDetail struct {
 	// 职位
 	Title string `json:"title"`
 
+	// 员工邮箱 (需要开通对应权限才会返回)
+	Email string `json:"email,omitempty"`
+
 	// 办公地点
 	WorkPlace string `json:"work_place"`
 

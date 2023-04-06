@@ -56,15 +56,23 @@ type DingTalkCrypto struct {
 
 // Decrypt 解密
 func (c *DingTalkCrypto) Decrypt(encrypt, sign, timestamp, nonce string) (string, error) {
-	if !c.VerificationSignature(encrypt, sign, timestamp, nonce) {
-		return "", errors.New("签名不匹配")
-	}
-	decode, err := base64.StdEncoding.DecodeString(encrypt)
+	bytePlant, err := c.DecryptToByte(encrypt, sign, timestamp, nonce)
 	if err != nil {
 		return "", err
 	}
+	return string(bytePlant), nil
+}
+
+func (c *DingTalkCrypto) DecryptToByte(encrypt, sign, timestamp, nonce string) ([]byte, error) {
+	if !c.VerificationSignature(encrypt, sign, timestamp, nonce) {
+		return nil, errors.New("签名不匹配")
+	}
+	decode, err := base64.StdEncoding.DecodeString(encrypt)
+	if err != nil {
+		return nil, err
+	}
 	if len(decode) < aes.BlockSize {
-		return "", errors.New("密文太短")
+		return nil, errors.New("密文太短")
 	}
 	blockMode := cipher.NewCBCDecrypter(c.Block, c.AESKey[:c.Block.BlockSize()])
 	plantText := make([]byte, len(decode))
@@ -74,9 +82,9 @@ func (c *DingTalkCrypto) Decrypt(encrypt, sign, timestamp, nonce string) (string
 	plantText = plantText[20:]
 	corpId := plantText[size:]
 	if string(corpId) != c.SuiteKey {
-		return "", errors.New("SuiteKey匹配不正确")
+		return nil, errors.New("SuiteKey匹配不正确")
 	}
-	return string(plantText[:size]), nil
+	return plantText[:size], nil
 }
 
 // Encrypt 加密

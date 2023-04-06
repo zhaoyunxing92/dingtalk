@@ -84,11 +84,11 @@ func TestDingTalk_GetExtContactDetail(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	assert.Equal(t, res.Name, "李四")
-	assert.Equal(t, res.CompanyName, "小番茄")
-	assert.Equal(t, res.Address, "杭州")
-	assert.Equal(t, res.FollowerUser, "manager164")
-	assert.Equal(t, len(res.Labels), 3)
-	assert.Equal(t, len(res.ShareDept), 1)
-	assert.Equal(t, res.Mobile, "18058762217")
+	assert.Equal(t, res.Result.Name, "李四")
+	assert.Equal(t, res.Result.CompanyName, "小番茄")
+	assert.Equal(t, res.Result.Address, "杭州")
+	assert.Equal(t, res.Result.FollowerUser, "manager164")
+	assert.Equal(t, len(res.Result.Labels), 3)
+	assert.Equal(t, len(res.Result.ShareDept), 1)
+	assert.Equal(t, res.Result.Mobile, "18058762217")
 }
