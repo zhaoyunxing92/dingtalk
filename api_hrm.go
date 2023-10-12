@@ -18,6 +18,8 @@ package dingtalk
 
 import (
 	"net/http"
+	"net/url"
+	"strconv"
 
 	"github.com/zhaoyunxing92/dingtalk/v2/constant"
 	"github.com/zhaoyunxing92/dingtalk/v2/constant/employee"
@@ -43,6 +45,16 @@ func (ding DingTalk) GetHrmToBeHiredEmployee(offset, size int) (res response.Get
 func (ding DingTalk) GetHrmResignEmployeeIds(offset, size int) (res response.GetHrmEmployee, err error) {
 	req := request.NewGetHrmToBeHiredEmployee(offset, size)
 	return res, ding.Request(http.MethodPost, constant.GetHrmResignEmployeeKey, nil, req, &res)
+}
+
+// GetHrmResignEmployeeIds 获取时间范围内离职员工记录
+func (ding DingTalk) GetHrmEmpLeaveRecords(startTime string, endTime string, nextToken string, maxResults int) (res response.GetHrmEmployeeLevelRecord, err error) {
+	u := url.Values{}
+	u.Add("startTime", startTime)
+	u.Add("endTime", endTime)
+	u.Add("nextToken", nextToken)
+	u.Add("maxResults", strconv.Itoa(maxResults))
+	return res, ding.Request(http.MethodGet, constant.GetHrmEmpLeaveRecordsKey, u, nil, &res)
 }
 
 // GetHrmResignEmployee 获取员工离职信息
