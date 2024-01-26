@@ -16,28 +16,33 @@
 
 package response
 
+type DeptBaseResponse struct {
+	Id int `json:"dept_id"`
+
+	Name string `json:"name"`
+
+	ParentId int `json:"parent_id"`
+
+	// 部门标识字段
+	SourceIdentifier string `json:"source_identifier"`
+
+	//是否同步创建一个关联此部门的企业群：
+	//
+	//true：创建
+	//
+	//false：不创建
+	CreateDeptGroup bool `json:"create_dept_group"`
+
+	//当部门群已经创建后，是否有新人加入部门会自动加入该群：
+	//
+	//true：自动加入群
+	//
+	//false：不会自动加入群
+	AutoAddUser bool `json:"auto_add_user"`
+}
+
 type DeptList struct {
 	Response
 
-	List []struct {
-		Id int `json:"dept_id"`
-
-		Name string `json:"name"`
-
-		ParentId int `json:"parent_id"`
-
-		//是否同步创建一个关联此部门的企业群：
-		//
-		//true：创建
-		//
-		//false：不创建
-		CreateDeptGroup bool `json:"create_dept_group"`
-
-		//当部门群已经创建后，是否有新人加入部门会自动加入该群：
-		//
-		//true：自动加入群
-		//
-		//false：不会自动加入群
-		AutoAddUser bool `json:"auto_add_user"`
-	} `json:"result"`
+	List []DeptBaseResponse `json:"result"`
 }
