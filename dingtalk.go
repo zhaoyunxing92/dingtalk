@@ -31,9 +31,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/zhaoyunxing92/dingtalk/v2/crypto"
 
-	"github.com/go-playground/validator/v10"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -330,7 +330,7 @@ func validate(s interface{}) error {
 }
 
 func isNewApi(path string) bool {
-	return strings.HasPrefix(path, "/v1.0/")
+	return strings.HasPrefix(path, "/v1.0/") || strings.HasPrefix(path, "/v2.0/")
 }
 
 // GetDingTalkCrypto 钉钉事件解密类
