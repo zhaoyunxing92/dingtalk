@@ -301,26 +301,17 @@ func (ding *DingTalk) httpRequest(method, path string, query url.Values, body in
 		zap.String("body", string(form)), zap.String("token", token),
 		zap.ByteString("res", data))
 
-	switch res.StatusCode {
-	case 200:
-		if err = json.Unmarshal(data, response); err != nil {
-			log.Error(err)
-			return err
-		}
-		log.Debug("request succeed")
-		return response.CheckError()
-	case 400:
-		log.Errorf("ding fail status code %d,res:%s", res.StatusCode, data)
-		return errors.Errorf("dingtalk server error,res:%s", data)
-	case 404:
-		log.Errorf("ding fail status code %d,res:%s", res.StatusCode, data)
-		return errors.Errorf("dingtalk server error,res:%s", data)
-	case 500:
+	if res.StatusCode != 200 {
 		log.Errorf("ding fail status code %d,res:%s", res.StatusCode, data)
 		return errors.Errorf("dingtalk server error,res:%s", data)
 	}
-	log.Error("ding fail")
-	return errors.New("ding fail")
+
+	if err = json.Unmarshal(data, response); err != nil {
+		log.Error(err)
+		return err
+	}
+	log.Debug("request succeed")
+	return response.CheckError()
 }
 
 // validate 参数验证
