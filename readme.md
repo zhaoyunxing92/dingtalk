@@ -200,6 +200,13 @@ client:= NewClient(1244553273, "appkey", "AppSecret", WithLevel(zap.DebugLevel))
         - [x] [批量获取考勤组摘要](https://open.dingtalk.com/document/orgapp-server/batch-query-of-simple-information-of-the-attendance-group) `client.GetAttendanceGroupMinimalism`
         - [x] [获取考勤组详情](https://open.dingtalk.com/document/orgapp-server/query-a-single-attendance-group) `client.GetAttendanceGroupDetail`
         - [x] [搜索考勤组摘要](https://open.dingtalk.com/document/orgapp-server/attendance-group-search) `client.SearchAttendanceGroup`
+    - 考勤打卡
+        - [x] [获取打卡结果](https://open.dingtalk.com/document/orgapp/open-attendance-clock-in-data) `client.GetAttendanceList`
+        - [x] [获取打卡详情](https://open.dingtalk.com/document/orgapp/attendance-clock-in-record-is-open) `client.GetAttendanceListRecord`
+    - 假勤审批
+        - [x] [查询请假状态](https://open.dingtalk.com/document/orgapp/obtain-the-attendance-update-data) `client.GetAttendanceLeaveStatus`
+    - 考勤统计
+        - [x] [获取用户考勤数据](https://open.dingtalk.com/document/orgapp/obtain-the-attendance-update-data) `client.GetAttendanceGetUpdateData`
 
 * 应用管理
     - [x] [获取应用列表](https://open.dingtalk.com/document/orgapp-server/manager-microapplications-api-permission) `client.GetMicroAppList`

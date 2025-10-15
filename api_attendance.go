@@ -60,3 +60,27 @@ func (ding *DingTalk) SearchAttendanceGroup(userId, groupName string) (rsp respo
 func (ding *DingTalk) CreateAttendanceGroup(res *request.CreateAttendanceGroup) (rsp response.CreateAttendanceGroup, err error) {
 	return rsp, ding.Request(http.MethodPost, constant.CreateAttendanceGroupKey, nil, res, &rsp)
 }
+
+// GetAttendanceList 获取打卡结果
+func (ding *DingTalk) GetAttendanceList(res *request.GetAttendanceList) (rsp response.GetAttendanceList,
+	err error) {
+	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceListKey, nil, res, &rsp)
+}
+
+// GetAttendanceListRecord 获取打卡详情
+func (ding *DingTalk) GetAttendanceListRecord(res *request.GetAttendanceListRecord) (rsp response.GetAttendanceListRecord,
+	err error) {
+	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceListRecordKey, nil, res, &rsp)
+}
+
+// GetAttendanceLeaveStatus 查询请假状态
+func (ding *DingTalk) GetAttendanceLeaveStatus(res *request.GetAttendanceLeaveStatus) (rsp response.GetAttendanceLeaveStatus,
+	err error) {
+	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceLeaveStatusKey, nil, res, &rsp)
+}
+
+// GetAttendanceGetUpdateData 获取用户考勤数据
+func (ding *DingTalk) GetAttendanceGetUpdateData(res *request.GetAttendanceGetUpdateData) (rsp response.GetAttendanceGetUpdateData,
+	err error) {
+	return rsp, ding.Request(http.MethodPost, constant.GetAttendanceGetUpdateDataKey, nil, res, &rsp)
+}

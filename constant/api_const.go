@@ -175,4 +175,9 @@ const (
 	GetAttendanceGroupDetailKey     = "/topapi/attendance/group/query"           // 获取考勤组详情
 	SearchAttendanceGroupKey        = "/topapi/attendance/group/search"          // 搜索考勤组摘要
 	CreateAttendanceGroupKey        = "/topapi/attendance/group/add"             // 创建考勤组
+	GetAttendanceLeaveStatusKey     = "/topapi/attendance/getleavestatus"        // 查询请假状态
+	GetAttendanceGetUpdateDataKey   = "/topapi/attendance/getupdatedata"         // 获取用户考勤数据
+
+	GetAttendanceListKey       = "/attendance/list"       // 获取打卡结果
+	GetAttendanceListRecordKey = "/attendance/listRecord" // 获取打卡详情
 )

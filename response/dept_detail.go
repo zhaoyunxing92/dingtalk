@@ -125,5 +125,11 @@ type DeptDetail struct {
 		//
 		//当hide_dept为true时，则此值生效
 		DeptPermits []int `json:"dept_permits"`
+
+		// 部门员工数（包含子部门）
+		MemberCount int `json:"member_count"`
+
+		// 部门直属员工数（不包含子部门）
+		OwningMemberCount int `json:"owning_member_count"`
 	} `json:"result"`
 }
